@@ -1,0 +1,110 @@
+/* 
+   Localizable.strings
+   Preit
+
+   Created by Aniket on 9/15/10.
+   Copyright 2010 __MyCompanyName__. All rights reserved.
+*/
+
+//Tabs titles
+"Shopping" = "Shopping";
+"Dining" = "Dining";
+"Events" = "Events";
+"Specials" = "Specials";
+"More" = "More";
+
+//NavigationBar Color
+ "NavBarColorR"="242/255.0";
+ "NavBarColorG"="242/255.0";
+ "NavBarColorB"="243/255.0";
+ "NavBarColorAlpha"="1.0";
+
+//Screen Titles
+"HomeTitle"="Select Your PREIT Mall";
+"Screen1" = "Shopping";
+"Screen2" = "Dining";
+"Screen3" = "Events";
+"Screen4" = "Deals";
+
+"Screen5" = "More";
+"Screen6" = "Directions";
+"Screen7" = "Movie Listing";
+"Screen8" = "Hours";
+"Screen9" = "Trends";
+"Screen10" = "Contact Us";
+"Screen11" = "Job Openings";//"Parking Map";
+"Screen12" = "Gift Card";
+
+"Screen1.1"="Store Details";
+"Screen2.1"="Dining Details";
+"Screen3.1"="Events Details";
+"Screen4.1"="Specials Details";
+"Screen7.1"="Movie Details";
+"Screen11.1"="Job Details";
+
+"ScreenMonth"="Select Month";
+ 
+// Server Url
+ "Server"="http://cherryhillmall.com/";
+//"Server"="http://devcherryhillmall.red5demo.com/";
+// "Server"="http://192.168.1.50:3009/";
+// "Server"="http://cherryhillmall.red5demo.com/";
+// "Server"="http://sabdekho.com:3010/";
+ 
+ //Api's
+ "API_RevGeoCoding"="http://maps.google.com/maps/geo";
+ "API_GeoCoding"="http://maps.googleapis.com/maps/api/geocode/";
+ "API_BgImages"="/info/background";
+
+ "API0"="api/v1/properties";
+ "API1"="/tenant_categories/with_tenants_detail";
+ "API1.1"="/tenant_categories/all_tenants_detail";
+"API1.2"="/tenants";
+
+
+ "API2"="/tenant_categories/dining";
+ "API3"="/events";
+ "API3.1"="/monthevents";
+ "API4"="/sales";
+ 
+ "API6" ="/info/direction";
+ "API7"="/movies";
+ "API8"="/info/hours";
+ "API9"="/info/trend";
+ "API10"="/info";
+ "API11"="/jobs";
+ 
+ "API12"="https://www279.americanexpress.com/gpmobile/initial.do";
+
+
+"API13"="/mobilepromo";
+
+
+//"SEARCHAPI"="http://dev_cherryhillmall.red5demo.com/api/v1/properties";
+"SEARCHAPI" = "http://cherryhillmall.com/api/product_search?search=";
+//"SEARCHAPI" = "http://cherryhillmall.red5demo.com/api/product_search?search=";
+//"SEARCHAPI" = "http://devcherryhillmall.red5demo.com/api/product_search?search=";
+
+//"PRODUCT_SEARCH_IDS" = "http://cherryhillmall.red5demo.com/api/product_search_ids?";
+"PRODUCT_SEARCH_IDS" = "http://cherryhillmall.com/api/product_search_ids?";
+//lamp&property_id=24
+//"SEARCHAPI"="http://cherryhillmall.com/api/v1/properties";
+//"SEARCHAPI"="http://cherryhillmall.red5demo.com/product_search";
+//  "ProductSearchAPI" = "https://www.googleapis.com/shopping/search/v1/public/products?key=AIzaSyADKm83D-K3O1MPhBU-Fl33oGc6MLvJCRw&country=US&q="
+ //Alert Msg
+"PushNotification_title" = "\"PREIT\" Would Like to Send You Push Notifications";
+"PushNotification_message" = "Notifications may include alerts, sounds and icon badges. These can be configured in settings.";
+
+"Gps"="\PREIT\" Would you like to Use your Current Location";
+// "Gps"="\PREIT\" Would you like to search malls nearest to you?";
+ "ShowAll"="Sorry no mall near your location,would you like to get list of all malls?";
+
+//  "MOREINFOAPI" = "red5demo.com/product_search";
+"MOREINFOAPI" = "com/product_search";
+//  "EMAILLISTAPI" = "http://cherryhillmall.red5demo.com/product_search/email_from_phone";
+"EMAILLISTAPI" = "http://cherryhillmall.com/product_search/email_from_phone";
+
+// http://cherryhillmall.com/mobilepromo
+
+"WebView_message" = "By following this link you will be leaving this app and it will open in your web browser.";
+"WebView_title" = "Messsage";

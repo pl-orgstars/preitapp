@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDisplayName</key>
+	<string>PREIT</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>AppIcon29x29.png</string>
+		<string>AppIcon29x29@2x.png</string>
+		<string>AppIcon40x40.png</string>
+		<string>AppIcon40x40@2x.png</string>
+		<string>AppIcon50x50.png</string>
+		<string>AppIcon50x50@2x.png</string>
+		<string>AppIcon57x57.png</string>
+		<string>AppIcon57x57@2x.png</string>
+		<string>AppIcon72x72.png</string>
+		<string>AppIcon72x72@2x.png</string>
+		<string>AppIcon76x76.png</string>
+		<string>AppIcon76x76@2x.png</string>
+		<string>AppIcon60x60.png</string>
+		<string>AppIcon60x60@2x.png</string>
+	</array>
+	<key>CFBundleIcons</key>
+	<dict/>
+	<key>CFBundleIcons~ipad</key>
+	<dict/>
+	<key>CFBundleIdentifier</key>
+	<string>com.r5i.preit</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2.4</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>2.41</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string></string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
+	<key>PRODUCTION_API_KEY</key>
+	<string>277d825b-7e1f-4418-895f-0d1cf248ff80</string>
+	<key>U</key>
+	<string></string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Proxima Nova Bold.ttf</string>
+		<string>Proxima Nova Reg.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
+		<string>remote-notification</string>
+	</array>
+	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+</dict>
+</plist>
