@@ -158,6 +158,8 @@
                      nil];
     }
     
+    [tableData addObject:@"Parking"];
+    
     
     
 
@@ -214,13 +216,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	
+    
     
     NSString *str = [tableData objectAtIndex:indexPath.row];
     
     if ([str isEqualToString:HOME]) {
 //        @"HOME",
-        [appdelegate hideProductScreen:NO];
+//        [appdelegate hideProductScreen:NO];
+        ProductSearchHome *productVC = [[ProductSearchHome alloc] initWithNibName:@"ProductSearchHome" bundle:[NSBundle mainBundle]];
+        _navController.viewControllers = @[productVC];
+        
         
     }else if ([str isEqualToString:STORE]){
 //        @"STORES",
@@ -320,7 +325,13 @@
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
         [self.navigationController pushViewController:screenContact animated:YES];
+    }else if ([str isEqualToString:@"Parking"]){
+        ParkScreenViewController *parkScreen = [[ParkScreenViewController alloc] initWithNibName:@"ParkScreenViewController" bundle:[NSBundle mainBundle]];
+        _navController.viewControllers = @[parkScreen];
     }
+    
+    
+    self.menuContainerViewController.menuState = MFSideMenuStateClosed;
 
 }
 
