@@ -41,7 +41,7 @@
 {
     [super viewDidLoad];
     appdelegate = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
-
+    
     [self setNavigationTitle:@"Parking" withBackButton:NO];
     
     [noteTextField.layer setBorderWidth: 1.0];
@@ -53,7 +53,11 @@
     noteTextField.delegate = self;
     [noteTextField setInputAccessoryView:[self getTextFieldAccessoryView]];
     
-    noteTextField.text = isNoteStored?getNotesParking:@"";
+    noteTextField.text = isNoteStored?getNotesParking:@"Save a text reminder";
+    if([noteTextField.text isEqualToString:@""]){
+        noteTextField.text = @"Save a text reminder";
+    }
+    
     [lblNote setHidden:![Utils checkForEmptyString:noteTextField.text]];
     if (isAudioStored) {
         filePath = getAudioParking;
@@ -67,9 +71,14 @@
     mallLocation = isLocationStored?getLocationParking:CLLocationCoordinate2DMake([[appdelegate.mallData objectForKey:@"location_lat"]floatValue], [[appdelegate.mallData objectForKey:@"location_lng"]floatValue]);
     
     imageCaptured = isImageStored?getImageParking:nil;
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(takePhotoTapped:)];
-    [parkingImageView addGestureRecognizer:tapGesture];
+    mapImage = isMapImageStored?getMapParking:nil;
+    
+    UITapGestureRecognizer *imageTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(takePhotoTapped:)];
+    [parkingImageView addGestureRecognizer:imageTapGesture];
     parkingImageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *mapTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(loctionTapped:)];
+    [mapImageView addGestureRecognizer:mapTapGesture];
+    mapImageView.userInteractionEnabled = YES;
     
     audioRecorder = [[AudioRecorder alloc]init];
     audioRecorder.delegate = self;
@@ -80,14 +89,34 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    imageCaptured = isImageStored?getImageParking:nil;
+    mapImage = isMapImageStored?getMapParking:nil;
+
+    if(mapImage){
+        [mapImageView setImage:mapImage];
+        captureMapButton.hidden = YES;
+        mapImageLabel.hidden = YES;
+    }else{
+        [mapImageView setImage:mapImage];
+        captureMapButton.hidden = NO;
+        mapImageLabel.hidden = NO;
+    }
     if (imageCaptured){
         [parkingImageView setImage:imageCaptured];
         captureImageButton.hidden = YES;
         captureImageButton2.hidden = YES;
+        parkingImageLabel.hidden = YES;
+        
     }else{
+        //[parkingImageView setImage:imageCaptured];
         captureImageButton.hidden = NO;
+        parkingImageLabel.hidden = NO;
         captureImageButton2.hidden = YES;
     }
+    
+    [noteTextField.layer setBorderWidth:0.0];
+    [textFieldView.layer setBorderWidth:1.0];
+    [textFieldView.layer setBorderColor:[UIColor whiteColor].CGColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,10 +125,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(IBAction)clearTextTapped:(id)sender{
+    noteTextField.text = @"";
+}
+
 -(IBAction)recordTapped:(UIButton *)sender{
     if (sender.isSelected) {
         lblRecording.text = @"Record";
-        
+        [recordBttn setImage:[UIImage imageNamed:@"park_record"] forState:UIControlStateNormal];
         [audioRecorder stopRecording];
         filePath = [audioRecorder saveFileWithOldName:@"sound.caf"];
         
@@ -115,6 +148,7 @@
         [self isRecoding:NO];
     }else{
         lblRecording.text = @"Stop";
+        [recordBttn setImage:[UIImage imageNamed:@"park_stop"] forState:UIControlStateNormal];
         [audioRecorder startRecording];
     }
     [sender setSelected:!sender.isSelected];
@@ -155,8 +189,6 @@
             [Parking storeParkingLocation:location];
         }
             [lblMap setText:MAP_IS_SELECTED(isSaved)];
-        
-       
     }];
     [self.navigationController pushViewController:viewCnt animated:YES];
 }
@@ -228,11 +260,10 @@
 {
     // Access the uncropped image from info dictionary
     imageCaptured = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-    
-    
+    [Parking storeParkingImage:imageCaptured];
+    [lblPhoto setText:PHOTO_IS_SELECTED(isImageStored)];
     [picker dismissViewControllerAnimated:YES completion:^{
-        [Parking storeParkingImage:imageCaptured];
-        [lblPhoto setText:PHOTO_IS_SELECTED(isImageStored)];
+        //[parkingImageView setImage:imageCaptured];
         
     }];
     // Save image
@@ -303,7 +334,7 @@
 }
 -(void)doneTapped:(UIBarButtonItem *)sender{
     if (sender.tag == 1) {
-        noteTextField.text = @"";
+        noteTextField.text = @"Save a text reminder";
     }else
     [self.view endEditing:YES];
     

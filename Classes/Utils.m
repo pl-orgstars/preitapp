@@ -98,6 +98,7 @@
 #define PARKING_NOTE @"parkingNote"
 #define PARKING_LOCATION @"parkingLocation"
 #define PARKING_IMAGE @"parkingImage"
+#define PARKING_MAP_IMAGE @"parkingMapImage"
 #define PARKING_AUDIO_LOCATION @"parkingAudioLocation"
 #define PARKING_AUDIO_LOCATION_NOTE @"parkingAudioLocationNote"
 @implementation Parking
@@ -113,6 +114,14 @@
     NSUserDefaults *userdefaut = [NSUserDefaults standardUserDefaults];
     [userdefaut setObject:dict forKey:PARKING_LOCATION];
     [userdefaut synchronize];
+}
++(void)storeParkingMapImage:(UIImage*)image{
+    NSData* imageData = UIImageJPEGRepresentation(image, 1);// UIImagePNGRepresentation(image);
+    NSData* myEncodedImageData = [NSKeyedArchiver archivedDataWithRootObject:imageData];
+    NSUserDefaults *userdefaut = [NSUserDefaults standardUserDefaults];
+    [userdefaut setObject:myEncodedImageData forKey:PARKING_MAP_IMAGE];
+    [userdefaut synchronize];
+
 }
 +(void)storeParkingImage:(UIImage *)image{
     NSData* imageData = UIImageJPEGRepresentation(image, 1);// UIImagePNGRepresentation(image);
@@ -140,12 +149,14 @@
     [userdefaut synchronize];
 }
 
-
 +(BOOL)isParkingNoteStored{
     return [[NSUserDefaults standardUserDefaults]objectForKey:PARKING_NOTE];
 }
 +(BOOL)isParkingLocationStored{
     return [[NSUserDefaults standardUserDefaults]objectForKey:PARKING_LOCATION];
+}
++(BOOL)isParkingMapImageStored{
+    return [[NSUserDefaults standardUserDefaults]objectForKey:PARKING_MAP_IMAGE];
 }
 +(BOOL)isParkingImageStored{
     return [[NSUserDefaults standardUserDefaults]objectForKey:PARKING_IMAGE];
@@ -165,6 +176,12 @@
     NSDictionary *dict = [userdefaut objectForKey:PARKING_LOCATION];
     return CLLocationCoordinate2DMake([[dict objectForKey:@"lat"]floatValue], [[dict objectForKey:@"long"]floatValue]);
     
+}
++(UIImage*)getMapImage{
+    NSUserDefaults *userdefaut = [NSUserDefaults standardUserDefaults];
+    NSData* myEncodedImageData = [userdefaut objectForKey:PARKING_MAP_IMAGE];
+    NSData *imageData = [NSKeyedUnarchiver unarchiveObjectWithData:myEncodedImageData];
+    return [UIImage imageWithData:imageData];
 }
 +(UIImage *)getParkingImage{
     NSUserDefaults *userdefaut = [NSUserDefaults standardUserDefaults];
