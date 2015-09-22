@@ -71,7 +71,7 @@
     
 	self.navigationController.navigationBar.hidden=YES;
 
-    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"mallData"]isKindOfClass:[NSData class]] && !delegate.isOnForeGround) {
+    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"mallData"]isKindOfClass:[NSData class]] && !delegate.isOnForeGround && !_shouldReload) {
        NSData *data2 = [[NSUserDefaults standardUserDefaults]objectForKey:@"mallData"];
        NSDictionary *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data2];
 
@@ -477,6 +477,7 @@
 	NSString *city=[placemark.addressDictionary objectForKey:@"City"];
 	city=[city stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
 	screenHome.city=city;
+    screenHome.presentMainView = _presentMainView;
     
 	[self.navigationController pushViewController:screenHome animated:YES];
 
@@ -500,6 +501,7 @@
 	self.navigationItem.title=@"Back";
 	screenHome.coordinates=coordinates;
 	screenHome.radius=[pickerItem objectAtIndex:radiusSelected];
+    screenHome.presentMainView = _presentMainView;
 	[self.navigationController pushViewController:screenHome animated:YES];
 //	[screenHome release];
 }
@@ -639,7 +641,10 @@
 //	[delegate.navController.view removeFromSuperview];
 //    [delegate.window addSubview:delegate.tabBarController.view];
     
-    [self showMainViewController];
+    if (_presentMainView)
+        [self showMainViewController];
+    else
+        [self.navigationController popToRootViewControllerAnimated:YES];
     
     [delegate initilizeBeacon];
 //    [self requestForImages];
@@ -795,6 +800,7 @@
         //        screenHome.radius=[pickerItem objectAtIndex:radiusSelected];
         screenHome.isLocationEnabled = isLocationEnabled;
         screenHome.tableData = [[NSMutableArray alloc]initWithArray:array];
+        screenHome.presentMainView = _presentMainView;
         [self.navigationController pushViewController:screenHome animated:YES];
     }
     

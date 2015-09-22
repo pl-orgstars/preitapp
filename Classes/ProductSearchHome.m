@@ -10,6 +10,8 @@
 #import "ProductListViewController.h"
 #import "PreitAppDelegate.h"
 #import "UIAlertView+Blocks.h"
+#import "LocationViewController.h"
+
 @implementation ProductSearchHome{
     NSString *webViewURLString;
     PreitAppDelegate *del;
@@ -43,7 +45,6 @@
 
     urlString = [NSString stringWithFormat:@"%@%@",urlString,HOME_WEB_VIEW];
     NSLog(@"urlsrtrrttrviewWillAppear %@",urlString);
-
     webViewURLString = urlString;
     mobileWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, isIPhone5?66:65, 320, isIPhone5?534:417)];
     [mobileWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
@@ -66,8 +67,6 @@
 {
     [super viewDidLoad];
     [webview setDelegate:self];
-    
-    
 }
 
  
@@ -165,12 +164,16 @@
 
         
     }else{
-        PreitAppDelegate *appdelegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
-        appdelegate.isOnForeGround = YES;
-        [appdelegate.window addSubview:appdelegate.navController.view];
-        [appdelegate.tabBarController.view removeFromSuperview];    //Waseem Menu
+        LocationViewController *loaction = [[LocationViewController alloc]initWithNibName:@"LocationViewController" bundle:nil];
+        loaction.shouldReload = YES;
+        [self.navigationController pushViewController:loaction animated:YES];
         
-        [appdelegate disableBeacon];
+//        PreitAppDelegate *appdelegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
+//        appdelegate.isOnForeGround = YES;
+//        [appdelegate.window addSubview:appdelegate.navController.view];
+//        [appdelegate.tabBarController.view removeFromSuperview];    //Waseem Menu
+//        
+//        [appdelegate disableBeacon];
         
 #warning handle navigation here
     }

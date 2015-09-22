@@ -347,7 +347,12 @@ static NSString *const kAllowTracking = @"allowTracking";
     refreshMore=YES;
     
     storeListContent=[[NSMutableArray alloc]init];
+    
     LocationViewController *loaction = [[LocationViewController alloc]initWithNibName:@"LocationViewController" bundle:nil];
+    loaction.presentMainView = YES;
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"mallData"] isKindOfClass:[NSData class]])
+        loaction.shouldReload = NO;
+    
     navController = [[UINavigationController alloc]initWithRootViewController:loaction];
     
     

@@ -15,7 +15,9 @@
     __weak IBOutlet UIButton *recordBttn;
     __weak IBOutlet UIButton *playBttn;
     __weak IBOutlet UIButton *deleteBttn;
-    
+    __weak IBOutlet UIButton *captureImageButton;
+    __weak IBOutlet UIButton *captureImageButton2;
+    __weak IBOutlet UIButton *captureMapButton;
     
     __weak IBOutlet UILabel *lblNote;
     
@@ -26,6 +28,8 @@
     
     __weak IBOutlet UILabel *lblMap;
     __weak IBOutlet UILabel *lblPhoto;
+    __weak IBOutlet UIImageView *parkingImageView;
+    __weak IBOutlet UIImageView *mapImageView;
     
     AudioRecorder *audioRecorder;
     NSString *filePath;

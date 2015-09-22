@@ -34,6 +34,8 @@
 @property(nonatomic,retain)NSString *radius;
 
 @property(nonatomic)BOOL isLocationEnabled;
+@property (nonatomic) BOOL presentMainView;
+
 -(void)getData;
 -(void)getDistance;
 -(void)requestForImages;

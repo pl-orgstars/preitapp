@@ -145,6 +145,8 @@
 		70FE3AA11739370200E64874 /* LocationViewController copy.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70FE3AA01739370200E64874 /* LocationViewController copy.xib */; };
 		70FE3AA3173941C700E64874 /* CustomTable copy.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70FE3AA2173941C700E64874 /* CustomTable copy.xib */; };
 		8CE9BF151AC95F3700C89A46 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE9BF141AC95F3700C89A46 /* libGoogleAnalyticsServices.a */; };
+		8D9E8D991BB18D9100550D67 /* ParkScreenNew.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D9E8D981BB18D9100550D67 /* ParkScreenNew.xib */; settings = {ASSET_TAGS = (); }; };
+		8D9E8D9B1BB18F7900550D67 /* ParkingImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D9E8D9A1BB18F7900550D67 /* ParkingImages.xcassets */; settings = {ASSET_TAGS = (); }; };
 		AE08DBEC194573AF001FCC7B /* pause_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE08DBEA194573AF001FCC7B /* pause_icon.png */; };
 		AE08DBED194573AF001FCC7B /* pause_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE08DBEB194573AF001FCC7B /* pause_icon@2x.png */; };
 		AE08DBF019457FB5001FCC7B /* white_arrow_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE08DBEE19457FB5001FCC7B /* white_arrow_icon.png */; };
@@ -591,6 +593,8 @@
 		8C15BE011ACA715D00CE3107 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		8CE9BF141AC95F3700C89A46 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = ../../../../../Users/jittu/Downloads/GoogleAnalyticsServicesiOS_3.10/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Preit-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Preit-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		8D9E8D981BB18D9100550D67 /* ParkScreenNew.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParkScreenNew.xib; sourceTree = "<group>"; };
+		8D9E8D9A1BB18F7900550D67 /* ParkingImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ParkingImages.xcassets; sourceTree = "<group>"; };
 		AE08DBEA194573AF001FCC7B /* pause_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_icon.png; sourceTree = "<group>"; };
 		AE08DBEB194573AF001FCC7B /* pause_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause_icon@2x.png"; sourceTree = "<group>"; };
 		AE08DBEE19457FB5001FCC7B /* white_arrow_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_arrow_icon.png; sourceTree = "<group>"; };
@@ -1502,6 +1506,8 @@
 				AE710DDE19404D34003277B2 /* CameraImageViewController.h */,
 				AE710DDF19404D34003277B2 /* CameraImageViewController.m */,
 				AE710DE019404D34003277B2 /* CameraImageViewController.xib */,
+				8D9E8D981BB18D9100550D67 /* ParkScreenNew.xib */,
+				8D9E8D9A1BB18F7900550D67 /* ParkingImages.xcassets */,
 			);
 			name = ParkScreen;
 			sourceTree = "<group>";
@@ -2090,6 +2096,7 @@
 				AE87D299193707E200F5493D /* Menu_normal@2x.png in Resources */,
 				E2C992C4127038A700F83CDD /* DirectionViewController.xib in Resources */,
 				E2BDADCF12783E8300B52E14 /* MapViewController.xib in Resources */,
+				8D9E8D991BB18D9100550D67 /* ParkScreenNew.xib in Resources */,
 				E2AD92941279AA450021D20C /* calendar.png in Resources */,
 				E2B0AF81127ACDE100B32837 /* select_hover.png in Resources */,
 				AECE4801195A935600D1E5DB /* AppIcon29x29@2x.png in Resources */,
@@ -2151,6 +2158,7 @@
 				42A3AB1A15AC2C0500F5790B /* previous_highlighted@2X.png in Resources */,
 				42A3AB1B15AC2C0500F5790B /* previous_normal@2X.png in Resources */,
 				BD93E47D1BB14BD700EB91F0 /* mainmenu-icon-directions@2x.png in Resources */,
+				8D9E8D9B1BB18F7900550D67 /* ParkingImages.xcassets in Resources */,
 				AECE480B195A935600D1E5DB /* AppIcon72x72@2x.png in Resources */,
 				42A3AB1C15AC2C0500F5790B /* product_search@2X.png in Resources */,
 				AE87D2901936F2C800F5493D /* 12.png in Resources */,
