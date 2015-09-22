@@ -38,12 +38,14 @@
 
 #define isAudioStored [Parking isParkingAudioStored]
 #define isImageStored [Parking isParkingImageStored]
+#define isMapImageStored [Parking isParkingMapImageStored]
 #define isLocationStored [Parking isParkingLocationStored]
 #define isNoteStored [Parking isParkingNoteStored]
 
 #define getNotesParking [Parking getParkingNote]
 #define getLocationParking [Parking getParkingLocation]
 #define getImageParking [Parking getParkingImage]
+#define getMapParking [Parking getMapImage]
 #define getAudioParking [Parking getParkingAudio]
 #define getAudioNoteParking [Parking getParkingAudioNote]
 
@@ -51,17 +53,20 @@
 
 +(void)storeParkingNote:(NSString *)string;
 +(void)storeParkingLocation:(CLLocationCoordinate2D)location;
++(void)storeParkingMapImage:(UIImage*)image;
 +(void)storeParkingImage:(UIImage *)image;
 //+(void)storeParkingAudioLocation:(NSString *)string;
 +(void)storeParkingAudioLocation:(NSString *)string note:(NSString *)note;
 
 +(BOOL)isParkingNoteStored;
 +(BOOL)isParkingLocationStored;
++(BOOL)isParkingMapImageStored;
 +(BOOL)isParkingImageStored;
 +(BOOL)isParkingAudioStored;
 
 +(NSString *)getParkingNote;
 +(CLLocationCoordinate2D)getParkingLocation;
++(UIImage*)getMapImage;
 +(UIImage *)getParkingImage;
 +(NSString *)getParkingAudio;
 +(NSString *)getParkingAudioNote;

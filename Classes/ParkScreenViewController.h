@@ -18,6 +18,7 @@
     __weak IBOutlet UIButton *captureImageButton;
     __weak IBOutlet UIButton *captureImageButton2;
     __weak IBOutlet UIButton *captureMapButton;
+    __weak IBOutlet UIButton *clearTextButton;
     
     __weak IBOutlet UILabel *lblNote;
     
@@ -35,6 +36,7 @@
     NSString *filePath;
     NSString *fileSavedMessage;
     
+    UIImage *mapImage;
     UIImage *imageCaptured;
 }
 -(IBAction)recordTapped:(id)sender;

@@ -10,10 +10,12 @@
                 <outlet property="captureImageButton" destination="Sw0-1x-6Lc" id="tbK-wN-cUa"/>
                 <outlet property="captureImageButton2" destination="BC6-As-WH0" id="JfI-uE-J0u"/>
                 <outlet property="captureMapButton" destination="Mxq-n8-E7D" id="bCy-Kv-zeb"/>
+                <outlet property="clearTextButton" destination="ssR-Yn-cea" id="zYL-ou-ZV9"/>
                 <outlet property="deleteBttn" destination="MIL-Za-TMo" id="JKd-i4-4nw"/>
                 <outlet property="lblPlayPause" destination="Z4U-eZ-KVo" id="8hy-3m-MwQ"/>
                 <outlet property="lblRecording" destination="b7E-LJ-VWD" id="nQ7-2W-kwP"/>
                 <outlet property="mapImageView" destination="hpv-aq-w9U" id="k40-oF-IAb"/>
+                <outlet property="noteTextField" destination="STc-Sr-hWd" id="Uk5-zF-sYn"/>
                 <outlet property="parkingImageView" destination="u8Y-fy-4kV" id="Upc-I3-3ky"/>
                 <outlet property="playBttn" destination="wIM-Y7-7mu" id="TQ3-YJ-ldf"/>
                 <outlet property="recordBttn" destination="vwg-Do-911" id="wcC-ve-QCA"/>
@@ -27,12 +29,9 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u8Y-fy-4kV" userLabel="parkingimage">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="220"/>
-                    <color key="backgroundColor" red="0.72549019609999998" green="0.72549019609999998" blue="0.72549019609999998" alpha="1" colorSpace="deviceRGB"/>
-                    <color key="tintColor" red="0.72549019609999998" green="0.72549019609999998" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hpv-aq-w9U" userLabel="mapimage">
                     <rect key="frame" x="0.0" y="220" width="600" height="219"/>
-                    <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sw0-1x-6Lc" userLabel="image">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="220"/>
@@ -126,20 +125,35 @@
                                 <constraint firstAttribute="width" constant="20" id="CAv-aP-XJL"/>
                             </constraints>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="park_clear_text" translatesAutoresizingMaskIntoConstraints="NO" id="dOs-sc-EXO">
-                            <rect key="frame" x="572" y="8" width="20" height="20"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="STc-Sr-hWd">
+                            <rect key="frame" x="36" y="0.0" width="528" height="36"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ssR-Yn-cea">
+                            <rect key="frame" x="572" y="7" width="21" height="22"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="20" id="H4Y-r1-PNZ"/>
-                                <constraint firstAttribute="height" constant="20" id="jN2-Yf-Iqp"/>
+                                <constraint firstAttribute="height" constant="22" id="TtY-gC-8BB"/>
+                                <constraint firstAttribute="width" constant="21" id="WxT-Go-eGy"/>
                             </constraints>
-                        </imageView>
+                            <state key="normal" image="park_clear_text"/>
+                            <connections>
+                                <action selector="clearTextTapped:" destination="-1" eventType="touchUpInside" id="cQB-QV-93h"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="dOs-sc-EXO" secondAttribute="trailing" constant="8" id="7XA-O0-rAL"/>
-                        <constraint firstItem="dOs-sc-EXO" firstAttribute="centerY" secondItem="qfn-XL-ViW" secondAttribute="centerY" id="SRE-Kk-jTv"/>
+                        <constraint firstItem="ssR-Yn-cea" firstAttribute="centerY" secondItem="qfn-XL-ViW" secondAttribute="centerY" id="3Ho-Qm-9Ht"/>
+                        <constraint firstAttribute="bottom" secondItem="STc-Sr-hWd" secondAttribute="bottom" id="8ee-cn-UD0"/>
+                        <constraint firstItem="STc-Sr-hWd" firstAttribute="leading" secondItem="oLh-VO-iGr" secondAttribute="trailing" constant="8" id="QQn-eK-U3m"/>
+                        <constraint firstItem="ssR-Yn-cea" firstAttribute="leading" secondItem="STc-Sr-hWd" secondAttribute="trailing" constant="8" id="bUc-1N-dok"/>
+                        <constraint firstItem="STc-Sr-hWd" firstAttribute="centerY" secondItem="qfn-XL-ViW" secondAttribute="centerY" id="bjZ-QY-kFL"/>
+                        <constraint firstItem="STc-Sr-hWd" firstAttribute="top" secondItem="qfn-XL-ViW" secondAttribute="top" id="eMA-KD-o8x"/>
                         <constraint firstAttribute="height" constant="36" id="gjF-Kl-Vwo"/>
                         <constraint firstItem="oLh-VO-iGr" firstAttribute="leading" secondItem="qfn-XL-ViW" secondAttribute="leading" constant="8" id="lbn-9z-7y4"/>
+                        <constraint firstAttribute="trailing" secondItem="ssR-Yn-cea" secondAttribute="trailing" constant="7" id="qOw-aQ-Taa"/>
                         <constraint firstItem="oLh-VO-iGr" firstAttribute="centerY" secondItem="qfn-XL-ViW" secondAttribute="centerY" id="wp0-7x-Adx"/>
                     </constraints>
                 </view>

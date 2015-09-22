@@ -67,9 +67,14 @@
     mallLocation = isLocationStored?getLocationParking:CLLocationCoordinate2DMake([[appdelegate.mallData objectForKey:@"location_lat"]floatValue], [[appdelegate.mallData objectForKey:@"location_lng"]floatValue]);
     
     imageCaptured = isImageStored?getImageParking:nil;
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(takePhotoTapped:)];
-    [parkingImageView addGestureRecognizer:tapGesture];
+    mapImage = isMapImageStored?getMapParking:nil;
+    
+    UITapGestureRecognizer *imageTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(takePhotoTapped:)];
+    [parkingImageView addGestureRecognizer:imageTapGesture];
     parkingImageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *mapTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(loctionTapped:)];
+    [mapImageView addGestureRecognizer:mapTapGesture];
+    mapImageView.userInteractionEnabled = YES;
     
     audioRecorder = [[AudioRecorder alloc]init];
     audioRecorder.delegate = self;
@@ -80,11 +85,22 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    imageCaptured = isImageStored?getImageParking:nil;
+    mapImage = isMapImageStored?getMapParking:nil;
+
+    if(mapImage){
+        [mapImageView setImage:mapImage];
+        captureMapButton.hidden = YES;
+    }else{
+        [mapImageView setImage:mapImage];
+        captureMapButton.hidden = NO;
+    }
     if (imageCaptured){
         [parkingImageView setImage:imageCaptured];
         captureImageButton.hidden = YES;
         captureImageButton2.hidden = YES;
     }else{
+        //[parkingImageView setImage:imageCaptured];
         captureImageButton.hidden = NO;
         captureImageButton2.hidden = YES;
     }
@@ -94,6 +110,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)clearTextTapped:(id)sender{
+    noteTextField.text = @"";
 }
 
 -(IBAction)recordTapped:(UIButton *)sender{
@@ -155,8 +175,6 @@
             [Parking storeParkingLocation:location];
         }
             [lblMap setText:MAP_IS_SELECTED(isSaved)];
-        
-       
     }];
     [self.navigationController pushViewController:viewCnt animated:YES];
 }
@@ -228,11 +246,10 @@
 {
     // Access the uncropped image from info dictionary
     imageCaptured = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-    
-    
+    [Parking storeParkingImage:imageCaptured];
+    [lblPhoto setText:PHOTO_IS_SELECTED(isImageStored)];
     [picker dismissViewControllerAnimated:YES completion:^{
-        [Parking storeParkingImage:imageCaptured];
-        [lblPhoto setText:PHOTO_IS_SELECTED(isImageStored)];
+        //[parkingImageView setImage:imageCaptured];
         
     }];
     // Save image

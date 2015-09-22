@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 //#import "Event.h"
+#import "ParkScreenViewController.h"
 #import "MyCLController.h"
 @interface MapKitDragAndDropViewController : BaseViewController <MKMapViewDelegate,MyCLControllerDelegate> {
 	MKMapView *mapView;
@@ -17,6 +18,7 @@
         __weak IBOutlet UIButton *rightBttn;
 
 }
+@property (nonatomic, weak) ParkScreenViewController *parkingScreen;
 @property (nonatomic,readwrite) BOOL isEdit;
 @property (nonatomic,readwrite) CLLocationCoordinate2D loc;
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;

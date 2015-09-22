@@ -310,9 +310,14 @@
         REMOVE_PARK_LOCATION;
         _callback(nil,_loc,NO);
        [self performSelector:@selector(getCurrentLocation) withObject:nil afterDelay:0.2];
+        [Parking storeParkingMapImage:nil];
     }else{
          _isEdit = YES;
        _callback(destinationStr,_loc,YES);
+        UIGraphicsBeginImageContext(self.mapView.bounds.size);
+        [self.mapView.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *mapImage = UIGraphicsGetImageFromCurrentImageContext();
+        [Parking storeParkingMapImage:mapImage];
     }
     [rightBttn setTitle:SELECTED_TITLE(_isEdit) forState:UIControlStateNormal];
     return;
