@@ -12,7 +12,9 @@
     IBOutlet UITableView* sideTableView;
     
 }
-@property(nonatomic,retain) IBOutlet UILabel* nameLabel;
+
+@property (nonatomic,retain) IBOutlet UILabel* nameLabel;
+@property (retain, nonatomic) UINavigationController *navController;
 
 
 -(id)customInit;

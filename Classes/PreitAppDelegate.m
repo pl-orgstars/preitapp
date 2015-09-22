@@ -334,7 +334,7 @@ static NSString *const kAllowTracking = @"allowTracking";
     
     
     // Override point for customization after application launch.
-    [window makeKeyAndVisible];
+//    [window makeKeyAndVisible];
     
     tabBarController.delegate = self;
     tabBarController.hidesBottomBarWhenPushed = YES;
@@ -349,7 +349,13 @@ static NSString *const kAllowTracking = @"allowTracking";
     storeListContent=[[NSMutableArray alloc]init];
     LocationViewController *loaction = [[LocationViewController alloc]initWithNibName:@"LocationViewController" bundle:nil];
     navController = [[UINavigationController alloc]initWithRootViewController:loaction];
-    [window addSubview:navController.view];
+    
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = navController;
+    [self.window makeKeyAndVisible];
+    
+//    [window addSubview:navController.view];
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     

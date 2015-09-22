@@ -180,6 +180,24 @@
     // e.g. self.myOutlet = nil;
 }
 
+#pragma mark - MainView Method
+
+- (void)showMainViewController {
+    ProductSearchHome *productSearchVC = [[ProductSearchHome alloc] initWithNibName:@"ProductSearchHome" bundle:nil];
+    productSearchVC.view.frame = CGRectMake(0, 0, 320, isIPhone5?568:480);
+    
+    UINavigationController *navCont = [[UINavigationController alloc] initWithRootViewController:productSearchVC];
+    navCont.navigationBarHidden = YES;
+    
+    MenuScreenViewController *sideMenu = [[MenuScreenViewController alloc] initWithNibName:@"MenuScreenViewController" bundle:[NSBundle mainBundle]];
+    sideMenu.navController = navCont;
+    
+    MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController containerWithCenterViewController:navCont
+                                                                                                 leftMenuViewController:nil
+                                                                                                rightMenuViewController:sideMenu];
+    container.rightMenuWidth = 320.0;
+    [self presentViewController:container animated:YES completion:nil];
+}
 
 //- (void)dealloc {	
 //    [super dealloc];
@@ -618,9 +636,11 @@
     }
     [self hideHud];
     [delegate setupPortraitUserInterface];
-	[delegate.navController.view removeFromSuperview];
-
-    [delegate.window addSubview:delegate.tabBarController.view];
+//	[delegate.navController.view removeFromSuperview];
+//    [delegate.window addSubview:delegate.tabBarController.view];
+    
+    [self showMainViewController];
+    
     [delegate initilizeBeacon];
 //    [self requestForImages];
 }

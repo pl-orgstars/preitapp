@@ -45,10 +45,13 @@
 	<string>2.41</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string></string>
-	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
 	<key>PRODUCTION_API_KEY</key>
 	<string>277d825b-7e1f-4418-895f-0d1cf248ff80</string>
 	<key>U</key>
