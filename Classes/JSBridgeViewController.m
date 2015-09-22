@@ -31,9 +31,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //	self.navigationItem.title=@"Map";
+    self.navigationController.navigationBar.hidden = YES;
     
-    [self setNavigationTitle:@"Map" withBackButton:YES];
-    [self setUIForIOS7];
+//    [self setNavigationTitle:@"Map" withBackButton:YES];
+//    [self setUIForIOS7];
     //kkk
     // change google
     [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:@"title"];

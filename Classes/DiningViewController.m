@@ -122,6 +122,11 @@
 
 - (void)tableView:(UITableView *)tableView modified_didSelectRowAtIndexPath:(NSIndexPath *)indexPath {	
 	DiningDetailViewController *screenStoreDetail=[[DiningDetailViewController alloc]initWithNibName:@"CustomStoreDetailViewController" bundle:nil];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        screenStoreDetail.titleLabel.text = @"Dining";
+
+    });
 	NSDictionary *tmpDict=[self.tableData objectAtIndex:indexPath.row];
     ///kkkkkk
     NSLog(@"dinning data are:::::%@",tmpDict);

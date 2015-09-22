@@ -2460,7 +2460,7 @@
 					"\"$(SRCROOT)/GoogleAnalyticsServicesiOS_3.10\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = Preit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2501,7 +2501,7 @@
 					"\"$(SRCROOT)/GoogleAnalyticsServicesiOS_3.10\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.r5i.preitTJ;
-				PRODUCT_NAME = Preit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9a14a316-d22f-4a46-99ad-3d4c2e683daa";
 				TARGETED_DEVICE_FAMILY = 1;

@@ -21,7 +21,11 @@
 	NSString *apiString;
 	IBOutlet UIActivityIndicatorView *indicator_;
 	NSMutableArray *disclosureRow;
+    
 }
+@property(nonatomic,retain) IBOutlet UILabel* titleLabel;
+
+
 @property(nonatomic,retain) UITableView *tableCustom;;
 @property(nonatomic,retain) UIImageView *imageView;
 @property(nonatomic,retain)PreitAppDelegate *delegate;

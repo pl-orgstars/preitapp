@@ -77,13 +77,17 @@
     [webView setOpaque:NO];
 	
 	//create the button
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
 	
     //sets its size
-    [button setFrame:CGRectMake(100, 41, 125, 30)];
+//    [button setFrame:CGRectMake(108, 83, 125, 30)];
+    
+    [button setEnabled:YES];
+    [button setHidden:NO];
 //    [button setFrame:CGRectMake(100, 41, 200, 30)];
 	
     //set title, font size and font color
+//    [button setAttributedTitle:[dictData objectForKey:@"telephone"] forState:UIControlStateNormal];
     [button setTitle:[dictData objectForKey:@"telephone"] forState:UIControlStateNormal];
 	button.titleLabel.font =[UIFont boldSystemFontOfSize:17.0];
     [button setTitleColor:LABEL_TEXT_COLOR forState:UIControlStateNormal];
@@ -119,6 +123,13 @@
 //}
 
 #pragma mark Action methods
+
+- (IBAction)menuBtnCall:(id)sender {
+    
+    self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
+
+}
+
 
 -(IBAction)buttonAction:(id)sender{
 

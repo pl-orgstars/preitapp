@@ -92,6 +92,14 @@
     [beaconmsgUpdate invalidate];
     beaconmsgUpdate=nil;
 }
+
+- (IBAction)closeBtnCall:(id)sender {
+    
+    self.menuContainerViewController.menuState = MFSideMenuStateClosed;
+
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -129,41 +137,49 @@
                      DEALS,
                      EVENTS,
                      TRENDS,
-                 
                      DIRECTIONS,
-                     MOVIE,
+                     PARKING,
                      HOURS,
+                     MOVIE,
                      JOB,
                      CONTACT_US,
-                     SHOW_NEW_MALL,
+                     //SHOW_NEW_MALL,
                      nil];
     }else if (!appdelegate.isMovie){
         tableData = [[NSMutableArray alloc]initWithObjects:
                      HOME,
+                     GIFT,
                      STORE,
                      PRODUCTS,
-                     DINING,
-                     TRENDS,
+                     DEALS,
                      EVENTS,
+                     TRENDS,
                      DIRECTIONS,
+                     PARKING,
                      HOURS,
+                     MOVIE,
                      JOB,
                      CONTACT_US,
-                     SHOW_NEW_MALL,
+                     //SHOW_NEW_MALL,
                      nil];
     }else{
         tableData = [[NSMutableArray alloc]initWithObjects:
                      HOME,
+                     GIFT,
                      STORE,
                      PRODUCTS,
-                     TRENDS,
+                     DEALS,
                      EVENTS,
+                     TRENDS,
                      DIRECTIONS,
+                     PARKING,
                      HOURS,
                      JOB,
-                     SHOW_NEW_MALL,
+                     //SHOW_NEW_MALL,
                      nil];
     }
+    
+    [tableData addObject:DINING];
     
     
     
@@ -185,7 +201,7 @@
     if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [tableView setSeparatorInset:UIEdgeInsetsMake(tableView.separatorInset.top, 4.0, tableView.separatorInset.bottom, 4.0)];
     }
-	CGFloat height = 60.0;
+	CGFloat height = 50.0;
 	return height;
 }
 
@@ -237,11 +253,11 @@
     }
     else if ([str isEqualToString:STORE]){
         //        @"STORES",
-        
-        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[StoreSearchViewController class]]) {
+#warning ibnetariq update store view and solve this issue
+      /*  if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[StoreSearchViewController class]]) {
             StoreSearchViewController *screenShoppingindex=[[StoreSearchViewController alloc]initWithNibName:@"StoreSearchViewController" bundle:nil];
             _navController.viewControllers = @[screenShoppingindex];
-        }
+        } */
         
         //        self.navigationItem.title=@"Back";
         //        [self.navigationController pushViewController:screenShoppingindex animated:YES];
@@ -256,7 +272,11 @@
         if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[DiningViewController class]]) {
             DiningViewController *viewCnt = [[DiningViewController alloc]initWithNibName:@"CustomTable" bundle:nil];
             _navController.viewControllers = @[viewCnt];
-            
+//            [viewCnt.titleLabel setText:@"DINING"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                viewCnt.titleLabel.text = @"DINING";
+
+            });
         }
         //        [self.navigationController pushViewController:viewCnt animated:YES];
         

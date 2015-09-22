@@ -24,8 +24,12 @@
     
     __weak IBOutlet UIButton *dealBttn;
     
+    IBOutlet UIButton* button;
+    
     NSDictionary *showDealDictionary;
 }
+
+@property (nonatomic,retain) IBOutlet UILabel* titleLabel;
 
 @property (nonatomic,retain)NSDictionary *dictData;
 -(void)setData;
