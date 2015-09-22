@@ -12,5 +12,8 @@
 {
     NSTimer *beaconmsgUpdate;
 }
+
 -(void)searchAction:(id)sender;
+@property (retain, nonatomic) UINavigationController *navController;
+
 @end
