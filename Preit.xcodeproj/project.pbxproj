@@ -90,9 +90,9 @@
 		42CC8F3715A5C6B6004B0CDE /* ProductListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CC8F3415A5C6B6004B0CDE /* ProductListViewController.xib */; };
 		42CC8F3B15A5C756004B0CDE /* ProductDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC8F3915A5C756004B0CDE /* ProductDetailViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		42CC8F3C15A5C756004B0CDE /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CC8F3A15A5C756004B0CDE /* ProductDetailViewController.xib */; };
-		612FBB5D1BB14FBA00D9E30C /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB581BB14FBA00D9E30C /* MFSideMenuContainerViewController.m */; settings = {ASSET_TAGS = (); }; };
-		612FBB5E1BB14FBA00D9E30C /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5A1BB14FBA00D9E30C /* MFSideMenuShadow.m */; settings = {ASSET_TAGS = (); }; };
-		612FBB5F1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5C1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m */; settings = {ASSET_TAGS = (); }; };
+		612FBB5D1BB14FBA00D9E30C /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB581BB14FBA00D9E30C /* MFSideMenuContainerViewController.m */; };
+		612FBB5E1BB14FBA00D9E30C /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5A1BB14FBA00D9E30C /* MFSideMenuShadow.m */; };
+		612FBB5F1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5C1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m */; };
 		7003D6D9170961940031D69D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003D6D8170961920031D69D /* SystemConfiguration.framework */; };
 		7003D6DB170961B20031D69D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003D6DA170961B10031D69D /* CoreData.framework */; };
 		704554321740B2840038838F /* MapViewController copy.xib in Resources */ = {isa = PBXBuildFile; fileRef = 704554311740B2840038838F /* MapViewController copy.xib */; };
@@ -2458,6 +2458,7 @@
 					"\"$(SRCROOT)/Library\"",
 					"\"$(SRCROOT)/GoogleAnalyticsServicesiOS_3.10\"",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Preit;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
