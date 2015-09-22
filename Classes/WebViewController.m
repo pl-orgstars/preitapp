@@ -135,6 +135,8 @@
 	{
 		imageView.image=delegate.image3;
 	}
+    
+  
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -358,6 +360,12 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"updateGeneral_IMG" object:nil];
 
 }
+
+- (IBAction)backBtnCall:(id)sender {
+    self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
+    
+}
+
 
 @end
 

@@ -547,4 +547,11 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"updateGeneral_IMG" object:nil];
 }
 
+- (IBAction)menuBtnCall:(id)sender {
+    
+    self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
+
+}
+
+
 @end

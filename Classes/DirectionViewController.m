@@ -217,6 +217,10 @@
 {
 	
 }
+- (IBAction)menuBtnCall:(id)sender {
+    self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
+
+}
 
 
 @end

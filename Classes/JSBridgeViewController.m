@@ -44,7 +44,8 @@
     //kkkk
 	//NSLog(@"View Did Load!");
 		
-	webView = [[JSBridgeWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    webView = [[JSBridgeWebView alloc] initWithFrame:webView.frame];
+//	webView = [[JSBridgeWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
 	webView.delegate = self;
 	webView.backgroundColor=[UIColor whiteColor];
 	webView.opaque=YES;
@@ -146,6 +147,11 @@
 	{
 		
 	}
+}
+- (IBAction)menuBtnCall:(id)sender {
+    
+    self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
+
 }
 
 //- (void)dealloc {

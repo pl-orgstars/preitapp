@@ -272,6 +272,15 @@
 //    [[GAI sharedInstance].defaultTracker sendView:@"Hours"];
     
     screenWebView.htmlString = [showDealDictionary objectForKeyWithNullCheck:@"content"];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.titleLabel.text = @"DEAL";
+        
+    });
+    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        screenWebView.titleLabel.text = @"DEAL";
+//    });
     [self.navigationController pushViewController:screenWebView animated:YES];
 }
 

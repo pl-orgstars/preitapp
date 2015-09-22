@@ -39,6 +39,7 @@
 #import "MovieListingViewController.h"
 #import "JobsViewController.h"
 #import "LocationViewController.h"
+#import "SalesViewController.h"
 
 #import "HomeScreen.h"
 #import "ContactUsViewController.h"
@@ -179,7 +180,6 @@
                      nil];
     }
     
-    [tableData addObject:DINING];
     
     
     
@@ -241,12 +241,12 @@
     
     
     NSString *str = [tableData objectAtIndex:indexPath.row];
-    
+    NSInteger count = _navController.viewControllers.count-1;
     if ([str isEqualToString:HOME]) {
         //        @"HOME",
         //        [appdelegate hideProductScreen:NO];
         
-        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[ProductSearchHome class]]) {
+        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[ProductSearchHome class]]) {
             ProductSearchHome *productVC = [[ProductSearchHome alloc] initWithNibName:@"ProductSearchHome" bundle:[NSBundle mainBundle]];
             _navController.viewControllers = @[productVC];
         }
@@ -264,12 +264,14 @@
     }
     else if ([str isEqualToString:PRODUCTS]){
         //        @"PRODUCTS",
-        [self searchAction:nil];
+        
+#warning ibnetariq update products
+//        [self searchAction:nil];
     }
     
     else if ([str isEqualToString:DINING]) {
         
-        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[DiningViewController class]]) {
+        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[DiningViewController class]]) {
             DiningViewController *viewCnt = [[DiningViewController alloc]initWithNibName:@"CustomTable" bundle:nil];
             _navController.viewControllers = @[viewCnt];
 //            [viewCnt.titleLabel setText:@"DINING"];
@@ -290,13 +292,19 @@
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
         
+        dispatch_async(dispatch_get_main_queue(), ^{
+            screenWebView.titleLabel.text = @"TRENDS";
+        });
+        
         _navController.viewControllers = @[screenWebView];
         //        [self.navigationController pushViewController:screenWebView animated:YES];
+        
+        
         
     }
     else if([str isEqualToString:EVENTS]){
         
-        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[EventsViewController class]]) {
+        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[EventsViewController class]]) {
             EventsViewController *viewCnt = [[EventsViewController alloc]initWithNibName:@"EventsViewController" bundle:nil];
             _navController.viewControllers = @[viewCnt];
         }
@@ -311,7 +319,7 @@
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
         
-        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[DirectionViewController class]]) {
+        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[DirectionViewController class]]) {
             DirectionViewController *screenDirection=[[DirectionViewController alloc]initWithNibName:@"DirectionViewController" bundle:nil];
             _navController.viewControllers = @[screenDirection];
         }
@@ -326,7 +334,7 @@
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
         
-        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[MovieListingViewController class]]) {
+        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[MovieListingViewController class]]) {
             MovieListingViewController *screenMovieListing=[[MovieListingViewController alloc]initWithNibName:@"MovieListingViewController" bundle:nil];
             _navController.viewControllers = @[screenMovieListing];
             
@@ -356,7 +364,7 @@
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
         //[[GAI sharedInstance].defaultTracker sendView:@"Job Openings"];
         
-        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[JobsViewController class]]) {
+        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[JobsViewController class]]) {
             JobsViewController *screenJobs=[[JobsViewController alloc]initWithNibName:@"JobsViewController" bundle:nil];
             _navController.viewControllers = @[screenJobs];
         }
@@ -385,6 +393,15 @@
         //        [appdelegate disableBeacon];
         
     }
+    else if ([str isEqualToString:DEALS])
+    {
+        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[SalesViewController class]]) {
+            
+            SalesViewController* salesVC=[[SalesViewController alloc] initWithNibName:@"SalesViewController" bundle:[NSBundle mainBundle]];
+            _navController.viewControllers = @[salesVC];
+        }
+        
+    }
     else if ([str isEqualToString:CONTACT_US]){
         // Change google
         [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:@"Contact Us"];
@@ -392,7 +409,7 @@
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
         
-        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[ContactUsViewController class]]) {
+        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[ContactUsViewController class]]) {
             ContactUsViewController *screenContact=[[ContactUsViewController alloc]initWithNibName:@"ContactUsViewController" bundle:nil];
             _navController.viewControllers = @[screenContact];
         }
@@ -400,7 +417,7 @@
     }
     else if ([str isEqualToString:PARKING]){
         
-        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[ParkScreenViewController class]]) {
+        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[ParkScreenViewController class]]) {
             ParkScreenViewController *parkScreen = [[ParkScreenViewController alloc] initWithNibName:@"ParkScreenNew" bundle:[NSBundle mainBundle]];
             _navController.viewControllers = @[parkScreen];
             
@@ -470,7 +487,9 @@
     NSLog(@"searchAction");
     //    UIAlertView *alert= [[UIAlertView alloc] initWithTitle:@"" message:@"Product Search is temporarily unavailable" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] ;
     
-    if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[ProductListViewController class]]) {
+    
+    NSInteger count = _navController.viewControllers.count - 1;
+    if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[ProductListViewController class]]) {
         ProductListViewController *productListViewController = [[ProductListViewController alloc]initWithNibName:@"ProductListViewController" bundle:nil];
         _navController.viewControllers = @[productListViewController];
     }

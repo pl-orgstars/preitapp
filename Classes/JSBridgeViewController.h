@@ -11,7 +11,7 @@
 #import "GAITrackedViewController.h"
 @interface JSBridgeViewController : GAITrackedViewController <JSBridgeWebViewDelegate> {
 
-	JSBridgeWebView* webView;
+	IBOutlet JSBridgeWebView* webView;
 	NSString *mapUrl;
 }
 @property(nonatomic,retain)NSString *mapUrl;

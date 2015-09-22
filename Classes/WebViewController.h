@@ -21,7 +21,11 @@
 	NSDictionary *tmpdict;
 	int screenIndex;
 	IBOutlet UILabel *lab1,*lab2;
+    
 }
+
+
+@property(nonatomic,retain) IBOutlet UILabel* titleLabel;
 @property(nonatomic,retain) NSDictionary *tmpdict;
 @property(nonatomic,retain) NSString *urlString;
 @property(nonatomic,retain) NSString *htmlString;
