@@ -67,6 +67,9 @@
     mallLocation = isLocationStored?getLocationParking:CLLocationCoordinate2DMake([[appdelegate.mallData objectForKey:@"location_lat"]floatValue], [[appdelegate.mallData objectForKey:@"location_lng"]floatValue]);
     
     imageCaptured = isImageStored?getImageParking:nil;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(takePhotoTapped:)];
+    [parkingImageView addGestureRecognizer:tapGesture];
+    parkingImageView.userInteractionEnabled = YES;
     
     audioRecorder = [[AudioRecorder alloc]init];
     audioRecorder.delegate = self;
@@ -76,6 +79,16 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    if (imageCaptured){
+        [parkingImageView setImage:imageCaptured];
+        captureImageButton.hidden = YES;
+        captureImageButton2.hidden = YES;
+    }else{
+        captureImageButton.hidden = NO;
+        captureImageButton2.hidden = YES;
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -209,13 +222,13 @@
     [playBttn setEnabled:!isRecoding];
     
     lblTitle.text = isRecoding?DEFAULT_NOTE_FOR_REMINDER:fileSavedMessage;
-    
 }
 
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     // Access the uncropped image from info dictionary
     imageCaptured = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    
     
     [picker dismissViewControllerAnimated:YES completion:^{
         [Parking storeParkingImage:imageCaptured];
