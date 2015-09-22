@@ -44,17 +44,14 @@
 
     [self setNavigationTitle:@"Parking" withBackButton:NO];
     
-    
-    
-    
     [noteTextField.layer setBorderWidth: 1.0];
     noteTextField.layer.cornerRadius = 5;
     [noteTextField.layer setBorderColor:[UIColor grayColor].CGColor];
     [self.navigationController.navigationBar setTranslucent:NO];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"backNavigation.png"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBarHidden = NO;
     noteTextField.delegate = self;
     [noteTextField setInputAccessoryView:[self getTextFieldAccessoryView]];
-    
     
     noteTextField.text = isNoteStored?getNotesParking:@"";
     [lblNote setHidden:![Utils checkForEmptyString:noteTextField.text]];
@@ -73,7 +70,6 @@
     
     audioRecorder = [[AudioRecorder alloc]init];
     audioRecorder.delegate = self;
-    
 
     [lblMap setText:MAP_IS_SELECTED(isLocationStored)];
     [lblPhoto setText:PHOTO_IS_SELECTED(isImageStored)];

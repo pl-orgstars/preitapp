@@ -330,7 +330,6 @@
         _navController.viewControllers = @[parkScreen];
     }
     
-    
     self.menuContainerViewController.menuState = MFSideMenuStateClosed;
 
 }
