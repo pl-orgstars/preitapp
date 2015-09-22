@@ -149,9 +149,7 @@
         
        
     }];
-    [self.navigationController presentViewController:viewCnt animated:YES completion:^{
-        
-    }];
+    [self.navigationController pushViewController:viewCnt animated:YES];
 }
 -(IBAction)takePhotoTapped:(id)sender{
     
@@ -264,6 +262,7 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
+
 #pragma mark - UITextViewDelegate
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     return YES;

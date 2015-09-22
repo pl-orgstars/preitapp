@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParkScreenViewController.h"
 
 @interface MenuScreenViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 {
-    __weak IBOutlet UILabel *navigationLabel;
     NSTimer *beaconmsgUpdate;
 }
 

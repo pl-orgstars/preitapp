@@ -171,6 +171,8 @@
         [appdelegate.tabBarController.view removeFromSuperview];    //Waseem Menu
         
         [appdelegate disableBeacon];
+        
+#warning handle navigation here
     }
 }
 @end

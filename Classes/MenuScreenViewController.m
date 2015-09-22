@@ -74,6 +74,8 @@
      [self.navigationController setNavigationBarHidden:YES];
     [self.navigationController.navigationBar setTranslucent:NO];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"backNavigation.png"] forBarMetrics:UIBarMetricsDefault];
+    [mallNameLabel setText:[appdelegate.mallData objectForKey:@"name"]];
+
     
     
 
@@ -82,7 +84,6 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:NO];
     
-    [mallNameLabel setText:[appdelegate.mallData objectForKey:@"name"]];
 }
 -(void)targetMethod:(NSTimer*)timer{
     [appdelegate initilizeBeacon];
@@ -103,26 +104,32 @@
     if (appdelegate.isDinning && appdelegate.isMovie) {
         tableData = [[NSMutableArray alloc]initWithObjects:
                      HOME,
+                     GIFT,
                      STORE,
-                     PRODUCTS,
                      DINING,
-                     TRENDS,
+                     PRODUCTS,
+                     DEALS,
                      EVENTS,
+                     TRENDS,
                      DIRECTIONS,
-                     MOVIE,
+                     PARKING,
                      HOURS,
+                     MOVIE,
                      JOB,
                      CONTACT_US,
-                     SHOW_NEW_MALL,
+                     //SHOW_NEW_MALL,
                      nil];
     }else if (!appdelegate.isDinning){
         tableData = [[NSMutableArray alloc]initWithObjects:
                      
                      HOME,
+                     GIFT,
                      STORE,
                      PRODUCTS,
-                     TRENDS,
+                     DEALS,
                      EVENTS,
+                     TRENDS,
+                 
                      DIRECTIONS,
                      MOVIE,
                      HOURS,
@@ -157,6 +164,7 @@
                      SHOW_NEW_MALL,
                      nil];
     }
+    
     
     
     
@@ -213,115 +221,176 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     
     NSString *str = [tableData objectAtIndex:indexPath.row];
     
     if ([str isEqualToString:HOME]) {
-//        @"HOME",
-        [appdelegate hideProductScreen:NO];
+        //        @"HOME",
+        //        [appdelegate hideProductScreen:NO];
         
-    }else if ([str isEqualToString:STORE]){
-//        @"STORES",
-
-        StoreSearchViewController *screenShoppingindex=[[StoreSearchViewController alloc]initWithNibName:@"StoreSearchViewController" bundle:nil];
-        self.navigationItem.title=@"Back";
-        [self.navigationController pushViewController:screenShoppingindex animated:YES];
-    }else if ([str isEqualToString:PRODUCTS]){
-//        @"PRODUCTS",
+        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[ProductSearchHome class]]) {
+            ProductSearchHome *productVC = [[ProductSearchHome alloc] initWithNibName:@"ProductSearchHome" bundle:[NSBundle mainBundle]];
+            _navController.viewControllers = @[productVC];
+        }
+    }
+    else if ([str isEqualToString:STORE]){
+        //        @"STORES",
+        
+        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[StoreSearchViewController class]]) {
+            StoreSearchViewController *screenShoppingindex=[[StoreSearchViewController alloc]initWithNibName:@"StoreSearchViewController" bundle:nil];
+            _navController.viewControllers = @[screenShoppingindex];
+        }
+        
+        //        self.navigationItem.title=@"Back";
+        //        [self.navigationController pushViewController:screenShoppingindex animated:YES];
+    }
+    else if ([str isEqualToString:PRODUCTS]){
+        //        @"PRODUCTS",
         [self searchAction:nil];
-    }else if ([str isEqualToString:DINING]) {
-
-        DiningViewController *viewCnt = [[DiningViewController alloc]initWithNibName:@"CustomTable" bundle:nil];
-        [self.navigationController pushViewController:viewCnt animated:YES];
+    }
+    
+    else if ([str isEqualToString:DINING]) {
         
-    }else if([str isEqualToString:TRENDS]){
+        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[DiningViewController class]]) {
+            DiningViewController *viewCnt = [[DiningViewController alloc]initWithNibName:@"CustomTable" bundle:nil];
+            _navController.viewControllers = @[viewCnt];
+            
+        }
+        //        [self.navigationController pushViewController:viewCnt animated:YES];
+        
+    }
+    else if([str isEqualToString:TRENDS]){
         WebViewController *screenWebView=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
-		screenWebView.screenIndex=9;
+        screenWebView.screenIndex=9;
         // Change google
         [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:@"Trends"];
         
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
-		[self.navigationController pushViewController:screenWebView animated:YES];
-
-    }else if([str isEqualToString:EVENTS]){
-
-        EventsViewController *viewCnt = [[EventsViewController alloc]initWithNibName:@"EventsViewController" bundle:nil];
-        [self.navigationController pushViewController:viewCnt animated:YES];
         
-    }else if([str isEqualToString:DIRECTIONS]){
-        DirectionViewController *screenDirection=[[DirectionViewController alloc]initWithNibName:@"DirectionViewController" bundle:nil];
+        _navController.viewControllers = @[screenWebView];
+        //        [self.navigationController pushViewController:screenWebView animated:YES];
+        
+    }
+    else if([str isEqualToString:EVENTS]){
+        
+        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[EventsViewController class]]) {
+            EventsViewController *viewCnt = [[EventsViewController alloc]initWithNibName:@"EventsViewController" bundle:nil];
+            _navController.viewControllers = @[viewCnt];
+        }
+        
+        //        [self.navigationController pushViewController:viewCnt animated:YES];
+        
+    }
+    else if([str isEqualToString:DIRECTIONS]){
         // Change google
         [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:@"Direction"];
         
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
-
-		[self.navigationController pushViewController:screenDirection animated:YES];
-
-    }else if([str isEqualToString:MOVIE]){
-        MovieListingViewController *screenMovieListing=[[MovieListingViewController alloc]initWithNibName:@"MovieListingViewController" bundle:nil];
+        
+        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[DirectionViewController class]]) {
+            DirectionViewController *screenDirection=[[DirectionViewController alloc]initWithNibName:@"DirectionViewController" bundle:nil];
+            _navController.viewControllers = @[screenDirection];
+        }
+        
+        //        [self.navigationController pushViewController:screenDirection animated:YES];
+        
+    }
+    else if([str isEqualToString:MOVIE]){
         // Change google
         [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:@"Movie Listings"];
         
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
-		[self.navigationController pushViewController:screenMovieListing animated:YES];
-
-    }else if([str isEqualToString:HOURS]){
+        
+        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[MovieListingViewController class]]) {
+            MovieListingViewController *screenMovieListing=[[MovieListingViewController alloc]initWithNibName:@"MovieListingViewController" bundle:nil];
+            _navController.viewControllers = @[screenMovieListing];
+            
+        }
+        //        [self.navigationController pushViewController:screenMovieListing animated:YES];
+        
+    }
+    else if([str isEqualToString:HOURS]){
         WebViewController *screenWebView=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
-		screenWebView.screenIndex=8;
-       // Change google
-       // [[GAI sharedInstance].defaultTracker sendView:@"Hours"];
+        screenWebView.screenIndex=8;
+        // Change google
+        // [[GAI sharedInstance].defaultTracker sendView:@"Hours"];
         [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:@"Hours"];
         
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
-		[self.navigationController pushViewController:screenWebView animated:YES];
-
-    }else if([str isEqualToString:JOB]){
-        JobsViewController *screenJobs=[[JobsViewController alloc]initWithNibName:@"JobsViewController" bundle:nil];
+        
+        _navController.viewControllers = @[screenWebView];
+        //        [self.navigationController pushViewController:screenWebView animated:YES];
+        
+    }
+    else if([str isEqualToString:JOB]){
         // Change google
         [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:@"Job Openings"];
         
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
         //[[GAI sharedInstance].defaultTracker sendView:@"Job Openings"];
-		[self.navigationController pushViewController:screenJobs animated:YES];
-
-    }else if ([str isEqualToString:SHOW_NEW_MALL]){
-        appdelegate.isOnForeGround = YES;
-        if (appdelegate.navController.viewControllers.count == 1) {
-            HomeScreen *screenHome=[[HomeScreen alloc]initWithNibName:@"HomeScreen" bundle:nil];
-            self.navigationItem.title=@"Back";
-            screenHome.isLocationEnabled = NO;
-            [appdelegate.navController pushViewController:screenHome animated:YES];
-        }else{
-            HomeScreen *homeView = ((HomeScreen *)[appdelegate.navController.viewControllers objectAtIndex:1]);
-            
-            if (homeView.isLocationEnabled) {
-                homeView.isLocationEnabled = NO;
-                [homeView loadInitialView];
-            }
-            
+        
+        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[JobsViewController class]]) {
+            JobsViewController *screenJobs=[[JobsViewController alloc]initWithNibName:@"JobsViewController" bundle:nil];
+            _navController.viewControllers = @[screenJobs];
         }
-		[appdelegate.tabBarController.view removeFromSuperview];     //Waseem Menu
-		[appdelegate.window addSubview:appdelegate.navController.view];
+        //        [self.navigationController pushViewController:screenJobs animated:YES];
         
-        [appdelegate disableBeacon];
+    }
+    else if ([str isEqualToString:SHOW_NEW_MALL]){
+        //        appdelegate.isOnForeGround = YES;
+        //        if (appdelegate.navController.viewControllers.count == 1) {
+        //            HomeScreen *screenHome=[[HomeScreen alloc]initWithNibName:@"HomeScreen" bundle:nil];
+        //            self.navigationItem.title=@"Back";
+        //            screenHome.isLocationEnabled = NO;
+        //            [appdelegate.navController pushViewController:screenHome animated:YES];
+        //        }else{
+        //            HomeScreen *homeView = ((HomeScreen *)[appdelegate.navController.viewControllers objectAtIndex:1]);
+        //
+        //            if (homeView.isLocationEnabled) {
+        //                homeView.isLocationEnabled = NO;
+        //                [homeView loadInitialView];
+        //            }
+        //
+        //        }
+        //        [appdelegate.tabBarController.view removeFromSuperview];     //Waseem Menu
+        //        [appdelegate.window addSubview:appdelegate.navController.view];
+        //
+        //        [appdelegate disableBeacon];
         
-    }else if ([str isEqualToString:CONTACT_US]){
-        ContactUsViewController *screenContact=[[ContactUsViewController alloc]initWithNibName:@"ContactUsViewController" bundle:nil];
+    }
+    else if ([str isEqualToString:CONTACT_US]){
         // Change google
         [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:@"Contact Us"];
         
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
-        [self.navigationController pushViewController:screenContact animated:YES];
+        
+        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[ContactUsViewController class]]) {
+            ContactUsViewController *screenContact=[[ContactUsViewController alloc]initWithNibName:@"ContactUsViewController" bundle:nil];
+            _navController.viewControllers = @[screenContact];
+        }
+        //        [self.navigationController pushViewController:screenContact animated:YES];
     }
-
+    else if ([str isEqualToString:PARKING]){
+        
+        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[ParkScreenViewController class]]) {
+            ParkScreenViewController *parkScreen = [[ParkScreenViewController alloc] initWithNibName:@"ParkScreenViewController" bundle:[NSBundle mainBundle]];
+            _navController.viewControllers = @[parkScreen];
+            
+            
+        }
+    }
+    
+    
+    self.menuContainerViewController.menuState = MFSideMenuStateClosed;
+    
 }
 
 -(UIImage*)getImageForCell:(NSString*)cellName
@@ -380,11 +449,16 @@
 
 -(void)searchAction:(id)sender {
     NSLog(@"searchAction");
-//    UIAlertView *alert= [[UIAlertView alloc] initWithTitle:@"" message:@"Product Search is temporarily unavailable" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] ;
+    //    UIAlertView *alert= [[UIAlertView alloc] initWithTitle:@"" message:@"Product Search is temporarily unavailable" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] ;
     
-    ProductListViewController *productListViewController = [[ProductListViewController alloc]initWithNibName:@"ProductListViewController" bundle:nil];
-    [self.navigationItem setTitle:@"Back"];
-    [self.navigationController pushViewController:productListViewController animated:YES];
+    if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[ProductListViewController class]]) {
+        ProductListViewController *productListViewController = [[ProductListViewController alloc]initWithNibName:@"ProductListViewController" bundle:nil];
+        _navController.viewControllers = @[productListViewController];
+    }
+    
+    
+    //    [self.navigationItem setTitle:@"Back"];
+    //    [self.navigationController pushViewController:productListViewController animated:YES];
     
 }
 
