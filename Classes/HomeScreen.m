@@ -12,6 +12,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import "JSON.h"
 #import "UIAlertView+Blocks.h"
+#import "MenuScreenViewController.h"
+
 #define LABEL_TAG 100
 
 @implementation HomeScreen
@@ -527,9 +529,14 @@
     
     [[LoadingAgent defaultAgent]makeBusy:NO];
     [delegate setupPortraitUserInterface];
-    [delegate.navController.view removeFromSuperview];
+//    [delegate.navController.view removeFromSuperview];
+//    [delegate.window addSubview:delegate.tabBarController.view];
     
-    [delegate.window addSubview:delegate.tabBarController.view];
+    if (_presentMainView)
+        [self showMainViewController];
+    else
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    
     [delegate initilizeBeacon];
 }
 
@@ -550,6 +557,25 @@
     
     return [NSString stringWithFormat:@"%@, Version %@ (%@)",
             appDisplayName, majorVersion, minorVersion];
+}
+
+#pragma mark - MainView Method
+
+- (void)showMainViewController {
+    ProductSearchHome *productSearchVC = [[ProductSearchHome alloc] initWithNibName:@"ProductSearchHome" bundle:nil];
+    productSearchVC.view.frame = CGRectMake(0, 0, 320, isIPhone5?568:480);
+    
+    UINavigationController *navCont = [[UINavigationController alloc] initWithRootViewController:productSearchVC];
+    navCont.navigationBarHidden = YES;
+    
+    MenuScreenViewController *sideMenu = [[MenuScreenViewController alloc] initWithNibName:@"MenuScreenViewController" bundle:[NSBundle mainBundle]];
+    sideMenu.navController = navCont;
+    
+    MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController containerWithCenterViewController:navCont
+                                                                                                 leftMenuViewController:nil
+                                                                                                rightMenuViewController:sideMenu];
+    container.rightMenuWidth = 320.0;
+    [self presentViewController:container animated:YES completion:nil];
 }
 
 @end
