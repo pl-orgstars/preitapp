@@ -2468,7 +2468,7 @@
 					"\"$(SRCROOT)/GoogleAnalyticsServicesiOS_3.10\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.r5i.preitTJ;
+				PRODUCT_BUNDLE_IDENTIFIER = com.r5i.preit;
 				PRODUCT_NAME = Preit;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -2509,7 +2509,7 @@
 					"\"$(SRCROOT)/Library\"",
 					"\"$(SRCROOT)/GoogleAnalyticsServicesiOS_3.10\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.r5i.preitTJ;
+				PRODUCT_BUNDLE_IDENTIFIER = com.r5i.preit;
 				PRODUCT_NAME = Preit;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9a14a316-d22f-4a46-99ad-3d4c2e683daa";

@@ -34,4 +34,7 @@
 //-(void)updateLocation;
 -(void)prefomLocalNotification;
 
+@property (nonatomic) BOOL presentMainView;
+@property (nonatomic) BOOL shouldReload;
+
 @end
