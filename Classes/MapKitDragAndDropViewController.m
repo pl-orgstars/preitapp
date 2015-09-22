@@ -32,8 +32,6 @@
 	
     mapView.showsUserLocation=YES;
     
-    
-    
 //	theCoordinate.latitude = 37.810000;
 //    theCoordinate.longitude = -122.477989;
     
@@ -328,17 +326,19 @@
 //        viewCntr.event = self.event;
 //        [self.navigationController pushViewController:viewCntr animated:YES];
     }else{
-        [self dismissViewControllerAnimated:YES completion:^{
-            
-        }];
+        [self.navigationController popViewControllerAnimated:YES];
+//        [self dismissViewControllerAnimated:YES completion:^{
+//            
+//        }];
     }
    
 }
 
 -(IBAction)back {
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    [self.navigationController popViewControllerAnimated:YES];
+//    [self dismissViewControllerAnimated:YES completion:^{
+//        
+//    }];
 }
 
 #pragma mark - delgatemethod
