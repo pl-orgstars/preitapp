@@ -13,15 +13,19 @@
 #import "WebViewController.h"
 
 #define HOME @"HOME"
+#define GIFT @"BEST GIFT EVER"
 #define STORE @"STORES"
-#define PRODUCTS @"PRODUCT SEARCH"
 #define DINING @"DINING"
-#define TRENDS @"TRENDS"
+#define PRODUCTS @"PRODUCT SEARCH"
+#define DEALS @"DEALS"
 #define EVENTS @"EVENTS"
+#define TRENDS @"TRENDS"
 #define DIRECTIONS @"DIRECTIONS"
-#define MOVIE @"MOVIE LISTING"
+#define PARKING @"PARKING REMINDERS"
 #define HOURS @"HOURS"
+#define MOVIE @"MOVIE LISTING"
 #define JOB @"JOB OPENINGS"
+
 #define SHOW_NEW_MALL @"Select a Different PREIT Property"
 
 #define CONTACT_US @"CONTACT US"
@@ -42,6 +46,8 @@
 {
     NSMutableArray *tableData;
     PreitAppDelegate *appdelegate;
+    
+    IBOutlet UILabel* mallNameLabel;
 }
 @end
 
@@ -68,11 +74,15 @@
      [self.navigationController setNavigationBarHidden:YES];
     [self.navigationController.navigationBar setTranslucent:NO];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"backNavigation.png"] forBarMetrics:UIBarMetricsDefault];
+    
+    
 
 
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:NO];
+    
+    [mallNameLabel setText:[appdelegate.mallData objectForKey:@"name"]];
 }
 -(void)targetMethod:(NSTimer*)timer{
     [appdelegate initilizeBeacon];
@@ -160,7 +170,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Table View
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [tableView setSeparatorInset:UIEdgeInsetsMake(tableView.separatorInset.top, 4.0, tableView.separatorInset.bottom, 4.0)];
+    }
 	CGFloat height = 60.0;
 	return height;
 }
@@ -177,12 +193,18 @@
         
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
         
-        UIImageView *view = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"back_icon1.png"]];
-        [view setFrame:CGRectMake(0, 0, 8, 14)];
-        cell.accessoryView = view;
+//       commented on sep 22,2015 Ali Bin Tariq Pure Logics
+//        UIImageView *view = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"back_icon1.png"]];
+//        [view setFrame:CGRectMake(0, 0, 8, 14)];
+//        cell.accessoryView = view;
         [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+        
+      
+        
 	}
+    
     cell.textLabel.text = [tableData objectAtIndex:indexPath.row];
+    cell.imageView.image = [self getImageForCell:cell.textLabel.text];
     [cell.textLabel setFont:LABEL_TEXT_FONT];
     [cell.textLabel setTextColor:LABEL_TEXT_COLOR];
     [cell.textLabel setBackgroundColor:[UIColor clearColor]];
@@ -300,6 +322,59 @@
         [self.navigationController pushViewController:screenContact animated:YES];
     }
 
+}
+
+-(UIImage*)getImageForCell:(NSString*)cellName
+{
+    UIImage* cellImage;
+    if ([cellName isEqualToString:HOME]) {
+        cellImage = [UIImage imageNamed:@"mainmenu-icon-home"];
+    }
+    else if ([cellName isEqualToString:GIFT]){
+        cellImage = [UIImage imageNamed:@"mainmenu-icon-gift"];
+    }
+    else if ([cellName isEqualToString:STORE]){
+        cellImage = [UIImage imageNamed:@"mainmenu-icon-stores"];
+    }
+    else if ([cellName isEqualToString:DINING]){
+        cellImage = [UIImage imageNamed:@"mainmenu-icon-dining"];
+    }
+    else if ([cellName isEqualToString:PRODUCTS]){
+        cellImage = [UIImage imageNamed:@"mainmenu-icon-productsearch"];
+    }
+    else if ([cellName isEqualToString:DEALS]){
+        cellImage = [UIImage imageNamed:@"mainmenu-icon-deals"];
+    }
+    else if ([cellName isEqualToString:EVENTS]){
+        cellImage = [UIImage imageNamed:@"mainmenu-icon-events"];
+    }
+    else if ([cellName isEqualToString:TRENDS]){
+        cellImage = [UIImage imageNamed:@"mainmenu-icon-trends"];
+    }
+    else if ([cellName isEqualToString:DIRECTIONS]){
+        cellImage = [UIImage imageNamed:@"mainmenu-icon-directions"];
+    }
+    else if ([cellName isEqualToString:PARKING]){
+        cellImage = [UIImage imageNamed:@"mainmenu-icon-parking"];
+    }
+    else if ([cellName isEqualToString:HOURS]){
+        cellImage = [UIImage imageNamed:@"mainmenu-icon-hours"];
+    }
+    else if ([cellName isEqualToString:JOB]){
+        cellImage = [UIImage imageNamed:@"mainmenu-icon-jobs"];
+    }
+    else if ([cellName isEqualToString:MOVIE]){
+        cellImage = [UIImage imageNamed:@"mainmenu-icon-movies"];
+    }
+    else if ([cellName isEqualToString:CONTACT_US]){
+        cellImage = [UIImage imageNamed:@"mainmenu-icon-contactus"];
+    }
+    else{
+        return nil;
+    }
+    
+    return cellImage;
+    
 }
 
 

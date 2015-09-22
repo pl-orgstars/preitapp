@@ -10,7 +10,6 @@
 
 @interface MenuScreenViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 {
-    __weak IBOutlet UILabel *navigationLabel;
     NSTimer *beaconmsgUpdate;
 }
 -(void)searchAction:(id)sender;

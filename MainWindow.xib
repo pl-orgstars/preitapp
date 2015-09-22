@@ -51,6 +51,7 @@
                     <tabBarItem key="tabBarItem" title="Item 2" id="14"/>
                 </viewController>
             </viewControllers>
+            <point key="canvasLocation" x="620" y="264"/>
         </tabBarController>
         <navigationController id="17">
             <extendedEdge key="edgesForExtendedLayout"/>
@@ -70,6 +71,7 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="20"/>
                 </viewController>
             </viewControllers>
+            <point key="canvasLocation" x="995" y="264"/>
         </navigationController>
     </objects>
     <resources>
