@@ -378,7 +378,6 @@ static NSString *const kAllowTracking = @"allowTracking";
     return YES;
 }
 
-
 -(void)ShowMenuViewOnTop
 {
 //    [window addSubview:self.vc_MenuUpperview];

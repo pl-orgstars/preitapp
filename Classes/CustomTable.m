@@ -95,8 +95,7 @@
     button2.frame = CGRectMake(253, 20, 50, 44);
     [button2 addTarget:self action:@selector(MenuOpen:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:button2];
-    self.navigationItem.rightBarButtonItem = rightItem;
-    
+    //self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 -(void)MenuOpen:(UIButton *)btn

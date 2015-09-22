@@ -41,7 +41,7 @@
 {
     [super viewDidLoad];
     appdelegate = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
-
+    
     [self setNavigationTitle:@"Parking" withBackButton:NO];
     
     [noteTextField.layer setBorderWidth: 1.0];
@@ -53,7 +53,11 @@
     noteTextField.delegate = self;
     [noteTextField setInputAccessoryView:[self getTextFieldAccessoryView]];
     
-    noteTextField.text = isNoteStored?getNotesParking:@"";
+    noteTextField.text = isNoteStored?getNotesParking:@"Save a text reminder";
+    if([noteTextField.text isEqualToString:@""]){
+        noteTextField.text = @"Save a text reminder";
+    }
+    
     [lblNote setHidden:![Utils checkForEmptyString:noteTextField.text]];
     if (isAudioStored) {
         filePath = getAudioParking;
@@ -91,19 +95,28 @@
     if(mapImage){
         [mapImageView setImage:mapImage];
         captureMapButton.hidden = YES;
+        mapImageLabel.hidden = YES;
     }else{
         [mapImageView setImage:mapImage];
         captureMapButton.hidden = NO;
+        mapImageLabel.hidden = NO;
     }
     if (imageCaptured){
         [parkingImageView setImage:imageCaptured];
         captureImageButton.hidden = YES;
         captureImageButton2.hidden = YES;
+        parkingImageLabel.hidden = YES;
+        
     }else{
         //[parkingImageView setImage:imageCaptured];
         captureImageButton.hidden = NO;
+        parkingImageLabel.hidden = NO;
         captureImageButton2.hidden = YES;
     }
+    
+    [noteTextField.layer setBorderWidth:0.0];
+    [textFieldView.layer setBorderWidth:1.0];
+    [textFieldView.layer setBorderColor:[UIColor whiteColor].CGColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -119,7 +132,7 @@
 -(IBAction)recordTapped:(UIButton *)sender{
     if (sender.isSelected) {
         lblRecording.text = @"Record";
-        
+        [recordBttn setImage:[UIImage imageNamed:@"park_record"] forState:UIControlStateNormal];
         [audioRecorder stopRecording];
         filePath = [audioRecorder saveFileWithOldName:@"sound.caf"];
         
@@ -135,6 +148,7 @@
         [self isRecoding:NO];
     }else{
         lblRecording.text = @"Stop";
+        [recordBttn setImage:[UIImage imageNamed:@"park_stop"] forState:UIControlStateNormal];
         [audioRecorder startRecording];
     }
     [sender setSelected:!sender.isSelected];
@@ -320,7 +334,7 @@
 }
 -(void)doneTapped:(UIBarButtonItem *)sender{
     if (sender.tag == 1) {
-        noteTextField.text = @"";
+        noteTextField.text = @"Save a text reminder";
     }else
     [self.view endEditing:YES];
     
