@@ -327,18 +327,11 @@
 //        [self.navigationController pushViewController:viewCntr animated:YES];
     }else{
         [self.navigationController popViewControllerAnimated:YES];
-//        [self dismissViewControllerAnimated:YES completion:^{
-//            
-//        }];
     }
-   
 }
 
 -(IBAction)back {
     [self.navigationController popViewControllerAnimated:YES];
-//    [self dismissViewControllerAnimated:YES completion:^{
-//        
-//    }];
 }
 
 #pragma mark - delgatemethod

@@ -150,9 +150,6 @@
        
     }];
     [self.navigationController pushViewController:viewCnt animated:YES];
-//    [self.navigationController presentViewController:viewCnt animated:YES completion:^{
-//        
-//    }];
 }
 -(IBAction)takePhotoTapped:(id)sender{
     
