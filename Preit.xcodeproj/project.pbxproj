@@ -2406,6 +2406,7 @@
 					"\"$(SRCROOT)/Library\"",
 					"\"$(SRCROOT)/GoogleAnalyticsServicesiOS_3.10\"",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Preit;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
