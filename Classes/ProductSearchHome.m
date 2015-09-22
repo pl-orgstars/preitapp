@@ -45,7 +45,6 @@
 
     urlString = [NSString stringWithFormat:@"%@%@",urlString,HOME_WEB_VIEW];
     NSLog(@"urlsrtrrttrviewWillAppear %@",urlString);
-
     webViewURLString = urlString;
     mobileWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, isIPhone5?66:65, 320, isIPhone5?534:417)];
     [mobileWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
@@ -68,8 +67,6 @@
 {
     [super viewDidLoad];
     [webview setDelegate:self];
-    
-    
 }
 
  

@@ -381,13 +381,12 @@
     else if ([str isEqualToString:PARKING]){
         
         if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[ParkScreenViewController class]]) {
-            ParkScreenViewController *parkScreen = [[ParkScreenViewController alloc] initWithNibName:@"ParkScreenViewController" bundle:[NSBundle mainBundle]];
+            ParkScreenViewController *parkScreen = [[ParkScreenViewController alloc] initWithNibName:@"ParkScreenNew" bundle:[NSBundle mainBundle]];
             _navController.viewControllers = @[parkScreen];
             
             
         }
     }
-    
     
     self.menuContainerViewController.menuState = MFSideMenuStateClosed;
     

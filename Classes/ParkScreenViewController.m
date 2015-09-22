@@ -44,17 +44,14 @@
 
     [self setNavigationTitle:@"Parking" withBackButton:NO];
     
-    
-    
-    
     [noteTextField.layer setBorderWidth: 1.0];
     noteTextField.layer.cornerRadius = 5;
     [noteTextField.layer setBorderColor:[UIColor grayColor].CGColor];
     [self.navigationController.navigationBar setTranslucent:NO];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"backNavigation.png"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBarHidden = NO;
     noteTextField.delegate = self;
     [noteTextField setInputAccessoryView:[self getTextFieldAccessoryView]];
-    
     
     noteTextField.text = isNoteStored?getNotesParking:@"";
     [lblNote setHidden:![Utils checkForEmptyString:noteTextField.text]];
@@ -70,16 +67,28 @@
     mallLocation = isLocationStored?getLocationParking:CLLocationCoordinate2DMake([[appdelegate.mallData objectForKey:@"location_lat"]floatValue], [[appdelegate.mallData objectForKey:@"location_lng"]floatValue]);
     
     imageCaptured = isImageStored?getImageParking:nil;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(takePhotoTapped:)];
+    [parkingImageView addGestureRecognizer:tapGesture];
+    parkingImageView.userInteractionEnabled = YES;
     
     audioRecorder = [[AudioRecorder alloc]init];
     audioRecorder.delegate = self;
-    
 
     [lblMap setText:MAP_IS_SELECTED(isLocationStored)];
     [lblPhoto setText:PHOTO_IS_SELECTED(isImageStored)];
     // Do any additional setup after loading the view from its nib.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    if (imageCaptured){
+        [parkingImageView setImage:imageCaptured];
+        captureImageButton.hidden = YES;
+        captureImageButton2.hidden = YES;
+    }else{
+        captureImageButton.hidden = NO;
+        captureImageButton2.hidden = YES;
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -213,13 +222,13 @@
     [playBttn setEnabled:!isRecoding];
     
     lblTitle.text = isRecoding?DEFAULT_NOTE_FOR_REMINDER:fileSavedMessage;
-    
 }
 
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     // Access the uncropped image from info dictionary
     imageCaptured = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    
     
     [picker dismissViewControllerAnimated:YES completion:^{
         [Parking storeParkingImage:imageCaptured];
