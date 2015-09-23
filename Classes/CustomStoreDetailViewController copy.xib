@@ -13,6 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomStoreDetailViewController">
             <connections>
+                <outlet property="backBtn" destination="1cy-mj-k0W" id="73a-WL-pi1"/>
                 <outlet property="button" destination="DDk-H5-Icn" id="46w-oa-y3h"/>
                 <outlet property="buttonLabel" destination="10" id="24"/>
                 <outlet property="buttonMap" destination="9" id="16"/>
@@ -129,6 +130,17 @@
                     </state>
                     <connections>
                         <action selector="dealBttnTapped:" destination="-1" eventType="touchUpInside" id="7wm-R5-6ob"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1cy-mj-k0W">
+                    <rect key="frame" x="16" y="23" width="42" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="BACK">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="backBtnCall:" destination="-1" eventType="touchUpInside" id="cPG-BC-44r"/>
                     </connections>
                 </button>
             </subviews>

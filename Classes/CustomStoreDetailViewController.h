@@ -19,6 +19,8 @@
 	IBOutlet UIButton *buttonMap;
 	PreitAppDelegate *delegate;
 	NSDictionary *dictData;
+    
+    IBOutlet UIButton* backBtn;
 	
     __weak IBOutlet UIWebView *webView;
     

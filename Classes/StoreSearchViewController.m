@@ -360,6 +360,10 @@
 
 		[listContent removeAllObjects];
 		if([tmpArray count]!=0){
+            
+            NSSortDescriptor *sortName = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+            NSArray *sortDescriptor = [NSArray arrayWithObject:sortName];
+            tmpArray = [tmpArray sortedArrayUsingDescriptors:sortDescriptor];
 			
 			for(int i=0;i<[tmpArray count];i++)
 			{

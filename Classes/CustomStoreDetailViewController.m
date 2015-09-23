@@ -60,6 +60,10 @@
 		[req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
 
 	}
+    
+    if (self.navigationController.viewControllers.count<2) {
+        [backBtn setHidden:YES];
+    }
 	
 	[self setData];
 }
@@ -123,6 +127,12 @@
 //}
 
 #pragma mark Action methods
+
+- (IBAction)backBtnCall:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 - (IBAction)menuBtnCall:(id)sender {
     

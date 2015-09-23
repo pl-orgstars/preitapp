@@ -29,6 +29,7 @@
                 <outlet property="dataSource" destination="-1" id="6"/>
                 <outlet property="delegate" destination="-1" id="7"/>
             </connections>
+            <point key="canvasLocation" x="386" y="307"/>
         </tableView>
         <searchDisplayController id="11">
             <connections>

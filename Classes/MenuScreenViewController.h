@@ -12,6 +12,7 @@
 @interface MenuScreenViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate>
 {
     NSTimer *beaconmsgUpdate;
+    IBOutlet UITableView *tableView_;
 }
 
 -(void)searchAction:(id)sender;

@@ -58,6 +58,8 @@
     titleLabel2.text = (NSString*)[del.mallData objectForKey:@"name"];
     NSLog(@"titleLabel1 ==%@",[del.mallData objectForKey:@"name"]);
     NSLog(@"titleLabel2 ==%@",[del.mallData objectForKey:@"name"]);
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateSideMenu" object:nil];
 
     
     findLabel.text = [NSString stringWithFormat:@"Find what you are looking for at %@ from participating retailers",[del.mallData objectForKey:@"name"]];

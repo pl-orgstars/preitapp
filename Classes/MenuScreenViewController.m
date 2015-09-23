@@ -40,9 +40,12 @@
 #import "JobsViewController.h"
 #import "LocationViewController.h"
 #import "SalesViewController.h"
+#import "ShoppingViewController.h"
+#import "MenuScreenViewController.h"
 
 #import "HomeScreen.h"
 #import "ContactUsViewController.h"
+#import "DirectoryViewController.h"
 @interface MenuScreenViewController ()
 {
     NSMutableArray *tableData;
@@ -75,13 +78,12 @@
      [self.navigationController setNavigationBarHidden:YES];
     [self.navigationController.navigationBar setTranslucent:NO];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"backNavigation.png"] forBarMetrics:UIBarMetricsDefault];
+    
     [mallNameLabel setText:[appdelegate.mallData objectForKey:@"name"]];
 
-    
-    
-
-
+    [self setSideMenuItems];
 }
+
 -(void)viewWillDisappear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:NO];
     
@@ -110,6 +112,19 @@
                                    userInfo:nil
                                     repeats:YES];
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewWillAppear:) name:@"UpdateSideMenu" object:nil];
+    
+    // Do any additional setup after loading the view from its nib.
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)setSideMenuItems {
     if (appdelegate.isDinning && appdelegate.isMovie) {
         tableData = [[NSMutableArray alloc]initWithObjects:
                      HOME,
@@ -180,18 +195,8 @@
                      nil];
     }
     
+    [tableView_ reloadData];
     
-    
-    
-    
-
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table View
@@ -253,11 +258,24 @@
     }
     else if ([str isEqualToString:STORE]){
         //        @"STORES",
-#warning ibnetariq update store view and solve this issue
-      /*  if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[StoreSearchViewController class]]) {
-            StoreSearchViewController *screenShoppingindex=[[StoreSearchViewController alloc]initWithNibName:@"StoreSearchViewController" bundle:nil];
-            _navController.viewControllers = @[screenShoppingindex];
-        } */
+        
+//CHM Start ibnetariq update store view and solve this issue
+        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[StoreSearchViewController class]]) {
+           /* StoreSearchViewController *screenShoppingindex=[[StoreSearchViewController alloc]initWithNibName:@"StoreSearchViewController" bundle:nil];
+            _navController.viewControllers = @[screenShoppingindex];*/
+            
+            DirectoryViewController* directoryVC = [[DirectoryViewController alloc] initWithNibName:@"DirectoryViewController" bundle:[NSBundle mainBundle]];
+            
+            _navController.viewControllers = @[directoryVC];
+            
+            
+           /* ShoppingViewController* shoppingVC = [[ShoppingViewController alloc] initWithNibName:@"CustomTable" bundle:[NSBundle mainBundle]];
+            
+            _navController.viewControllers = @[shoppingVC];*/
+            
+            
+            
+        }
         
         //        self.navigationItem.title=@"Back";
         //        [self.navigationController pushViewController:screenShoppingindex animated:YES];

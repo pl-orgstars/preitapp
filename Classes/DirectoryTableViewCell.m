@@ -1,14 +1,14 @@
 //
-//  SideMenuTableViewCell.m
+//  DirectoryTableViewCell.m
 //  Preit
 //
-//  Created by Noman iqbal on 9/21/15.
+//  Created by Noman iqbal on 9/23/15.
 //
 //
 
-#import "SideMenuTableViewCell.h"
+#import "DirectoryTableViewCell.h"
 
-@implementation SideMenuTableViewCell
+@implementation DirectoryTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
