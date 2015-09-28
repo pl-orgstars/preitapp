@@ -33,20 +33,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-	delegate=(PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
-	tableData=[[NSMutableArray alloc]init];
+	delegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
+//	tableData=[[NSMutableArray alloc]init];
     
-    navigationLabel.text = [delegate.mallData objectForKey:@"name"];
-    NSLog(@"ContactUsViewController ==%@",[delegate.mallData objectForKey:@"name"]);
-    [self.navigationController.navigationBar setTranslucent:NO];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"backNavigation.png"] forBarMetrics:UIBarMetricsDefault];
+//    navigationLabel.text = [delegate.mallData objectForKey:@"name"];
+//    NSLog(@"ContactUsViewController ==%@",[delegate.mallData objectForKey:@"name"]);
+//    [self.navigationController.navigationBar setTranslucent:NO];
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"backNavigation.png"] forBarMetrics:UIBarMetricsDefault];
 	[self getData];
     
    
 
-}
--(IBAction)backButtonTapped:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -115,54 +112,60 @@
 		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding] ;//autorelease];
 		NSDictionary *dictTmp=[[jsonString JSONValue] objectForKey:@"property"];
 		
-
+        nameLabel.text = dictTmp[@"name"];
+        streelLabel.text = dictTmp[@"address_street"];
+        state_zipLabel.text = [NSString stringWithFormat:@"%@, %@ %@", dictTmp[@"address_city"], dictTmp[@"address_state"], dictTmp[@"address_zipcode"]];
+        
+        phoneLabel.text = ([dictTmp[@"main_telephone"] isEqualToString:@""]) ? @"No Contact": dictTmp[@"main_telephone"];
+        emailLabel.text = [dictTmp[@"contact_us_email"] lowercaseString];
+        
 		//NSLog(@"dictTmp===%@",dictTmp);
-		NSString *address_city=@"";
-		NSString *address_state=@"";
-		NSString *address_zipcode=@"";
-		NSString *addString=@"";
-		NSString *address_street=@"";
-		NSString *main_telephone=@"";
-		NSString *contact_us_email=@"";
-		
-		if([dictTmp objectForKey:@"address_city"]!=[NSNull null])
-			address_city=[dictTmp objectForKey:@"address_city"];
-		if([dictTmp objectForKey:@"address_state"]!=[NSNull null])
-			address_state=[dictTmp objectForKey:@"address_state"];
-		if([dictTmp objectForKey:@"address_zipcode"]!=[NSNull null])
-			address_zipcode=[dictTmp objectForKey:@"address_zipcode"];
-		if([dictTmp objectForKey:@"address_street"]!=[NSNull null])
-			address_street=[dictTmp objectForKey:@"address_street"];
-		if([dictTmp objectForKey:@"main_telephone"]!=[NSNull null])
-			main_telephone=[dictTmp objectForKey:@"main_telephone"];
-		if([dictTmp objectForKey:@"contact_us_email"]!=[NSNull null])
-			contact_us_email=[dictTmp objectForKey:@"contact_us_email"];
-
-
-	    if([address_city length]!=0)
-			addString=address_city;
-		if([address_state length]!=0)
-			addString= [NSString stringWithFormat:@"%@, %@",addString,address_state];
-		if([address_zipcode length]!=0)
-			addString=[NSString stringWithFormat:@"%@ %@",addString,address_zipcode];
-		if([main_telephone length]==0)
-			main_telephone=@"No contact";
-		if([contact_us_email length]==0)
-			contact_us_email=@"No email";
-			
-		NSArray *address=[[NSArray alloc]initWithObjects:[self convertHTML:address_street],[self convertHTML:addString],nil];
-		[tableData addObject:address];
-//		[address release];
-		[tableContact insertSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationRight];
-
-		NSArray *phone=[[NSArray alloc]initWithObjects:[self convertHTML:main_telephone],nil];
-		[tableData addObject:phone];
-//		[phone release];
-		[tableContact insertSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationLeft];
-		
-		NSArray *email=[contact_us_email componentsSeparatedByString:@","];
-		[tableData addObject:[email objectAtIndex:0]];
-		[tableContact insertSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationRight];
+//		NSString *address_city=@"";
+//		NSString *address_state=@"";
+//		NSString *address_zipcode=@"";
+//		NSString *addString=@"";
+//		NSString *address_street=@"";
+//		NSString *main_telephone=@"";
+//		NSString *contact_us_email=@"";
+//		
+//		if([dictTmp objectForKey:@"address_city"]!=[NSNull null])
+//			address_city=[dictTmp objectForKey:@"address_city"];
+//		if([dictTmp objectForKey:@"address_state"]!=[NSNull null])
+//			address_state=[dictTmp objectForKey:@"address_state"];
+//		if([dictTmp objectForKey:@"address_zipcode"]!=[NSNull null])
+//			address_zipcode=[dictTmp objectForKey:@"address_zipcode"];
+//		if([dictTmp objectForKey:@"address_street"]!=[NSNull null])
+//			address_street=[dictTmp objectForKey:@"address_street"];
+//		if([dictTmp objectForKey:@"main_telephone"]!=[NSNull null])
+//			main_telephone=[dictTmp objectForKey:@"main_telephone"];
+//		if([dictTmp objectForKey:@"contact_us_email"]!=[NSNull null])
+//			contact_us_email=[dictTmp objectForKey:@"contact_us_email"];
+//
+//
+//	    if([address_city length]!=0)
+//			addString=address_city;
+//		if([address_state length]!=0)
+//			addString= [NSString stringWithFormat:@"%@, %@",addString,address_state];
+//		if([address_zipcode length]!=0)
+//			addString=[NSString stringWithFormat:@"%@ %@",addString,address_zipcode];
+//		if([main_telephone length]==0)
+//			main_telephone=@"No contact";
+//		if([contact_us_email length]==0)
+//			contact_us_email=@"No email";
+//			
+////		NSArray *address=[[NSArray alloc]initWithObjects:[self convertHTML:address_street],[self convertHTML:addString],nil];
+////		[tableData addObject:address];
+//////		[address release];
+////		[tableContact insertSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationRight];
+////
+////		NSArray *phone=[[NSArray alloc]initWithObjects:[self convertHTML:main_telephone],nil];
+////		[tableData addObject:phone];
+//////		[phone release];
+////		[tableContact insertSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationLeft];
+////		
+////		NSArray *email=[contact_us_email componentsSeparatedByString:@","];
+////		[tableData addObject:[email objectAtIndex:0]];
+////		[tableContact insertSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationRight];
 		
 	}
 }
@@ -172,182 +175,32 @@
 	[delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Message" buttontitle:@"Ok"];
 }
 
-#pragma mark UITableViewDelegate methods
+#pragma mark - Button Actions
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return [tableData count];
+- (IBAction)backBtnCall:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if(section==2) return 1;
-	
-	return [[tableData objectAtIndex:section]count];
+- (IBAction)menuBtnCall:(id)sender {
+    self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	NSString *txtString;
-	if(indexPath.section==2)
-	    txtString=[tableData objectAtIndex:indexPath.section];
-	else {
-		txtString=[[tableData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-	}
-
-	CGSize constraint = CGSizeMake(200.0000, 20000.0f);
-	CGSize titlesize = [txtString sizeWithFont:[UIFont boldSystemFontOfSize:18] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-	return (titlesize.height<50?50:titlesize.height);
+- (IBAction)directionsAction:(id)sender {
+    NSString *location = [NSString stringWithFormat:@"%@ %@", streelLabel.text, state_zipLabel.text];
+    location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:location]]];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	static NSString *cellIdentifier=@"Cell";
-	UITableViewCell *cell;
-	
-	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-	if (cell == nil)
-		cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] ;//autorelease];
-
-	if(indexPath.section==1)
-	{
-		NSString *contact=[[tableData objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-		if([contact isEqualToString:@"No contact"])
-			cell.selectionStyle=UITableViewCellSelectionStyleNone;	
-		cell.textLabel.text=contact;
-	}else if(indexPath.section==2)
-	{
-		NSString *email=[tableData objectAtIndex:indexPath.section];
-		if([email isEqualToString:@"No email"])
-		{
-			cell.selectionStyle=UITableViewCellSelectionStyleNone;
-		}
-		cell.textLabel.text=email;
-	}
-	
-	else
-	{
-		cell.textLabel.text=[[tableData objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-		cell.selectionStyle=UITableViewCellSelectionStyleNone;
-	}
-    cell.textLabel.textColor = [UIColor whiteColor];
-    [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
-	cell.textLabel.numberOfLines=0;
-	return cell;	
+- (IBAction)callAction:(id)sender {
+    if (![phoneLabel.text isEqualToString:@"No Contact"])
+        [self actionPhone:phoneLabel.text];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {	
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (indexPath.section==0) {
-        NSArray *phone=[tableData objectAtIndex:indexPath.section];
-        NSString *location = [phone componentsJoinedByString:@"+"];
-        location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-        
-        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:location]]];
-        
-        
-    }
-    else
-	if(indexPath.section==1)
-	{
-		NSString *phone=[[tableData objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
-		if(![phone isEqualToString:@"No contact"])
-			[self actionPhone:phone];	
-	}
-	else if(indexPath.section==2)
-	{
-		NSString *email=[tableData objectAtIndex:indexPath.section];
-		if(![email isEqualToString:@"No email"])
-			[self actionEmail:email];
-	}
+- (IBAction)emailAction:(id)sender {
+    [self actionEmail:emailLabel.text];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-	return 40.0;
-}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-	return 0.5f;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 0.5f)];
-    [view setBackgroundColor:[UIColor lightGrayColor]];
-    return view;
-}
-
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-	UILabel *headerView=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40)] ;//autorelease];
-//	headerView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
-	
-	[headerView setBackgroundColor:[UIColor clearColor]];
-	headerView.textColor=[UIColor blackColor];
-	headerView.font=[UIFont boldSystemFontOfSize:20];
-
-//    [headerView setContentMode:UIViewContentModeBottom];
-//    UIImageView *imageView = [[UIImageView alloc]init];
-    UIButton *imageView = [UIButton buttonWithType:UIButtonTypeCustom];
-    [imageView setTag:section];
-    [imageView addTarget:self action:@selector(sectionButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-//    [imageView setFrame:CGRectMake(0, 0, 38, 38)];
-//    [imageView addSubview:buttonImageView];
-    
-    if(section == 0){
-		headerView.text=@"   Address";
-        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 0.5f)];
-        [view setBackgroundColor:[UIColor lightGrayColor]];
-        
-        [imageView setImage:[UIImage imageNamed:@"address_icon.png"] forState:UIControlStateNormal];
-        [imageView setFrame:CGRectMake(tableView.bounds.size.width-32-15, 7, 32, 32)];
-        [headerView addSubview:imageView];
-        
-        [headerView addSubview:view];
-    }
-    else if(section==1){
-		headerView.text=@"   Telephone";
-        [imageView setImage:[UIImage imageNamed:@"call_new.png"] forState:UIControlStateNormal];
-        [imageView setFrame:CGRectMake(tableView.bounds.size.width-32-15, 7, 32, 32)];
-        [headerView addSubview:imageView];
-    }
-    else {
-		headerView.text=@"   Email";
-        
-        [imageView setImage:[UIImage imageNamed:@"email_new.png"] forState:UIControlStateNormal];
-        [imageView setFrame:CGRectMake(tableView.bounds.size.width-32-15, 7, 32, 32)];
-        [headerView addSubview:imageView];
-        
-    }
-    [headerView setUserInteractionEnabled:YES];
-//    [imageView setUserInteractionEnabled:YES];
-	
-	return headerView;
-}
-
--(void)sectionButtonTapped:(UIButton*)sender{
-    NSLog(@"sdsadsdsads   %d",sender.tag);
-    
-    if (sender.tag==0) {
-        NSArray *phone=[tableData objectAtIndex:sender.tag];
-        NSString *location = [phone componentsJoinedByString:@"+"];
-        location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-        
-        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:location]]];
-        
-        
-    }
-    else
-    if(sender.tag==1)
-    {
-        NSString *phone=[[tableData objectAtIndex:sender.tag]objectAtIndex:0];
-        if(![phone isEqualToString:@"No contact"])
-            [self actionPhone:phone];
-    }
-    else if(sender.tag==2)
-    {
-        NSString *email=[tableData objectAtIndex:sender.tag];
-        if(![email isEqualToString:@"No email"])
-            [self actionEmail:email];
-    }
-}
 
 -(void) actionEmail:(NSString *)email{
 	
@@ -374,7 +227,7 @@
 	[picker setSubject:@"Enquiry"];
 	// Set up recipients
 	//NSArray *toRecipients = [NSArray arrayWithObjects:[detailarr objectAtIndex:3] ,nil]; 
-	NSArray *toRecipients = [NSArray arrayWithObjects: email,nil]; 
+	NSArray *toRecipients = [email componentsSeparatedByString:@", "];
 	//NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil]; 
 	//NSArray *bccRecipients = [NSArray arrayWithObject:@"fourth@example.com"]; 
 	
@@ -439,24 +292,5 @@
 	// [[UIApplication sharedApplication] openURL:url];
 }
 
--(NSString *)convertHTML:(NSString *)html {
-    
-    NSScanner *myScanner;
-    NSString *text = nil;
-    myScanner = [NSScanner scannerWithString:html];
-    
-    while ([myScanner isAtEnd] == NO) {
-        
-        [myScanner scanUpToString:@"<" intoString:NULL] ;
-        
-        [myScanner scanUpToString:@">" intoString:&text] ;
-        
-        html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>", text] withString:@""];
-    }
-    //
-    html = [html stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    
-    return html;
-}
 
 @end
