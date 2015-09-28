@@ -785,7 +785,16 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         // TODO: full animation duration hard to calculate with two menu widths
         CGFloat menuWidth = MAX(_leftMenuWidth, _rightMenuWidth);
         CGFloat animationPerecent = (animationPositionDelta == 0) ? 0 : menuWidth / animationPositionDelta;
-        duration = self.menuAnimationDefaultDuration * animationPerecent;
+        
+        // CHM JAWAD START
+//        duration = self.menuAnimationDefaultDuration * animationPerecent;
+        
+        if (startPosition == 320.0)
+            duration = 0.25;
+        else
+            duration = self.menuAnimationDefaultDuration * animationPerecent;
+        
+        // CHM JAWAD END
     }
     
     return MIN(duration, self.menuAnimationMaxDuration);

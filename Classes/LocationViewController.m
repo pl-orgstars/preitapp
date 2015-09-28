@@ -196,6 +196,7 @@
                                                                                                  leftMenuViewController:nil
                                                                                                 rightMenuViewController:sideMenu];
     container.rightMenuWidth = 320.0;
+    container.menuAnimationDefaultDuration = 0.5;
     [self presentViewController:container animated:YES completion:nil];
 }
 
