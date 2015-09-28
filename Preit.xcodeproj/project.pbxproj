@@ -90,6 +90,9 @@
 		42CC8F3715A5C6B6004B0CDE /* ProductListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CC8F3415A5C6B6004B0CDE /* ProductListViewController.xib */; };
 		42CC8F3B15A5C756004B0CDE /* ProductDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC8F3915A5C756004B0CDE /* ProductDetailViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		42CC8F3C15A5C756004B0CDE /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CC8F3A15A5C756004B0CDE /* ProductDetailViewController.xib */; };
+		6101E2581BB96DB000A8BD65 /* call-us@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6101E2551BB96DB000A8BD65 /* call-us@2x.png */; settings = {ASSET_TAGS = (); }; };
+		6101E2591BB96DB000A8BD65 /* direction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6101E2561BB96DB000A8BD65 /* direction@2x.png */; settings = {ASSET_TAGS = (); }; };
+		6101E25A1BB96DB000A8BD65 /* email-us@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6101E2571BB96DB000A8BD65 /* email-us@2x.png */; settings = {ASSET_TAGS = (); }; };
 		612FBB5D1BB14FBA00D9E30C /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB581BB14FBA00D9E30C /* MFSideMenuContainerViewController.m */; };
 		612FBB5E1BB14FBA00D9E30C /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5A1BB14FBA00D9E30C /* MFSideMenuShadow.m */; };
 		612FBB5F1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5C1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m */; };
@@ -519,6 +522,9 @@
 		42CC8F3815A5C756004B0CDE /* ProductDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductDetailViewController.h; sourceTree = "<group>"; };
 		42CC8F3915A5C756004B0CDE /* ProductDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductDetailViewController.m; sourceTree = "<group>"; };
 		42CC8F3A15A5C756004B0CDE /* ProductDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductDetailViewController.xib; sourceTree = "<group>"; };
+		6101E2551BB96DB000A8BD65 /* call-us@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "call-us@2x.png"; sourceTree = "<group>"; };
+		6101E2561BB96DB000A8BD65 /* direction@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "direction@2x.png"; sourceTree = "<group>"; };
+		6101E2571BB96DB000A8BD65 /* email-us@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email-us@2x.png"; sourceTree = "<group>"; };
 		612FBB561BB14FBA00D9E30C /* MFSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenu.h; sourceTree = "<group>"; };
 		612FBB571BB14FBA00D9E30C /* MFSideMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuContainerViewController.h; sourceTree = "<group>"; };
 		612FBB581BB14FBA00D9E30C /* MFSideMenuContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuContainerViewController.m; sourceTree = "<group>"; };
@@ -1269,6 +1275,16 @@
 			path = normal_size;
 			sourceTree = "<group>";
 		};
+		6101E2541BB96D8F00A8BD65 /* Contact Us */ = {
+			isa = PBXGroup;
+			children = (
+				6101E2551BB96DB000A8BD65 /* call-us@2x.png */,
+				6101E2561BB96DB000A8BD65 /* direction@2x.png */,
+				6101E2571BB96DB000A8BD65 /* email-us@2x.png */,
+			);
+			name = "Contact Us";
+			sourceTree = "<group>";
+		};
 		612FBB551BB14FBA00D9E30C /* MFSideMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -1427,6 +1443,7 @@
 				AE875A4B193CA5CA0052901E /* Home */,
 				AE875A41193C4B0F0052901E /* Launch */,
 				AE87D2E4193765AC00F5493D /* Park */,
+				6101E2541BB96D8F00A8BD65 /* Contact Us */,
 				AE87D2DE1937407D00F5493D /* main_screen_icon.png */,
 				AE87D2DF1937407D00F5493D /* main_screen_icon@2x.png */,
 				AE87D2E01937407D00F5493D /* main_screen_icon@568.png */,
@@ -2133,6 +2150,7 @@
 				E2DF39041268966C00A38543 /* EventsViewController.xib in Resources */,
 				AE875A45193C4B210052901E /* Launch_screen.png in Resources */,
 				AE08DBEC194573AF001FCC7B /* pause_icon.png in Resources */,
+				6101E25A1BB96DB000A8BD65 /* email-us@2x.png in Resources */,
 				AE87D298193707E200F5493D /* Menu_normal.png in Resources */,
 				E92DFA491B4412DA000B91B0 /* PREIT_Logo@3x.png in Resources */,
 				E2AFBBC6126C1C0400F84431 /* SelectMonthViewController.xib in Resources */,
@@ -2338,6 +2356,7 @@
 				BD46BB881BB2ABD100FC5A43 /* directory-icon-detail-menu@2x.png in Resources */,
 				AE87D2CD193710F600F5493D /* Deal_normal@2x.png in Resources */,
 				70D42EDF173A07B600A9562E /* EventsViewController copy.xib in Resources */,
+				6101E2591BB96DB000A8BD65 /* direction@2x.png in Resources */,
 				70D42EE1173A080200A9562E /* SalesViewController copy.xib in Resources */,
 				AE522160196E59C100487C3A /* main_screen_icon2.png in Resources */,
 				AE87D2F1193765C100F5493D /* Delete_icon.png in Resources */,
@@ -2364,6 +2383,7 @@
 				BD46BB8E1BB2C28A00FC5A43 /* appback@2x.png in Resources */,
 				704554321740B2840038838F /* MapViewController copy.xib in Resources */,
 				704554341740F39F0038838F /* CustomStoreDetailViewController copy.xib in Resources */,
+				6101E2581BB96DB000A8BD65 /* call-us@2x.png in Resources */,
 				70C7098A1742172500503AE1 /* btn-selectmonth@2x.png in Resources */,
 				70C7098B1742172500503AE1 /* btn-selectmonth.png in Resources */,
 				AE7B5D9B1A56743900729437 /* address_icon.png in Resources */,
@@ -2506,7 +2526,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kevin Dufficy (5GU6JDPWBT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kevin Dufficy (5GU6JDPWBT)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
@@ -2549,7 +2569,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Red 5 Interactive, Inc. (2JTRSA43WS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Red 5 Interactive, Inc. (2JTRSA43WS)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;

@@ -12,31 +12,15 @@
 
 #import "BaseViewController.h"
 @interface ContactUsViewController : BaseViewController <MFMailComposeViewControllerDelegate> {
-//	IBOutlet UIImageView *imageView;
-//	IBOutlet UILabel *label_City;
-//	IBOutlet UILabel *label_State;
-//	IBOutlet UILabel *label_Street;
-//	IBOutlet UILabel *label_Suite;
-//	IBOutlet UILabel *label_Zipcode;
-//	IBOutlet UIButton *button_Phone;
-//	IBOutlet UIButton *button_Email;
-	IBOutlet UITableView *tableContact;
-	NSMutableArray *tableData;
+    IBOutlet UILabel *nameLabel;
+    IBOutlet UILabel *streelLabel;
+    IBOutlet UILabel *state_zipLabel;
+    
+    IBOutlet UILabel *phoneLabel;
+    IBOutlet UILabel *emailLabel;
+    
 	PreitAppDelegate *delegate;
 	IBOutlet UIActivityIndicatorView *indicator_;
-    
-    __weak IBOutlet UILabel *navigationLabel;
-
-    
-    
-    
-    
 }
 
--(IBAction)backButtonTapped:(id)sender;
--(void) actionPhone:(NSString *)phone;
--(void) actionEmail:(NSString *)email;
--(void)setHeader;
--(void)getData;
--(void)sendDetailOnMail:(NSString *)email;
 @end
