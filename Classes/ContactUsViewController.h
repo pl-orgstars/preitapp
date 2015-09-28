@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "PreitAppDelegate.h"
-
 #import "BaseViewController.h"
+
+#import "MFSideMenu.h"
+
 @interface ContactUsViewController : BaseViewController <MFMailComposeViewControllerDelegate> {
     IBOutlet UILabel *nameLabel;
     IBOutlet UILabel *streelLabel;

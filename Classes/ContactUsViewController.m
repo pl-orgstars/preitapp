@@ -45,9 +45,6 @@
    
 
 }
--(IBAction)backButtonTapped:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 
 
@@ -120,7 +117,7 @@
         state_zipLabel.text = [NSString stringWithFormat:@"%@, %@ %@", dictTmp[@"address_city"], dictTmp[@"address_state"], dictTmp[@"address_zipcode"]];
         
         phoneLabel.text = ([dictTmp[@"main_telephone"] isEqualToString:@""]) ? @"No Contact": dictTmp[@"main_telephone"];
-        emailLabel.text = dictTmp[@"contact_us_email"];
+        emailLabel.text = [dictTmp[@"contact_us_email"] lowercaseString];
         
 		//NSLog(@"dictTmp===%@",dictTmp);
 //		NSString *address_city=@"";
@@ -180,8 +177,12 @@
 
 #pragma mark - Button Actions
 
-- (IBAction)backButtonAction:(id)sender {
+- (IBAction)backBtnCall:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)menuBtnCall:(id)sender {
+    self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
 }
 
 - (IBAction)directionsAction:(id)sender {
@@ -226,7 +227,7 @@
 	[picker setSubject:@"Enquiry"];
 	// Set up recipients
 	//NSArray *toRecipients = [NSArray arrayWithObjects:[detailarr objectAtIndex:3] ,nil]; 
-	NSArray *toRecipients = [NSArray arrayWithObjects: email,nil]; 
+	NSArray *toRecipients = [email componentsSeparatedByString:@", "];
 	//NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@example.com", @"third@example.com", nil]; 
 	//NSArray *bccRecipients = [NSArray arrayWithObject:@"fourth@example.com"]; 
 	
