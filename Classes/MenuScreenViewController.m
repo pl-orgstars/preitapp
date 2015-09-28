@@ -23,7 +23,7 @@
 #define DIRECTIONS @"DIRECTIONS"
 #define PARKING @"PARKING REMINDERS"
 #define HOURS @"HOURS"
-#define MOVIE @"MOVIE LISTING"
+#define MOVIE @"MOVIE LISTINGS"
 #define JOB @"JOB OPENINGS"
 
 #define SHOW_NEW_MALL @"Select a Different PREIT Property"
@@ -166,6 +166,7 @@
                      HOME,
                      GIFT,
                      STORE,
+                     DINING,
                      PRODUCTS,
                      DEALS,
                      EVENTS,
@@ -236,6 +237,7 @@
     [cell.textLabel setFont:LABEL_TEXT_FONT];
     [cell.textLabel setTextColor:LABEL_TEXT_COLOR];
     [cell.textLabel setBackgroundColor:[UIColor clearColor]];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
 	return cell;
 }
@@ -268,7 +270,7 @@
             
             
             [_navController popToRootViewControllerAnimated:NO];
-            [_navController pushViewController:directoryVC animated:YES];
+            [_navController pushViewController:directoryVC animated:NO];
             
             
             
@@ -279,7 +281,7 @@
              _navController.viewControllers = @[screenShoppingindex];*/
             
             
-           /* ShoppingViewController* shoppingVC = [[ShoppingViewController alloc] initWithNibName:@"CustomTable" bundle:[NSBundle mainBundle]];
+          /*\  ShoppingViewController* shoppingVC = [[ShoppingViewController alloc] initWithNibName:@"CustomTable" bundle:[NSBundle mainBundle]];
             
             _navController.viewControllers = @[shoppingVC];*/
             
@@ -308,7 +310,7 @@
             });
             
             [_navController popToRootViewControllerAnimated:NO];
-            [_navController pushViewController:viewCnt animated:YES];
+            [_navController pushViewController:viewCnt animated:NO];
         }
         //        [self.navigationController pushViewController:viewCnt animated:YES];
         
@@ -360,7 +362,7 @@
 //            _navController.viewControllers = @[screenDirection];
             
             [_navController popToRootViewControllerAnimated:NO];
-            [_navController pushViewController:screenDirection animated:YES];
+            [_navController pushViewController:screenDirection animated:NO];
         }
         
         //        [self.navigationController pushViewController:screenDirection animated:YES];
@@ -377,7 +379,7 @@
             MovieListingViewController *screenMovieListing=[[MovieListingViewController alloc]initWithNibName:@"MovieListingViewController" bundle:nil];
 //            _navController.viewControllers = @[screenMovieListing];
             [_navController popToRootViewControllerAnimated:NO];
-            [_navController pushViewController:screenMovieListing animated:YES];
+            [_navController pushViewController:screenMovieListing animated:NO];
             
         }
         //        [self.navigationController pushViewController:screenMovieListing animated:YES];
@@ -395,7 +397,7 @@
         
         
         [_navController popToRootViewControllerAnimated:NO];
-        [_navController pushViewController:screenWebView animated:YES];
+        [_navController pushViewController:screenWebView animated:NO];
 //        _navController.viewControllers = @[screenWebView];
         //        [self.navigationController pushViewController:screenWebView animated:YES];
         
@@ -412,7 +414,7 @@
             JobsViewController *screenJobs=[[JobsViewController alloc]initWithNibName:@"JobsViewController" bundle:nil];
             
             [_navController popToRootViewControllerAnimated:NO];
-            [_navController pushViewController:screenJobs animated:YES];
+            [_navController pushViewController:screenJobs animated:NO];
 //            _navController.viewControllers = @[screenJobs];
         }
         //        [self.navigationController pushViewController:screenJobs animated:YES];
@@ -447,7 +449,7 @@
             SalesViewController* salesVC=[[SalesViewController alloc] initWithNibName:@"SalesViewController" bundle:[NSBundle mainBundle]];
             
             [_navController popToRootViewControllerAnimated:NO];
-            [_navController pushViewController:salesVC animated:YES];
+            [_navController pushViewController:salesVC animated:NO];
 //            _navController.viewControllers = @[salesVC];
         }
         
@@ -463,7 +465,7 @@
             ContactUsViewController *screenContact=[[ContactUsViewController alloc]initWithNibName:@"ContactUsViewController" bundle:nil];
             
             [_navController popToRootViewControllerAnimated:NO];
-            [_navController pushViewController:screenContact animated:YES];
+            [_navController pushViewController:screenContact animated:NO];
 //            _navController.viewControllers = @[screenContact];
         }
         //        [self.navigationController pushViewController:screenContact animated:YES];
@@ -474,7 +476,7 @@
             ParkScreenViewController *parkScreen = [[ParkScreenViewController alloc] initWithNibName:@"ParkScreenNew" bundle:[NSBundle mainBundle]];
             
             [_navController popToRootViewControllerAnimated:NO];
-            [_navController pushViewController:parkScreen animated:YES];
+            [_navController pushViewController:parkScreen animated:NO];
 //            _navController.viewControllers = @[parkScreen];
             
             
@@ -550,7 +552,7 @@
         
         
         [_navController popToRootViewControllerAnimated:NO];
-        [_navController pushViewController:productListViewController animated:YES];
+        [_navController pushViewController:productListViewController animated:NO];
 //        _navController.viewControllers = @[productListViewController];
     }
     

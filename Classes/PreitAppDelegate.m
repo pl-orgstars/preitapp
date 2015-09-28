@@ -368,6 +368,8 @@ static NSString *const kAllowTracking = @"allowTracking";
 
     
     sideMenuV = [[SideMenu alloc] customInit];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
     /////////////////////////////////////
     

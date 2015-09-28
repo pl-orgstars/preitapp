@@ -10,6 +10,10 @@
 #import "JSBridgeViewController.h"
 #import "JSON.h"
 
+
+#define ALLSTORES @"All Stores"
+
+
 @interface DirectoryViewController ()
 
 @end
@@ -49,7 +53,25 @@
     textField.clearButtonMode = UITextFieldViewModeNever;
 
     
+// settings of filter table view
+    
     filterTableOnFront = NO;
+    
+    CGRect frame = filterTableView.frame;
+    frame.size.height = 0.0;
+    [filterTableView setFrame:frame];
+    
+    indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    
+    [filterTableView addSubview:indicator];
+    
+    indicator.center = filterTableView.center;
+    
+    filterCategories = [[NSMutableArray alloc] init];
+    
+    [self getShoppingData];
+    
+
 
     NSLog(@"Directory View, listContent:   %@",listContent);
     if([listContent count]==0)
@@ -57,6 +79,8 @@
     
     
     searchBar_.delegate = self;
+    
+    
 
 
 }
@@ -93,35 +117,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    /*
-     If the requesting table view is the search display controller's table view, return the count of
-     the filtered list, otherwise return the count of the main list.
-     */
-    
-//    if (tableView == self.searchDisplayController.searchResultsTableView)
-//    {
-//        return [self.filteredListContent count];
-//    }
-//    else
-//    {
-//        if([self.listContent count] && [self.listContent count]>section)
-//        {
-//            NSArray *tmpArray=[self.listContent objectAtIndex:section];
-//            if(tmpArray)
-//                return [tmpArray count];
-//            
-//        }
-//        else if(isNoData) return 1;
-//        
-//        return 0;
-//    }
-    
-    
-    if (searchBar_.isFirstResponder) {
-        return filteredListContent.count;
+
+    if (tableView.tag == 201) {
+        if (searchBar_.isFirstResponder) {
+            return filteredListContent.count;
+        }
+        return listContent.count;
     }
     
-    return listContent.count;
+   
+    return filterCategories.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -155,8 +160,30 @@
         
     }
     
+    else{
+        
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"filterCell"];
+        
+        if (!cell) {
+            cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"filterCell"];
+        }
+        
+        cell.backgroundColor = [UIColor darkGrayColor];
+        
+        if (indexPath.row == 0) {
+            cell.textLabel.text = [filterCategories objectAtIndex:0];
+        }
+        else{
+            NSDictionary* tenantCategory = [[filterCategories objectAtIndex:indexPath.row] objectForKey:@"tenant_category"];
+            cell.textLabel.text = [tenantCategory objectForKey:@"name"];
+        }
+        
+        return cell;
+        
+    }
+    
   
-    return nil;
+    return [[UITableViewCell alloc] init];
   
 }
 
@@ -187,6 +214,59 @@
     
    
 
+}
+
+
+- (IBAction)toggleFilterTableView:(UIButton*)sender {
+    
+    if (filterTableOnFront) {
+        filterTableView.userInteractionEnabled = NO;
+        tableView_.hidden = NO;
+        CGRect frame = filterTableView.frame;
+        frame.size.height = 0.0;
+        
+        filterTableOnFront = NO;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+        [sender.imageView setImage:[UIImage imageNamed:@"exoandArrowDown50"]];
+
+        });
+        
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            filterTableView.frame = frame;
+            
+        } completion:^(BOOL finished) {
+            filterTableView.hidden = YES;
+            tableView_.userInteractionEnabled = YES;
+            
+        }];
+        
+        
+    }
+    else{
+        
+        filterTableOnFront = YES;
+        filterTableView.hidden = NO;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [sender.imageView setImage:[UIImage imageNamed:@"collapseArrow"]];
+
+        });
+        
+        [UIView animateWithDuration:1.0 animations:^{
+        
+            filterTableView.frame = tableView_.frame;
+            filterTableView.userInteractionEnabled = YES;
+            
+        } completion:^(BOOL finished) {
+            tableView_.hidden = YES;
+            tableView_.userInteractionEnabled = NO;
+            
+            
+        }];
+    }
 }
 
 
@@ -288,64 +368,6 @@
             tmpArray = [tmpArray sortedArrayUsingDescriptors:sortDescriptor];
             
             [listContent addObjectsFromArray:tmpArray];
-            
-            
-            
-//            for(int i=0;i<[tmpArray count];i++)
-//            {
-//                NSDictionary *tmpDict=[[tmpArray objectAtIndex:i]objectForKey:@"tenant"];
-//                [self checkIndex:[tmpDict objectForKey:@"name"] forindex:i];
-//            }
-            
-/*            for(int i=0;i<[indexArray count];i++)
-            {
-                int x,y;
-                int number=[[indexArray objectAtIndex:i] intValue];
-                
-                if(number==-1)
-                {
-                    NSArray *emptyArray=[[NSArray alloc]init];
-                    [listContent addObject:emptyArray];
-                }
-                else
-                {
-                    x=number;
-                    if([[tempArray objectAtIndex:i] isEqualToString:@"Z"])
-                    {
-                        y=[tmpArray count]-x;
-                    }
-                    else
-                    {
-                        int z=i+1;
-                        int num=[[indexArray objectAtIndex:z] intValue];
-                        
-                        if([[tempArray objectAtIndex:z] isEqualToString:@"Z"] && num==-1)
-                            num=-2;
-                        
-                        while (num==-1)
-                        {
-                            z++;
-                            num=[[indexArray objectAtIndex:z] intValue];
-                            if([[tempArray objectAtIndex:z] isEqualToString:@"Z"] && num==-1)
-                                num=-2;
-                        }
-                        if(num==-2)
-                        {
-                            y=[tmpArray count]-x;
-                        }
-                        else
-                            y=num-x;
-                    }
-                    
-                    // Starting at position x, get y characters
-                    NSRange range={x,y};
-                    NSIndexSet *indexes=[NSIndexSet indexSetWithIndexesInRange:range];
-                    NSArray *objectArray=[tmpArray objectsAtIndexes:indexes];// retain];
-                    
-                    [listContent addObject:objectArray];
-                }
-            }*/
-            
             
             delegate.storeListContent=listContent;
         }
@@ -451,6 +473,50 @@
     }
     
 }
+
+
+#pragma mark - Data and API for Filter categories
+
+
+-(void)getShoppingData
+{
+    NSLog(@"Get data");
+    
+    NSString *apiString=[NSString stringWithFormat:@"API%d",1];
+    NSString *url=[NSString stringWithFormat:@"%@%@",[delegate.mallData objectForKey:@"resource_url"],NSLocalizedString(apiString,"")];
+    
+    RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
+    [req requestToServer:self callBackSelector:@selector(responseDataFilter:) errorSelector:@selector(errorCallback:) Url:url];
+    [indicator startAnimating];
+  
+}
+
+
+-(void)responseDataFilter:(NSData*)receivedData
+{
+    
+    [indicator stopAnimating];
+    
+    if (receivedData != nil) {
+        NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];
+        
+        NSArray* tmpArray = [jsonString JSONValue];
+        
+        NSLog(@"%@",tmpArray);
+        
+        [filterCategories removeAllObjects];
+        [filterCategories addObjectsFromArray:tmpArray];
+        [filterCategories insertObject:@"All Stores" atIndex:0];
+        
+        
+        [filterTableView reloadData];
+    }
+    
+}
+
+
+
+
 
 
 /*

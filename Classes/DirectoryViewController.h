@@ -18,9 +18,13 @@
     IBOutlet UITableView* tableView_;
     IBOutlet UITableView* filterTableView;
     
+    UIActivityIndicatorView* indicator;
+    
     PreitAppDelegate* delegate;
+    
     NSMutableArray *listContent;
     NSMutableArray *filteredListContent;
+    NSMutableArray *filterCategories;
     
     
     NSString		*savedSearchTerm;
