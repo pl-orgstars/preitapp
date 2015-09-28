@@ -361,10 +361,16 @@
 
 }
 
-- (IBAction)backBtnCall:(id)sender {
+- (IBAction)menuBtnCall:(id)sender {
     self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
     
 }
+
+- (IBAction)backBtnCall:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
 
 
 @end

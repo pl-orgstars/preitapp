@@ -69,6 +69,8 @@
 {
     [super viewDidLoad];
     [webview setDelegate:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLocationView) name:@"ShowLocationView" object:nil];
 }
 
  
@@ -84,6 +86,7 @@
     self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
 //    [del ShowMenuViewOnTop];
 }
+
 -(IBAction)useProduct:(id)sender {
 
     
@@ -125,6 +128,15 @@
         
     }];
 }
+
+- (void)showLocationView {
+    LocationViewController *loaction = [[LocationViewController alloc]initWithNibName:@"LocationViewController" bundle:nil];
+    loaction.shouldReload = YES;
+    
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    [self.navigationController pushViewController:loaction animated:NO];
+}
+
 #pragma mark webview delegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     NSLog(@"request::::::::::: Waseem %@ %@",[request URL],[[request URL]absoluteString]);
@@ -166,9 +178,7 @@
 
         
     }else{
-        LocationViewController *loaction = [[LocationViewController alloc]initWithNibName:@"LocationViewController" bundle:nil];
-        loaction.shouldReload = YES;
-        [self.navigationController pushViewController:loaction animated:YES];
+        [self showLocationView];
         
 //        PreitAppDelegate *appdelegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
 //        appdelegate.isOnForeGround = YES;

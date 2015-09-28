@@ -82,11 +82,22 @@
                     <rect key="frame" x="151" y="219" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </activityIndicatorView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LEW-Mx-smm">
+                    <rect key="frame" x="8" y="29" width="25" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="BackWhite.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="backBtnCall:" destination="-1" eventType="touchUpInside" id="Uvi-rN-Cnw"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>
     </objects>
     <resources>
+        <image name="BackWhite.png" width="25" height="25"/>
         <image name="btn-selectmonth.png" width="278" height="46"/>
         <image name="header-icon-menu.png" width="22" height="18"/>
         <image name="menuback.png" width="375" height="667"/>
