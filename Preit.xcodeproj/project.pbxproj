@@ -283,6 +283,9 @@
 		AECE480F195A935600D1E5DB /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AECE47FF195A935600D1E5DB /* iTunesArtwork@2x.png */; };
 		AEDCC257198A018200E1DA17 /* btn-showdeals.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDCC255198A018200E1DA17 /* btn-showdeals.png */; };
 		AEDCC258198A018200E1DA17 /* btn-showdeals@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDCC256198A018200E1DA17 /* btn-showdeals@2x.png */; };
+		BD24B63D1BB92C0C00066F15 /* collapseArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24B63C1BB92C0C00066F15 /* collapseArrow@2x.png */; };
+		BD24B63F1BB92EC900066F15 /* BackBlack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24B63E1BB92EC900066F15 /* BackBlack@2x.png */; };
+		BD24B6411BB93CB300066F15 /* BackWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24B6401BB93CB300066F15 /* BackWhite@2x.png */; };
 		BD46BB751BB28D6000FC5A43 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD46BB731BB28D6000FC5A43 /* DirectoryViewController.m */; };
 		BD46BB761BB28D6000FC5A43 /* DirectoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD46BB741BB28D6000FC5A43 /* DirectoryViewController.xib */; };
 		BD46BB7B1BB2AA3A00FC5A43 /* DirectoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD46BB791BB2AA3A00FC5A43 /* DirectoryTableViewCell.m */; };
@@ -319,6 +322,7 @@
 		BDCAF7381BB067F0009522E9 /* mainmenu-icon-productsearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDCAF7371BB067F0009522E9 /* mainmenu-icon-productsearch@2x.png */; };
 		BDCAF73A1BB06800009522E9 /* mainmenu-icon-deals@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDCAF7391BB06800009522E9 /* mainmenu-icon-deals@2x.png */; };
 		BDCAF73C1BB06813009522E9 /* mainmenu-icon-parking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDCAF73B1BB06813009522E9 /* mainmenu-icon-parking@2x.png */; };
+		BDF060911BB92A1100B79BB9 /* exoandArrowDown50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF060901BB92A1100B79BB9 /* exoandArrowDown50@2x.png */; };
 		E222B22F1259EE7800A699DB /* ShoppingStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E222B22E1259EE7800A699DB /* ShoppingStoreViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		E222B2AD125A0D5700A699DB /* CustomTable.m in Sources */ = {isa = PBXBuildFile; fileRef = E222B2AB125A0D5700A699DB /* CustomTable.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		E222B2AE125A0D5700A699DB /* CustomTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = E222B2AC125A0D5700A699DB /* CustomTable.xib */; };
@@ -768,6 +772,9 @@
 		AECE47FF195A935600D1E5DB /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		AEDCC255198A018200E1DA17 /* btn-showdeals.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-showdeals.png"; sourceTree = "<group>"; };
 		AEDCC256198A018200E1DA17 /* btn-showdeals@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-showdeals@2x.png"; sourceTree = "<group>"; };
+		BD24B63C1BB92C0C00066F15 /* collapseArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collapseArrow@2x.png"; sourceTree = "<group>"; };
+		BD24B63E1BB92EC900066F15 /* BackBlack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackBlack@2x.png"; sourceTree = "<group>"; };
+		BD24B6401BB93CB300066F15 /* BackWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackWhite@2x.png"; sourceTree = "<group>"; };
 		BD46BB721BB28D6000FC5A43 /* DirectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryViewController.h; sourceTree = "<group>"; };
 		BD46BB731BB28D6000FC5A43 /* DirectoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryViewController.m; sourceTree = "<group>"; };
 		BD46BB741BB28D6000FC5A43 /* DirectoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DirectoryViewController.xib; sourceTree = "<group>"; };
@@ -809,6 +816,7 @@
 		BDCAF7371BB067F0009522E9 /* mainmenu-icon-productsearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mainmenu-icon-productsearch@2x.png"; sourceTree = "<group>"; };
 		BDCAF7391BB06800009522E9 /* mainmenu-icon-deals@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mainmenu-icon-deals@2x.png"; sourceTree = "<group>"; };
 		BDCAF73B1BB06813009522E9 /* mainmenu-icon-parking@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mainmenu-icon-parking@2x.png"; sourceTree = "<group>"; };
+		BDF060901BB92A1100B79BB9 /* exoandArrowDown50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exoandArrowDown50@2x.png"; sourceTree = "<group>"; };
 		E222B22D1259EE7800A699DB /* ShoppingStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingStoreViewController.h; sourceTree = "<group>"; };
 		E222B22E1259EE7800A699DB /* ShoppingStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingStoreViewController.m; sourceTree = "<group>"; };
 		E222B2AA125A0D5700A699DB /* CustomTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTable.h; sourceTree = "<group>"; };
@@ -1435,6 +1443,10 @@
 		AE87D293193707BD00F5493D /* New changes Images */ = {
 			isa = PBXGroup;
 			children = (
+				BD24B6401BB93CB300066F15 /* BackWhite@2x.png */,
+				BD24B63E1BB92EC900066F15 /* BackBlack@2x.png */,
+				BD24B63C1BB92C0C00066F15 /* collapseArrow@2x.png */,
+				BDF060901BB92A1100B79BB9 /* exoandArrowDown50@2x.png */,
 				BD46BB8C1BB2C28A00FC5A43 /* appback@2x.png */,
 				BD46BB8D1BB2C28A00FC5A43 /* appback@3x.png */,
 				BD46BB7D1BB2ABBF00FC5A43 /* New Directory */,
@@ -2119,6 +2131,7 @@
 			files = (
 				AECE4809195A935600D1E5DB /* AppIcon60x60@2x.png in Resources */,
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				BD24B63D1BB92C0C00066F15 /* collapseArrow@2x.png in Resources */,
 				E2DFF14312410D8000F8687B /* Localizable.strings in Resources */,
 				E2DFF1591241104F00F8687B /* Default.png in Resources */,
 				AE87D2D2193710F600F5493D /* Map_selected.png in Resources */,
@@ -2138,6 +2151,7 @@
 				E2BC273512676D3F00E871E7 /* EventsDetailsViewController.xib in Resources */,
 				AEDCC258198A018200E1DA17 /* btn-showdeals@2x.png in Resources */,
 				AECE4800195A935600D1E5DB /* AppIcon29x29.png in Resources */,
+				BD24B6411BB93CB300066F15 /* BackWhite@2x.png in Resources */,
 				E6E2837A1BAABDCD001736DF /* MenuView.xib in Resources */,
 				E2DF371F126826EA00A38543 /* shopping.gif in Resources */,
 				E2DF3720126826EA00A38543 /* thumbnail.gif in Resources */,
@@ -2211,6 +2225,7 @@
 				4246FA6A159DBBA600620E60 /* ShoppingListViewController.xib in Resources */,
 				AE87D2D4193710F600F5493D /* Park_normal.png in Resources */,
 				42CC8F3715A5C6B6004B0CDE /* ProductListViewController.xib in Resources */,
+				BDF060911BB92A1100B79BB9 /* exoandArrowDown50@2x.png in Resources */,
 				42CC8F3C15A5C756004B0CDE /* ProductDetailViewController.xib in Resources */,
 				AE87D2DD19373FA400F5493D /* Default@2x.png in Resources */,
 				427ABA3715AB1F5F0079FDC3 /* PreitDB.sqlite in Resources */,
@@ -2336,6 +2351,7 @@
 				AE87D2F2193765C100F5493D /* Delete_icon@2x.png in Resources */,
 				BD46BB891BB2ABD100FC5A43 /* directory-icon-detail-phone@2x.png in Resources */,
 				AE87D29A193707E200F5493D /* Menu_selected.png in Resources */,
+				BD24B63F1BB92EC900066F15 /* BackBlack@2x.png in Resources */,
 				BDAFA4AE1BB0674400BE5CE8 /* mainmenu-icon-home@2x.png in Resources */,
 				1B379A2915BD58FC00F7DC9A /* more_info.png in Resources */,
 				E92DFA471B4412D3000B91B0 /* PREIT_Logo@2x.png in Resources */,

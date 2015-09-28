@@ -39,7 +39,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="backBtnCall:" destination="-1" eventType="touchUpInside" id="EJn-0c-XAe"/>
+                        <action selector="menuBtnCall:" destination="-1" eventType="touchUpInside" id="I8K-HW-ur5"/>
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Egs-ji-POP" userLabel="dividerLine">
@@ -88,12 +88,23 @@
                     <rect key="frame" x="151" y="282" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </activityIndicatorView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vcx-gX-m1f">
+                    <rect key="frame" x="8" y="29" width="25" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="BackWhite.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="backBtnCall:" destination="-1" eventType="touchUpInside" id="ZRk-ub-j16"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>
+        <image name="BackWhite.png" width="25" height="25"/>
         <image name="header-icon-menu.png" width="22" height="18"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

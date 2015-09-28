@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DirectoryViewController">
             <connections>
+                <outlet property="filterTableView" destination="o1D-Uk-yel" id="4Ji-Oq-oeh"/>
                 <outlet property="searchBar_" destination="9D9-BD-nbC" id="WPw-Pz-jet"/>
                 <outlet property="searchDisplayController" destination="zF9-ah-lwb" id="bEc-Bo-ylZ"/>
                 <outlet property="tableView_" destination="rV0-RQ-DLN" id="Mpb-hL-hOa"/>
@@ -40,11 +41,14 @@
                         <action selector="menuBtnCall:" destination="-1" eventType="touchUpInside" id="ih0-dX-zRe"/>
                     </connections>
                 </button>
-                <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="prominent" placeholder="Search by name" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9D9-BD-nbC">
+                <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="prominent" placeholder="Search by name" translatesAutoresizingMaskIntoConstraints="NO" id="9D9-BD-nbC">
                     <rect key="frame" x="0.0" y="63" width="320" height="44"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="qKC-cf-srG"/>
+                    </connections>
                 </searchBar>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fsp-Kb-Mkx">
                     <rect key="frame" x="0.0" y="107" width="320" height="44"/>
@@ -62,13 +66,15 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5V0-IV-h2f">
-                    <rect key="frame" x="266" y="114" width="46" height="30"/>
-                    <state key="normal" title="Toggle">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rV0-RQ-DLN">
+                <tableView hidden="YES" clipsSubviews="YES" tag="202" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="o1D-Uk-yel" userLabel="filter Table View">
+                    <rect key="frame" x="0.0" y="152" width="320" height="416"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="cXC-T2-mRJ"/>
+                        <outlet property="delegate" destination="-1" id="5y2-xb-fUI"/>
+                    </connections>
+                </tableView>
+                <tableView clipsSubviews="YES" tag="201" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rV0-RQ-DLN" userLabel="main Table View">
                     <rect key="frame" x="0.0" y="152" width="320" height="416"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
@@ -76,10 +82,25 @@
                         <outlet property="delegate" destination="-1" id="8s0-hH-UkE"/>
                     </connections>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c2F-rq-Nhq">
+                    <rect key="frame" x="282" y="63" width="38" height="43"/>
+                    <state key="normal" image="searchfield-icon-clear.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="searchBarClearBtn:" destination="-1" eventType="touchUpInside" id="xJH-5D-p00"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5V0-IV-h2f">
+                    <rect key="frame" x="287" y="116" width="25" height="25"/>
+                    <state key="normal" image="exoandArrowDown50.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="380" y="268"/>
+            <point key="canvasLocation" x="672" y="205"/>
         </view>
         <searchDisplayController id="eKR-UG-VZe">
             <connections>
@@ -100,6 +121,8 @@
     </objects>
     <resources>
         <image name="appback.png" width="375" height="667"/>
+        <image name="exoandArrowDown50.png" width="25" height="25"/>
         <image name="header-icon-menu.png" width="22" height="18"/>
+        <image name="searchfield-icon-clear.png" width="21" height="21"/>
     </resources>
 </document>

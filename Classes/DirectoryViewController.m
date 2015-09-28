@@ -31,13 +31,6 @@
     
     delegate=(PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
     
-//    for (UIView* subview in searchBar_.subviews) {
-//        if ([subview isKindOfClass:[UIButton class]]) {
-//            UIButton* cancel = (UIButton*)subview;
-//            [cancel setTitle:@"" forState:UIControlStateNormal];
-//            [cancel setImage:[UIImage imageNamed:@"searchfield-icon-clear"] forState:UIControlStateNormal];
-//        }
-//    }
     
     
     listContent = [[NSMutableArray alloc] init];
@@ -52,67 +45,11 @@
     NSString *path = [[[NSBundle mainBundle] bundlePath]stringByAppendingPathComponent:@"checkDict.plist"];
     checkDict = [[NSDictionary dictionaryWithContentsOfFile:path] mutableCopy];
     
+    UITextField *textField = [searchBar_ valueForKey:@"_searchField"];
+    textField.clearButtonMode = UITextFieldViewModeNever;
+
     
-/*    indexArray = [[NSMutableArray alloc] init];
-    NSNumber *num=[NSNumber numberWithInt:-1];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    [indexArray addObject:num];
-    
-    tempArray = [[NSMutableArray alloc] init];
-    [tempArray addObject:@"123"];
-    [tempArray addObject:@"A"];
-    [tempArray addObject:@"B"];
-    [tempArray addObject:@"C"];
-    [tempArray addObject:@"D"];
-    [tempArray addObject:@"E"];
-    [tempArray addObject:@"F"];
-    [tempArray addObject:@"G"];
-    [tempArray addObject:@"H"];
-    [tempArray addObject:@"I"];
-    [tempArray addObject:@"J"];
-    [tempArray addObject:@"K"];
-    [tempArray addObject:@"L"];
-    [tempArray addObject:@"M"];
-    [tempArray addObject:@"N"];
-    [tempArray addObject:@"O"];
-    [tempArray addObject:@"P"];
-    [tempArray addObject:@"Q"];
-    [tempArray addObject:@"R"];
-    [tempArray addObject:@"S"];
-    [tempArray addObject:@"T"];
-    [tempArray addObject:@"U"];
-    [tempArray addObject:@"V"];
-    [tempArray addObject:@"W"];
-    [tempArray addObject:@"X"];
-    [tempArray addObject:@"Y"];
-    [tempArray addObject:@"Z"];
- 
- */
+    filterTableOnFront = NO;
 
     NSLog(@"Directory View, listContent:   %@",listContent);
     if([listContent count]==0)
@@ -189,31 +126,38 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    DirectoryTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"directoryCell"];
-    
-    if (!cell) {
-        cell = [[NSBundle mainBundle] loadNibNamed:@"DirectoryTableViewCell" owner:self options:nil].firstObject;
+    if (tableView.tag == 201) {
+        DirectoryTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"directoryCell"];
+        
+        if (!cell) {
+            cell = [[NSBundle mainBundle] loadNibNamed:@"DirectoryTableViewCell" owner:self options:nil].firstObject;
+        }
+        
+        NSDictionary *tmpDict;
+        
+        if (searchBar_.isFirstResponder) {
+            tmpDict=[filteredListContent objectAtIndex:indexPath.row];
+        }
+        else{
+            tmpDict=[listContent objectAtIndex:indexPath.row];
+        }
+        
+        
+        cell.titleLabel.text = tmpDict[@"tenant"][@"name"];
+        
+        cell.phoneBtn.tag = indexPath.row;
+        [cell.phoneBtn addTarget:self action:@selector(cellPhoneAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        cell.mapButton.tag = indexPath.row;
+        [cell.mapButton addTarget:self action:@selector(cellMapAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        return cell;
+        
     }
     
-    NSDictionary *tmpDict;
-    
-    if (searchBar_.isFirstResponder) {
-        tmpDict=[filteredListContent objectAtIndex:indexPath.row];
-    }
-    else{
-        tmpDict=[listContent objectAtIndex:indexPath.row];
-    }
-    
-    
-    cell.titleLabel.text = tmpDict[@"tenant"][@"name"];
-    
-    cell.phoneBtn.tag = indexPath.row;
-    [cell.phoneBtn addTarget:self action:@selector(cellPhoneAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    cell.mapButton.tag = indexPath.row;
-    [cell.mapButton addTarget:self action:@selector(cellMapAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return cell;
+  
+    return nil;
+  
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -247,16 +191,34 @@
 
 
 
+
+
 #pragma mark - search bar methods
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     
     [searchBar resignFirstResponder];
+    
+    [tableView_ reloadData];
 }
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     
 }
+
+
+- (IBAction)searchBarClearBtn:(UIButton*)sender {
+    
+    if (searchBar_.isFirstResponder) {
+        searchBar_.text = @"";
+        [searchBar_ resignFirstResponder];
+    }
+    
+    [tableView_ reloadData];
+    
+    
+}
+
 
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText

@@ -280,6 +280,12 @@
     
 }
 
+- (IBAction)backBtnCall:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 -(void)buttonAction:(id)sender
 {
 	[self getData];

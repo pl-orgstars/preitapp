@@ -16,6 +16,7 @@
 {
     IBOutlet UISearchBar* searchBar_;
     IBOutlet UITableView* tableView_;
+    IBOutlet UITableView* filterTableView;
     
     PreitAppDelegate* delegate;
     NSMutableArray *listContent;
@@ -25,12 +26,12 @@
     NSString		*savedSearchTerm;
     NSInteger		savedScopeButtonIndex;
     BOOL			searchWasActive;
-//    NSMutableArray  *tempArray;
     NSMutableArray  *webViewArray;
     BOOL isNoData;
     UIView *main_view;
-//    NSMutableArray  *indexArray;
     NSMutableDictionary *checkDict;
+    
+    BOOL filterTableOnFront;
 }
 
 @property (nonatomic, retain) NSArray *listContent;

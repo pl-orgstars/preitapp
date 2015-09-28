@@ -173,7 +173,6 @@
                      DIRECTIONS,
                      PARKING,
                      HOURS,
-                     MOVIE,
                      JOB,
                      CONTACT_US,
                      //SHOW_NEW_MALL,
@@ -252,21 +251,32 @@
         //        [appdelegate hideProductScreen:NO];
         
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[ProductSearchHome class]]) {
-            ProductSearchHome *productVC = [[ProductSearchHome alloc] initWithNibName:@"ProductSearchHome" bundle:[NSBundle mainBundle]];
-            _navController.viewControllers = @[productVC];
+//            ProductSearchHome *productVC = [[ProductSearchHome alloc] initWithNibName:@"ProductSearchHome" bundle:[NSBundle mainBundle]];
+//            _navController.viewControllers = @[productVC];
+            
+            [_navController popToRootViewControllerAnimated:YES];
         }
     }
     else if ([str isEqualToString:STORE]){
         //        @"STORES",
         
 //CHM Start ibnetariq update store view and solve this issue
-        if (![[_navController.viewControllers objectAtIndex:0] isKindOfClass:[StoreSearchViewController class]]) {
-           /* StoreSearchViewController *screenShoppingindex=[[StoreSearchViewController alloc]initWithNibName:@"StoreSearchViewController" bundle:nil];
-            _navController.viewControllers = @[screenShoppingindex];*/
+        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[StoreSearchViewController class]]) {
+      
             
             DirectoryViewController* directoryVC = [[DirectoryViewController alloc] initWithNibName:@"DirectoryViewController" bundle:[NSBundle mainBundle]];
             
-            _navController.viewControllers = @[directoryVC];
+            
+            [_navController popToRootViewControllerAnimated:NO];
+            [_navController pushViewController:directoryVC animated:YES];
+            
+            
+            
+//            _navController.viewControllers = @[directoryVC];
+            
+            
+            /* StoreSearchViewController *screenShoppingindex=[[StoreSearchViewController alloc]initWithNibName:@"StoreSearchViewController" bundle:nil];
+             _navController.viewControllers = @[screenShoppingindex];*/
             
             
            /* ShoppingViewController* shoppingVC = [[ShoppingViewController alloc] initWithNibName:@"CustomTable" bundle:[NSBundle mainBundle]];
@@ -283,20 +293,22 @@
     else if ([str isEqualToString:PRODUCTS]){
         //        @"PRODUCTS",
         
-#warning ibnetariq update products
-//        [self searchAction:nil];
+//#warning ibnetariq update products
+        [self searchAction:nil];
     }
     
     else if ([str isEqualToString:DINING]) {
         
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[DiningViewController class]]) {
             DiningViewController *viewCnt = [[DiningViewController alloc]initWithNibName:@"CustomTable" bundle:nil];
-            _navController.viewControllers = @[viewCnt];
-//            [viewCnt.titleLabel setText:@"DINING"];
+//            _navController.viewControllers = @[viewCnt];
             dispatch_async(dispatch_get_main_queue(), ^{
                 viewCnt.titleLabel.text = @"DINING";
 
             });
+            
+            [_navController popToRootViewControllerAnimated:NO];
+            [_navController pushViewController:viewCnt animated:YES];
         }
         //        [self.navigationController pushViewController:viewCnt animated:YES];
         
@@ -314,7 +326,10 @@
             screenWebView.titleLabel.text = @"TRENDS";
         });
         
-        _navController.viewControllers = @[screenWebView];
+        [_navController popToRootViewControllerAnimated:NO];
+        [_navController pushViewController:screenWebView animated:NO];
+        
+//        _navController.viewControllers = @[screenWebView];
         //        [self.navigationController pushViewController:screenWebView animated:YES];
         
         
@@ -324,7 +339,10 @@
         
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[EventsViewController class]]) {
             EventsViewController *viewCnt = [[EventsViewController alloc]initWithNibName:@"EventsViewController" bundle:nil];
-            _navController.viewControllers = @[viewCnt];
+//            _navController.viewControllers = @[viewCnt];
+            
+            [_navController popToRootViewControllerAnimated:NO];
+            [_navController pushViewController:viewCnt animated:NO];
         }
         
         //        [self.navigationController pushViewController:viewCnt animated:YES];
@@ -339,7 +357,10 @@
         
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[DirectionViewController class]]) {
             DirectionViewController *screenDirection=[[DirectionViewController alloc]initWithNibName:@"DirectionViewController" bundle:nil];
-            _navController.viewControllers = @[screenDirection];
+//            _navController.viewControllers = @[screenDirection];
+            
+            [_navController popToRootViewControllerAnimated:NO];
+            [_navController pushViewController:screenDirection animated:YES];
         }
         
         //        [self.navigationController pushViewController:screenDirection animated:YES];
@@ -354,7 +375,9 @@
         
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[MovieListingViewController class]]) {
             MovieListingViewController *screenMovieListing=[[MovieListingViewController alloc]initWithNibName:@"MovieListingViewController" bundle:nil];
-            _navController.viewControllers = @[screenMovieListing];
+//            _navController.viewControllers = @[screenMovieListing];
+            [_navController popToRootViewControllerAnimated:NO];
+            [_navController pushViewController:screenMovieListing animated:YES];
             
         }
         //        [self.navigationController pushViewController:screenMovieListing animated:YES];
@@ -370,7 +393,10 @@
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
         
-        _navController.viewControllers = @[screenWebView];
+        
+        [_navController popToRootViewControllerAnimated:NO];
+        [_navController pushViewController:screenWebView animated:YES];
+//        _navController.viewControllers = @[screenWebView];
         //        [self.navigationController pushViewController:screenWebView animated:YES];
         
     }
@@ -384,7 +410,10 @@
         
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[JobsViewController class]]) {
             JobsViewController *screenJobs=[[JobsViewController alloc]initWithNibName:@"JobsViewController" bundle:nil];
-            _navController.viewControllers = @[screenJobs];
+            
+            [_navController popToRootViewControllerAnimated:NO];
+            [_navController pushViewController:screenJobs animated:YES];
+//            _navController.viewControllers = @[screenJobs];
         }
         //        [self.navigationController pushViewController:screenJobs animated:YES];
         
@@ -416,7 +445,10 @@
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[SalesViewController class]]) {
             
             SalesViewController* salesVC=[[SalesViewController alloc] initWithNibName:@"SalesViewController" bundle:[NSBundle mainBundle]];
-            _navController.viewControllers = @[salesVC];
+            
+            [_navController popToRootViewControllerAnimated:NO];
+            [_navController pushViewController:salesVC animated:YES];
+//            _navController.viewControllers = @[salesVC];
         }
         
     }
@@ -429,7 +461,10 @@
         
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[ContactUsViewController class]]) {
             ContactUsViewController *screenContact=[[ContactUsViewController alloc]initWithNibName:@"ContactUsViewController" bundle:nil];
-            _navController.viewControllers = @[screenContact];
+            
+            [_navController popToRootViewControllerAnimated:NO];
+            [_navController pushViewController:screenContact animated:YES];
+//            _navController.viewControllers = @[screenContact];
         }
         //        [self.navigationController pushViewController:screenContact animated:YES];
     }
@@ -437,7 +472,10 @@
         
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[ParkScreenViewController class]]) {
             ParkScreenViewController *parkScreen = [[ParkScreenViewController alloc] initWithNibName:@"ParkScreenNew" bundle:[NSBundle mainBundle]];
-            _navController.viewControllers = @[parkScreen];
+            
+            [_navController popToRootViewControllerAnimated:NO];
+            [_navController pushViewController:parkScreen animated:YES];
+//            _navController.viewControllers = @[parkScreen];
             
             
         }
@@ -503,13 +541,17 @@
 
 -(void)searchAction:(id)sender {
     NSLog(@"searchAction");
-    //    UIAlertView *alert= [[UIAlertView alloc] initWithTitle:@"" message:@"Product Search is temporarily unavailable" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] ;
+
     
     
     NSInteger count = _navController.viewControllers.count - 1;
     if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[ProductListViewController class]]) {
         ProductListViewController *productListViewController = [[ProductListViewController alloc]initWithNibName:@"ProductListViewController" bundle:nil];
-        _navController.viewControllers = @[productListViewController];
+        
+        
+        [_navController popToRootViewControllerAnimated:NO];
+        [_navController pushViewController:productListViewController animated:YES];
+//        _navController.viewControllers = @[productListViewController];
     }
     
     
@@ -517,5 +559,13 @@
     //    [self.navigationController pushViewController:productListViewController animated:YES];
     
 }
+
+#pragma mark - nav
+
+- (IBAction)selectAnotherCall:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowLocationView" object:nil];
+    self.menuContainerViewController.menuState = MFSideMenuStateClosed;
+}
+
 
 @end
