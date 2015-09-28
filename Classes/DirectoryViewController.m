@@ -19,7 +19,7 @@
 @end
 
 @implementation DirectoryViewController
-@synthesize listContent, filteredListContent, savedSearchTerm, savedScopeButtonIndex, searchWasActive;
+@synthesize listContent, searchedListContent, savedSearchTerm, savedScopeButtonIndex, searchWasActive;
 
 
 #pragma mark - Life Cycle Methods
@@ -43,7 +43,7 @@
         [listContent addObjectsFromArray:delegate.storeListContent];
     
     // create a filtered list that will contain products for the search results table.
-    self.filteredListContent = [NSMutableArray arrayWithCapacity:[self.listContent count]];
+    self.searchedListContent = [NSMutableArray arrayWithCapacity:[self.listContent count]];
     
     
     NSString *path = [[[NSBundle mainBundle] bundlePath]stringByAppendingPathComponent:@"checkDict.plist"];
@@ -86,15 +86,32 @@
 }
 
 -(void)viewDidUnload{
-    self.filteredListContent = nil;
+    self.searchedListContent = nil;
 
     
 }
 
--(void)viewWillAppear:(BOOL)animated
+-(void)viewWillLayoutSubviews
 {
+    if ([tableView_ respondsToSelector:@selector(setSeparatorInset:)]) {
+        [tableView_ setSeparatorInset:UIEdgeInsetsZero];
+    }
     
+    if ([tableView_ respondsToSelector:@selector(setLayoutMargins:)]) {
+        [tableView_ setLayoutMargins:UIEdgeInsetsZero];
+    }
     
+    if ([filterTableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        UIEdgeInsets insets = filterTableView.separatorInset;
+                insets.right = insets.left;
+        [filterTableView setSeparatorInset:insets];
+    }
+    
+    if ([filterTableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        UIEdgeInsets insets = filterTableView.layoutMargins;
+        insets.right = insets.left;
+        [filterTableView setLayoutMargins:insets];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -120,7 +137,7 @@
 
     if (tableView.tag == 201) {
         if (searchBar_.isFirstResponder) {
-            return filteredListContent.count;
+            return searchedListContent.count;
         }
         return listContent.count;
     }
@@ -141,7 +158,7 @@
         NSDictionary *tmpDict;
         
         if (searchBar_.isFirstResponder) {
-            tmpDict=[filteredListContent objectAtIndex:indexPath.row];
+            tmpDict=[searchedListContent objectAtIndex:indexPath.row];
         }
         else{
             tmpDict=[listContent objectAtIndex:indexPath.row];
@@ -211,9 +228,38 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 
-    
-   
+}
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if (tableView.tag == 201) {
+        if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+            [cell setSeparatorInset:UIEdgeInsetsZero];
+        }
+        
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+            [cell setLayoutMargins:UIEdgeInsetsZero];
+        }
+    }
+    
+    else{
+        if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+            
+            UIEdgeInsets inset = cell.separatorInset;
+            inset.right = inset.left;
+            [cell setSeparatorInset:inset];
+        }
+        
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+            
+            UIEdgeInsets inset = cell.layoutMargins;
+            inset.right = inset.left;
+            [cell setLayoutMargins:UIEdgeInsetsZero];
+        }
+        
+    }
+  
 }
 
 
@@ -313,7 +359,7 @@
      Update the filtered array based on the search text and scope.
      */
     
-    [self.filteredListContent removeAllObjects]; // First clear the filtered array.
+    [self.searchedListContent removeAllObjects]; // First clear the filtered array.
     
     /*
      Search the main list for products whose type matches the scope (if selected) and whose name matches searchText; add items that match to the filtered array.
@@ -329,7 +375,7 @@
             
             if (result == NSOrderedSame)
             {
-                [self.filteredListContent addObject:dict];
+                [self.searchedListContent addObject:dict];
             }
 //        }
     }
