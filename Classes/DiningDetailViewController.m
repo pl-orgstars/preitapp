@@ -41,10 +41,11 @@
 	if(delegate.image2==nil)
 	{
 		
-		if(delegate.image3)
+	/*	if(delegate.image3)
 			image_Background.image=delegate.image3;
 		else
 			image_Background.image=[UIImage imageNamed:@"dinning.jpg"];
+     */
 
 		if(delegate.imageLink2 && [delegate.imageLink2 length]!=0)
 		{
@@ -61,7 +62,7 @@
 	}
 	else
 	{
-		image_Background.image=delegate.image2;
+//		image_Background.image=delegate.image2;
 	}
 
 }
@@ -95,7 +96,7 @@
 
 -(void)responseData_Image:(NSData *)receivedData{
 	delegate.image2=[UIImage imageWithData:receivedData];
-	image_Background.image=delegate.image2;
+//	image_Background.image=delegate.image2;
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"updateDining_IMG" object:nil];
 
 }

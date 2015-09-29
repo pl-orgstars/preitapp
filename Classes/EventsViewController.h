@@ -24,6 +24,8 @@
 	IBOutlet UIActivityIndicatorView *indicator_;
 }
 
+@property (nonatomic) int tenantID;
+
 -(IBAction)buttonAction:(id)sender;
 -(void)setHeader;
 -(void)getData:(NSString *)apiString;

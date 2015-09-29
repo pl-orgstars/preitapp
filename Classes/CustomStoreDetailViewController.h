@@ -11,7 +11,7 @@
 
 
 @interface CustomStoreDetailViewController : SuperViewController {
-	IBOutlet UIImageView *image_Background;
+//	IBOutlet UIImageView *image_Background;
 	IBOutlet UIImageView *image_thumbNail;
 	IBOutlet UILabel *labelName;
 	IBOutlet UILabel *buttonLabel;
@@ -26,9 +26,13 @@
     
     __weak IBOutlet UIButton *dealBttn;
     
-    IBOutlet UIButton* button;
+    IBOutlet UIButton* callBtn;
     
     NSDictionary *showDealDictionary;
+    
+    IBOutlet UIButton* eventsBtn;
+    
+    IBOutlet UILabel* locationInfoLabel;
 }
 
 @property (nonatomic,retain) IBOutlet UILabel* titleLabel;

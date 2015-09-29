@@ -154,6 +154,12 @@
 
 }
 
+- (IBAction)backBtnCall:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
+
 //- (void)dealloc {
 //	
 //    [super dealloc];

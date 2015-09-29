@@ -7,6 +7,7 @@
 //
 
 #import "CustomStoreDetailViewController.h"
+#import "EventsViewController.h"
 #import "JSBridgeViewController.h"
 #import "LoadingAgent.h"
 #import "AsyncImageView.h"
@@ -36,6 +37,16 @@
     [super viewDidLoad];
     
     [dealBttn setHidden:YES];
+    [eventsBtn setHidden:YES];
+    
+    
+    if ([dictData objectForKeyWithNullCheck:@"location_info"]) {
+        locationInfoLabel.text = [dictData objectForKeyWithNullCheck:@"location_info"];
+    }
+    
+    else{
+        locationInfoLabel.text = @"N/A";
+    }
 	delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
 
     NSLog(@"<<<<<<<<<<<<<<<<<<<<<<< %@",dictData);
@@ -43,15 +54,16 @@
 	NSDictionary *suite=[dictData objectForKey:@"suite"];
 	int suiteID=[[suite objectForKey:@"id"] intValue];
     
-//    int tenantID = [[suite objectForKey:@"tenant_id"] intValue];
+    
+    [buttonMap.layer setBorderWidth:1.0];
+    [buttonMap.layer setBorderColor:([[UIColor whiteColor] CGColor])];
+    
+    [callBtn.layer setBorderWidth:1.0];
+    [callBtn.layer setBorderColor:([[UIColor whiteColor] CGColor])];
 
 	if(suiteID>0)
-//    if (tenantID>0)
 	{
 		
-//        NSString *url=[NSString stringWithFormat:@"%@/sales",[delegate.mallData objectForKey:@"resource_url"]];
-        
-//        NSString *url=[NSString stringWithFormat:@"%@/tenant_categories/tenant_image?tenant_id=%d",[delegate.mallData objectForKey:@"resource_url"],tenantID];
 		
         
         NSString *url=[NSString stringWithFormat:@"%@/tenant_categories/tenant_image?suite_id=%d",[delegate.mallData objectForKey:@"resource_url"],suiteID];
@@ -74,31 +86,34 @@
 	labelName.text=[dictData objectForKey:@"name"];
 //	textDescription.text=[dictData objectForKey:@"description"];
     
+//    NSString* desription = [dictData objectForKeyWithNullCheck:@"description"];
+//    
+//    desription = [desription stringByReplacingOccurrencesOfString:@"<p>" withString:@""];
+//    desription = [desription stringByReplacingOccurrencesOfString:@"</p>" withString:@""];
+    
+//    textDescription.text = desription;
+    
+    
+
     
     [webView loadHTMLString:[dictData objectForKey:@"description"] baseURL:nil];
     
     [webView setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.2]];
     [webView setOpaque:NO];
 	
-	//create the button
-//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-	
-    //sets its size
-//    [button setFrame:CGRectMake(108, 83, 125, 30)];
+
     
-    [button setEnabled:YES];
-    [button setHidden:NO];
-//    [button setFrame:CGRectMake(100, 41, 200, 30)];
-	
+
+/*
     //set title, font size and font color
 //    [button setAttributedTitle:[dictData objectForKey:@"telephone"] forState:UIControlStateNormal];
-    [button setTitle:[dictData objectForKey:@"telephone"] forState:UIControlStateNormal];
-	button.titleLabel.font =[UIFont boldSystemFontOfSize:17.0];
-    [button setTitleColor:LABEL_TEXT_COLOR forState:UIControlStateNormal];
+    [callBtn setTitle:[dictData objectForKey:@"telephone"] forState:UIControlStateNormal];
+	callBtn.titleLabel.font =[UIFont boldSystemFontOfSize:17.0];
+    [callBtn setTitleColor:LABEL_TEXT_COLOR forState:UIControlStateNormal];
     //set action of the button
-    [button addTarget:self action:@selector(buttonAction:)forControlEvents:UIControlEventTouchUpInside];
-	button.tag=100;
-	[self.view addSubview:button];		
+    [callBtn addTarget:self action:@selector(buttonAction:)forControlEvents:UIControlEventTouchUpInside];
+	callBtn.tag=100;
+	[self.view addSubview:callBtn];	*/
 }
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -181,6 +196,45 @@
 	}
 }
 
+- (IBAction)callBtnCall:(id)sender {
+    
+
+    NSString *url = [NSString stringWithFormat:@"tel:%@", dictData[@"telephone"]];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:url]]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }
+    else {
+        NSLog(@"Error Calling");
+    }
+}
+
+-(IBAction)dealBttnTapped:(id)sender{
+    WebViewController *screenWebView=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
+    screenWebView.screenIndex=50;
+    //    [[GAI sharedInstance].defaultTracker sendView:@"Hours"];
+    
+    screenWebView.htmlString = [showDealDictionary objectForKeyWithNullCheck:@"content"];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        screenWebView.titleLabel.text = @"DEAL";
+        
+    });
+    [self.navigationController pushViewController:screenWebView animated:YES];
+}
+
+- (IBAction)eventBtnCall:(id)sender {
+    
+    EventsViewController *viewCnt = [[EventsViewController alloc]initWithNibName:@"EventsViewController" bundle:nil];
+    
+    viewCnt.tenantID = [[dictData[@"suite"] objectForKey:@"tenant_id"] intValue];
+    
+    [self.navigationController pushViewController:viewCnt animated:NO];
+
+}
+
+
+#pragma mark - send and response DATA
 -(void)responseData:(NSData *)receivedData{
 
     [self hideHud];
@@ -198,11 +252,11 @@
 			NSString *imageLink=[tmpInnerDict objectForKey:@"image"];
 			if([imageLink length]!=0)
 			{
-				CGRect frame;
-				frame.size.width=90;
-				frame.size.height=90;
-				frame.origin.x=10; frame.origin.y=10;	
-				AsyncImageView* thumbnailImage = [[AsyncImageView alloc] initWithFrame:frame] ;//autorelease];
+//				CGRect frame;
+//				frame.size.width=90;
+//				frame.size.height=90;
+//				frame.origin.x=10; frame.origin.y=10;	
+				AsyncImageView* thumbnailImage = [[AsyncImageView alloc] initWithFrame:image_thumbNail.frame] ;//autorelease];
 				NSURL *url=[NSURL URLWithString:imageLink];
 				[thumbnailImage loadImageFromURL:url delegate:self requestSelector:@selector(responseThumb_Image:)];				
 			}
@@ -216,6 +270,31 @@
     RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
     [req requestToServer:self callBackSelector:@selector(responseDataForDeal:) errorSelector:@selector(errorCallback2:) Url:url];
     
+    url=[NSString stringWithFormat:@"%@/events",[delegate.mallData objectForKey:@"resource_url"]];
+    RequestAgent *req1=[[RequestAgent alloc] init];
+    [req1 requestToServer:self callBackSelector:@selector(responseForEvents:) errorSelector:@selector(errorCallback2:) Url:url];
+    
+}
+
+-(void)responseForEvents:(NSData*)receivedData{
+    
+    if (receivedData!=nil) {
+        NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];
+        NSArray *tmparr=[jsonString JSONValue];
+        int tenantID = [[dictData[@"suite"] objectForKey:@"tenant_id"] intValue];
+        
+        if (tmparr) {
+            if (tmparr.count) {
+                for (NSDictionary *tmpDic in tmparr) {
+                    NSDictionary* eventDic = tmpDic[@"event"];
+                    if ([[eventDic objectForKeyWithNullCheck:@"tenant_id"] intValue] == tenantID) {
+                        [eventsBtn setHidden:NO];
+                    }
+                }
+            }
+        }
+
+    }
 }
 
 -(void)responseDataForDeal:(NSData *)receivedData{
@@ -276,22 +355,6 @@
 	image_thumbNail.image=[UIImage imageNamed:@"shopingBag.png"];
 }
 
--(IBAction)dealBttnTapped:(id)sender{
-    WebViewController *screenWebView=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
-    screenWebView.screenIndex=50;
-//    [[GAI sharedInstance].defaultTracker sendView:@"Hours"];
-    
-    screenWebView.htmlString = [showDealDictionary objectForKeyWithNullCheck:@"content"];
 
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.titleLabel.text = @"DEAL";
-        
-    });
-    
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        screenWebView.titleLabel.text = @"DEAL";
-//    });
-    [self.navigationController pushViewController:screenWebView animated:YES];
-}
 
 @end
