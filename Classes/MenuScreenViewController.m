@@ -39,7 +39,8 @@
 #import "MovieListingViewController.h"
 #import "JobsViewController.h"
 #import "LocationViewController.h"
-#import "SalesViewController.h"
+//#import "SalesViewController.h"
+#import "DealScreenViewController.h"
 #import "ShoppingViewController.h"
 #import "MenuScreenViewController.h"
 
@@ -448,12 +449,12 @@
     }
     else if ([str isEqualToString:DEALS])
     {
-        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[SalesViewController class]]) {
+        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[DealScreenViewController class]]) {
             
-            SalesViewController* salesVC=[[SalesViewController alloc] initWithNibName:@"SalesViewController" bundle:[NSBundle mainBundle]];
+            DealScreenViewController* dealsVC = [[DealScreenViewController alloc] initWithNibName:@"DealScreenViewController" bundle:[NSBundle mainBundle]];
             
             [_navController popToRootViewControllerAnimated:NO];
-            [_navController pushViewController:salesVC animated:NO];
+            [_navController pushViewController:dealsVC animated:NO];
 //            _navController.viewControllers = @[salesVC];
         }
         
