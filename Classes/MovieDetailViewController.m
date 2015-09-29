@@ -103,4 +103,18 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"updateGeneral_IMG" object:nil];
 
 }
+
+#pragma mark - navigation
+- (IBAction)menuBtncall:(id)sender {
+    
+    self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
+
+}
+
+
+- (IBAction)backBtnCall:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
 @end
