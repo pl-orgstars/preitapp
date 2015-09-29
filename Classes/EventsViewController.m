@@ -414,11 +414,32 @@
 	if(receivedData!=nil){
         //kuldeep edit
 		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];//autorelease];
-		NSArray *tmpArray=[jsonString JSONValue];
-		//NSLog(@"tmpArray==%@",tmpArray);
+		NSMutableArray *tmpArray=[jsonString JSONValue];
+        
 		[tableData removeAllObjects];
         [constArray removeAllObjects];
 		[disclosureRow removeAllObjects];
+        
+        NSMutableArray* shortListedArray = [[NSMutableArray alloc] init];
+        
+        if (self.tenantID) {
+            if (tmpArray) {
+                if (tmpArray.count) {
+                    for (NSDictionary *tmpDic in tmpArray) {
+                        NSDictionary* eventDic = tmpDic[@"event"];
+                        if ([[eventDic objectForKeyWithNullCheck:@"tenant_id"] intValue] == self.tenantID) {
+                            [shortListedArray addObject:tmpDic];
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        [tmpArray removeAllObjects];
+        [tmpArray addObjectsFromArray:shortListedArray];
+        
+        
 		if([tmpArray count]!=0){
 			isNoData=NO;
 			[tableData addObjectsFromArray:tmpArray];

@@ -287,6 +287,9 @@
 		BD24B63F1BB92EC900066F15 /* BackBlack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24B63E1BB92EC900066F15 /* BackBlack@2x.png */; };
 		BD24B6411BB93CB300066F15 /* BackWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24B6401BB93CB300066F15 /* BackWhite@2x.png */; };
 		BD3223111BB99AF8002D5146 /* BackBlackThick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3223101BB99AF8002D5146 /* BackBlackThick@2x.png */; };
+		BD3DAD841BBAB2BF00933F74 /* share-icon-facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3DAD811BBAB2BE00933F74 /* share-icon-facebook@2x.png */; };
+		BD3DAD851BBAB2BF00933F74 /* share-icon-instragram@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3DAD821BBAB2BE00933F74 /* share-icon-instragram@2x.png */; };
+		BD3DAD861BBAB2BF00933F74 /* share-icon-twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3DAD831BBAB2BE00933F74 /* share-icon-twitter@2x.png */; };
 		BD46BB751BB28D6000FC5A43 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD46BB731BB28D6000FC5A43 /* DirectoryViewController.m */; };
 		BD46BB761BB28D6000FC5A43 /* DirectoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD46BB741BB28D6000FC5A43 /* DirectoryViewController.xib */; };
 		BD46BB7B1BB2AA3A00FC5A43 /* DirectoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD46BB791BB2AA3A00FC5A43 /* DirectoryTableViewCell.m */; };
@@ -777,6 +780,9 @@
 		BD24B63E1BB92EC900066F15 /* BackBlack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackBlack@2x.png"; sourceTree = "<group>"; };
 		BD24B6401BB93CB300066F15 /* BackWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackWhite@2x.png"; sourceTree = "<group>"; };
 		BD3223101BB99AF8002D5146 /* BackBlackThick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackBlackThick@2x.png"; sourceTree = "<group>"; };
+		BD3DAD811BBAB2BE00933F74 /* share-icon-facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-icon-facebook@2x.png"; sourceTree = "<group>"; };
+		BD3DAD821BBAB2BE00933F74 /* share-icon-instragram@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-icon-instragram@2x.png"; sourceTree = "<group>"; };
+		BD3DAD831BBAB2BE00933F74 /* share-icon-twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-icon-twitter@2x.png"; sourceTree = "<group>"; };
 		BD46BB721BB28D6000FC5A43 /* DirectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryViewController.h; sourceTree = "<group>"; };
 		BD46BB731BB28D6000FC5A43 /* DirectoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryViewController.m; sourceTree = "<group>"; };
 		BD46BB741BB28D6000FC5A43 /* DirectoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DirectoryViewController.xib; sourceTree = "<group>"; };
@@ -1445,6 +1451,7 @@
 		AE87D293193707BD00F5493D /* New changes Images */ = {
 			isa = PBXGroup;
 			children = (
+				BD3DAD801BBAB2B100933F74 /* SOCIAL */,
 				BD3223101BB99AF8002D5146 /* BackBlackThick@2x.png */,
 				BD24B6401BB93CB300066F15 /* BackWhite@2x.png */,
 				BD24B63E1BB92EC900066F15 /* BackBlack@2x.png */,
@@ -1679,6 +1686,16 @@
 				AECE47FF195A935600D1E5DB /* iTunesArtwork@2x.png */,
 			);
 			name = AppIcons;
+			sourceTree = "<group>";
+		};
+		BD3DAD801BBAB2B100933F74 /* SOCIAL */ = {
+			isa = PBXGroup;
+			children = (
+				BD3DAD811BBAB2BE00933F74 /* share-icon-facebook@2x.png */,
+				BD3DAD821BBAB2BE00933F74 /* share-icon-instragram@2x.png */,
+				BD3DAD831BBAB2BE00933F74 /* share-icon-twitter@2x.png */,
+			);
+			name = SOCIAL;
 			sourceTree = "<group>";
 		};
 		BD46BB6C1BB28CAC00FC5A43 /* Directory Screen */ = {
@@ -2196,6 +2213,7 @@
 				AE87D2AE19370BE400F5493D /* MenuScreenViewController.xib in Resources */,
 				E2B0AF83127ACDE100B32837 /* show.png in Resources */,
 				E2ABABBA1294FF7200240E75 /* dollar.png in Resources */,
+				BD3DAD841BBAB2BF00933F74 /* share-icon-facebook@2x.png in Resources */,
 				E2ABABBB1294FF7200240E75 /* shopingBag.png in Resources */,
 				E2ABABBC1294FF7200240E75 /* whineglass.png in Resources */,
 				AE87D2FA193765C100F5493D /* save_photo_icon@2x.png in Resources */,
@@ -2310,6 +2328,7 @@
 				42AEED0815AE8FC300BE5B35 /* edit.png in Resources */,
 				AECE4805195A935600D1E5DB /* AppIcon50x50@2x.png in Resources */,
 				AE875A46193C4B210052901E /* Launch_screen@2x.png in Resources */,
+				BD3DAD861BBAB2BF00933F74 /* share-icon-twitter@2x.png in Resources */,
 				42AEED0915AE8FC300BE5B35 /* girl_back.png in Resources */,
 				AE87D2B519370C1700F5493D /* DealScreenViewController.xib in Resources */,
 				42AEED0A15AE8FC300BE5B35 /* girls.png in Resources */,
@@ -2405,6 +2424,7 @@
 				704554341740F39F0038838F /* CustomStoreDetailViewController copy.xib in Resources */,
 				6101E2581BB96DB000A8BD65 /* call-us@2x.png in Resources */,
 				70C7098A1742172500503AE1 /* btn-selectmonth@2x.png in Resources */,
+				BD3DAD851BBAB2BF00933F74 /* share-icon-instragram@2x.png in Resources */,
 				70C7098B1742172500503AE1 /* btn-selectmonth.png in Resources */,
 				AE7B5D9B1A56743900729437 /* address_icon.png in Resources */,
 				E92DFA451B4412CB000B91B0 /* PREIT_Logo.png in Resources */,

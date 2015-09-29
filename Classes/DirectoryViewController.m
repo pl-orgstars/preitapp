@@ -38,13 +38,18 @@
     
     
     listContent = [[NSMutableArray alloc] init];
+    displayContent = [[NSMutableArray alloc] init];
+
     
-    if([delegate.storeListContent count]>0)
+    if([delegate.storeListContent count]>0){
         [listContent addObjectsFromArray:delegate.storeListContent];
+        [displayContent removeAllObjects];
+        [displayContent addObjectsFromArray:listContent];
+        [tableView_ reloadData];
+    }
     
     // create a filtered list that will contain products for the search results table.
 //    displayContent = [NSMutableArray arrayWithCapacity:[self.listContent count]];
-    displayContent = [[NSMutableArray alloc] init];
     
     
     NSString *path = [[[NSBundle mainBundle] bundlePath]stringByAppendingPathComponent:@"checkDict.plist"];
@@ -85,6 +90,11 @@
     
 
 
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [tableView_ reloadData];
+    
 }
 
 -(void)viewDidUnload{
@@ -141,8 +151,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (tableView.tag == 201) {
+        return displayContent.count;
 
-    return displayContent.count;
+    }
+    
+    return filterCategories.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -214,7 +228,7 @@
     else
     {
         if (tableView.tag == 201) {
-            NSDictionary* tempDic = [listContent objectAtIndex:indexPath.row];
+            NSDictionary* tempDic = [displayContent objectAtIndex:indexPath.row];
             StoreDetailsViewController *screenStoreDetail=[[StoreDetailsViewController alloc]initWithNibName:@"CustomStoreDetailViewController" bundle:nil];
             screenStoreDetail.dictData=tempDic[@"tenant"];
             
