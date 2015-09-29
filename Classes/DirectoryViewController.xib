@@ -6,10 +6,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DirectoryViewController">
             <connections>
+                <outlet property="filterByLabel" destination="8A5-yL-IWp" id="9dP-K3-lNn"/>
                 <outlet property="filterTableView" destination="o1D-Uk-yel" id="4Ji-Oq-oeh"/>
                 <outlet property="searchBar_" destination="9D9-BD-nbC" id="WPw-Pz-jet"/>
                 <outlet property="searchDisplayController" destination="zF9-ah-lwb" id="bEc-Bo-ylZ"/>
                 <outlet property="tableView_" destination="rV0-RQ-DLN" id="Mpb-hL-hOa"/>
+                <outlet property="toggleFilterBtn" destination="5V0-IV-h2f" id="hah-sh-rI8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

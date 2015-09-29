@@ -275,15 +275,38 @@
 {
     if (position==0) {
         
+        [displayContent removeAllObjects];
+        [displayContent addObjectsFromArray:listContent];
+        [self toggleFilterTableView:nil];
+        filterON = NO;
+        
+        filterByLabel.text = ALLSTORES;
+        
+        
+        
     }else{
         filterON = YES;
         
         [selectedFilter removeAllObjects];
         NSDictionary* tmpDic = [filterCategories objectAtIndex:position];
-        [selectedFilter addObjectsFromArray:tmpDic[@"tenant_category"][@"tenants"]];
         
-        NSLog(@"nothing");
+        filterByLabel.text = tmpDic[@"tenant_category"][@"name"];
+        
+        NSMutableArray* categoryArray = [[NSMutableArray alloc] initWithArray:tmpDic[@"tenant_category"][@"tenants"]];
+        
+        for (NSDictionary* tenantDic in categoryArray) {
+            [selectedFilter addObject:[[NSDictionary alloc] initWithObjectsAndKeys:tenantDic,@"tenant", nil]];
+        }
+        
+        [displayContent removeAllObjects];
+        [displayContent addObjectsFromArray:selectedFilter];
+    
+        [self toggleFilterTableView:toggleFilterBtn];
+        
     }
+    
+    [tableView_ reloadData];
+
 }
 
 
@@ -349,6 +372,7 @@
     
     [searchBar resignFirstResponder];
     
+    
     [tableView_ reloadData];
 }
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
@@ -362,9 +386,9 @@
     if (searchBar_.isFirstResponder) {
         searchBar_.text = @"";
         [searchBar_ resignFirstResponder];
+        [self filterContentForSearchText:@""];
+
     }
-    
-    [tableView_ reloadData];
     
     
 }
@@ -388,16 +412,33 @@
     /*
      Search the main list for products whose type matches the scope (if selected) and whose name matches searchText; add items that match to the filtered array.
      */
-    for (NSDictionary *dict in displayContent)
-    {
-        NSDictionary *tmpDict=[dict objectForKey:@"tenant"];
-        NSString *sTemp=[tmpDict objectForKey:@"name"];
-        
-        NSComparisonResult result = [sTemp compare:searchText options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [searchText length])];
-        
-        if (result == NSOrderedSame)
+    
+    if (filterON) {
+        for (NSDictionary *dict in selectedFilter)
         {
-            [displayContent addObject:dict];
+            NSDictionary *tmpDict=[dict objectForKey:@"tenant"];
+            NSString *sTemp=[tmpDict objectForKey:@"name"];
+            
+            NSComparisonResult result = [sTemp compare:searchText options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [searchText length])];
+            
+            if (result == NSOrderedSame)
+            {
+                [displayContent addObject:dict];
+            }
+        }
+    }
+    else {
+        for (NSDictionary *dict in listContent)
+        {
+            NSDictionary *tmpDict=[dict objectForKey:@"tenant"];
+            NSString *sTemp=[tmpDict objectForKey:@"name"];
+            
+            NSComparisonResult result = [sTemp compare:searchText options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [searchText length])];
+            
+            if (result == NSOrderedSame)
+            {
+                [displayContent addObject:dict];
+            }
         }
     }
     
@@ -515,7 +556,7 @@
 #pragma mark - Cell Button Actions
 
 - (IBAction)cellPhoneAction:(UIButton *)sender {
-    NSDictionary *tempDict = listContent[sender.tag];
+    NSDictionary *tempDict = displayContent[sender.tag];
     NSString *url = [NSString stringWithFormat:@"tel:%@", tempDict[@"tenant"][@"telephone"]];
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:url]]) {
@@ -529,7 +570,7 @@
 - (IBAction)cellMapAction:(UIButton *)sender {
     
     
-    NSDictionary *dictData = [listContent objectAtIndex:sender.tag];
+    NSDictionary *dictData = [displayContent objectAtIndex:sender.tag];
     NSLog(@"Map==%@",dictData);
     NSDictionary *suite=[[dictData objectForKey:@"tenant"] objectForKey:@"suite"];
     int suiteID=[[suite objectForKey:@"id"] intValue];

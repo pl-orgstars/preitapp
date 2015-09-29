@@ -42,7 +42,11 @@
     UIView *main_view;
     NSMutableDictionary *checkDict;
     
+    IBOutlet UIButton* toggleFilterBtn;
+    IBOutlet UILabel* filterByLabel;
+    
     BOOL filterTableOnFront;
+    
 }
 
 @property (nonatomic, retain) NSArray *listContent;
