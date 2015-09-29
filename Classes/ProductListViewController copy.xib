@@ -29,7 +29,7 @@
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </imageView>
                 <searchBar contentMode="redraw" barStyle="blackTranslucent" placeholder="Search Products" id="5">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <rect key="frame" x="0.0" y="63" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
@@ -37,7 +37,7 @@
                     </connections>
                 </searchBar>
                 <view contentMode="scaleToFill" id="21">
-                    <rect key="frame" x="0.0" y="44" width="320" height="504"/>
+                    <rect key="frame" x="0.0" y="107" width="320" height="441"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Find exactly what you're looking for at Cherry Hill Mall from over 200 participating retailers nationwide" lineBreakMode="tailTruncation" numberOfLines="3" minimumFontSize="10" id="8">
@@ -65,7 +65,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <pickerView hidden="YES" contentMode="scaleToFill" showsSelectionIndicator="NO" id="33">
-                    <rect key="frame" x="0.0" y="202" width="320" height="216"/>
+                    <rect key="frame" x="0.0" y="265" width="320" height="216"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="36"/>
@@ -73,7 +73,7 @@
                     </connections>
                 </pickerView>
                 <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.80000001192092896" contentMode="scaleToFill" barStyle="blackTranslucent" id="39">
-                    <rect key="frame" x="0.0" y="227" width="320" height="44"/>
+                    <rect key="frame" x="0.0" y="290" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <items>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="47"/>
@@ -85,7 +85,7 @@
                     </items>
                 </toolbar>
                 <view hidden="YES" contentMode="scaleToFill" id="13">
-                    <rect key="frame" x="0.0" y="40" width="320" height="30"/>
+                    <rect key="frame" x="0.0" y="103" width="320" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bar.png" id="27">
@@ -124,13 +124,46 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="N5I-yI-AeX">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Search" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vuK-Du-rla">
+                    <rect key="frame" x="8" y="31" width="304" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gxq-db-e5C">
+                    <rect key="frame" x="8" y="29" width="25" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="BackWhite.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="backBtnCall:" destination="-1" eventType="touchUpInside" id="YwV-8j-bU3"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ea9-f9-DSo">
+                    <rect key="frame" x="290" y="31" width="22" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="header-icon-menu.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="menuBtnCall:" destination="-1" eventType="touchUpInside" id="iwD-NC-avd"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>
     </objects>
     <resources>
+        <image name="BackWhite.png" width="25" height="25"/>
         <image name="Sort@2X.png" width="302" height="44"/>
         <image name="bar.png" width="320" height="32"/>
+        <image name="header-icon-menu.png" width="22" height="18"/>
         <image name="view-shopping-list.png" width="278" height="46"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

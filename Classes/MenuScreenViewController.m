@@ -388,6 +388,10 @@
     else if([str isEqualToString:HOURS]){
         WebViewController *screenWebView=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
         screenWebView.screenIndex=8;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            screenWebView.titleLabel.text = @"HOURS";
+        });
         // Change google
         // [[GAI sharedInstance].defaultTracker sendView:@"Hours"];
         [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:@"Hours"];
@@ -548,7 +552,7 @@
     
     NSInteger count = _navController.viewControllers.count - 1;
     if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[ProductListViewController class]]) {
-        ProductListViewController *productListViewController = [[ProductListViewController alloc]initWithNibName:@"ProductListViewController" bundle:nil];
+        ProductListViewController *productListViewController = [[ProductListViewController alloc]initWithNibName:@"ProductListViewController copy" bundle:nil];
         
         
         [_navController popToRootViewControllerAnimated:NO];
