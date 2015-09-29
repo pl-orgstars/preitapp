@@ -179,7 +179,6 @@
         
         tmpDict = [displayContent objectAtIndex:indexPath.row];
         
-        
         cell.titleLabel.text = tmpDict[@"tenant"][@"name"];
         
         cell.phoneBtn.tag = indexPath.row;
@@ -209,6 +208,8 @@
             NSDictionary* tenantCategory = [[filterCategories objectAtIndex:indexPath.row] objectForKey:@"tenant_category"];
             cell.textLabel.text = [tenantCategory objectForKey:@"name"];
         }
+        
+        cell.textLabel.textColor = [UIColor whiteColor];
         
         return cell;
         
