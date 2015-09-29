@@ -367,8 +367,10 @@
 }
 
 - (IBAction)backBtnCall:(id)sender {
-    
-    [self.navigationController popViewControllerAnimated:NO];
+    if (webView.canGoBack)
+        [webView goBack];
+    else
+        [self.navigationController popViewControllerAnimated:NO];
 }
 
 

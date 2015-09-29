@@ -47,9 +47,9 @@
     [noteTextField.layer setBorderWidth: 1.0];
     noteTextField.layer.cornerRadius = 5;
     [noteTextField.layer setBorderColor:[UIColor grayColor].CGColor];
-    [self.navigationController.navigationBar setTranslucent:NO];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"backNavigation.png"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBarHidden = NO;
+//    [self.navigationController.navigationBar setTranslucent:NO];
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"backNavigation.png"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBarHidden = YES;
     noteTextField.delegate = self;
     [noteTextField setInputAccessoryView:[self getTextFieldAccessoryView]];
     
@@ -123,6 +123,16 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Button Actions
+
+- (IBAction)backBtnCall:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)menuBtnCall:(id)sender {
+    self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
 }
 
 -(IBAction)clearTextTapped:(id)sender{
@@ -308,9 +318,22 @@
     return YES;
 }
 -(void)textViewDidBeginEditing:(UITextView *)textView{
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect frame = self.view.frame;
+        frame.origin.y = -180.0;
+        self.view.frame = frame;
+    }];
+    
     [lblNote setHidden:YES];
 }
--(void)textViewDidEndEditing:(UITextView *)textView{
+
+-(void)textViewDidEndEditing:(UITextView *)textView {
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect frame = self.view.frame;
+        frame.origin.y = 0;
+        self.view.frame = frame;
+    }];
+    
     [Parking storeParkingNote:textView.text];
     [lblNote setHidden:![Utils checkForEmptyString:textView.text]];
 }
