@@ -56,6 +56,20 @@
         
     }];
 }
+
+#pragma mark - Button Actions
+
+- (IBAction)backBtnCall:(id)sender {
+    if (webView.canGoBack)
+        [webView goBack];
+    else
+        [self.navigationController popViewControllerAnimated:NO];
+}
+
+- (IBAction)menuBtnCall:(id)sender {
+    self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
+}
+
 #pragma mark webview delegate
 - (BOOL)webView:(UIWebView *)webview shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     
