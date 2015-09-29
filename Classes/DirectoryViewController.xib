@@ -126,7 +126,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="510" y="187"/>
+            <point key="canvasLocation" x="768" y="145"/>
         </view>
         <searchDisplayController id="eKR-UG-VZe">
             <connections>
