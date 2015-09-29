@@ -11,4 +11,5 @@
 @interface NSDictionary (Extension)
 -(id)objectForKeyWithNullCheck:(id)aKey;
 -(id)valueForKeyWithNullCheck:(NSString *)akey;
+
 @end
