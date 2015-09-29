@@ -56,6 +56,7 @@
 //    document.body.innerHTML
      NSString *yourHTMLSourceCodeString = [titleWebView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"];
     labelName.text = yourHTMLSourceCodeString;
+    headerLabel.text = yourHTMLSourceCodeString;
     NSLog(@"titttttt :: %@",yourHTMLSourceCodeString);
 }
 - (void)viewDidLoad {
@@ -154,6 +155,17 @@
 //    [super dealloc];
 //}
 
+#pragma mark - Button Actions
+
+- (IBAction)backBtnCall:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)menuBtnCall:(id)sender {
+    self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
+}
+
+
 #pragma mark Action methods
 
 -(IBAction)buttonAction:(id)sender{
@@ -212,6 +224,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     NSString *yourHTMLSourceCodeString = [titleWebView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"];
     labelName.text = yourHTMLSourceCodeString;
+    headerLabel.text = yourHTMLSourceCodeString;
     NSLog(@"titttttt :: %@",yourHTMLSourceCodeString);
 }
 @end

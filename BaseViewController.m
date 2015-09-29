@@ -45,17 +45,21 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)showHudWithMessage:(NSString *)message{
+    [self showHudWithMessage:message color:[UIColor clearColor]];
+}
+
+-(void)showHudWithMessage:(NSString *)message color:(UIColor *)color {
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     if (![Utils checkForEmptyString:message])
     {
         [hud setLabelText:message];
         [hud setLabelFont:[UIFont systemFontOfSize:17]];
-//        [hud setL [UIColor blackColor]];
+        [hud setColor:color];
+        //        [hud setL [UIColor blackColor]];
     }
     [hud setOpacity:0];
     [hud show:YES];
-    
 }
 
 -(void)hideHud

@@ -10,6 +10,7 @@
 #import "PreitAppDelegate.h"
 
 @interface EventsDetailsViewController : BaseViewController <UIWebViewDelegate>{
+    IBOutlet UILabel *headerLabel;
 	IBOutlet UIImageView *image_Background;
 	IBOutlet UIImageView *image_thumbNail;
 	IBOutlet UILabel *labelName;

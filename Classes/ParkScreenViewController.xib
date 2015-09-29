@@ -162,7 +162,7 @@
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="68" y="68"/>
+            <point key="canvasLocation" x="240" y="14"/>
         </view>
     </objects>
     <resources>

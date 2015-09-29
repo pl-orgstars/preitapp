@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "AudioRecorder.h"
-@interface ParkScreenViewController : BaseViewController<AudioRecorderDelegete,UINavigationControllerDelegate, UIImagePickerControllerDelegate,UITextViewDelegate>
+@interface ParkScreenViewController : BaseViewController<AudioRecorderDelegete,UINavigationControllerDelegate, UIImagePickerControllerDelegate,
+    UITextViewDelegate>
 {
     __weak IBOutlet UITextView *noteTextField;
     
