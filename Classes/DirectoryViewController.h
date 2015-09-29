@@ -23,9 +23,14 @@
     PreitAppDelegate* delegate;
     
     NSMutableArray *listContent;
-    NSMutableArray *searchedListContent;
+//    NSMutableArray *searchedListContent;
+    
+    NSMutableArray* displayContent;
     
     NSMutableArray *filterCategories;
+    NSMutableArray *searchedFilterCategories;
+    NSMutableArray *selectedFilter;
+    BOOL            filterON;
     
     
     
@@ -41,7 +46,8 @@
 }
 
 @property (nonatomic, retain) NSArray *listContent;
-@property (nonatomic, retain) NSMutableArray *searchedListContent;
+//@property (nonatomic, retain) NSMutableArray *searchedListContent;
+
 
 @property (nonatomic, copy) NSString *savedSearchTerm;
 @property (nonatomic) NSInteger savedScopeButtonIndex;

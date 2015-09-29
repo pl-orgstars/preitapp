@@ -90,9 +90,9 @@
 		42CC8F3715A5C6B6004B0CDE /* ProductListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CC8F3415A5C6B6004B0CDE /* ProductListViewController.xib */; };
 		42CC8F3B15A5C756004B0CDE /* ProductDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC8F3915A5C756004B0CDE /* ProductDetailViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		42CC8F3C15A5C756004B0CDE /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CC8F3A15A5C756004B0CDE /* ProductDetailViewController.xib */; };
-		6101E2581BB96DB000A8BD65 /* call-us@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6101E2551BB96DB000A8BD65 /* call-us@2x.png */; settings = {ASSET_TAGS = (); }; };
-		6101E2591BB96DB000A8BD65 /* direction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6101E2561BB96DB000A8BD65 /* direction@2x.png */; settings = {ASSET_TAGS = (); }; };
-		6101E25A1BB96DB000A8BD65 /* email-us@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6101E2571BB96DB000A8BD65 /* email-us@2x.png */; settings = {ASSET_TAGS = (); }; };
+		6101E2581BB96DB000A8BD65 /* call-us@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6101E2551BB96DB000A8BD65 /* call-us@2x.png */; };
+		6101E2591BB96DB000A8BD65 /* direction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6101E2561BB96DB000A8BD65 /* direction@2x.png */; };
+		6101E25A1BB96DB000A8BD65 /* email-us@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6101E2571BB96DB000A8BD65 /* email-us@2x.png */; };
 		612FBB5D1BB14FBA00D9E30C /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB581BB14FBA00D9E30C /* MFSideMenuContainerViewController.m */; };
 		612FBB5E1BB14FBA00D9E30C /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5A1BB14FBA00D9E30C /* MFSideMenuShadow.m */; };
 		612FBB5F1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5C1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m */; };
@@ -286,6 +286,7 @@
 		BD24B63D1BB92C0C00066F15 /* collapseArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24B63C1BB92C0C00066F15 /* collapseArrow@2x.png */; };
 		BD24B63F1BB92EC900066F15 /* BackBlack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24B63E1BB92EC900066F15 /* BackBlack@2x.png */; };
 		BD24B6411BB93CB300066F15 /* BackWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24B6401BB93CB300066F15 /* BackWhite@2x.png */; };
+		BD3223111BB99AF8002D5146 /* BackBlackThick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3223101BB99AF8002D5146 /* BackBlackThick@2x.png */; };
 		BD46BB751BB28D6000FC5A43 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD46BB731BB28D6000FC5A43 /* DirectoryViewController.m */; };
 		BD46BB761BB28D6000FC5A43 /* DirectoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD46BB741BB28D6000FC5A43 /* DirectoryViewController.xib */; };
 		BD46BB7B1BB2AA3A00FC5A43 /* DirectoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD46BB791BB2AA3A00FC5A43 /* DirectoryTableViewCell.m */; };
@@ -775,6 +776,7 @@
 		BD24B63C1BB92C0C00066F15 /* collapseArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collapseArrow@2x.png"; sourceTree = "<group>"; };
 		BD24B63E1BB92EC900066F15 /* BackBlack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackBlack@2x.png"; sourceTree = "<group>"; };
 		BD24B6401BB93CB300066F15 /* BackWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackWhite@2x.png"; sourceTree = "<group>"; };
+		BD3223101BB99AF8002D5146 /* BackBlackThick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackBlackThick@2x.png"; sourceTree = "<group>"; };
 		BD46BB721BB28D6000FC5A43 /* DirectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryViewController.h; sourceTree = "<group>"; };
 		BD46BB731BB28D6000FC5A43 /* DirectoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryViewController.m; sourceTree = "<group>"; };
 		BD46BB741BB28D6000FC5A43 /* DirectoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DirectoryViewController.xib; sourceTree = "<group>"; };
@@ -1443,6 +1445,7 @@
 		AE87D293193707BD00F5493D /* New changes Images */ = {
 			isa = PBXGroup;
 			children = (
+				BD3223101BB99AF8002D5146 /* BackBlackThick@2x.png */,
 				BD24B6401BB93CB300066F15 /* BackWhite@2x.png */,
 				BD24B63E1BB92EC900066F15 /* BackBlack@2x.png */,
 				BD24B63C1BB92C0C00066F15 /* collapseArrow@2x.png */,
@@ -2169,6 +2172,7 @@
 				E92DFA491B4412DA000B91B0 /* PREIT_Logo@3x.png in Resources */,
 				E2AFBBC6126C1C0400F84431 /* SelectMonthViewController.xib in Resources */,
 				AECE4802195A935600D1E5DB /* AppIcon40x40.png in Resources */,
+				BD3223111BB99AF8002D5146 /* BackBlackThick@2x.png in Resources */,
 				E2880B0A126C603C007B9D71 /* JobsViewController.xib in Resources */,
 				AE710DE519406905003277B2 /* camera_icon@2x.png in Resources */,
 				E2B70AFD126F0E04006D2142 /* LocationViewController.xib in Resources */,

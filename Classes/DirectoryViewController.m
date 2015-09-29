@@ -19,7 +19,7 @@
 @end
 
 @implementation DirectoryViewController
-@synthesize listContent, searchedListContent, savedSearchTerm, savedScopeButtonIndex, searchWasActive;
+@synthesize listContent,/* searchedListContent, */savedSearchTerm, savedScopeButtonIndex, searchWasActive;
 
 
 #pragma mark - Life Cycle Methods
@@ -43,7 +43,8 @@
         [listContent addObjectsFromArray:delegate.storeListContent];
     
     // create a filtered list that will contain products for the search results table.
-    self.searchedListContent = [NSMutableArray arrayWithCapacity:[self.listContent count]];
+//    displayContent = [NSMutableArray arrayWithCapacity:[self.listContent count]];
+    displayContent = [[NSMutableArray alloc] init];
     
     
     NSString *path = [[[NSBundle mainBundle] bundlePath]stringByAppendingPathComponent:@"checkDict.plist"];
@@ -68,6 +69,7 @@
     indicator.center = filterTableView.center;
     
     filterCategories = [[NSMutableArray alloc] init];
+    selectedFilter = [[NSMutableArray alloc] init];
     
     [self getShoppingData];
     
@@ -86,7 +88,7 @@
 }
 
 -(void)viewDidUnload{
-    self.searchedListContent = nil;
+    displayContent = nil;
 
     
 }
@@ -127,6 +129,11 @@
 
 }
 
+- (IBAction)backBtnCall:(id)sender {
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
+
 #pragma mark - Table Views
 
 
@@ -135,15 +142,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    if (tableView.tag == 201) {
-        if (searchBar_.isFirstResponder) {
-            return searchedListContent.count;
-        }
-        return listContent.count;
-    }
-    
-   
-    return filterCategories.count;
+    return displayContent.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -156,13 +155,15 @@
         }
         
         NSDictionary *tmpDict;
-        
+  /*
         if (searchBar_.isFirstResponder) {
             tmpDict=[searchedListContent objectAtIndex:indexPath.row];
         }
         else{
             tmpDict=[listContent objectAtIndex:indexPath.row];
-        }
+        }*/
+        
+        tmpDict = [displayContent objectAtIndex:indexPath.row];
         
         
         cell.titleLabel.text = tmpDict[@"tenant"][@"name"];
@@ -212,17 +213,23 @@
     
     else
     {
-        
-        NSDictionary* tempDic = [listContent objectAtIndex:indexPath.row];
-         StoreDetailsViewController *screenStoreDetail=[[StoreDetailsViewController alloc]initWithNibName:@"CustomStoreDetailViewController" bundle:nil];
-        screenStoreDetail.dictData=tempDic[@"tenant"];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            screenStoreDetail.titleLabel.text = @"STORES";
-        });
-        
-        
-        [self.navigationController pushViewController:screenStoreDetail animated:YES];
+        if (tableView.tag == 201) {
+            NSDictionary* tempDic = [listContent objectAtIndex:indexPath.row];
+            StoreDetailsViewController *screenStoreDetail=[[StoreDetailsViewController alloc]initWithNibName:@"CustomStoreDetailViewController" bundle:nil];
+            screenStoreDetail.dictData=tempDic[@"tenant"];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                screenStoreDetail.titleLabel.text = @"STORES";
+            });
+            
+            
+            [self.navigationController pushViewController:screenStoreDetail animated:YES];
+        }
+        else{
+            
+            [self applyFilterAtPosition:indexPath.row];
+        }
+   
 
     }
     
@@ -260,6 +267,23 @@
         
     }
   
+}
+
+#pragma mark - Filter Funcs
+
+-(void)applyFilterAtPosition:(NSInteger)position
+{
+    if (position==0) {
+        
+    }else{
+        filterON = YES;
+        
+        [selectedFilter removeAllObjects];
+        NSDictionary* tmpDic = [filterCategories objectAtIndex:position];
+        [selectedFilter addObjectsFromArray:tmpDic[@"tenant_category"][@"tenants"]];
+        
+        NSLog(@"nothing");
+    }
 }
 
 
@@ -359,25 +383,22 @@
      Update the filtered array based on the search text and scope.
      */
     
-    [self.searchedListContent removeAllObjects]; // First clear the filtered array.
+    [displayContent removeAllObjects]; // First clear the filtered array.
     
     /*
      Search the main list for products whose type matches the scope (if selected) and whose name matches searchText; add items that match to the filtered array.
      */
-    for (NSDictionary *dict in listContent)
+    for (NSDictionary *dict in displayContent)
     {
-//        for (NSDictionary *dict in array)
-//        {
-            NSDictionary *tmpDict=[dict objectForKey:@"tenant"];
-            NSString *sTemp=[tmpDict objectForKey:@"name"];
-            
-            NSComparisonResult result = [sTemp compare:searchText options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [searchText length])];
-            
-            if (result == NSOrderedSame)
-            {
-                [self.searchedListContent addObject:dict];
-            }
-//        }
+        NSDictionary *tmpDict=[dict objectForKey:@"tenant"];
+        NSString *sTemp=[tmpDict objectForKey:@"name"];
+        
+        NSComparisonResult result = [sTemp compare:searchText options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [searchText length])];
+        
+        if (result == NSOrderedSame)
+        {
+            [displayContent addObject:dict];
+        }
     }
     
     [tableView_ reloadData];
@@ -414,6 +435,7 @@
             tmpArray = [tmpArray sortedArrayUsingDescriptors:sortDescriptor];
             
             [listContent addObjectsFromArray:tmpArray];
+            [displayContent addObjectsFromArray:listContent];
             
             delegate.storeListContent=listContent;
         }
@@ -430,6 +452,8 @@
 -(void)errorCallback:(NSError *)error{
     [self loadingView:NO];
     [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Message" buttontitle:@"Ok"];
+    
+    [indicator stopAnimating];
 }
 
 #pragma mark - loading
