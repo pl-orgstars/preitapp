@@ -100,8 +100,8 @@
     
     
 
-    
-    [webView loadHTMLString:[dictData objectForKey:@"description"] baseURL:nil];
+    NSString *description = [dictData[@"description"] stringByReplacingOccurrencesOfString:@"<p>" withString:@"<p style='color:white'>"];
+    [webView loadHTMLString:description baseURL:nil];
     
     [webView setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.2]];
     [webView setOpaque:NO];
