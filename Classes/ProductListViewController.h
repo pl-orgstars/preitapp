@@ -51,6 +51,8 @@
     NSString *searchString;
 }
 
+@property (nonatomic,retain) NSString* passedSearchString;
+
 -(void)makeRequestForString:(NSString*)productStr;
 -(void)loadMore;
 -(void)moreRequestFinished:(NSData*)responseData;

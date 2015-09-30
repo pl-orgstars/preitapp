@@ -19,6 +19,7 @@
 #import "WebViewController.h"
 #import "EventsViewController.h"
 #import "DealScreenViewController.h"
+#import "ProductListViewController.h"
 
 @implementation ProductSearchHome{
     NSString *webViewURLString;
@@ -216,6 +217,29 @@
                 return NO;
             }
             
+            else if ([page isEqualToString:@"/product_search"]){
+                ProductListViewController *productListViewController = [[ProductListViewController alloc]initWithNibName:@"ProductListViewController copy" bundle:nil];
+                
+                [self.navigationController pushViewController:productListViewController animated:NO];
+                return NO;
+                
+            }
+            
+            else if ([page rangeOfString:@"/product_search"].location != NSNotFound){
+                
+                
+                NSRange range = [page rangeOfString:@"search="];
+                NSString* searchString = [page substringWithRange:NSMakeRange(range.location + range.length, page.length - range.location - range.length)];
+                
+                ProductListViewController *productListViewController = [[ProductListViewController alloc]initWithNibName:@"ProductListViewController copy" bundle:nil];
+                
+                productListViewController.passedSearchString = searchString;
+                
+                [self.navigationController pushViewController:productListViewController animated:NO];
+                return NO;
+                
+            }
+            
             return YES;
         }
         
@@ -234,6 +258,8 @@
     if (!spinner.isAnimating) {
         [spinner startAnimating];
     }
+    
+
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
