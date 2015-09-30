@@ -734,7 +734,7 @@
 
 -(void)getDataFromServer
 {
-    [self showHudWithMessage:@"Locating Nearest PREIT Mall"];
+    [self showHudWithMessage:@"Locating Nearest PREIT Mall" color:[UIColor whiteColor]];
 	NSString *url=[NSString stringWithFormat:@"%@%@",NSLocalizedString(@"Server",""),NSLocalizedString(@"API0","")];
 	//NSLog(@"url====%@",url);
 //	if(self.radius)

@@ -41,7 +41,12 @@
     
     
     if ([dictData objectForKeyWithNullCheck:@"location_info"]) {
-        locationInfoLabel.text = [dictData objectForKeyWithNullCheck:@"location_info"];
+        if ([[dictData objectForKeyWithNullCheck:@"location_info"] isEqualToString:@""]) {
+            locationInfoLabel.text = @"N/A";
+        }
+        else{
+            locationInfoLabel.text = [dictData objectForKeyWithNullCheck:@"location_info"];
+        }
     }
     
     else{

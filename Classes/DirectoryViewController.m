@@ -179,7 +179,6 @@
         
         tmpDict = [displayContent objectAtIndex:indexPath.row];
         
-        
         cell.titleLabel.text = tmpDict[@"tenant"][@"name"];
         
         cell.phoneBtn.tag = indexPath.row;
@@ -209,6 +208,8 @@
             NSDictionary* tenantCategory = [[filterCategories objectAtIndex:indexPath.row] objectForKey:@"tenant_category"];
             cell.textLabel.text = [tenantCategory objectForKey:@"name"];
         }
+        
+        cell.textLabel.textColor = [UIColor whiteColor];
         
         return cell;
         
@@ -326,6 +327,8 @@
 
 - (IBAction)toggleFilterTableView:(UIButton*)sender {
     
+    sender.enabled = NO;
+    
     if (filterTableOnFront) {
         filterTableView.userInteractionEnabled = NO;
         tableView_.hidden = NO;
@@ -335,8 +338,11 @@
         filterTableOnFront = NO;
         
         dispatch_async(dispatch_get_main_queue(), ^{
-        [sender.imageView setImage:[UIImage imageNamed:@"exoandArrowDown50"]];
-
+            [sender setImage:[UIImage imageNamed:@"exoandArrowDown50"]  forState:UIControlStateNormal];
+            [sender setImage:[UIImage imageNamed:@"exoandArrowDown50"] forState:UIControlStateDisabled];
+            
+            
+            
         });
         
         
@@ -348,6 +354,8 @@
             filterTableView.hidden = YES;
             tableView_.userInteractionEnabled = YES;
             
+            sender.enabled = YES;
+            
         }];
         
         
@@ -358,7 +366,10 @@
         filterTableView.hidden = NO;
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [sender.imageView setImage:[UIImage imageNamed:@"collapseArrow"]];
+            
+            [sender setImage:[UIImage imageNamed:@"collapseArrow"]  forState:UIControlStateNormal];
+            [sender setImage:[UIImage imageNamed:@"collapseArrow"] forState:UIControlStateDisabled];
+
 
         });
         
@@ -370,6 +381,8 @@
         } completion:^(BOOL finished) {
             tableView_.hidden = YES;
             tableView_.userInteractionEnabled = NO;
+            
+            sender.enabled = YES;
             
             
         }];
