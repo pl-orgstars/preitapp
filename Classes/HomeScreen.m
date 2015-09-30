@@ -228,7 +228,11 @@
     NSLog(@"selectrow");
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	if(!isNoData){
-		NSDictionary *tmpDict=[self.tableData objectAtIndex:indexPath.row];
+		NSMutableDictionary *tmpDict=[self.tableData objectAtIndex:indexPath.row];
+        
+        if ([[tmpDict objectForKey:@"name"] isEqualToString:@"Cherry Hill Mall"]) {
+            [tmpDict setObject:@"http://staging.cherryhillmall.red5demo.com" forKey:@"website_url"];
+        }
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:tmpDict];
@@ -236,11 +240,13 @@
 
          NSLog(@".............dictionare to prionnasjkdfnksa %@ :::::",tmpDict);
         
+       
 
         
 		delegate.mallData=tmpDict;
 		delegate.mallId=[[tmpDict objectForKey:@"id"] longValue];
 		[delegate.tabBarController setSelectedIndex:0];
+    
 		
 		
 		delegate.refreshShopping=!delegate.refreshShopping;

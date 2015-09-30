@@ -141,13 +141,27 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     NSLog(@"request::::::::::: Waseem %@ %@",[request URL],[[request URL]absoluteString]);
     
-    PreitAppDelegate *del = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
+//    PreitAppDelegate *del = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
     
     NSString *urlString = [del.mallData objectForKey:@"website_url"];
     
     if ([[[request URL]absoluteString]rangeOfString:urlString].location != NSNotFound) {
+        
+        if ([[del.mallData objectForKey:@"name"] isEqualToString:@"Cherry Hill Mall"]) {
+            NSString* url = [[request URL]absoluteString];
+            
+            NSRange range = [url rangeOfString:@".com/"];
+            
+            NSString* page = [url substringWithRange:NSMakeRange(range.location + range.length , url.length - range.length - range.location)];
+            if ([page isEqualToString:@"directory"]) {
+//                <#statements#>
+            }
+        }
+        
+        
         return YES;
     }
+    
     if ([Utils checkForEmptyString:[[request URL]absoluteString]]) {
         return NO;
     }

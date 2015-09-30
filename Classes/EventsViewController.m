@@ -420,24 +420,26 @@
         [constArray removeAllObjects];
 		[disclosureRow removeAllObjects];
         
-        NSMutableArray* shortListedArray = [[NSMutableArray alloc] init];
         
         if (self.tenantID) {
             if (tmpArray) {
                 if (tmpArray.count) {
+                    NSMutableArray* shortListedArray = [[NSMutableArray alloc] init];
+
                     for (NSDictionary *tmpDic in tmpArray) {
                         NSDictionary* eventDic = tmpDic[@"event"];
                         if ([[eventDic objectForKeyWithNullCheck:@"tenant_id"] intValue] == self.tenantID) {
                             [shortListedArray addObject:tmpDic];
                         }
                     }
+                    [tmpArray removeAllObjects];
+                    [tmpArray addObjectsFromArray:shortListedArray];
                 }
             }
         }
         
         
-        [tmpArray removeAllObjects];
-        [tmpArray addObjectsFromArray:shortListedArray];
+        
         
         
 		if([tmpArray count]!=0){
