@@ -141,7 +141,29 @@
 	}
 	return height;	
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 35.0;
+}
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(10.0, 0.0, 320.0, 35.0)] ;
+    customView.backgroundColor = [UIColor grayColor];;
+    
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectZero] ;
+    headerLabel.backgroundColor = [UIColor clearColor];
+    headerLabel.opaque = NO;
+    headerLabel.textColor = [UIColor whiteColor];
+    headerLabel.font = [UIFont boldSystemFontOfSize:18];
+    headerLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    headerLabel.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    headerLabel.frame = CGRectMake(10,0, 300.0, 35.0);
+    headerLabel.textAlignment = UITextAlignmentLeft;
+    headerLabel.text = array_section[section];
+    [customView addSubview:headerLabel];
+    return customView;
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return array_section.count;
@@ -196,21 +218,17 @@
 		
 		if([htmlString length]==0)
 		{
-//			[disclosureRow addObject:[NSNumber numberWithBool:NO]];
             [tmpDict setValue:@"0" forKey:@"disclosureRow"];
 			cell.accessoryType =UITableViewCellAccessoryNone;
 			cell.selectionStyle=UITableViewCellSelectionStyleNone;
-            NSLog(@"htmlString   %d===%d",(int)indexPath.section,(int)indexPath.row);
 		}
 		else
 		{
-//			[disclosureRow addObject:[NSNumber numberWithBool:YES]];
             [tmpDict setValue:@"1" forKey:@"disclosureRow"];
             UIImageView *view = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"back_icon1.png"]];
             [view setFrame:CGRectMake(0, 0, 8, 14)];
             cell.accessoryView = view;
 			cell.selectionStyle=UITableViewCellSelectionStyleGray;
-            NSLog(@"KKKKKKKKKKKK %d===%d",(int)indexPath.section,(int)indexPath.row);
 		}
         
         
@@ -244,9 +262,6 @@
 		if([tmpDict[@"disclosureRow"] boolValue])
 		{
 			EventsDetailsViewController *screenEventDetail=[[EventsDetailsViewController alloc]initWithNibName:@"EventsDetailsViewController" bundle:nil];
-
-//            NSDictionary *tmpDict=[[tableData objectAtIndex:indexPath.row]objectForKey:@"event"];
-
             
             // Change google
             [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:@"title"];

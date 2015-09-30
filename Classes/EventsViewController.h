@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PreitAppDelegate.h"
 
-@interface EventsViewController : SuperViewController<UIActionSheetDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDataSource> {
+@interface EventsViewController : SuperViewController<UIActionSheetDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDataSource,UITableViewDelegate> {
 	IBOutlet UITableView *tableEvents;
 	IBOutlet UIImageView *imageView;
 	//IBOutlet UIPickerView *pickerView;
