@@ -12,24 +12,7 @@
 
 @implementation EventsDetailsViewController
 @synthesize dictData,flagScreen;
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
- - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
- if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
- // Custom initialization
- }
- return self;
- }
- */
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-
-//-(NSString*)convertHTML:(NSString*)HTMLString{
-//    NSData *HTMLData = [HTMLString dataUsingEncoding:NSUTF8StringEncoding];
-//    NSAttributedString *attrString = [NSAttributedString attributedStringWithHTML:HTMLData options:nil];
-//    NSString *plainText = attrString.string;
-//    return plainText;
-//}
 - (NSString *)flattenHTML:(NSString *)html {
     
     NSScanner *theScanner;
@@ -44,45 +27,32 @@
         
         html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>", text] withString:@""];
     }
-    //
     html = [html stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     return html;
 }
 -(void)setTitleInWebView:(NSString *)title{
-//    NSString *str = [NSString stringWithFormat:@"<p>%@</p>",title];
     [titleWebView loadHTMLString:title baseURL:nil];
-//    NSString *yourHTMLSourceCodeString = [titleWebView stringByEvaluatingJavaScriptFromString:@"document.documentElement.outerHTML"];
-//    document.body.innerHTML
      NSString *yourHTMLSourceCodeString = [titleWebView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"];
     labelName.text = yourHTMLSourceCodeString;
     headerLabel.text = yourHTMLSourceCodeString;
-    NSLog(@"titttttt :: %@",yourHTMLSourceCodeString);
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
 	if(flagScreen){
-//        NSString *htmlStripped = [[NSAttributedString attributedStringWithHTML:[dictData objectForKey:@"title"] options:nil] string];
 
-        
-//		labelName.text=    [dictData objectForKey:@"title"];
-//        labelName.text=  [self flattenHTML:[dictData objectForKey:@"title"]];
         [self setTitleInWebView:[dictData objectForKey:@"title"]];
         
-//		self.navigationItem.title=NSLocalizedString(@"Screen3.1",@"");
         [self setNavigationTitle:NSLocalizedString(@"Screen3.1",@"") withBackButton:YES];
 		
 		labelDate.text=[NSString stringWithFormat:@"%@ - %@",[dictData objectForKey:@"startsAt"],[dictData objectForKey:@"endsAt"]];
 	}
     
 	else{
-//		labelName.text=[dictData objectForKey:@"headline"];
 
-//        labelName.text= [self flattenHTML:[dictData objectForKey:@"headline"]];
         [self setTitleInWebView:[dictData objectForKey:@"headline"]];
         
-//		self.navigationItem.title=NSLocalizedString(@"Screen4.1",@"");
         [self setNavigationTitle:NSLocalizedString(@"Screen4.1",@"") withBackButton:YES];
         
 		labelDate.text=[NSString stringWithFormat:@"%@ - %@",[dictData objectForKey:@"startsOn"],[dictData objectForKey:@"endsOn"]];
@@ -90,7 +60,6 @@
 	}
 
 	NSString *htmlString=[dictData objectForKey:@"content"];
-//    NSString *htmlString=[dictData objectForKey:@"headline"];
     if(!htmlString || htmlString==nil || htmlString==[NSNull null] || htmlString==@"<p></p>")
 		htmlString=@"";
 		
@@ -129,13 +98,7 @@
     [webView setOpaque:NO];
 }
 
-/*
- // Override to allow orientations other than the default portrait orientation.
- - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
- // Return YES for supported orientations
- return (interfaceOrientation == UIInterfaceOrientationPortrait);
- }
- */
+
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -151,9 +114,6 @@
 }
 
 
-//- (void)dealloc {
-//    [super dealloc];
-//}
 
 #pragma mark - Button Actions
 
@@ -177,13 +137,9 @@
 			//Phone Number
 			NSURL *url = [[ NSURL alloc ] initWithString: @"tel:212-555-1234" ];
 			[[UIApplication sharedApplication] openURL:url];
-//			[url release];
 		}
 			break;
-		case 101:
-			//Map
-			//NSLog(@"Map");
-			break;
+		
 		default:
 			break;
 	}
@@ -216,15 +172,12 @@
 	{	
 		if (![[UIApplication sharedApplication] openURL:url_LinkClicked])			
 			NSLog(@"%@%@",@"Failed to open url:",[url_LinkClicked description]);
-		
-//		[url_LinkClicked release];
-	}
+    }
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     NSString *yourHTMLSourceCodeString = [titleWebView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"];
     labelName.text = yourHTMLSourceCodeString;
     headerLabel.text = yourHTMLSourceCodeString;
-    NSLog(@"titttttt :: %@",yourHTMLSourceCodeString);
 }
 @end
