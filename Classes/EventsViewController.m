@@ -172,6 +172,7 @@
 	}
     if([cellIdentifier isEqualToString:@"Cell"])
 	{
+
 		cell.textLabel.numberOfLines=0;
 		cell.textLabel.font=[UIFont boldSystemFontOfSize:25];
         NSDictionary *tmpDict=tableData[indexPath.section][indexPath.row][@"event"];
@@ -197,7 +198,7 @@
 		{
 //			[disclosureRow addObject:[NSNumber numberWithBool:NO]];
             [tmpDict setValue:@"0" forKey:@"disclosureRow"];
-			cell.accessoryType=UITableViewCellAccessoryNone;
+			cell.accessoryType =UITableViewCellAccessoryNone;
 			cell.selectionStyle=UITableViewCellSelectionStyleNone;
             NSLog(@"htmlString   %d===%d",(int)indexPath.section,(int)indexPath.row);
 		}
@@ -211,6 +212,15 @@
 			cell.selectionStyle=UITableViewCellSelectionStyleGray;
             NSLog(@"KKKKKKKKKKKK %d===%d",(int)indexPath.section,(int)indexPath.row);
 		}
+        
+        
+        
+        if(![tmpDict[@"disclosureRow"] boolValue])
+        {
+            cell.accessoryType =UITableViewCellAccessoryNone;
+            cell.selectionStyle =UITableViewCellSelectionStyleNone;
+            cell.accessoryView.hidden = TRUE;
+        }
 		
 	}else
 	{
@@ -218,8 +228,10 @@
 		cell.textLabel.backgroundColor=[UIColor clearColor];
 		cell.textLabel.textColor=LABEL_TEXT_COLOR;
 		cell.textLabel.textAlignment=UITextAlignmentCenter;
-	}	
-	return cell;	
+	}
+    
+
+	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
