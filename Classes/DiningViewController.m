@@ -58,6 +58,8 @@
 	{
 		imageView.image=delegate.image2;
 	}
+    
+    self.titleLabel.text = @"DINING";
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateImage2:) name:@"updateDining_IMG" object:nil];
 }
