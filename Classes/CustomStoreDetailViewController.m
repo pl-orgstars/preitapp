@@ -38,21 +38,37 @@
     
     [dealBttn setHidden:YES];
     [eventsBtn setHidden:YES];
+  
+    
+//    
+//    if ([dictData objectForKeyWithNullCheck:@"location_info"]) {
+//        if ([[dictData objectForKeyWithNullCheck:@"location_info"] isEqualToString:@""]) {
+//            locationInfoLabel.text = @"N/A";
+//        }
+//        else{
+//            locationInfoLabel.text = [dictData objectForKeyWithNullCheck:@"location_info"];
+//        }
+//    }
+//    
+//    else{
+//        locationInfoLabel.text = @"N/A";
+//    }
+	delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
     
     
-    if ([dictData objectForKeyWithNullCheck:@"location_info"]) {
-        if ([[dictData objectForKeyWithNullCheck:@"location_info"] isEqualToString:@""]) {
+    if ([delegate.mallData objectForKeyWithNullCheck:@"address_city"] && [delegate.mallData objectForKeyWithNullCheck:@"address_state"]) {
+        if ([[delegate.mallData objectForKeyWithNullCheck:@"address_city"] isEqualToString:@""] && [[delegate.mallData objectForKeyWithNullCheck:@"address_state"] isEqualToString:@""]) {
             locationInfoLabel.text = @"N/A";
         }
+        
         else{
-            locationInfoLabel.text = [dictData objectForKeyWithNullCheck:@"location_info"];
+            locationInfoLabel.text = [NSString stringWithFormat:@"%@, %@",[delegate.mallData objectForKeyWithNullCheck:@"address_city"],[delegate.mallData objectForKeyWithNullCheck:@"address_state"]];
         }
     }
     
     else{
         locationInfoLabel.text = @"N/A";
     }
-	delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
 
     NSLog(@"<<<<<<<<<<<<<<<<<<<<<<< %@",dictData);
     
@@ -103,7 +119,7 @@
     NSString *description = [dictData[@"description"] stringByReplacingOccurrencesOfString:@"<p>" withString:@"<p style='color:white'>"];
     [webView loadHTMLString:description baseURL:nil];
     
-    [webView setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.2]];
+    [webView setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.0]];
     [webView setOpaque:NO];
 	
 
