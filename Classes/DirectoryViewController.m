@@ -478,8 +478,9 @@
 
 -(void)getData{
     isNoData=NO;
-    NSString *url=[NSString stringWithFormat:@"%@%@",[delegate.mallData objectForKey:@"resource_url"],NSLocalizedString(@"API1.2","")];
+//    NSString *url=[NSString stringWithFormat:@"%@%@",[delegate.mallData objectForKey:@"resource_url"],NSLocalizedString(@"API1.2","")];
     
+    NSString* url = [NSString stringWithFormat:@"%@/tenant_categories/all_tenants_detail",[delegate.mallData objectForKey:@"resource_url"]];
     RequestAgent *req= [[RequestAgent alloc] init];// autorelease];
     [req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
     [self loadingView:YES];
