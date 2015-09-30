@@ -304,7 +304,6 @@
         
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[DiningViewController class]]) {
             DiningViewController *viewCnt = [[DiningViewController alloc]initWithNibName:@"CustomTable" bundle:nil];
-//            _navController.viewControllers = @[viewCnt];
             dispatch_async(dispatch_get_main_queue(), ^{
                 viewCnt.titleLabel.text = @"DINING";
 

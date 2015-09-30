@@ -12,6 +12,14 @@
 #import "UIAlertView+Blocks.h"
 #import "LocationViewController.h"
 
+
+#import "DirectoryViewController.h"
+#import "DiningViewController.h"
+#import "DirectionViewController.h"
+#import "WebViewController.h"
+#import "EventsViewController.h"
+#import "DealScreenViewController.h"
+
 @implementation ProductSearchHome{
     NSString *webViewURLString;
     PreitAppDelegate *del;
@@ -137,9 +145,12 @@
     [self.navigationController pushViewController:loaction animated:NO];
 }
 
+
+
 #pragma mark webview delegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     NSLog(@"request::::::::::: Waseem %@ %@",[request URL],[[request URL]absoluteString]);
+    
     
 //    PreitAppDelegate *del = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
     
@@ -150,12 +161,62 @@
         if ([[del.mallData objectForKey:@"name"] isEqualToString:@"Cherry Hill Mall"]) {
             NSString* url = [[request URL]absoluteString];
             
-            NSRange range = [url rangeOfString:@".com/"];
+            NSRange range = [url rangeOfString:@".com"];
             
             NSString* page = [url substringWithRange:NSMakeRange(range.location + range.length , url.length - range.length - range.location)];
-            if ([page isEqualToString:@"directory"]) {
-//                <#statements#>
+            
+            if ([page isEqualToString:HOME_WEB_VIEW]) {
+                return YES;
             }
+            else if ([page isEqualToString:@"/directory"]) {
+                DirectoryViewController* directoryVC = [[DirectoryViewController alloc] initWithNibName:@"DirectoryViewController" bundle:[NSBundle mainBundle]];
+                [self.navigationController pushViewController:directoryVC animated:NO];
+                return NO;
+            }
+            else if ([page isEqualToString:@"/directory/dining"]){
+                DiningViewController *viewCnt = [[DiningViewController alloc]initWithNibName:@"CustomTable" bundle:nil];
+                
+                
+                [self.navigationController pushViewController:viewCnt animated:NO];
+                return NO;
+            }
+            else if ([page isEqualToString:@"/about_us/directions"]){
+                DirectionViewController *directionVC=[[DirectionViewController alloc]initWithNibName:@"DirectionViewController" bundle:nil];
+                [self.navigationController pushViewController:directionVC animated:NO];
+                return NO;
+                
+            }
+            else if ([page isEqualToString:@"/mall_hours"]){
+                WebViewController *hoursWebView=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
+                hoursWebView.screenIndex=8;
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    hoursWebView.titleLabel.text = @"HOURS";
+                });
+                
+                [self.navigationController pushViewController:hoursWebView animated:NO];
+                return NO;
+                
+            }
+            
+            else if ([page isEqualToString:@"/events"]){
+                EventsViewController *viewCnt = [[EventsViewController alloc]initWithNibName:@"EventsViewController" bundle:nil];
+                
+                [self.navigationController pushViewController:viewCnt animated:NO];
+                
+                return NO;
+
+            }
+            
+            else if ([page isEqualToString:@"/sales"]){
+                DealScreenViewController* dealsVC = [[DealScreenViewController alloc] initWithNibName:@"DealScreenViewController" bundle:[NSBundle mainBundle]];
+                
+                [self.navigationController pushViewController:dealsVC animated:NO];
+                
+                return NO;
+            }
+            
+            return YES;
         }
         
         

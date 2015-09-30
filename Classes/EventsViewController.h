@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PreitAppDelegate.h"
 
-@interface EventsViewController : SuperViewController<UIActionSheetDelegate,UIPickerViewDelegate,UIPickerViewDataSource> {
+@interface EventsViewController : SuperViewController<UIActionSheetDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDataSource,UITableViewDelegate> {
 	IBOutlet UITableView *tableEvents;
 	IBOutlet UIImageView *imageView;
 	//IBOutlet UIPickerView *pickerView;
@@ -21,13 +21,15 @@
 	int yearSelected;
     NSMutableArray *constArray;
 	NSMutableArray *disclosureRow;
+    NSMutableArray *array_section;
 	IBOutlet UIActivityIndicatorView *indicator_;
 }
 
 @property (nonatomic) int tenantID;
 
--(IBAction)buttonAction:(id)sender;
+
 -(void)setHeader;
 -(void)getData:(NSString *)apiString;
-//-(void)pickerShow:(BOOL) flag;
+
+
 @end
