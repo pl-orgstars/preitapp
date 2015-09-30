@@ -233,7 +233,10 @@
                 
                 ProductListViewController *productListViewController = [[ProductListViewController alloc]initWithNibName:@"ProductListViewController copy" bundle:nil];
                 
-                productListViewController.passedSearchString = searchString;
+                if (![searchString isEqualToString:@""]) {
+                    productListViewController.passedSearchString = searchString;
+
+                }
                 
                 [self.navigationController pushViewController:productListViewController animated:NO];
                 return NO;
