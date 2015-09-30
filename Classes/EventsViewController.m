@@ -163,7 +163,8 @@
 	UITableViewCell *cell;
 
 	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-	if (cell == nil){
+	if (cell == nil)
+    {
         if([cellIdentifier isEqualToString:@"Cell"])
 			cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier] ;
         else
@@ -173,7 +174,6 @@
 	{
 		cell.textLabel.numberOfLines=0;
 		cell.textLabel.font=[UIFont boldSystemFontOfSize:25];
-//		NSDictionary *tmpDict=[[tableData objectAtIndex:indexPath.row]objectForKey:@"event"];
         NSDictionary *tmpDict=tableData[indexPath.section][indexPath.row][@"event"];
 
 		cell.detailTextLabel.text=[tmpDict objectForKey:@"title"];
@@ -187,7 +187,6 @@
 		cell.detailTextLabel.backgroundColor=[UIColor clearColor];
 		
 		NSString *htmlString=[tmpDict objectForKey:@"content"];
-        
 		if(!htmlString || htmlString==nil || htmlString ==[NSNull null] || htmlString==@"<p></p>" || htmlString==@"<p><p></p></p>")
 			htmlString=@"";
 		
@@ -196,20 +195,21 @@
 		
 		if([htmlString length]==0)
 		{
-			[disclosureRow addObject:[NSNumber numberWithBool:NO]];
-			cell.accessoryType=UITableViewCellAccessoryNone;	
+//			[disclosureRow addObject:[NSNumber numberWithBool:NO]];
+            [tmpDict setValue:@"0" forKey:@"disclosureRow"];
+			cell.accessoryType=UITableViewCellAccessoryNone;
 			cell.selectionStyle=UITableViewCellSelectionStyleNone;
-
+            NSLog(@"htmlString   %d===%d",(int)indexPath.section,(int)indexPath.row);
 		}
 		else
 		{
-			[disclosureRow addObject:[NSNumber numberWithBool:YES]];
-            
+//			[disclosureRow addObject:[NSNumber numberWithBool:YES]];
+            [tmpDict setValue:@"1" forKey:@"disclosureRow"];
             UIImageView *view = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"back_icon1.png"]];
             [view setFrame:CGRectMake(0, 0, 8, 14)];
             cell.accessoryView = view;
 			cell.selectionStyle=UITableViewCellSelectionStyleGray;
-
+            NSLog(@"KKKKKKKKKKKK %d===%d",(int)indexPath.section,(int)indexPath.row);
 		}
 		
 	}else
@@ -223,15 +223,18 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
-{	
+{
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	if(!isNoData)
 	{
-		if([[disclosureRow objectAtIndex:indexPath.row] boolValue])
+        NSDictionary *tmpDict=tableData[indexPath.section][indexPath.row][@"event"];
+        
+		if([tmpDict[@"disclosureRow"] boolValue])
 		{
 			EventsDetailsViewController *screenEventDetail=[[EventsDetailsViewController alloc]initWithNibName:@"EventsDetailsViewController" bundle:nil];
 
-            NSDictionary *tmpDict=[[tableData objectAtIndex:indexPath.row]objectForKey:@"event"];
+//            NSDictionary *tmpDict=[[tableData objectAtIndex:indexPath.row]objectForKey:@"event"];
+
             
             // Change google
             [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:@"title"];
@@ -239,7 +242,7 @@
             // Send a screenview.
             [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
             
-			screenEventDetail.dictData=[[tableData objectAtIndex:indexPath.row]objectForKey:@"event"];
+			screenEventDetail.dictData=tableData[indexPath.section][indexPath.row][@"event"];
 			screenEventDetail.flagScreen=YES;
 			[self.navigationController pushViewController:screenEventDetail animated:YES];
 		}
