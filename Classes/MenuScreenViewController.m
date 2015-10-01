@@ -47,6 +47,7 @@
 #import "HomeScreen.h"
 #import "ContactUsViewController.h"
 #import "DirectoryViewController.h"
+#import "WinViewController.h"
 @interface MenuScreenViewController ()
 {
     NSMutableArray *tableData;
@@ -242,6 +243,15 @@
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[ProductSearchHome class]]) {
             
             [_navController popToRootViewControllerAnimated:YES];
+        }
+    }
+    
+    else if ([str isEqualToString:GIFT]){
+        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[WinViewController class]]) {
+            WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
+            
+            [_navController popToRootViewControllerAnimated:NO];
+            [_navController pushViewController:winVC animated:NO];
         }
     }
     else if ([str isEqualToString:STORE]){

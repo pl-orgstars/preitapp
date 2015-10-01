@@ -10,7 +10,7 @@
 #import "PreitAppDelegate.h"
 
 
-@interface CustomStoreDetailViewController : SuperViewController {
+@interface CustomStoreDetailViewController : SuperViewController   <UIWebViewDelegate>{
 //	IBOutlet UIImageView *image_Background;
 	IBOutlet UIImageView *image_thumbNail;
 	IBOutlet UILabel *labelName;
@@ -22,7 +22,7 @@
     
     IBOutlet UIButton* backBtn;
 	
-    __weak IBOutlet UIWebView *webView;
+    __weak IBOutlet UIWebView *webView_;
     
     __weak IBOutlet UIButton *dealBttn;
     
@@ -33,6 +33,15 @@
     IBOutlet UIButton* eventsBtn;
     
     IBOutlet UILabel* locationInfoLabel;
+    
+    
+    IBOutlet UIView* callMapView;
+    IBOutlet UIView* dealEventsView;
+    IBOutlet UIView* locationView;
+    IBOutlet UIView* descriptionView;
+    
+    BOOL noEvents;
+    BOOL noDeals;
 }
 
 @property (nonatomic,retain) IBOutlet UILabel* titleLabel;

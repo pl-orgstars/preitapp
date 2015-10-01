@@ -38,42 +38,14 @@
     
     [dealBttn setHidden:YES];
     [eventsBtn setHidden:YES];
-  
     
-//    
-//    if ([dictData objectForKeyWithNullCheck:@"location_info"]) {
-//        if ([[dictData objectForKeyWithNullCheck:@"location_info"] isEqualToString:@""]) {
-//            locationInfoLabel.text = @"N/A";
-//        }
-//        else{
-//            locationInfoLabel.text = [dictData objectForKeyWithNullCheck:@"location_info"];
-//        }
-//    }
-//    
-//    else{
-//        locationInfoLabel.text = @"N/A";
-//    }
+    [locationInfoLabel setHidden:YES];
+
+
 	delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
     
-    
-    if ([delegate.mallData objectForKeyWithNullCheck:@"address_city"] && [delegate.mallData objectForKeyWithNullCheck:@"address_state"]) {
-        if ([[delegate.mallData objectForKeyWithNullCheck:@"address_city"] isEqualToString:@""] && [[delegate.mallData objectForKeyWithNullCheck:@"address_state"] isEqualToString:@""]) {
-            locationInfoLabel.text = @"N/A";
-        }
-        
-        else{
-            locationInfoLabel.text = [NSString stringWithFormat:@"%@, %@",[delegate.mallData objectForKeyWithNullCheck:@"address_city"],[delegate.mallData objectForKeyWithNullCheck:@"address_state"]];
-        }
-    }
-    
-    else{
-        locationInfoLabel.text = @"N/A";
-    }
-
-    NSLog(@"<<<<<<<<<<<<<<<<<<<<<<< %@",dictData);
-    
-	NSDictionary *suite=[dictData objectForKey:@"suite"];
-	int suiteID=[[suite objectForKey:@"id"] intValue];
+    noEvents = NO;
+    noDeals  = NO;
     
     
     [buttonMap.layer setBorderWidth:1.0];
@@ -81,6 +53,9 @@
     
     [callBtn.layer setBorderWidth:1.0];
     [callBtn.layer setBorderColor:([[UIColor whiteColor] CGColor])];
+    
+    NSDictionary *suite=[dictData objectForKey:@"suite"];
+    int suiteID=[[suite objectForKey:@"id"] intValue];
 
 	if(suiteID>0)
 	{
@@ -91,6 +66,11 @@
         [self showHudWithMessage:@""];
         RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
 		[req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
+        
+        url = [NSString stringWithFormat:@"%@/areas/%@",[delegate.mallData objectForKey:@"resource_url"],[suite objectForKey:@"area_id"]];
+        RequestAgent *reqArea = [[RequestAgent alloc] init];
+        [reqArea requestToServer:self callBackSelector:@selector(responseDataForArea:) errorSelector:@selector(errorCallback:) Url:url];
+        
 
 	}
     
@@ -105,23 +85,24 @@
 //    [self setDefaultThumbnail];
     
 	labelName.text=[dictData objectForKey:@"name"];
-//	textDescription.text=[dictData objectForKey:@"description"];
     
-//    NSString* desription = [dictData objectForKeyWithNullCheck:@"description"];
-//    
-//    desription = [desription stringByReplacingOccurrencesOfString:@"<p>" withString:@""];
-//    desription = [desription stringByReplacingOccurrencesOfString:@"</p>" withString:@""];
+    if ([dictData objectForKeyWithNullCheck:@"description"]) {
+        NSString *description = [dictData[@"description"] stringByReplacingOccurrencesOfString:@"<p>" withString:@"<p style='color:white'>"];
+        [webView_ loadHTMLString:description baseURL:nil];
+        
+        [webView_ setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.0]];
+        [webView_ setOpaque:NO];
+    }
     
-//    textDescription.text = desription;
+    else{
+        [descriptionView setHidden:YES];
+    }
     
     
 
-    NSString *description = [dictData[@"description"] stringByReplacingOccurrencesOfString:@"<p>" withString:@"<p style='color:white'>"];
-    [webView loadHTMLString:description baseURL:nil];
-    
-    [webView setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.0]];
-    [webView setOpaque:NO];
+   
 	
+    NSLog(@"%f",webView_.scrollView.contentSize.height);
 
     
 
@@ -161,6 +142,20 @@
 //- (void)dealloc {
 //    [super dealloc];
 //}
+
+#pragma mark - web view delegate
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    
+    
+    if (webView_.scrollView.contentSize.height > webView_.frame.size.height) {
+        CGRect webFrame = webView_.frame;
+        
+        [webView_ setFrame:CGRectMake(webFrame.origin.x, webFrame.origin.y, webFrame.size.width, webView_.scrollView.contentSize.height)];
+    }
+    
+    
+}
 
 #pragma mark Action methods
 
@@ -220,7 +215,10 @@
 - (IBAction)callBtnCall:(id)sender {
     
 
-    NSString *url = [NSString stringWithFormat:@"tel:%@", dictData[@"telephone"]];
+    
+    NSString* phoneNumber = dictData[@"telephone"];
+    phoneNumber = [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+    NSString *url = [NSString stringWithFormat:@"tel:%@", phoneNumber];
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:url]]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
@@ -256,15 +254,28 @@
 
 
 #pragma mark - send and response DATA
+
+-(void)responseDataForArea:(NSData*)receivedData{
+    
+    if (receivedData!=nil) {
+        NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];// autorelease];
+        NSDictionary *tmpDict=[jsonString JSONValue];
+        
+        if ([tmpDict[@"area"] objectForKeyWithNullCheck:@"name"]) {
+            locationInfoLabel.text = [tmpDict[@"area"] objectForKey:@"name"];
+            [locationInfoLabel setHidden:NO];
+
+        }
+        
+    }
+    
+}
 -(void)responseData:(NSData *)receivedData{
 
     [self hideHud];
 	if(receivedData!=nil){
-		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];// autorelease];
-        NSLog(@"kuldeep:::: dddddeeeeeeeellll  %@ ",[jsonString JSONValue]);
-        
-        
-		
+		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];
+
         
         NSDictionary *tmpDict=[jsonString JSONValue];
 		if(tmpDict && [tmpDict objectForKey:@"tenant"])
@@ -273,15 +284,12 @@
 			NSString *imageLink=[tmpInnerDict objectForKey:@"image"];
 			if([imageLink length]!=0)
 			{
-//				CGRect frame;
-//				frame.size.width=90;
-//				frame.size.height=90;
-//				frame.origin.x=10; frame.origin.y=10;	
+
 				AsyncImageView* thumbnailImage = [[AsyncImageView alloc] initWithFrame:image_thumbNail.frame] ;//autorelease];
 				NSURL *url=[NSURL URLWithString:imageLink];
 				[thumbnailImage loadImageFromURL:url delegate:self requestSelector:@selector(responseThumb_Image:)];				
 			}
-			else [self setDefaultThumbnail];
+			else [self hideLogoImageView];
 		}
 	}
     
@@ -304,16 +312,30 @@
         NSArray *tmparr=[jsonString JSONValue];
         int tenantID = [[dictData[@"suite"] objectForKey:@"tenant_id"] intValue];
         
+        int counter = 0;
         if (tmparr) {
             if (tmparr.count) {
                 for (NSDictionary *tmpDic in tmparr) {
                     NSDictionary* eventDic = tmpDic[@"event"];
                     if ([[eventDic objectForKeyWithNullCheck:@"tenant_id"] intValue] == tenantID) {
                         [eventsBtn setHidden:NO];
+                        counter++;
                     }
+                    
                 }
             }
         }
+        
+        if (counter>0) {
+            noEvents = NO;
+        }
+        else{
+            noEvents = YES;
+        }
+        
+        [self hideDealEventsView];
+       
+        
 
     }
 }
@@ -330,7 +352,8 @@
 		NSDictionary *suite=[dictData objectForKeyWithNullCheck:@"suite"];
         
         int tenantID = [[suite objectForKeyWithNullCheck:@"tenant_id"] intValue];
-        NSLog(@"kuldeep::::%d ",tenantID);
+
+        int counter = 0;
         if (tmparr) {
             if (tmparr.count) {
                 //                NSArray *array = [tmparr objectAtIndex:0];
@@ -340,11 +363,21 @@
                     if ([[dictDeal objectForKeyWithNullCheck:@"tenant_id"]intValue] == tenantID) {
                         showDealDictionary = dictDeal;
                         [dealBttn setHidden:NO];
+                        counter++;
                         break;
                     }
                 }
             }
         }
+        
+        if (counter>0) {
+            noDeals = NO;
+        }
+        else{
+            noDeals = YES;
+        }
+        
+        [self hideDealEventsView];
     }
 }
 -(void)errorCallback2:(NSError *)error
@@ -376,6 +409,44 @@
 	image_thumbNail.image=[UIImage imageNamed:@"shopingBag.png"];
 }
 
+
+#pragma mark Hide Funcs
+
+-(void)hideLogoImageView{
+    
+    [image_thumbNail setHidden:YES];
+    [image_thumbNail setUserInteractionEnabled:NO];
+    
+    float diff = -image_thumbNail.frame.size.height;
+    [callMapView setFrame:[self newFrameWithDiffPosY:diff existingFrame:callMapView.frame]];
+    [dealEventsView setFrame:[self newFrameWithDiffPosY:diff existingFrame:dealEventsView.frame]];
+    [locationView setFrame:[self newFrameWithDiffPosY:diff existingFrame:locationView.frame]];
+    [descriptionView setFrame:[self newFrameWithDiffPosY:diff existingFrame:descriptionView.frame]];
+    
+    
+    
+}
+
+-(void)hideDealEventsView{
+    
+    if (noDeals && noEvents) {
+        [dealEventsView setHidden:YES];
+        [dealEventsView setUserInteractionEnabled:NO];
+        
+        float diff = - dealEventsView.frame.size.height;
+        [locationView setFrame:[self newFrameWithDiffPosY:diff existingFrame:locationView.frame]];
+        [descriptionView setFrame:[self newFrameWithDiffPosY:diff existingFrame:descriptionView.frame]];
+    }
+    
+}
+
+-(CGRect)newFrameWithDiffPosY:(float)diff existingFrame:(CGRect)frame
+{
+    
+    CGRect newFrame = CGRectMake(frame.origin.x, frame.origin.y+diff, frame.size.width, frame.size.height);
+    return newFrame;
+    
+}
 
 
 @end
