@@ -200,7 +200,7 @@
 
 		cell.detailTextLabel.text=[tmpDict objectForKey:@"title"];
 		cell.textLabel.backgroundColor=[UIColor clearColor];
-		cell.textLabel.font=DETAIL_TEXT_FONT;
+		cell.textLabel.font=DETAIL_TEXT_FONT_BOLD;
 		cell.textLabel.textColor=LABEL_TEXT_COLOR;
 		
 		NSString *dateString=[NSString stringWithFormat:@"%@ - %@",[tmpDict objectForKey:@"startsAt"],[tmpDict objectForKey:@"endsAt"]];
