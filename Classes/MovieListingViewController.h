@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "PreitAppDelegate.h"
 
-//kk
 @interface MovieListingViewController : BaseViewController {
 	IBOutlet UITableView *tableMovie;
 	IBOutlet UIImageView *imageViewMovie;

@@ -200,12 +200,13 @@
 
 		cell.detailTextLabel.text=[tmpDict objectForKey:@"title"];
 		cell.textLabel.backgroundColor=[UIColor clearColor];
-		cell.textLabel.font=LABEL_TEXT_FONT;
+		cell.textLabel.font=DETAIL_TEXT_FONT;
 		cell.textLabel.textColor=LABEL_TEXT_COLOR;
 		
 		NSString *dateString=[NSString stringWithFormat:@"%@ - %@",[tmpDict objectForKey:@"startsAt"],[tmpDict objectForKey:@"endsAt"]];
 		cell.textLabel.text=dateString;
 		cell.detailTextLabel.textColor=DETAIL_TEXT_COLOR;
+        cell.detailTextLabel.font=LABEL_TEXT_FONT;
 		cell.detailTextLabel.backgroundColor=[UIColor clearColor];
 		
 		NSString *htmlString=[tmpDict objectForKey:@"content"];

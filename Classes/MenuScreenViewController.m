@@ -73,7 +73,6 @@
     
     [self.navigationController.navigationBar setTranslucent:YES];
     NSString *titleLabel = (NSString*)[appdelegate.mallData objectForKey:@"name"];
-//    [navigationLabel setText:titleLabel];
     NSLog(@"navigationLabelnavigationLabel ==%@",[appdelegate.mallData objectForKey:@"name"]);
 
      [self.navigationController setNavigationBarHidden:YES];
@@ -142,7 +141,6 @@
                      MOVIE,
                      JOB,
                      CONTACT_US,
-                     //SHOW_NEW_MALL,
                      nil];
     }else if (!appdelegate.isDinning){
         tableData = [[NSMutableArray alloc]initWithObjects:
@@ -160,7 +158,6 @@
                      MOVIE,
                      JOB,
                      CONTACT_US,
-                     //SHOW_NEW_MALL,
                      nil];
     }else if (!appdelegate.isMovie){
         tableData = [[NSMutableArray alloc]initWithObjects:
@@ -177,7 +174,6 @@
                      HOURS,
                      JOB,
                      CONTACT_US,
-                     //SHOW_NEW_MALL,
                      nil];
     }else{
         tableData = [[NSMutableArray alloc]initWithObjects:
@@ -192,7 +188,6 @@
                      PARKING,
                      HOURS,
                      JOB,
-                     //SHOW_NEW_MALL,
                      nil];
     }
     
@@ -223,15 +218,8 @@
         
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
         
-//       commented on sep 22,2015 Ali Bin Tariq Pure Logics
-//        UIImageView *view = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"back_icon1.png"]];
-//        [view setFrame:CGRectMake(0, 0, 8, 14)];
-//        cell.accessoryView = view;
         [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
-        
-      
-        
-	}
+  	}
     
     cell.textLabel.text = [tableData objectAtIndex:indexPath.row];
     cell.imageView.image = [self getImageForCell:cell.textLabel.text];
@@ -250,18 +238,13 @@
     NSString *str = [tableData objectAtIndex:indexPath.row];
     NSInteger count = _navController.viewControllers.count-1;
     if ([str isEqualToString:HOME]) {
-        //        @"HOME",
-        //        [appdelegate hideProductScreen:NO];
         
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[ProductSearchHome class]]) {
-//            ProductSearchHome *productVC = [[ProductSearchHome alloc] initWithNibName:@"ProductSearchHome" bundle:[NSBundle mainBundle]];
-//            _navController.viewControllers = @[productVC];
             
             [_navController popToRootViewControllerAnimated:YES];
         }
     }
     else if ([str isEqualToString:STORE]){
-        //        @"STORES",
         
 //CHM Start ibnetariq update store view and solve this issue
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[StoreSearchViewController class]]) {
@@ -273,28 +256,11 @@
             [_navController popToRootViewControllerAnimated:NO];
             [_navController pushViewController:directoryVC animated:NO];
             
-            
-            
-//            _navController.viewControllers = @[directoryVC];
-            
-            
-            /* StoreSearchViewController *screenShoppingindex=[[StoreSearchViewController alloc]initWithNibName:@"StoreSearchViewController" bundle:nil];
-             _navController.viewControllers = @[screenShoppingindex];*/
-            
-            
-          /*\  ShoppingViewController* shoppingVC = [[ShoppingViewController alloc] initWithNibName:@"CustomTable" bundle:[NSBundle mainBundle]];
-            
-            _navController.viewControllers = @[shoppingVC];*/
-            
-            
+
             
         }
-        
-        //        self.navigationItem.title=@"Back";
-        //        [self.navigationController pushViewController:screenShoppingindex animated:YES];
     }
     else if ([str isEqualToString:PRODUCTS]){
-        //        @"PRODUCTS",
         
 //#warning ibnetariq update products
         [self searchAction:nil];
@@ -312,7 +278,6 @@
             [_navController popToRootViewControllerAnimated:NO];
             [_navController pushViewController:viewCnt animated:NO];
         }
-        //        [self.navigationController pushViewController:viewCnt animated:YES];
         
     }
     else if([str isEqualToString:TRENDS]){
@@ -331,23 +296,15 @@
         [_navController popToRootViewControllerAnimated:NO];
         [_navController pushViewController:screenWebView animated:NO];
         
-//        _navController.viewControllers = @[screenWebView];
-        //        [self.navigationController pushViewController:screenWebView animated:YES];
-        
-        
-        
     }
     else if([str isEqualToString:EVENTS]){
         
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[EventsViewController class]]) {
             EventsViewController *viewCnt = [[EventsViewController alloc]initWithNibName:@"EventsViewController" bundle:nil];
-//            _navController.viewControllers = @[viewCnt];
             
             [_navController popToRootViewControllerAnimated:NO];
             [_navController pushViewController:viewCnt animated:NO];
         }
-        
-        //        [self.navigationController pushViewController:viewCnt animated:YES];
         
     }
     else if([str isEqualToString:DIRECTIONS]){
@@ -359,13 +316,11 @@
         
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[DirectionViewController class]]) {
             DirectionViewController *screenDirection=[[DirectionViewController alloc]initWithNibName:@"DirectionViewController" bundle:nil];
-//            _navController.viewControllers = @[screenDirection];
             
             [_navController popToRootViewControllerAnimated:NO];
             [_navController pushViewController:screenDirection animated:NO];
         }
         
-        //        [self.navigationController pushViewController:screenDirection animated:YES];
         
     }
     else if([str isEqualToString:MOVIE]){
@@ -377,12 +332,10 @@
         
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[MovieListingViewController class]]) {
             MovieListingViewController *screenMovieListing=[[MovieListingViewController alloc]initWithNibName:@"MovieListingViewController" bundle:nil];
-//            _navController.viewControllers = @[screenMovieListing];
             [_navController popToRootViewControllerAnimated:NO];
             [_navController pushViewController:screenMovieListing animated:NO];
             
         }
-        //        [self.navigationController pushViewController:screenMovieListing animated:YES];
         
     }
     else if([str isEqualToString:HOURS]){
@@ -393,7 +346,6 @@
             screenWebView.titleLabel.text = @"HOURS";
         });
         // Change google
-        // [[GAI sharedInstance].defaultTracker sendView:@"Hours"];
         [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:@"Hours"];
         
         // Send a screenview.
@@ -402,8 +354,6 @@
         
         [_navController popToRootViewControllerAnimated:NO];
         [_navController pushViewController:screenWebView animated:NO];
-//        _navController.viewControllers = @[screenWebView];
-        //        [self.navigationController pushViewController:screenWebView animated:YES];
         
     }
     else if([str isEqualToString:JOB]){
@@ -412,38 +362,17 @@
         
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
-        //[[GAI sharedInstance].defaultTracker sendView:@"Job Openings"];
         
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[JobsViewController class]]) {
             JobsViewController *screenJobs=[[JobsViewController alloc]initWithNibName:@"JobsViewController" bundle:nil];
             
             [_navController popToRootViewControllerAnimated:NO];
             [_navController pushViewController:screenJobs animated:NO];
-//            _navController.viewControllers = @[screenJobs];
         }
-        //        [self.navigationController pushViewController:screenJobs animated:YES];
         
     }
     else if ([str isEqualToString:SHOW_NEW_MALL]){
-        //        appdelegate.isOnForeGround = YES;
-        //        if (appdelegate.navController.viewControllers.count == 1) {
-        //            HomeScreen *screenHome=[[HomeScreen alloc]initWithNibName:@"HomeScreen" bundle:nil];
-        //            self.navigationItem.title=@"Back";
-        //            screenHome.isLocationEnabled = NO;
-        //            [appdelegate.navController pushViewController:screenHome animated:YES];
-        //        }else{
-        //            HomeScreen *homeView = ((HomeScreen *)[appdelegate.navController.viewControllers objectAtIndex:1]);
-        //
-        //            if (homeView.isLocationEnabled) {
-        //                homeView.isLocationEnabled = NO;
-        //                [homeView loadInitialView];
-        //            }
-        //
-        //        }
-        //        [appdelegate.tabBarController.view removeFromSuperview];     //Waseem Menu
-        //        [appdelegate.window addSubview:appdelegate.navController.view];
-        //
-        //        [appdelegate disableBeacon];
+
         
     }
     else if ([str isEqualToString:DEALS])
@@ -454,7 +383,6 @@
             
             [_navController popToRootViewControllerAnimated:NO];
             [_navController pushViewController:dealsVC animated:NO];
-//            _navController.viewControllers = @[salesVC];
         }
         
     }
@@ -470,9 +398,7 @@
             
             [_navController popToRootViewControllerAnimated:NO];
             [_navController pushViewController:screenContact animated:NO];
-//            _navController.viewControllers = @[screenContact];
         }
-        //        [self.navigationController pushViewController:screenContact animated:YES];
     }
     else if ([str isEqualToString:PARKING]){
         
@@ -481,9 +407,6 @@
             
             [_navController popToRootViewControllerAnimated:NO];
             [_navController pushViewController:parkScreen animated:NO];
-//            _navController.viewControllers = @[parkScreen];
-            
-            
         }
     }
     
@@ -546,23 +469,13 @@
 
 
 -(void)searchAction:(id)sender {
-    NSLog(@"searchAction");
-
-    
     
     NSInteger count = _navController.viewControllers.count - 1;
     if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[ProductListViewController class]]) {
         ProductListViewController *productListViewController = [[ProductListViewController alloc]initWithNibName:@"ProductListViewController copy" bundle:nil];
-        
-        
         [_navController popToRootViewControllerAnimated:NO];
         [_navController pushViewController:productListViewController animated:NO];
-//        _navController.viewControllers = @[productListViewController];
     }
-    
-    
-    //    [self.navigationItem setTitle:@"Back"];
-    //    [self.navigationController pushViewController:productListViewController animated:YES];
     
 }
 
