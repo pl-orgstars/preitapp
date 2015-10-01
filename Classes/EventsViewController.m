@@ -133,7 +133,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 	CGFloat height=60.0;
 	if(!isNoData){
-//		NSDictionary *tmpDict=[[tableData objectAtIndex:indexPath.row]objectForKey:@"event"];
         NSDictionary *tmpDict=tableData[indexPath.section][indexPath.row][@"event"];
 		CGSize constraint = CGSizeMake(200.0000, 20000.0f);
 		CGSize titlesize = [[tmpDict objectForKey:@"title"] sizeWithFont:[UIFont boldSystemFontOfSize:18] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
