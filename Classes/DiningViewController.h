@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomTable.h"
+#import "DirectoryTableViewCell.h"
 
 @interface DiningViewController : CustomTable {
 

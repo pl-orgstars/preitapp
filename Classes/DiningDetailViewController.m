@@ -36,7 +36,7 @@
 //	self.navigationItem.title=NSLocalizedString(@"Screen2.1",@"");
 	[self setNavigationTitle:NSLocalizedString(@"Screen2.1",@"") withBackButton:YES];
     
-	buttonLabel.text=@"Description of Restaurant";
+//	buttonLabel.text=@"Description of Restaurant";
 	
 	if(delegate.image2==nil)
 	{

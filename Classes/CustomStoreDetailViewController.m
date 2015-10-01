@@ -78,7 +78,7 @@
         [backBtn setHidden:YES];
     }
 	
-	[self setData];
+	
 }
 
 -(void)setData{
@@ -87,11 +87,19 @@
 	labelName.text=[dictData objectForKey:@"name"];
     
     if ([dictData objectForKeyWithNullCheck:@"description"]) {
-        NSString *description = [dictData[@"description"] stringByReplacingOccurrencesOfString:@"<p>" withString:@"<p style='color:white'>"];
-        [webView_ loadHTMLString:description baseURL:nil];
-        
-        [webView_ setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.0]];
-        [webView_ setOpaque:NO];
+        if (![dictData[@"description"] isEqualToString:@""]) {
+            NSString *description = [dictData[@"description"] stringByReplacingOccurrencesOfString:@"<p>" withString:@"<p style='color:white'>"];
+            
+            NSLog(@"%@",[NSURL URLWithString:delegate.mallData[@"website_url"]]);
+            [webView_ loadHTMLString:description baseURL:[NSURL URLWithString:delegate.mallData[@"website_url"]]];
+            [webView_ setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.0]];
+            [webView_ setOpaque:NO];
+        }
+        else {
+            [descriptionView setHidden:YES];
+
+        }
+     
     }
     
     else{
@@ -100,9 +108,7 @@
     
     
 
-   
 	
-    NSLog(@"%f",webView_.scrollView.contentSize.height);
 
     
 
@@ -147,12 +153,31 @@
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
     
+    [webView_.scrollView setScrollEnabled:NO];
     
     if (webView_.scrollView.contentSize.height > webView_.frame.size.height) {
         CGRect webFrame = webView_.frame;
         
         [webView_ setFrame:CGRectMake(webFrame.origin.x, webFrame.origin.y, webFrame.size.width, webView_.scrollView.contentSize.height)];
+        
+        
+        webFrame = webView_.frame;
+        if ((webFrame.origin.y + webFrame.size.height + descriptionView.frame.origin.y) > mainScroll.frame.size.height) {
+            float diff = (webFrame.origin.y + webFrame.size.height + descriptionView.frame.origin.y) - mainScroll.frame.size.height;
+            
+            CGSize scrollContent = mainScroll.frame.size;
+            
+            scrollContent.height = scrollContent.height + diff;
+            
+            [mainScroll setContentSize:scrollContent];
+            
+            [webView_.scrollView setScrollEnabled:NO];
+
+            
+        }
+        
     }
+    
     
     
 }
@@ -298,10 +323,7 @@
     [self showHudWithMessage:@""];
     RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
     [req requestToServer:self callBackSelector:@selector(responseDataForDeal:) errorSelector:@selector(errorCallback2:) Url:url];
-    
-    url=[NSString stringWithFormat:@"%@/events",[delegate.mallData objectForKey:@"resource_url"]];
-    RequestAgent *req1=[[RequestAgent alloc] init];
-    [req1 requestToServer:self callBackSelector:@selector(responseForEvents:) errorSelector:@selector(errorCallback2:) Url:url];
+
     
 }
 
@@ -334,10 +356,10 @@
         }
         
         [self hideDealEventsView];
-       
-        
 
     }
+    
+    [self setData];
 }
 
 -(void)responseDataForDeal:(NSData *)receivedData{
@@ -378,6 +400,11 @@
         }
         
         [self hideDealEventsView];
+        
+        
+        NSString* url=[NSString stringWithFormat:@"%@/events",[delegate.mallData objectForKey:@"resource_url"]];
+        RequestAgent *req1=[[RequestAgent alloc] init];
+        [req1 requestToServer:self callBackSelector:@selector(responseForEvents:) errorSelector:@selector(errorCallback2:) Url:url];
     }
 }
 -(void)errorCallback2:(NSError *)error
@@ -388,7 +415,7 @@
 -(void)errorCallback:(NSError *)error
 {
         [self hideHud];
-	[self setDefaultThumbnail];
+	[self hideLogoImageView];
 }
 
 -(void)responseThumb_Image:(NSData *)receivedData{
@@ -397,10 +424,10 @@
 		UIImage *image=[UIImage imageWithData:receivedData];
 		if([delegate checkImage:image])
 			image_thumbNail.image=image;
-		else [self setDefaultThumbnail];
+		else [self hideLogoImageView];
 			
 	}
-	else [self setDefaultThumbnail];
+	else [self hideLogoImageView];
 
 }
 

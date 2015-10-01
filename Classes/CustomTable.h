@@ -10,7 +10,7 @@
 #import "PreitAppDelegate.h"
 
 
-@interface CustomTable : SuperViewController {
+@interface CustomTable : SuperViewController  <UISearchBarDelegate>{
 	IBOutlet UITableView *tableCustom;
 	IBOutlet UIImageView *imageView;
 	int screenIndex;
@@ -21,6 +21,12 @@
 	NSString *apiString;
 	IBOutlet UIActivityIndicatorView *indicator_;
 	NSMutableArray *disclosureRow;
+    
+    
+    IBOutlet UISearchBar* searchBar_;
+    
+    NSArray* downloadedData;
+    
     
 }
 @property(nonatomic,retain) IBOutlet UILabel* titleLabel;
@@ -37,7 +43,6 @@
 
 -(void)setHeader;
 -(void)getData;
-- (CGFloat)tableView_:(UITableView *)tableView modified_heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)tableView_:(UITableView *)tableView modified_cellForRowAtIndexPath:(NSIndexPath *)indexPath cell:(UITableViewCell*)cell;
 - (void)tableView:(UITableView *)tableView modified_didSelectRowAtIndexPath:(NSIndexPath *)indexPath ;
 @end

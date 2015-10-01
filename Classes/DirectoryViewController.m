@@ -57,6 +57,7 @@
     
     UITextField *textField = [searchBar_ valueForKey:@"_searchField"];
     textField.clearButtonMode = UITextFieldViewModeNever;
+    searchBar_.delegate = self;
 
     
 // settings of filter table view
@@ -85,7 +86,7 @@
         [self getData];
     
     
-    searchBar_.delegate = self;
+   
     
     
 
@@ -169,13 +170,7 @@
         }
         
         NSDictionary *tmpDict;
-  /*
-        if (searchBar_.isFirstResponder) {
-            tmpDict=[searchedListContent objectAtIndex:indexPath.row];
-        }
-        else{
-            tmpDict=[listContent objectAtIndex:indexPath.row];
-        }*/
+
         
         tmpDict = [displayContent objectAtIndex:indexPath.row];
         
@@ -395,13 +390,7 @@
 
 #pragma mark - search bar methods
 
--(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
-    
-    [searchBar resignFirstResponder];
-    
-    
-    [tableView_ reloadData];
-}
+
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     

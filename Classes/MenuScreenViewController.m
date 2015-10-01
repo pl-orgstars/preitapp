@@ -382,7 +382,6 @@
         
     }
     else if ([str isEqualToString:SHOW_NEW_MALL]){
-
         
     }
     else if ([str isEqualToString:DEALS])

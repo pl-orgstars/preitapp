@@ -12,6 +12,7 @@
 #import "JSON.h"
 
 #import "ShoppingViewController.h"
+#import "DirectoryTableViewCell.h"
 
 @implementation CustomTable
 @synthesize tableCustom,imageView,delegate,screenIndex,tableData,heading,apiString,disclosureRow;
@@ -22,6 +23,7 @@
 	delegate=(PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
 
 	[self setHeader];
+    
 	tableCustom.backgroundColor = [UIColor clearColor];//[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.4];
 	tableCustom.separatorColor=[UIColor lightGrayColor];
 	if(!self.tableData)
@@ -36,6 +38,12 @@
 
 	[self getData];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload:) name:@"Reload" object:nil];
+    
+    
+    
+    UITextField *textField = [searchBar_ valueForKey:@"_searchField"];
+    textField.clearButtonMode = UITextFieldViewModeNever;
+    searchBar_.delegate = self;
 }
 
 
@@ -118,7 +126,7 @@
 	if(!isNoData)
 		height= [self tableView_:tableView modified_heightForRowAtIndexPath:indexPath];
 	
-	return height;	
+	return height;
 }
 
 - (CGFloat)tableView_:(UITableView *)tableView modified_heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -136,33 +144,53 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSString *cellIdentifier=isNoData?@"NoData":@"Cell";
-	UITableViewCell *cell;
-	
-	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-	if (cell == nil){
-        if ([cellIdentifier isEqualToString:@"Cell"])
-			cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-        else
-			cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-	}
-         if ([cellIdentifier isEqualToString:@"Cell"])
-	{
-		cell.textLabel.numberOfLines=0;
-		cell.textLabel.font=[UIFont systemFontOfSize:17];
-        cell.textLabel.textColor=LABEL_TEXT_COLOR;
-		cell.selectionStyle=UITableViewCellSelectionStyleGray;
-		[self tableView_:tableView modified_cellForRowAtIndexPath:indexPath cell:cell];	
-		
-	}else
-	{
-		cell.textLabel.text=@"No Result";		
-		cell.textLabel.textColor=LABEL_TEXT_COLOR;
-		cell.textLabel.backgroundColor=[UIColor clearColor];
-		cell.textLabel.textAlignment=UITextAlignmentCenter;
-	}
+   
+    UITableViewCell *cell;
     
-	return cell;	
+    if ([self.titleLabel.text isEqualToString:@"DINING"]) {
+        
+        DirectoryTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"directoryCell"];
+        
+        if (!cell) {
+            cell = [[NSBundle mainBundle] loadNibNamed:@"DirectoryTableViewCell" owner:self options:nil].firstObject;
+        }
+        
+        [self tableView_:tableView modified_cellForRowAtIndexPath:indexPath cell:cell];
+        
+        return cell;
+        
+        
+    }
+    
+    else{
+        
+        NSString *cellIdentifier=isNoData?@"NoData":@"Cell";
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil){
+            if ([cellIdentifier isEqualToString:@"Cell"])
+                cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+            else
+                cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+        if ([cellIdentifier isEqualToString:@"Cell"])
+        {
+            cell.textLabel.numberOfLines=0;
+            cell.textLabel.font=[UIFont systemFontOfSize:17];
+            cell.textLabel.textColor=LABEL_TEXT_COLOR;
+            cell.selectionStyle=UITableViewCellSelectionStyleGray;
+            [self tableView_:tableView modified_cellForRowAtIndexPath:indexPath cell:cell];
+            
+        }else
+        {
+            cell.textLabel.text=@"No Result";
+            cell.textLabel.textColor=LABEL_TEXT_COLOR;
+            cell.textLabel.backgroundColor=[UIColor clearColor];
+            cell.textLabel.textAlignment=UITextAlignmentCenter;
+        }
+    }
+    
+    return cell;	
 }
 
 - (void)tableView_:(UITableView *)tableView modified_cellForRowAtIndexPath:(NSIndexPath *)indexPath cell:(UITableViewCell*)cell
@@ -252,6 +280,9 @@
                tmpArray=[[[tmpArray objectAtIndex:0]objectForKey:@"tenant_category"]objectForKey:@"tenants" ];
 
 			[self.tableData addObjectsFromArray:tmpArray];
+            
+            downloadedData = [[NSArray alloc] initWithArray:tmpArray];
+            
 			
 		}
 		else
@@ -290,4 +321,71 @@
 {
 	[self getData];
 }
+
+
+#pragma mark search bar
+
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+
+}
+
+
+- (IBAction)searchBarClearBtn:(UIButton*)sender {
+
+    if (searchBar_.isFirstResponder) {
+        searchBar_.text = @"";
+        [searchBar_ resignFirstResponder];
+        [self filterContentForSearchText:@""];
+
+    }
+
+
+}
+
+
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    [self filterContentForSearchText:searchBar.text];
+}
+
+
+- (void)filterContentForSearchText:(NSString*)searchText
+{
+    /*
+     Update the filtered array based on the search text and scope.
+     */
+
+    [tableData removeAllObjects]; // First clear the filtered array.
+
+    /*
+     Search the main list for products whose type matches the scope (if selected) and whose name matches searchText; add items that match to the filtered array.
+     */
+
+
+
+        for (NSDictionary *dict in downloadedData)
+        {
+            
+            NSString *sTemp=[dict objectForKey:@"name"];
+
+            NSComparisonResult result = [sTemp compare:searchText options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [searchText length])];
+
+            if (result == NSOrderedSame)
+            {
+                [tableData addObject:dict];
+            }
+        }
+
+    [tableCustom reloadData];
+}
+
+
+
+
+/*
+- (void)dealloc {
+    [super dealloc];
+}*/
 @end
