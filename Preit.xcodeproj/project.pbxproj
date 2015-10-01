@@ -304,6 +304,8 @@
 		BD46BB8E1BB2C28A00FC5A43 /* appback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD46BB8C1BB2C28A00FC5A43 /* appback@2x.png */; };
 		BD46BB8F1BB2C28A00FC5A43 /* appback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD46BB8D1BB2C28A00FC5A43 /* appback@3x.png */; };
 		BD46BB911BB2CD1500FC5A43 /* searchfield-icon-clear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD46BB901BB2CD1500FC5A43 /* searchfield-icon-clear@2x.png */; };
+		BD598C711BBD0AE700E2232D /* WinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD598C6F1BBD0AE700E2232D /* WinViewController.m */; };
+		BD598C721BBD0AE700E2232D /* WinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD598C701BBD0AE700E2232D /* WinViewController.xib */; };
 		BD69FACA1BB0138A00E78744 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD69FAC71BB0138A00E78744 /* IIViewDeckController.m */; };
 		BD69FACB1BB0138A00E78744 /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD69FAC91BB0138A00E78744 /* IIWrapController.m */; };
 		BD69FACF1BB01E0D00E78744 /* SideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BD69FACE1BB01E0D00E78744 /* SideMenu.m */; };
@@ -799,6 +801,9 @@
 		BD46BB8C1BB2C28A00FC5A43 /* appback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appback@2x.png"; sourceTree = "<group>"; };
 		BD46BB8D1BB2C28A00FC5A43 /* appback@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appback@3x.png"; sourceTree = "<group>"; };
 		BD46BB901BB2CD1500FC5A43 /* searchfield-icon-clear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchfield-icon-clear@2x.png"; sourceTree = "<group>"; };
+		BD598C6E1BBD0AE700E2232D /* WinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinViewController.h; sourceTree = "<group>"; };
+		BD598C6F1BBD0AE700E2232D /* WinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinViewController.m; sourceTree = "<group>"; };
+		BD598C701BBD0AE700E2232D /* WinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WinViewController.xib; sourceTree = "<group>"; };
 		BD69FAC61BB0138A00E78744 /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
 		BD69FAC71BB0138A00E78744 /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
 		BD69FAC81BB0138A00E78744 /* IIWrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIWrapController.h; sourceTree = "<group>"; };
@@ -1500,6 +1505,7 @@
 		AE87D29C19370B1B00F5493D /* New Group */ = {
 			isa = PBXGroup;
 			children = (
+				BD598C6D1BBD0ABB00E2232D /* WIN Screen */,
 				BD46BB6C1BB28CAC00FC5A43 /* Directory Screen */,
 				AE93BCD01A6522BA0040AEB5 /* iBeacon */,
 				AE875A48193C8ACE0052901E /* MBProgressHUD.h */,
@@ -1732,6 +1738,16 @@
 				BD46BB841BB2ABD100FC5A43 /* directory-icon-list-phone@2x.png */,
 			);
 			name = "New Directory";
+			sourceTree = "<group>";
+		};
+		BD598C6D1BBD0ABB00E2232D /* WIN Screen */ = {
+			isa = PBXGroup;
+			children = (
+				BD598C6E1BBD0AE700E2232D /* WinViewController.h */,
+				BD598C6F1BBD0AE700E2232D /* WinViewController.m */,
+				BD598C701BBD0AE700E2232D /* WinViewController.xib */,
+			);
+			name = "WIN Screen";
 			sourceTree = "<group>";
 		};
 		BD69FAC51BB0136F00E78744 /* IIViewDeck */ = {
@@ -2286,6 +2302,7 @@
 				BD46BB7C1BB2AA3A00FC5A43 /* DirectoryTableViewCell.xib in Resources */,
 				AE87D2F5193765C100F5493D /* Record_icon.png in Resources */,
 				42A3AB1F15AC2C0500F5790B /* Send-list@2X.png in Resources */,
+				BD598C721BBD0AE700E2232D /* WinViewController.xib in Resources */,
 				42A3AB2015AC2C0500F5790B /* Sort@2X.png in Resources */,
 				BDCAF7381BB067F0009522E9 /* mainmenu-icon-productsearch@2x.png in Resources */,
 				42A3AB2115AC2C0500F5790B /* Store_search@2X.png in Resources */,
@@ -2473,6 +2490,7 @@
 				AE35CDB91A7245FE0008A54D /* Transmitter.m in Sources */,
 				AE753F7F193EFCF700D6F7B2 /* CustomWebViewController.m in Sources */,
 				AE87D2BA19370C3A00F5493D /* ParkScreenViewController.m in Sources */,
+				BD598C711BBD0AE700E2232D /* WinViewController.m in Sources */,
 				E2DFF2CE1241311D00F8687B /* SBJsonWriter.m in Sources */,
 				E2DFF2D1124131E800F8687B /* LoadingAgent.m in Sources */,
 				E2DFF380124142A200F8687B /* HomeScreen.m in Sources */,

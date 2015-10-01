@@ -20,7 +20,7 @@
                 <outlet property="labelName" destination="7" id="14"/>
                 <outlet property="textDescription" destination="6" id="13"/>
                 <outlet property="view" destination="1" id="3"/>
-                <outlet property="webView" destination="P7W-VZ-tBx" id="Xdo-S1-rtR"/>
+                <outlet property="webView_" destination="P7W-VZ-tBx" id="0sR-vR-dOs"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
