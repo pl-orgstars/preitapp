@@ -18,7 +18,11 @@
 	PreitAppDelegate *delegate;
 	NSDictionary *dictData;
 	BOOL flagScreen;
-	IBOutlet UILabel *labelDate;
+	IBOutlet UILabel *labelDateStart;
+    IBOutlet UILabel *labelDateEnd;
+    IBOutlet UILabel *labelMonthStart;
+    IBOutlet UILabel *labelMonthEnd;
+    
 	NSString *dateString;
 	NSURL *url_LinkClicked;
     

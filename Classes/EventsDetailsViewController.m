@@ -31,7 +31,8 @@
     
     return html;
 }
--(void)setTitleInWebView:(NSString *)title{
+-(void)setTitleInWebView:(NSString *)title
+{
     [titleWebView loadHTMLString:title baseURL:nil];
      NSString *yourHTMLSourceCodeString = [titleWebView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"];
     labelName.text = yourHTMLSourceCodeString;
@@ -41,12 +42,59 @@
     [super viewDidLoad];
 	
 	if(flagScreen){
-
+        NSLog(@"dictData %@",dictData);
         [self setTitleInWebView:[dictData objectForKey:@"title"]];
         
         [self setNavigationTitle:NSLocalizedString(@"Screen3.1",@"") withBackButton:YES];
 		
-		labelDate.text=[NSString stringWithFormat:@"%@ - %@",[dictData objectForKey:@"startsAt"],[dictData objectForKey:@"endsAt"]];
+//		labelDate.text=[NSString stringWithFormat:@"%@ - %@",[dictData objectForKey:@"startsAt"],[dictData objectForKey:@"endsAt"]];
+        
+        
+        
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+        
+        NSDate *startdate = [dateFormatter dateFromString:dictData[@"starts_at"]];
+        NSDate *enddate = [dateFormatter dateFromString:dictData[@"ends_at"]];
+
+        NSLog(@"startdate %@",startdate);
+        NSLog(@"enddate %@",enddate);
+        
+        [dateFormatter setDateFormat:@"MMM d"];
+        
+        NSString *strStartDate  = [dateFormatter stringFromDate:startdate];
+        NSString *strEndDate  = [dateFormatter stringFromDate:enddate];
+        
+        [dateFormatter setDateFormat:@"hh:mm a"];
+        NSString *strStartTime  = [dateFormatter stringFromDate:startdate];
+        NSString *strEndTime  = [dateFormatter stringFromDate:enddate];
+        
+        
+        CGSize textSize = [strStartTime sizeWithAttributes:@{NSFontAttributeName:[labelDateStart font]}];
+        
+        CGFloat strikeWidth = textSize.width;
+
+        labelDateStart.frame = CGRectMake(labelDateStart.frame.origin.x, labelDateStart.frame.origin.y,strikeWidth + 5 ,labelDateStart.frame.size.height);
+        labelDateEnd.frame = CGRectMake(strikeWidth + 15, labelDateEnd.frame.origin.y,labelDateEnd.frame.size.width ,labelDateEnd.frame.size.height);
+        labelMonthEnd.frame  =CGRectMake(strikeWidth + 25,labelMonthEnd.frame.origin.y,labelMonthEnd.frame.size.width ,labelMonthEnd.frame.size.height);
+        
+        labelDateEnd.text = [NSString stringWithFormat:@"- %@",strEndTime];
+        labelDateStart.text = strStartTime;
+        
+        labelMonthStart.text = strStartDate;
+        
+        
+        if ([dictData[@"start_date"] isEqualToString:dictData[@"end_date"]])
+        {
+            labelMonthEnd.text = @"";
+        }else
+        {
+            labelMonthEnd.text = strEndDate;
+        }
+        
+        
+        
 	}
     
 	else{
@@ -54,9 +102,23 @@
         [self setTitleInWebView:[dictData objectForKey:@"headline"]];
         
         [self setNavigationTitle:NSLocalizedString(@"Screen4.1",@"") withBackButton:YES];
+      
         
-		labelDate.text=[NSString stringWithFormat:@"%@ - %@",[dictData objectForKey:@"startsOn"],[dictData objectForKey:@"endsOn"]];
-		image_thumbNail.image=[UIImage imageNamed:@"dollar.png"];
+        labelMonthEnd.text = labelMonthStart.text = @"";
+        labelDateStart.text =dictData[@"startsOn"];
+        labelDateEnd.text =[NSString stringWithFormat:@"- %@",dictData[@"endsOn"]];
+        image_thumbNail.image=[UIImage imageNamed:@"dollar.png"];
+        
+        CGSize textSize = [labelDateStart.text sizeWithAttributes:@{NSFontAttributeName:[labelDateStart font]}];
+        
+        CGFloat strikeWidth = textSize.width;
+        
+        labelDateStart.frame = CGRectMake(labelDateStart.frame.origin.x, labelDateStart.frame.origin.y,strikeWidth + 5 ,labelDateStart.frame.size.height);
+        labelDateEnd.frame = CGRectMake(strikeWidth + 15, labelDateEnd.frame.origin.y,labelDateEnd.frame.size.width ,labelDateEnd.frame.size.height);
+//        labelMonthEnd.frame  =CGRectMake(strikeWidth + 25,labelMonthEnd.frame.origin.y,labelMonthEnd.frame.size.width ,labelMonthEnd.frame.size.height);
+        
+        
+        
 	}
 
 	NSString *htmlString=[dictData objectForKey:@"content"];
@@ -175,7 +237,8 @@
     }
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
     NSString *yourHTMLSourceCodeString = [titleWebView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"];
     labelName.text = yourHTMLSourceCodeString;
     headerLabel.text = yourHTMLSourceCodeString;
