@@ -18,6 +18,10 @@
 	NSDictionary *movieData;
 	IBOutlet UITextView *labelTiming;
 	PreitAppDelegate *delegate;
+    
+    IBOutlet UIActivityIndicatorView *activityIndicator;
+    
+    
 }
 @property(nonatomic,retain) NSDictionary *movieData;
 @end
