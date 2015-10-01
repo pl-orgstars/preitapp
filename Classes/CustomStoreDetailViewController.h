@@ -14,7 +14,6 @@
 //	IBOutlet UIImageView *image_Background;
 	IBOutlet UIImageView *image_thumbNail;
 	IBOutlet UILabel *labelName;
-	IBOutlet UILabel *buttonLabel;
 	IBOutlet UITextView *textDescription;
 	IBOutlet UIButton *buttonMap;
 	PreitAppDelegate *delegate;
@@ -39,6 +38,8 @@
     IBOutlet UIView* dealEventsView;
     IBOutlet UIView* locationView;
     IBOutlet UIView* descriptionView;
+    
+    IBOutlet UIScrollView* mainScroll;
     
     BOOL noEvents;
     BOOL noDeals;

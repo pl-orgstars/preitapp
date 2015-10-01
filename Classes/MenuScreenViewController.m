@@ -143,7 +143,6 @@
                      MOVIE,
                      JOB,
                      CONTACT_US,
-                     //SHOW_NEW_MALL,
                      nil];
     }else if (!appdelegate.isDinning){
         tableData = [[NSMutableArray alloc]initWithObjects:
@@ -161,7 +160,6 @@
                      MOVIE,
                      JOB,
                      CONTACT_US,
-                     //SHOW_NEW_MALL,
                      nil];
     }else if (!appdelegate.isMovie){
         tableData = [[NSMutableArray alloc]initWithObjects:
@@ -178,7 +176,6 @@
                      HOURS,
                      JOB,
                      CONTACT_US,
-                     //SHOW_NEW_MALL,
                      nil];
     }else{
         tableData = [[NSMutableArray alloc]initWithObjects:
@@ -193,7 +190,6 @@
                      PARKING,
                      HOURS,
                      JOB,
-                     //SHOW_NEW_MALL,
                      nil];
     }
     
@@ -433,25 +429,6 @@
         
     }
     else if ([str isEqualToString:SHOW_NEW_MALL]){
-        //        appdelegate.isOnForeGround = YES;
-        //        if (appdelegate.navController.viewControllers.count == 1) {
-        //            HomeScreen *screenHome=[[HomeScreen alloc]initWithNibName:@"HomeScreen" bundle:nil];
-        //            self.navigationItem.title=@"Back";
-        //            screenHome.isLocationEnabled = NO;
-        //            [appdelegate.navController pushViewController:screenHome animated:YES];
-        //        }else{
-        //            HomeScreen *homeView = ((HomeScreen *)[appdelegate.navController.viewControllers objectAtIndex:1]);
-        //
-        //            if (homeView.isLocationEnabled) {
-        //                homeView.isLocationEnabled = NO;
-        //                [homeView loadInitialView];
-        //            }
-        //
-        //        }
-        //        [appdelegate.tabBarController.view removeFromSuperview];     //Waseem Menu
-        //        [appdelegate.window addSubview:appdelegate.navController.view];
-        //
-        //        [appdelegate disableBeacon];
         
     }
     else if ([str isEqualToString:DEALS])

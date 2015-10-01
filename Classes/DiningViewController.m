@@ -9,6 +9,7 @@
 #import "DiningViewController.h"
 #import "AsyncImageView.h"
 #import "DiningDetailViewController.h"
+#import "JSBridgeViewController.h"
 
 @implementation DiningViewController
 
@@ -35,7 +36,7 @@
 	self.screenIndex=2;
     [super viewDidLoad];
 	
-	if(delegate.image2==[NSNull null] || delegate.image2==nil)
+	if(delegate.image2 == nil || delegate.image2==nil)
 	{
 		if(delegate.image3)
 			imageView.image=delegate.image3;
@@ -62,6 +63,16 @@
     self.titleLabel.text = @"DINING";
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateImage2:) name:@"updateDining_IMG" object:nil];
+    
+    
+    
+    if ([tableCustom respondsToSelector:@selector(setSeparatorInset:)]) {
+        [tableCustom setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([tableCustom respondsToSelector:@selector(setLayoutMargins:)]) {
+        [tableCustom setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -99,30 +110,46 @@
 //}
 
 - (CGFloat)tableView_:(UITableView *)tableView modified_heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-	NSDictionary *tmpDict=[self.tableData objectAtIndex:indexPath.row];
-	CGSize constraint = CGSizeMake(200.0000, 20000.0f);
-	CGSize titlesize = [[tmpDict objectForKey:@"name"] sizeWithFont:[UIFont boldSystemFontOfSize:25] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-	return (titlesize.height<60?65:(titlesize.height+30));	
+    return 44;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	return [self.tableData count];
 }
 
+
+
 - (void)tableView_:(UITableView *)tableView modified_cellForRowAtIndexPath:(NSIndexPath *)indexPath cell:(UITableViewCell*)cell {
-	NSDictionary *tmpDict=[self.tableData objectAtIndex:indexPath.row];
-	cell.textLabel.text=[tmpDict objectForKey:@"name"];	
-//	cell.textLabel.textColor=[UIColor whiteColor];
-	cell.textLabel.backgroundColor=[UIColor clearColor];
-	[cell.textLabel sizeToFit];
+  
     
-    UIImageView *view = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"back_icon1.png"]];
-    [view setFrame:CGRectMake(0, 0, 8, 14)];
-    cell.accessoryView = view;
-//	cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+    NSDictionary *tmpDict=[self.tableData objectAtIndex:indexPath.row];
+    
+    DirectoryTableViewCell* newCell;
+    
+    if (![cell.reuseIdentifier isEqualToString:@"directoryCell"]) {
+        newCell = [tableView dequeueReusableCellWithIdentifier:@"directoryCell"];
+        
+        if (!newCell) {
+            newCell = [[NSBundle mainBundle] loadNibNamed:@"DirectoryTableViewCell" owner:self options:nil].firstObject;
+        }
+
+    }
+    else{
+        
+        newCell = (DirectoryTableViewCell*)cell;
+    }
+    
+    newCell.titleLabel.text = tmpDict[@"name"];
+    
+    newCell.phoneBtn.tag = indexPath.row;
+    [newCell.phoneBtn addTarget:self action:@selector(cellPhoneAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    newCell.mapButton.tag = indexPath.row;
+    [newCell.mapButton addTarget:self action:@selector(cellMapAction:) forControlEvents:UIControlEventTouchUpInside];
+
 }
 
-- (void)tableView:(UITableView *)tableView modified_didSelectRowAtIndexPath:(NSIndexPath *)indexPath {	
+- (void)tableView:(UITableView *)tableView modified_didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	DiningDetailViewController *screenStoreDetail=[[DiningDetailViewController alloc]initWithNibName:@"CustomStoreDetailViewController" bundle:nil];
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -158,4 +185,41 @@
 	delegate.image2=[UIImage imageWithData:receivedData];
 	imageView.image=delegate.image2;
 }
+
+
+#pragma mark - Cell Button Actions
+
+- (IBAction)cellPhoneAction:(UIButton *)sender {
+    NSDictionary *tempDict = tableData[sender.tag];
+    
+    NSString* phoneNumber = tempDict[@"telephone"];
+    phoneNumber = [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+    NSString *url = [NSString stringWithFormat:@"tel:%@", phoneNumber];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:url]]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }
+    else {
+        NSLog(@"Error Calling");
+    }
+}
+
+- (IBAction)cellMapAction:(UIButton *)sender {
+    
+    
+    NSDictionary *dictData = [tableData objectAtIndex:sender.tag];
+    NSLog(@"Map==%@",dictData);
+    NSDictionary *suite=[dictData objectForKey:@"suite"];
+    int suiteID=[[suite objectForKey:@"id"] intValue];
+    if(suiteID>0)
+    {
+        JSBridgeViewController *screenMap=[[JSBridgeViewController alloc]initWithNibName:@"JSBridgeViewController" bundle:nil];
+        
+        screenMap.mapUrl=[NSString stringWithFormat:@"%@/areas/getarea?suit_id=%d",[delegate.mallData objectForKey:@"resource_url"],suiteID];
+        [self.navigationController pushViewController:screenMap animated:YES];
+        //				[screenMap release];
+    }
+    
+}
+
 @end
