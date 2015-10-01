@@ -317,7 +317,10 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     return YES;
 }
--(void)textViewDidBeginEditing:(UITextView *)textView{
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+    if ([textView.text isEqualToString:@"Save a text reminder"])
+        textView.text = @"";
+    
     [UIView animateWithDuration:0.2 animations:^{
         CGRect frame = self.view.frame;
         frame.origin.y = -180.0;

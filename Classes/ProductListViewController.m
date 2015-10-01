@@ -120,6 +120,12 @@
     // Do any additional setup after loading the view from its nib.
     
     page = 1;
+    
+    if (self.passedSearchString) {
+        productSearchBar.text = self.passedSearchString;
+        
+        [self searchBarSearchButtonClicked:productSearchBar];
+    }
 }
 
 

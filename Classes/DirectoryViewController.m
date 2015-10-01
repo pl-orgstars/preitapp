@@ -585,7 +585,10 @@
 
 - (IBAction)cellPhoneAction:(UIButton *)sender {
     NSDictionary *tempDict = displayContent[sender.tag];
-    NSString *url = [NSString stringWithFormat:@"tel:%@", tempDict[@"tenant"][@"telephone"]];
+    
+    NSString* phoneNumber = tempDict[@"tenant"][@"telephone"];
+    phoneNumber = [[phoneNumber componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+    NSString *url = [NSString stringWithFormat:@"tel:%@", phoneNumber];
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:url]]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
