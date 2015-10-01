@@ -18,30 +18,24 @@
     NSString *webViewURLString;
 }
 @synthesize urlString,htmlString,titleString,screenIndex,tmpdict;
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
- - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
- if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
- // Custom initialization
- }
- return self;
- }
- */
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
 
     
-	delegate=(PreitAppDelegate *)[[UIApplication sharedApplication] delegate];	
- 	NSLog(@"=====>%@",tmpdict);
+	delegate=(PreitAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    
+ 
 	[lab1 setHidden:TRUE];
 	[lab2 setHidden:TRUE];
 	[webView1 setHidden:TRUE];
     if (screenIndex == 50) {
         
         NSString *titleLabel = (NSString*)[delegate.mallData objectForKey:@"name"];
-        NSLog(@"delegate titleLabel ==%@",[delegate.mallData objectForKey:@"name"]);
+        NSLog(@"delegate titleLabel ==%@",(NSDictionary *)[delegate.mallData objectForKey:@"name"]);
         [self setNavigationTitle:titleLabel withBackButton:YES];
         [webView loadHTMLString:htmlString baseURL:nil];
     }else if(htmlString)
@@ -51,7 +45,6 @@
 		[lab1 setHidden:FALSE];
 		[lab2 setHidden:FALSE];
 		[webView1 setHidden:FALSE];
-//		self.navigationItem.title=titleString;
         
         [self setNavigationTitle:titleString withBackButton:YES];
 		NSLog(@"*************************************");
@@ -65,7 +58,6 @@
 	else if(screenIndex==12)
 	{
 		NSString *screenTitle=[NSString stringWithFormat:@"Screen%d",screenIndex];
-//		self.navigationItem.title=NSLocalizedString(screenTitle,"");
         [self setNavigationTitle:NSLocalizedString(screenTitle,"") withBackButton:YES];
         
 		NSString *apiString=[NSString stringWithFormat:@"API%d",screenIndex];
@@ -78,14 +70,9 @@
 	else if(screenIndex==9)
 	{
 	    [self setHeader];		
-//		NSString *apiString=@"API9";
-//		NSString *url=[NSString stringWithFormat:@"%@%@",[delegate.mallData objectForKey:@"resource_url"],NSLocalizedString(apiString,"")];
         
         NSString *urlStrings = [delegate.mallData objectForKey:@"website_url"];
         NSLog(@"urlsrtrrttr %@",urlStrings);
-        
-//        urlStrings = [[urlStrings componentsSeparatedByString:@"."] objectAtIndex:0];
-        
         urlStrings = [NSString stringWithFormat:@"%@%@",urlStrings,TRENDS_WEB_VIEW];
         NSLog(@"urlsrtrrttr %@",urlStrings);
         
@@ -94,9 +81,6 @@
         NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:urlStrings]];
         [webView loadRequest:req];
         
-//		RequestAgent *req=[[RequestAgent alloc] init];//autorelease];
-//		[req requestToServer:self callBackSelector:@selector(responseDataTrends:) errorSelector:@selector(errorCallback:) Url:urlStrings];
-//		[indicator startAnimating];
 	}
 	else 
 	{
@@ -135,7 +119,7 @@
 	{
 		imageView.image=delegate.image3;
 	}
-    
+    	NSLog(@"WebViewController =====>%@",self.titleLabel.text);
   
 }
 
@@ -144,13 +128,42 @@
 	[webView stopLoading];
 }
 
-/*
- // Override to allow orientations other than the default portrait orientation.
- - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
- // Return YES for supported orientations
- return (interfaceOrientation == UIInterfaceOrientationPortrait);
- }
- */
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    NSDate *todayDate = [NSDate date];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"EEEE"];
+    
+    NSString *strTodayDate = [dateFormatter stringFromDate:todayDate];
+    NSLog(@"strTodayDay %@",strTodayDate);
+    
+    
+    
+    
+    NSString *title=[NSString stringWithFormat:@"Screen%d",screenIndex];
+    title=NSLocalizedString(title,@"");
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *data2 = [defaults objectForKey:@"mallData"];
+    NSDictionary *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data2];
+
+    NSDictionary *strAllDays = arr[@"daily_hours_data"][@"daily_hours"];
+    NSLog(@"arr %@",strAllDays[[strTodayDate lowercaseString]]);
+    
+   
+    
+    arrayTable  = [NSMutableArray new];
+    
+   
+    
+    
+    
+ 
+
+}
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
@@ -166,9 +179,6 @@
 }
 
 
-//- (void)dealloc {
-//    [super dealloc];
-//}
 
 -(void)setHeader{
 	UILabel *titleLabel;
@@ -184,13 +194,10 @@
 	titleLabel.textAlignment=UITextAlignmentCenter;
 	titleLabel.backgroundColor=[UIColor clearColor];
 	[headerView addSubview:titleLabel];
-//	[titleLabel release];
 	titleLabel = nil;
 	titleLabel=[[UILabel alloc] initWithFrame:CGRectMake(0, 20, 200, 20)];
 	NSString *title=[NSString stringWithFormat:@"Screen%d",screenIndex];
 	title=NSLocalizedString(title,@"");
-	//	if(self.heading)
-	//		title=[NSString stringWithFormat:@"%@-%@",title,self.heading];
 	
 	titleLabel.text=title;
 	titleLabel.textColor=[UIColor whiteColor];
@@ -200,14 +207,12 @@
 	[headerView addSubview:titleLabel];
     
     
-//	[titleLabel release];
 	
 	self.navigationItem.titleView=headerView;
     [self setNavigationLeftBackButton];
     [self.navigationController.navigationBar setTranslucent:NO];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"backNavigation.png"] forBarMetrics:UIBarMetricsDefault];
 
-//	[headerView release];
 }
 
 #pragma mark Response methods
@@ -217,8 +222,6 @@
 	if(receivedData!=nil){
 		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding] ;//autorelease];
 		NSDictionary *tmpDict=[jsonString JSONValue];
-//		//NSLog(@"jsonString=========%@=============",jsonString);
-//		//NSLog(@"tmpArray==%@",tmpDict);
 		[self loadHtml:tmpDict];
 	}
 	else{
@@ -230,7 +233,7 @@
 	[indicator stopAnimating];
 
 	if(receivedData!=nil){
-		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];// autorelease];
+		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];
 		NSArray *tmpArray=[jsonString JSONValue];
 		if([tmpArray count]>0)
 		{
@@ -258,7 +261,6 @@
 
 -(void)errorCallback:(NSError *)error{
 	[indicator stopAnimating];
-//	//NSLog(@":::::::::::::Error::::::::::::::");
 	[delegate showAlert:@"Sorry there was some error.Please check your internet connection and try agian later." title:@"Message" buttontitle:@"Ok"];
 }
 
@@ -289,7 +291,6 @@
     
     webView.userInteractionEnabled=FALSE;
 	[indicator startAnimating];
-//	return YES;
     NSString *urlStrings = [delegate.mallData objectForKey:@"website_url"];
     if (self.screenIndex == 9) {
         if ([[[request URL]absoluteString]rangeOfString:urlStrings].location != NSNotFound) {
@@ -303,11 +304,7 @@
     
 }
 
-//- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-//	webView.userInteractionEnabled=FALSE;
-//	[indicator startAnimating];
-//	return YES;
-//}
+
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
 	webView.userInteractionEnabled=TRUE;
@@ -315,7 +312,6 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-	//[delegate showAlert:@"Sorry there was some error please try again later."  title:@"" buttontitle:@"Close"];
 	webView.userInteractionEnabled=TRUE;
 	[delegate showNetworkIndicator:NO];
 	[indicator stopAnimating];
@@ -340,12 +336,7 @@
 			htmlString=[tmpDict2 objectForKey:@"hours_of_operation"];
 		}
 			break;
-//		case 9:
-//		{
-//			NSDictionary *tmpDict3=[dict objectForKey:@"webpage"];
-//			htmlString=[tmpDict3 objectForKey:@"content"];
-//			
-//		}
+
 			break;
 		default:
 			break;
@@ -354,26 +345,25 @@
 
 }
 
--(void)responseData_Image:(NSData *)receivedData{
+-(void)responseData_Image:(NSData *)receivedData
+{
 	delegate.image3=[UIImage imageWithData:receivedData];
 	imageView.image=delegate.image3;
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"updateGeneral_IMG" object:nil];
-
 }
 
-- (IBAction)menuBtnCall:(id)sender {
+- (IBAction)menuBtnCall:(id)sender
+{
     self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
-    
 }
 
-- (IBAction)backBtnCall:(id)sender {
+- (IBAction)backBtnCall:(id)sender
+{
     if (webView.canGoBack)
         [webView goBack];
     else
         [self.navigationController popViewControllerAnimated:NO];
 }
-
-
 
 @end
 

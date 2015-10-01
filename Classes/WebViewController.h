@@ -22,6 +22,9 @@
 	int screenIndex;
 	IBOutlet UILabel *lab1,*lab2;
     
+    
+    NSMutableArray *arrayTable;
+    
 }
 
 

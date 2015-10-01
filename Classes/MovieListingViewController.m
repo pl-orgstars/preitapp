@@ -149,7 +149,7 @@
 		NSDictionary *tmpDict1=[[tmpDict objectForKey:@"movie"]objectForKey:@"movie" ];
 		NSString *titleString=[NSString stringWithFormat:@"%@ (%@)",[tmpDict1 objectForKey:@"title"],[tmpDict1 objectForKey:@"rating"]];
 		cell.textLabel.text=titleString;
-		cell.textLabel.numberOfLines=0;
+		cell.textLabel.numberOfLines=1;
 		cell.textLabel.font=  LABEL_TEXT_FONT;
 		cell.textLabel.textColor= LABEL_TEXT_COLOR;
 		cell.textLabel.backgroundColor=[UIColor clearColor];
@@ -175,8 +175,8 @@
 		else {
 			cell.detailTextLabel.text=@"";
 		}
-		cell.detailTextLabel.numberOfLines=0;
-        cell.detailTextLabel.font=  DETAIL_TEXT_FONT;
+		cell.detailTextLabel.numberOfLines=2;
+        cell.detailTextLabel.font=  DETAIL_TEXT_FONT_BOLD;
 		cell.detailTextLabel.textColor= DETAIL_TEXT_COLOR;
 		cell.detailTextLabel.backgroundColor=[UIColor clearColor];
         

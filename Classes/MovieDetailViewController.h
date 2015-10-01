@@ -10,14 +10,19 @@
 #import "PreitAppDelegate.h"
 
 
-@interface MovieDetailViewController : BaseViewController <UITextViewDelegate> {
+@interface MovieDetailViewController : BaseViewController <UITextViewDelegate,UITableViewDataSource,UITableViewDelegate> {
 	IBOutlet UIImageView *imageView;
 	IBOutlet UILabel *labelName;
 	IBOutlet UITextView *textViewDesc;
 	IBOutlet UILabel *labelType;
 	NSDictionary *movieData;
-	IBOutlet UITextView *labelTiming;
+//	IBOutlet UITextView *labelTiming;
 	PreitAppDelegate *delegate;
+    
+    
+    IBOutlet UITableView *tbleViewMain;
+    
+    NSMutableArray *arrayTable;
     
     IBOutlet UIActivityIndicatorView *activityIndicator;
     

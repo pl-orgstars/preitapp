@@ -29,9 +29,6 @@
 - (void)viewDidLoad
 {
 
-    NSLog(@"gggggggggggg %@,%@,%@",self.searchUrl,self.imageUrl,self.description);
-//    textView.text = self.searchUrl;
-//    [self.navigationController.navigationBar setDelegate:self];
     [super viewDidLoad];
     spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [spinner setHidesWhenStopped:YES];
@@ -41,14 +38,7 @@
     
     [self postToPinterest];
     
-    
-    
-//    UIButton *bttn = [Pinterest pinItButton];
-//    [bttn addTarget:self
-//                    action:@selector(pinIt:)
-//          forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:bttn];
-    // Do any additional setup after loading the view from its nib.
+
 }
 //- (void)pinIt:(id)sender
 //{

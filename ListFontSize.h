@@ -14,6 +14,7 @@
 #define LABEL_TEXT_COLOR [UIColor whiteColor]
 
 #define DETAIL_TEXT_FONT [UIFont systemFontOfSize:11]
+#define DETAIL_TEXT_FONT_BOLD [UIFont boldSystemFontOfSize:12]
 //#define DETAIL_TEXT_COLOR [UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1]
 #define DETAIL_TEXT_COLOR [UIColor whiteColor]
 
