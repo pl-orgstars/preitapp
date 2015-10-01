@@ -247,12 +247,12 @@
     }
     
     else if ([str isEqualToString:GIFT]){
-        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[WinViewController class]]) {
-            WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
-            
-            [_navController popToRootViewControllerAnimated:NO];
-            [_navController pushViewController:winVC animated:NO];
-        }
+//        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[WinViewController class]]) {
+//            WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
+//            
+//            [_navController popToRootViewControllerAnimated:NO];
+//            [_navController pushViewController:winVC animated:NO];
+//        }
     }
     else if ([str isEqualToString:STORE]){
         

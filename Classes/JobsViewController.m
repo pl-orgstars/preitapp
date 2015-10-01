@@ -199,6 +199,7 @@
 		WebViewController *screenWebView=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
 		screenWebView.htmlString=[tmpDict objectForKey:@"description"];
 		screenWebView.titleString=NSLocalizedString(@"Screen11.1",@"");
+        screenWebView.titleLabel.text= @"JOB OPENINGS";
 		screenWebView.tmpdict=tmpDict;
         ////kk
         NSString *str = [NSString stringWithFormat:@"Job opening-%@",[tmpDict valueForKey:@"title"]];

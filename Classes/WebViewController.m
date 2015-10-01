@@ -48,11 +48,14 @@
         
         [self setNavigationTitle:titleString withBackButton:YES];
 		NSLog(@"*************************************");
-		webView1.frame=CGRectMake(16,isIPhone5?346:280, 290, 70);
+//		webView1.frame=CGRectMake(16,isIPhone5?346:280, 290, 70);
 		[webView1 loadHTMLString:[tmpdict objectForKey:@"contact"] baseURL:nil];
 		
-		webView.frame=CGRectMake(16, 95, 290, 251);
+//		webView.frame=CGRectMake(16, 95, 290, 251);
 		[webView loadHTMLString:htmlString baseURL:nil];
+        
+        
+     
        
 	}
 	else if(screenIndex==12)
@@ -95,8 +98,8 @@
 	}
     
 
-	webView.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.2];
-	webView1.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.2];
+	webView.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.0];
+	webView1.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.0];
     [webView setOpaque:NO];
     [webView1 setOpaque:NO];
     
