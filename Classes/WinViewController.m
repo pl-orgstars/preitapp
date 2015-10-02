@@ -56,8 +56,7 @@
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     
     
-    NSLog(@"%@",[request URL]);
-    NSLog(@"%@",[[request URL]absoluteString]);
+  
     
     NSString* url = [[request URL]absoluteString];
     
@@ -81,7 +80,8 @@
         return YES;
     }
     
-    return YES;
+    
+    return NO;
 }
 
 
