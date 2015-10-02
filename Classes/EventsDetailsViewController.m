@@ -41,16 +41,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+    
+    NSLog(@"dictData %@",dictData);
 	if(flagScreen){
-        NSLog(@"dictData %@",dictData);
         [self setTitleInWebView:[dictData objectForKey:@"title"]];
         
         [self setNavigationTitle:NSLocalizedString(@"Screen3.1",@"") withBackButton:YES];
 		
-//		labelDate.text=[NSString stringWithFormat:@"%@ - %@",[dictData objectForKey:@"startsAt"],[dictData objectForKey:@"endsAt"]];
-        
-        
-        
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
@@ -58,8 +55,6 @@
         NSDate *startdate = [dateFormatter dateFromString:dictData[@"starts_at"]];
         NSDate *enddate = [dateFormatter dateFromString:dictData[@"ends_at"]];
 
-        NSLog(@"startdate %@",startdate);
-        NSLog(@"enddate %@",enddate);
         
         [dateFormatter setDateFormat:@"MMM d"];
         
@@ -115,8 +110,6 @@
         
         labelDateStart.frame = CGRectMake(labelDateStart.frame.origin.x, labelDateStart.frame.origin.y,strikeWidth + 5 ,labelDateStart.frame.size.height);
         labelDateEnd.frame = CGRectMake(strikeWidth + 15, labelDateEnd.frame.origin.y,labelDateEnd.frame.size.width ,labelDateEnd.frame.size.height);
-//        labelMonthEnd.frame  =CGRectMake(strikeWidth + 25,labelMonthEnd.frame.origin.y,labelMonthEnd.frame.size.width ,labelMonthEnd.frame.size.height);
-        
         
         
 	}
@@ -134,7 +127,9 @@
 	
 	delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
 	[webView loadHTMLString:htmlString baseURL:nil];
-	image_Background.image=delegate.image1;	
+    
+    
+	image_Background.image=delegate.image1;
 	
 	if(delegate.image3==nil)
 	{
@@ -158,7 +153,13 @@
 	
 	webView.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.2];
     [webView setOpaque:NO];
+    
+    
+    NSLog(@"webview %f",webView.scrollView.contentSize.height);
+
 }
+
+
 
 
 
@@ -237,10 +238,24 @@
     }
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+- (void)webViewDidFinishLoad:(UIWebView *)LocalwebView
 {
     NSString *yourHTMLSourceCodeString = [titleWebView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML"];
     labelName.text = yourHTMLSourceCodeString;
     headerLabel.text = yourHTMLSourceCodeString;
+    
+    if (webView.scrollView.contentSize.height > 210)
+    {
+        CGRect frameWebView =  webView.frame;
+        CGSize sizeWebView = frameWebView.size;
+        sizeWebView.height = webView.scrollView.contentSize.height;
+        frameWebView.size = sizeWebView;
+        webView.frame = frameWebView;
+        
+        
+        webView.scrollView.frame = CGRectMake(0,0, webView.frame.size.width, webView.frame.size.height);
+        
+        scrolviewMain.contentSize= CGSizeMake(0, webView.frame.origin.y + webView.frame.size.height);
+    }
 }
 @end

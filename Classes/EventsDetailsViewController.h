@@ -28,6 +28,8 @@
 	NSURL *url_LinkClicked;
     
     IBOutlet UIWebView *titleWebView;
+    
+    IBOutlet UIScrollView *scrolviewMain;
 }
 
 @property (nonatomic,retain)NSDictionary *dictData;
