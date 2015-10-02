@@ -26,7 +26,7 @@
     
     IBOutlet UIActivityIndicatorView *activityIndicator;
     
-    
+    IBOutlet UIScrollView *scroolView;
 }
 @property(nonatomic,retain) NSDictionary *movieData;
 @end

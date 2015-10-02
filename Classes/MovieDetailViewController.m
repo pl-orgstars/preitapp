@@ -22,23 +22,35 @@
 	NSDictionary *movieDetails=[[movieData objectForKey:@"movie"]objectForKey:@"movie"];
 	labelName.text=[movieDetails objectForKey:@"title"];
 	textViewDesc.text=[movieDetails objectForKey:@"description"];
-	labelType.text=[movieDetails objectForKey:@"genre"];	
+    
+    CGFloat fixedWidth = textViewDesc.frame.size.width;
+    CGSize newSize = [textViewDesc sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+    NSLog(@"new Size %f",newSize.height);
+    
+    if (newSize.height > 225)
+    {
+        CGRect textViewFrame =textViewDesc.frame;
+        CGSize textViewSize = textViewFrame.size;
+        textViewSize.height = newSize.height;
+        textViewFrame.size = textViewSize;
+        textViewDesc.frame = textViewFrame;
+        
+        [scroolView setContentSize:CGSizeMake(0, textViewDesc.frame.origin.y + textViewDesc.frame.size.height)];
+    }
+    
+    
+	labelType.text=[NSString stringWithFormat:@"%@(%@)",movieDetails[@"genre"],movieDetails[@"rating"]];
 
 	NSArray *tmpArray=[movieData objectForKey:@"timing"];
 	if([tmpArray count])
-	{
-		NSDictionary *movie_schedule_Dict_0=[[tmpArray objectAtIndex:0]objectForKey:@"movie_schedule_time"];
-		
-		NSString *timingString=[movie_schedule_Dict_0 objectForKey:@"scheduled_time"];
+	{		
         arrayTable = [NSMutableArray new];
         
 		for(int i=1;i<[tmpArray count];i++)
 		{
 			NSDictionary *movie_schedule_Dict=[[tmpArray objectAtIndex:i]objectForKey:@"movie_schedule_time"];
             [arrayTable addObject:[movie_schedule_Dict objectForKey:@"scheduled_time"]];
-//			timingString=[NSString stringWithFormat:@"%@ \n%@",timingString,[movie_schedule_Dict objectForKey:@"scheduled_time"]];
 		}
-//		labelTiming.text=timingString;
 	}
 	
     AsyncImageView* asyncImage = [[AsyncImageView alloc] initWithFrame:imageView.frame] ;
