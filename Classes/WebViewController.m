@@ -134,6 +134,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    arrayTable = [NSMutableArray new];
     
     NSDate *todayDate = [NSDate date];
     
@@ -143,9 +144,6 @@
     NSString *strTodayDate = [dateFormatter stringFromDate:todayDate];
     NSLog(@"strTodayDay %@",strTodayDate);
     
-    
-    
-    
     NSString *title=[NSString stringWithFormat:@"Screen%d",screenIndex];
     title=NSLocalizedString(title,@"");
     
@@ -154,18 +152,85 @@
     NSDictionary *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data2];
 
     NSDictionary *strAllDays = arr[@"daily_hours_data"][@"daily_hours"];
-    NSLog(@"arr %@",strAllDays[[strTodayDate lowercaseString]]);
+    NSLog(@"arr %@",strAllDays);
     
-   
+    NSArray *arrayAllDays = [dateFormatter weekdaySymbols];
+    NSLog(@"%@", arrayAllDays);
     
-    arrayTable  = [NSMutableArray new];
+    int findIndex = -1;
+    for (int index = 0; index < [arrayAllDays count]; index ++)
+    {
+        if ([[arrayAllDays[index] lowercaseString] isEqualToString:[strTodayDate lowercaseString]])
+        {
+            findIndex = index;
+            break;
+        }
+    }
     
-   
+    NSMutableArray *arraySortDummy = [NSMutableArray new];
+    
+    NSDateFormatter *dateFormatterNEw = [[NSDateFormatter alloc]init];
+    [dateFormatterNEw setDateFormat:@"MMMM d"];
+    
+    NSDateFormatter *dateFormatterDAy = [[NSDateFormatter alloc]init];
+    [dateFormatterDAy setDateFormat:@"d"];
     
     
-    
- 
+    for (int index = 0 ; index < [arrayAllDays count] ; index++)
+    {
+        
+        NSDate *now = [NSDate date];
+        int daysToAdd = 60*60*24* index + 1 ;
+        NSDate *newDate1 = [now dateByAddingTimeInterval:daysToAdd];
+        
+        
+        NSString *dayString = [dateFormatterDAy stringFromDate:newDate1];
+        NSMutableDictionary *dummydict = [NSMutableDictionary new];
 
+        
+        switch ([dayString intValue]) {
+            case 1:
+                [dummydict setValue:[NSString stringWithFormat:@"%@ - %@st:",arrayAllDays[findIndex],[dateFormatterNEw stringFromDate:newDate1]] forKey:@"day"];
+
+                break;
+                
+                case 2:
+                [dummydict setValue:[NSString stringWithFormat:@"%@ - %@nd:",arrayAllDays[findIndex],[dateFormatterNEw stringFromDate:newDate1]] forKey:@"day"];
+
+                break;
+                
+                case 3:
+                [dummydict setValue:[NSString stringWithFormat:@"%@ - %@rd:",arrayAllDays[findIndex],[dateFormatterNEw stringFromDate:newDate1]] forKey:@"day"];
+
+                break;
+                
+            default:
+                [dummydict setValue:[NSString stringWithFormat:@"%@ - %@th:",arrayAllDays[findIndex],[dateFormatterNEw stringFromDate:newDate1]] forKey:@"day"];
+
+                break;
+        }
+        
+        [dummydict setValue:strAllDays[[arrayAllDays[findIndex] lowercaseString]] forKey:@"time"];
+        
+        [arraySortDummy addObject:dummydict];
+        
+        findIndex ++ ;
+        if (findIndex >= [[strAllDays allKeys] count])
+            findIndex = 0;
+        
+    }
+    
+    NSLog(@"arraySortDummy %@",arraySortDummy);
+    [arrayTable addObjectsFromArray:arraySortDummy];
+    
+    
+    
+    tbleViewHours.hidden = TRUE;
+    NSLog(@"title %@",title);
+    if ([title isEqualToString:@"Hours"])
+        tbleViewHours.hidden = FALSE;
+    
+    [tbleViewHours reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -366,6 +431,68 @@
         [webView goBack];
     else
         [self.navigationController popViewControllerAnimated:NO];
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0)
+        return 70;
+    
+    return 50;
+    
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return arrayTable.count ;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *cellIdentifier =  @"Cell";
+    UITableViewCell *cell;
+    
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil)
+    {
+        if([cellIdentifier isEqualToString:@"Cell"])
+            cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier] ;
+        else
+            cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] ;
+    }
+
+    cell.textLabel.numberOfLines=0;
+    cell.textLabel.font=[UIFont boldSystemFontOfSize:25];
+    
+    cell.detailTextLabel.text = arrayTable[indexPath.row][@"time"];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
+    cell.textLabel.textColor = LABEL_TEXT_COLOR;
+    
+    cell.textLabel.text = arrayTable[indexPath.row][@"day"];
+    cell.detailTextLabel.textColor=DETAIL_TEXT_COLOR;
+    cell.detailTextLabel.font=LABEL_TEXT_FONT;
+    cell.detailTextLabel.backgroundColor=[UIColor clearColor];
+    
+    
+    cell.accessoryType =UITableViewCellAccessoryNone;
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    
+    UIView *bg = [[UIView alloc] initWithFrame:cell.frame];
+    bg.backgroundColor = [UIColor colorWithRed:175.0/255.0 green:220.0/255.0 blue:186.0/255.0 alpha:1];
+    
+    
+    if (indexPath.row == 0){
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+        cell.textLabel.textColor = cell.detailTextLabel.textColor = [UIColor blackColor];
+    }
+    else
+    cell.contentView.backgroundColor = [UIColor clearColor];
+    
+    
+    return cell;
 }
 
 @end

@@ -25,6 +25,9 @@
     
     NSMutableArray *arrayTable;
     
+    
+    IBOutlet UITableView *tbleViewHours;
+    
 }
 
 
