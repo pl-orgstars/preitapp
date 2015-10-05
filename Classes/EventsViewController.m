@@ -299,7 +299,8 @@
         //kuldeep edit
 		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];//autorelease];
 		NSMutableArray *tmpArray=[jsonString JSONValue];
-        
+        NSLog(@"receivedDatareceivedData %@",tmpArray);
+
 		[tableData removeAllObjects];
         [constArray removeAllObjects];
 		[disclosureRow removeAllObjects];

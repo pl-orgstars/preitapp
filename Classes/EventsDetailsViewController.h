@@ -24,6 +24,7 @@
     IBOutlet UILabel *labelMonthStart;
     IBOutlet UILabel *labelMonthEnd;
     
+    IBOutlet UILabel *labelTenantName;
 	NSString *dateString;
 	NSURL *url_LinkClicked;
     
@@ -31,6 +32,7 @@
     
     IBOutlet UIScrollView *scrolviewMain;
 }
+
 
 @property (nonatomic,retain)NSDictionary *dictData;
 @property (nonatomic)BOOL flagScreen;
