@@ -304,6 +304,14 @@
 		BD46BB8E1BB2C28A00FC5A43 /* appback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD46BB8C1BB2C28A00FC5A43 /* appback@2x.png */; };
 		BD46BB8F1BB2C28A00FC5A43 /* appback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD46BB8D1BB2C28A00FC5A43 /* appback@3x.png */; };
 		BD46BB911BB2CD1500FC5A43 /* searchfield-icon-clear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD46BB901BB2CD1500FC5A43 /* searchfield-icon-clear@2x.png */; };
+		BD4EF96A1BBE56380042EF6E /* JobsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4EF9681BBE56380042EF6E /* JobsDetailViewController.m */; };
+		BD4EF96B1BBE56380042EF6E /* JobsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD4EF9691BBE56380042EF6E /* JobsDetailViewController.xib */; };
+		BD4EF9701BBE7B180042EF6E /* ScanReceiptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4EF96E1BBE7B180042EF6E /* ScanReceiptViewController.m */; };
+		BD4EF9711BBE7B180042EF6E /* ScanReceiptViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD4EF96F1BBE7B180042EF6E /* ScanReceiptViewController.xib */; };
+		BD4EF9771BBEA09F0042EF6E /* productsearch-icon-list-add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4EF9731BBEA09F0042EF6E /* productsearch-icon-list-add@2x.png */; };
+		BD4EF9781BBEA09F0042EF6E /* productsearch-icon-list-email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4EF9741BBEA09F0042EF6E /* productsearch-icon-list-email@2x.png */; };
+		BD4EF9791BBEA09F0042EF6E /* productsearch-icon-list-remove@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4EF9751BBEA09F0042EF6E /* productsearch-icon-list-remove@2x.png */; };
+		BD4EF97A1BBEA09F0042EF6E /* productsearch-icon-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4EF9761BBEA09F0042EF6E /* productsearch-icon-list@2x.png */; };
 		BD598C711BBD0AE700E2232D /* WinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD598C6F1BBD0AE700E2232D /* WinViewController.m */; };
 		BD598C721BBD0AE700E2232D /* WinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD598C701BBD0AE700E2232D /* WinViewController.xib */; };
 		BD69FACA1BB0138A00E78744 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD69FAC71BB0138A00E78744 /* IIViewDeckController.m */; };
@@ -801,6 +809,16 @@
 		BD46BB8C1BB2C28A00FC5A43 /* appback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appback@2x.png"; sourceTree = "<group>"; };
 		BD46BB8D1BB2C28A00FC5A43 /* appback@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appback@3x.png"; sourceTree = "<group>"; };
 		BD46BB901BB2CD1500FC5A43 /* searchfield-icon-clear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchfield-icon-clear@2x.png"; sourceTree = "<group>"; };
+		BD4EF9671BBE56380042EF6E /* JobsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobsDetailViewController.h; sourceTree = "<group>"; };
+		BD4EF9681BBE56380042EF6E /* JobsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobsDetailViewController.m; sourceTree = "<group>"; };
+		BD4EF9691BBE56380042EF6E /* JobsDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobsDetailViewController.xib; sourceTree = "<group>"; };
+		BD4EF96D1BBE7B180042EF6E /* ScanReceiptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanReceiptViewController.h; sourceTree = "<group>"; };
+		BD4EF96E1BBE7B180042EF6E /* ScanReceiptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanReceiptViewController.m; sourceTree = "<group>"; };
+		BD4EF96F1BBE7B180042EF6E /* ScanReceiptViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanReceiptViewController.xib; sourceTree = "<group>"; };
+		BD4EF9731BBEA09F0042EF6E /* productsearch-icon-list-add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "productsearch-icon-list-add@2x.png"; sourceTree = "<group>"; };
+		BD4EF9741BBEA09F0042EF6E /* productsearch-icon-list-email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "productsearch-icon-list-email@2x.png"; sourceTree = "<group>"; };
+		BD4EF9751BBEA09F0042EF6E /* productsearch-icon-list-remove@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "productsearch-icon-list-remove@2x.png"; sourceTree = "<group>"; };
+		BD4EF9761BBEA09F0042EF6E /* productsearch-icon-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "productsearch-icon-list@2x.png"; sourceTree = "<group>"; };
 		BD598C6E1BBD0AE700E2232D /* WinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinViewController.h; sourceTree = "<group>"; };
 		BD598C6F1BBD0AE700E2232D /* WinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinViewController.m; sourceTree = "<group>"; };
 		BD598C701BBD0AE700E2232D /* WinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WinViewController.xib; sourceTree = "<group>"; };
@@ -1456,6 +1474,7 @@
 		AE87D293193707BD00F5493D /* New changes Images */ = {
 			isa = PBXGroup;
 			children = (
+				BD4EF9721BBEA0900042EF6E /* Product Search */,
 				BD3DAD801BBAB2B100933F74 /* SOCIAL */,
 				BD3223101BB99AF8002D5146 /* BackBlackThick@2x.png */,
 				BD24B6401BB93CB300066F15 /* BackWhite@2x.png */,
@@ -1505,6 +1524,8 @@
 		AE87D29C19370B1B00F5493D /* New Group */ = {
 			isa = PBXGroup;
 			children = (
+				BD4EF96C1BBE7ABF0042EF6E /* ScanReceipt Screen */,
+				BD4EF9661BBE560B0042EF6E /* Jobs Detail Screen */,
 				BD598C6D1BBD0ABB00E2232D /* WIN Screen */,
 				BD46BB6C1BB28CAC00FC5A43 /* Directory Screen */,
 				AE93BCD01A6522BA0040AEB5 /* iBeacon */,
@@ -1738,6 +1759,37 @@
 				BD46BB841BB2ABD100FC5A43 /* directory-icon-list-phone@2x.png */,
 			);
 			name = "New Directory";
+			sourceTree = "<group>";
+		};
+		BD4EF9661BBE560B0042EF6E /* Jobs Detail Screen */ = {
+			isa = PBXGroup;
+			children = (
+				BD4EF9671BBE56380042EF6E /* JobsDetailViewController.h */,
+				BD4EF9681BBE56380042EF6E /* JobsDetailViewController.m */,
+				BD4EF9691BBE56380042EF6E /* JobsDetailViewController.xib */,
+			);
+			name = "Jobs Detail Screen";
+			sourceTree = "<group>";
+		};
+		BD4EF96C1BBE7ABF0042EF6E /* ScanReceipt Screen */ = {
+			isa = PBXGroup;
+			children = (
+				BD4EF96D1BBE7B180042EF6E /* ScanReceiptViewController.h */,
+				BD4EF96E1BBE7B180042EF6E /* ScanReceiptViewController.m */,
+				BD4EF96F1BBE7B180042EF6E /* ScanReceiptViewController.xib */,
+			);
+			name = "ScanReceipt Screen";
+			sourceTree = "<group>";
+		};
+		BD4EF9721BBEA0900042EF6E /* Product Search */ = {
+			isa = PBXGroup;
+			children = (
+				BD4EF9731BBEA09F0042EF6E /* productsearch-icon-list-add@2x.png */,
+				BD4EF9741BBEA09F0042EF6E /* productsearch-icon-list-email@2x.png */,
+				BD4EF9751BBEA09F0042EF6E /* productsearch-icon-list-remove@2x.png */,
+				BD4EF9761BBEA09F0042EF6E /* productsearch-icon-list@2x.png */,
+			);
+			name = "Product Search";
 			sourceTree = "<group>";
 		};
 		BD598C6D1BBD0ABB00E2232D /* WIN Screen */ = {
@@ -2226,6 +2278,7 @@
 				AECE4801195A935600D1E5DB /* AppIcon29x29@2x.png in Resources */,
 				E2B0AF82127ACDE100B32837 /* select.png in Resources */,
 				E92DFA4B1B4415E7000B91B0 /* Images.xcassets in Resources */,
+				BD4EF9781BBEA09F0042EF6E /* productsearch-icon-list-email@2x.png in Resources */,
 				AE87D2AE19370BE400F5493D /* MenuScreenViewController.xib in Resources */,
 				E2B0AF83127ACDE100B32837 /* show.png in Resources */,
 				E2ABABBA1294FF7200240E75 /* dollar.png in Resources */,
@@ -2234,6 +2287,7 @@
 				E2ABABBC1294FF7200240E75 /* whineglass.png in Resources */,
 				AE87D2FA193765C100F5493D /* save_photo_icon@2x.png in Resources */,
 				BDAFA4A21BB05A5C00BE5CE8 /* menuback@3x.png in Resources */,
+				BD4EF9771BBEA09F0042EF6E /* productsearch-icon-list-add@2x.png in Resources */,
 				E28A3E4F12B746C4004368D5 /* JSBridgeViewController.xib in Resources */,
 				AE52215F196E59C100487C3A /* main_screen_icon2@2x.png in Resources */,
 				AE2B5F8C1A47EC4300460114 /* back_new.png in Resources */,
@@ -2258,6 +2312,7 @@
 				BD93E4791BB14BA300EB91F0 /* mainmenu-icon-contactus@2x.png in Resources */,
 				AE87D2F9193765C100F5493D /* save_photo_icon.png in Resources */,
 				AECE4808195A935600D1E5DB /* AppIcon60x60.png in Resources */,
+				BD4EF9791BBEA09F0042EF6E /* productsearch-icon-list-remove@2x.png in Resources */,
 				BD46BB851BB2ABD100FC5A43 /* directory-icon-detail-deals@2x.png in Resources */,
 				E2B6672E135411740082934C /* icon111.png in Resources */,
 				4246FA6A159DBBA600620E60 /* ShoppingListViewController.xib in Resources */,
@@ -2342,6 +2397,7 @@
 				42AEED0615AE8FC300BE5B35 /* close_btn.png in Resources */,
 				AE87D2D5193710F600F5493D /* Park_normal@2x.png in Resources */,
 				42AEED0715AE8FC300BE5B35 /* date.png in Resources */,
+				BD4EF97A1BBEA09F0042EF6E /* productsearch-icon-list@2x.png in Resources */,
 				42AEED0815AE8FC300BE5B35 /* edit.png in Resources */,
 				AECE4805195A935600D1E5DB /* AppIcon50x50@2x.png in Resources */,
 				AE875A46193C4B210052901E /* Launch_screen@2x.png in Resources */,
@@ -2408,6 +2464,7 @@
 				70FE3A9F173936D400E64874 /* Default-568h@2x.png in Resources */,
 				AECE480C195A935600D1E5DB /* AppIcon76x76.png in Resources */,
 				70FE3AA11739370200E64874 /* LocationViewController copy.xib in Resources */,
+				BD4EF96B1BBE56380042EF6E /* JobsDetailViewController.xib in Resources */,
 				70FE3AA3173941C700E64874 /* CustomTable copy.xib in Resources */,
 				BD46BB881BB2ABD100FC5A43 /* directory-icon-detail-menu@2x.png in Resources */,
 				AE87D2CD193710F600F5493D /* Deal_normal@2x.png in Resources */,
@@ -2430,6 +2487,7 @@
 				70D42EED173A44B900A9562E /* sharingbutton_pinterest_2x.png in Resources */,
 				AE2B5F921A47F18200460114 /* call_new.png in Resources */,
 				AE87D2921936F3C300F5493D /* 1234.png in Resources */,
+				BD4EF9711BBE7B180042EF6E /* ScanReceiptViewController.xib in Resources */,
 				AE87D2E21937407D00F5493D /* main_screen_icon@2x.png in Resources */,
 				70D42EEF173A53FF00A9562E /* box.png in Resources */,
 				70D42EF1173A545600A9562E /* box2.png in Resources */,
@@ -2556,6 +2614,7 @@
 				426BE5A415BD257600C843DB /* ProductSearchHome.m in Sources */,
 				70FE3A9617392CE600E64874 /* SuperViewController.m in Sources */,
 				70C23F40173B5C4500E509CC /* PinterestWebViewController.m in Sources */,
+				BD4EF9701BBE7B180042EF6E /* ScanReceiptViewController.m in Sources */,
 				70BF84AB1757173E003ACF3C /* ASIAuthenticationDialog.m in Sources */,
 				70BF84AD1757173E003ACF3C /* ASIDataDecompressor.m in Sources */,
 				BD46BB751BB28D6000FC5A43 /* DirectoryViewController.m in Sources */,
@@ -2566,6 +2625,7 @@
 				70BF84B11757173E003ACF3C /* ASIInputStream.m in Sources */,
 				70BF84B21757173E003ACF3C /* ASINetworkQueue.m in Sources */,
 				70BF84B6175719B2003ACF3C /* Reachability.m in Sources */,
+				BD4EF96A1BBE56380042EF6E /* JobsDetailViewController.m in Sources */,
 				612FBB5E1BB14FBA00D9E30C /* MFSideMenuShadow.m in Sources */,
 				AE87D2B419370C1700F5493D /* DealScreenViewController.m in Sources */,
 				AE0E511D1987B78D0065B9DA /* NSDictionary+Extension.m in Sources */,

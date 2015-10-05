@@ -10,6 +10,7 @@
 #import "RequestAgent.h"
 #import "WebViewController.h"
 #import "AsyncImageView.h"
+#import "JobsDetailViewController.h"
 #import "JSON.h"
 @implementation JobsViewController
 
@@ -196,11 +197,19 @@
 	if(!isNoData)
 	{
 		NSDictionary *tmpDict=[[tableData objectAtIndex:indexPath.row]objectForKey:@"job"];
-		WebViewController *screenWebView=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
+		/*WebViewController *screenWebView=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
 		screenWebView.htmlString=[tmpDict objectForKey:@"description"];
 		screenWebView.titleString=NSLocalizedString(@"Screen11.1",@"");
         screenWebView.titleLabel.text= @"JOB OPENINGS";
-		screenWebView.tmpdict=tmpDict;
+		screenWebView.tmpdict=tmpDict;*/
+        
+        JobsDetailViewController* jobsDetailVC = [[JobsDetailViewController alloc] initWithNibName:@"JobsDetailViewController" bundle:[NSBundle mainBundle]];
+        
+        jobsDetailVC.jobDetailDict = tmpDict;
+        
+        [self.navigationController pushViewController:jobsDetailVC animated:NO];
+        
+        
         ////kk
         NSString *str = [NSString stringWithFormat:@"Job opening-%@",[tmpDict valueForKey:@"title"]];
         // Change google
@@ -211,8 +220,8 @@
        // [[GAI sharedInstance].defaultTracker sendView:str];
         
         
-        NSLog(@"<<<<<<<<< %@,,,,,%@",screenWebView.htmlString,tmpDict);
-		[self.navigationController pushViewController:screenWebView animated:YES];
+//        NSLog(@"<<<<<<<<< %@,,,,,%@",screenWebView.htmlString,tmpDict);
+//		[self.navigationController pushViewController:screenWebView animated:YES];
 //		[screenWebView release];
 	}
 }

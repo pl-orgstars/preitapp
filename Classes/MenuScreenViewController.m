@@ -25,6 +25,7 @@
 #define HOURS @"HOURS"
 #define MOVIE @"MOVIE LISTINGS"
 #define JOB @"JOB OPENINGS"
+#define SCAN @"SCAN RECEIPT"
 
 #define SHOW_NEW_MALL @"Select a Different PREIT Property"
 
@@ -48,6 +49,7 @@
 #import "ContactUsViewController.h"
 #import "DirectoryViewController.h"
 #import "WinViewController.h"
+#import "ScanReceiptViewController.h"
 @interface MenuScreenViewController ()
 {
     NSMutableArray *tableData;
@@ -192,6 +194,8 @@
                      nil];
     }
     
+    [tableData addObject:SCAN];
+    
     [tableView_ reloadData];
     
 }
@@ -247,12 +251,12 @@
     }
     
     else if ([str isEqualToString:GIFT]){
-//        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[WinViewController class]]) {
-//            WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
-//            
-//            [_navController popToRootViewControllerAnimated:NO];
-//            [_navController pushViewController:winVC animated:NO];
-//        }
+        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[WinViewController class]]) {
+            WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
+            
+            [_navController popToRootViewControllerAnimated:NO];
+            [_navController pushViewController:winVC animated:NO];
+        }
     }
     else if ([str isEqualToString:STORE]){
         
@@ -417,6 +421,16 @@
             [_navController popToRootViewControllerAnimated:NO];
             [_navController pushViewController:parkScreen animated:NO];
         }
+    }
+    
+    else if ([str isEqualToString:SCAN]){
+        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[ScanReceiptViewController class]]) {
+            ScanReceiptViewController *scanVC = [[ScanReceiptViewController alloc] initWithNibName:@"ScanReceiptViewController" bundle:[NSBundle mainBundle]];
+            
+            [_navController popToRootViewControllerAnimated:NO];
+            [_navController pushViewController:scanVC animated:NO];
+        }
+        
     }
     
     self.menuContainerViewController.menuState = MFSideMenuStateClosed;

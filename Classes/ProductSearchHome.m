@@ -20,6 +20,10 @@
 #import "EventsViewController.h"
 #import "DealScreenViewController.h"
 #import "ProductListViewController.h"
+#import "WinViewController.h"
+
+
+#define VOTIGO_SIGNUP @"http://sqa02demopartner.votigo.com/fbsweeps/sweeps/testsweepsforred5-1"
 
 @implementation ProductSearchHome{
     NSString *webViewURLString;
@@ -245,9 +249,15 @@
             
             return YES;
         }
-        
-        
         return YES;
+    }
+    
+    else if ([[[request URL] absoluteString] rangeOfString:VOTIGO_SIGNUP].location != NSNotFound){
+        WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
+        
+        [self.navigationController pushViewController:winVC animated:NO];
+        
+        return NO;
     }
     
     if ([Utils checkForEmptyString:[[request URL]absoluteString]]) {
