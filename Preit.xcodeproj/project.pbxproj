@@ -329,7 +329,6 @@
 		BD93E48B1BB14CCA00EB91F0 /* mainmenu-icon-trends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD93E48A1BB14CCA00EB91F0 /* mainmenu-icon-trends@2x.png */; };
 		BD93E48E1BB15AAF00EB91F0 /* header-icon-close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD93E48D1BB15AAF00EB91F0 /* header-icon-close@2x.png */; };
 		BD93E4901BB15AC400EB91F0 /* header-icon-menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD93E48F1BB15AC400EB91F0 /* header-icon-menu@2x.png */; };
-		BDA3DEDC1BC2824900BA028A /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA3DEDB1BC2824900BA028A /* Base64.m */; };
 		BDA3DEF11BC2950C00BA028A /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA3DEDF1BC2950C00BA028A /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA3DEF21BC2950C00BA028A /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA3DEE11BC2950C00BA028A /* AFHTTPRequestOperationManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA3DEF31BC2950C00BA028A /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA3DEE31BC2950C00BA028A /* AFHTTPSessionManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -850,8 +849,6 @@
 		BD93E48A1BB14CCA00EB91F0 /* mainmenu-icon-trends@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mainmenu-icon-trends@2x.png"; sourceTree = "<group>"; };
 		BD93E48D1BB15AAF00EB91F0 /* header-icon-close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-icon-close@2x.png"; sourceTree = "<group>"; };
 		BD93E48F1BB15AC400EB91F0 /* header-icon-menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-icon-menu@2x.png"; sourceTree = "<group>"; };
-		BDA3DEDA1BC2824200BA028A /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = base64/Base64.h; sourceTree = "<group>"; };
-		BDA3DEDB1BC2824900BA028A /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base64.m; path = base64/Base64.m; sourceTree = "<group>"; };
 		BDA3DEDE1BC2950C00BA028A /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		BDA3DEDF1BC2950C00BA028A /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		BDA3DEE01BC2950C00BA028A /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -1978,8 +1975,6 @@
 		E28B4F561241E8EF007AC1D4 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				BDA3DEDA1BC2824200BA028A /* Base64.h */,
-				BDA3DEDB1BC2824900BA028A /* Base64.m */,
 				70BF84961757173E003ACF3C /* ASIRequest */,
 				E28B4F5F1241EF3C007AC1D4 /* RequestAgent.h */,
 				E28B4F601241EF3C007AC1D4 /* RequestAgent.m */,
@@ -2631,7 +2626,6 @@
 				E27D07B7125B6B9100709A42 /* SpecialsDetailsViewController.m in Sources */,
 				AE710DE119404D34003277B2 /* CameraImageViewController.m in Sources */,
 				E2AB25BF12660B1000F25111 /* ContactUsViewController.m in Sources */,
-				BDA3DEDC1BC2824900BA028A /* Base64.m in Sources */,
 				AE92AF6C193DEF970094FA4F /* UIViewController+NavigationMethods.m in Sources */,
 				E2AB25CD126611A900F25111 /* MovieListingViewController.m in Sources */,
 				E2BC23931266CF3E00E871E7 /* WebViewController.m in Sources */,
