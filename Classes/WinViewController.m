@@ -13,6 +13,7 @@
 #define VOTIGO_CONFIRM @"http://sqa02demopartner.votigo.com/fbsweeps/confirmation/testsweepsforred5-1"
 #define VOTIGO_MAIN @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/mainmenu"
 #define VOTIGO_SCAN_RECEIPT @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/scanreceipt"
+#define NOT_CHECKED_IN      @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
 
 @interface WinViewController ()
 
@@ -90,6 +91,9 @@
         return YES;
     }
     
+    else if ([url rangeOfString:NOT_CHECKED_IN].location != NSNotFound) {
+        return YES;
+    }
     
     return NO;
 }
@@ -103,18 +107,40 @@
 }
 
 - (IBAction)menuBtnCall:(id)sender {
-    
     self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
-    
 }
 
-
-/*
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+- (IBAction)testButtonAction:(id)sender {
+    double destinationLat = [delegate.mallData[@"location_lat"] doubleValue];
+    double destinationLong = [delegate.mallData[@"location_lng"] doubleValue];
+    
+    CLLocation *destination = [[CLLocation alloc] initWithLatitude:destinationLat longitude:destinationLong];
+    CLLocation *current = [[CLLocation alloc] initWithLatitude:delegate.latitude longitude:delegate.longitude];
+    
+    CLLocationDistance distance = [current distanceFromLocation:destination];
+    if (distance >= 1609) { //1609 meters = 1 mile
+        NSURL *url = [NSURL URLWithString:NOT_CHECKED_IN];
+        [winWebView loadRequest:[NSURLRequest requestWithURL:url]];
+    }
+    else {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager GET:@"http://smbaqa02code.votigo.com/api/signature.json?apiKey=fb86e75edb447a2b66e5db3471a26ddb" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *params = @{@"sweepuserentry_id" : [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"],
+                                     @"sweep_id" : @"7239",
+                                     @"mall_id" : delegate.mallData[@"id"],
+                                     @"signature" : responseObject[@"signature"],
+                                     @"action_type" : @"checkin"
+                                     };
+            [manager GET:@"http://smbaqa02code.votigo.com/sweeps/awardSweepentryCredits.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"Params = %@", responseObject);
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error = %@", error);
+            }];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error = %@", error);
+        }];
+    }
+}
 
 @end
