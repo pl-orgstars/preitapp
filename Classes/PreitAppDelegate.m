@@ -780,22 +780,22 @@ static NSString *const kAllowTracking = @"allowTracking";
 -(void)initilizeBeacon
 {
 
-    if (self.beaconRequestManager)
-        [self.beaconRequestManager removeRequestManager];
-    else{
-        self.beaconRequestManager = [[BeaconRequestManager alloc]init];
-        [self.beaconRequestManager addingNotification];
-    }
-    
-    
-    NSString *url=[NSString stringWithFormat:@"%@/ibeacons",[self.mallData objectForKey:@"resource_url"]];
-    
-
-    [self.beaconRequestManager intWithUrl:url];
+//    if (self.beaconRequestManager)
+//        [self.beaconRequestManager removeRequestManager];
+//    else{
+//        self.beaconRequestManager = [[BeaconRequestManager alloc]init];
+//        [self.beaconRequestManager addingNotification];
+//    }
+//    
+//    
+//    NSString *url=[NSString stringWithFormat:@"%@/ibeacons",[self.mallData objectForKey:@"resource_url"]];
+//    
+//
+//    [self.beaconRequestManager intWithUrl:url];
     
 }
 -(void)disableBeacon{
-    [self.beaconRequestManager removeRequestManager];
+//    [self.beaconRequestManager removeRequestManager];
 }
 
 -(void)showLocalNotificationsWithMessage:(NSString *)message :(NSString*)beacon_id{

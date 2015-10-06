@@ -11,10 +11,7 @@
 #import "GAI.h"
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
-//#define your_app_id_MICRO  @"2738e4deb2b6d34d0b7630f19e166f2ba94d4ec843de282db0213f23d09c7c38";
-//#define secret_MICRO @"0e21208592006d04af618e39c1e2b9724c87e5d6c3496014bd4b13e8267b6d80";
-//#define callback_MICRO @"comr5ipreit://authcode";
-#import "BeaconRequestManager.h"
+
 #import "MenuView.h"
 #import "MenuUpperview.h"
 
@@ -121,9 +118,6 @@
 @property(retain,nonatomic) NSArray* viewsArray;
 
 
--(void)initilizeBeacon;
--(void)disableBeacon;
-@property(nonatomic,retain)BeaconRequestManager *beaconRequestManager;
 -(void)showLocalNotificationsWithMessage:(NSString *)message :(NSString*)beacon_id;
 -(void)setlocationNotifcation;
 -(void)AddmenuView;

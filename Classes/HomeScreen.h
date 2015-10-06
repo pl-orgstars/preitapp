@@ -11,8 +11,6 @@
 #import "MyCLController.h"
 
 #import "BaseViewController.h"
-///kkk
-#import "BeaconRequestManager.h"
 
 @interface HomeScreen : BaseViewController<UITableViewDataSource,UITableViewDelegate> {
 	IBOutlet UITableView *tableHome;

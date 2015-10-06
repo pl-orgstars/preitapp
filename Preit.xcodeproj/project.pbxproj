@@ -167,9 +167,6 @@
 		AE2B5F931A47F18200460114 /* call_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE2B5F8F1A47F18200460114 /* call_new@2x.png */; };
 		AE2B5F941A47F18200460114 /* email_new.png in Resources */ = {isa = PBXBuildFile; fileRef = AE2B5F901A47F18200460114 /* email_new.png */; };
 		AE2B5F951A47F18200460114 /* email_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE2B5F911A47F18200460114 /* email_new@2x.png */; };
-		AE35CDB61A722B840008A54D /* BeaconModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE35CDB51A722B840008A54D /* BeaconModel.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		AE35CDB91A7245FE0008A54D /* Transmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = AE35CDB81A7245FE0008A54D /* Transmitter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		AE35CDBC1A724D510008A54D /* BeaconRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE35CDBB1A724D510008A54D /* BeaconRequestManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE407BAD193880AC009E0485 /* MapKitDragAndDropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE407BAB193880AC009E0485 /* MapKitDragAndDropViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		AE407BAE193880AC009E0485 /* MapKitDragAndDropViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE407BAC193880AC009E0485 /* MapKitDragAndDropViewController.xib */; };
 		AE407BB3193880D0009E0485 /* DDAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE407BB0193880D0009E0485 /* DDAnnotation.m */; };
@@ -261,10 +258,7 @@
 		AE93BCCB1A65227C0040AEB5 /* ContextLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE93BCC11A65227B0040AEB5 /* ContextLocation.framework */; };
 		AE93BCCC1A65227C0040AEB5 /* DataModels.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AE93BCC31A65227B0040AEB5 /* DataModels.bundle */; };
 		AE93BCCD1A65227C0040AEB5 /* ContextProfiling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE93BCC51A65227B0040AEB5 /* ContextProfiling.framework */; };
-		AE93BCCE1A65227C0040AEB5 /* FYX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE93BCC61A65227B0040AEB5 /* FYX.framework */; };
 		AE93BCCF1A65227C0040AEB5 /* NetworkServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE93BCC81A65227B0040AEB5 /* NetworkServices.framework */; };
-		AE93BCD41A6523010040AEB5 /* BeaconViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE93BCD21A6523010040AEB5 /* BeaconViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		AE93BCD51A6523010040AEB5 /* BeaconViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE93BCD31A6523010040AEB5 /* BeaconViewController.xib */; };
 		AECE4800195A935600D1E5DB /* AppIcon29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = AECE47F0195A935600D1E5DB /* AppIcon29x29.png */; };
 		AECE4801195A935600D1E5DB /* AppIcon29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AECE47F1195A935600D1E5DB /* AppIcon29x29@2x.png */; };
 		AECE4802195A935600D1E5DB /* AppIcon40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = AECE47F2195A935600D1E5DB /* AppIcon40x40.png */; };
@@ -435,6 +429,10 @@
 		E6E283931BAAEC67001736DF /* MenuNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6E283921BAAEC67001736DF /* MenuNew@2x.png */; };
 		E6E283981BAAF80A001736DF /* MenuUpperview.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E283961BAAF80A001736DF /* MenuUpperview.m */; };
 		E6E283991BAAF80A001736DF /* MenuUpperview.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6E283971BAAF80A001736DF /* MenuUpperview.xib */; };
+		E6FC27921BC2AAA000DB444B /* MNNotificationsManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FC27911BC2AAA000DB444B /* MNNotificationsManager.framework */; };
+		E6FC27941BC2AAB000DB444B /* MNProximityManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6FC27931BC2AAB000DB444B /* MNProximityManager.bundle */; };
+		E6FC27961BC2AAD200DB444B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FC27951BC2AAD200DB444B /* AdSupport.framework */; };
+		E6FC27981BC2AAF200DB444B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FC27971BC2AAF200DB444B /* CoreTelephony.framework */; };
 		E92DFA451B4412CB000B91B0 /* PREIT_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E92DFA441B4412CB000B91B0 /* PREIT_Logo.png */; };
 		E92DFA471B4412D3000B91B0 /* PREIT_Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E92DFA461B4412D3000B91B0 /* PREIT_Logo@2x.png */; };
 		E92DFA491B4412DA000B91B0 /* PREIT_Logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E92DFA481B4412DA000B91B0 /* PREIT_Logo@3x.png */; };
@@ -651,12 +649,6 @@
 		AE2B5F8F1A47F18200460114 /* call_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "call_new@2x.png"; sourceTree = "<group>"; };
 		AE2B5F901A47F18200460114 /* email_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_new.png; sourceTree = "<group>"; };
 		AE2B5F911A47F18200460114 /* email_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email_new@2x.png"; sourceTree = "<group>"; };
-		AE35CDB41A722B840008A54D /* BeaconModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconModel.h; sourceTree = "<group>"; };
-		AE35CDB51A722B840008A54D /* BeaconModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconModel.m; sourceTree = "<group>"; };
-		AE35CDB71A7245FE0008A54D /* Transmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transmitter.h; sourceTree = "<group>"; };
-		AE35CDB81A7245FE0008A54D /* Transmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transmitter.m; sourceTree = "<group>"; };
-		AE35CDBA1A724D510008A54D /* BeaconRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconRequestManager.h; sourceTree = "<group>"; };
-		AE35CDBB1A724D510008A54D /* BeaconRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconRequestManager.m; sourceTree = "<group>"; };
 		AE407BAA193880AC009E0485 /* MapKitDragAndDropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapKitDragAndDropViewController.h; sourceTree = "<group>"; };
 		AE407BAB193880AC009E0485 /* MapKitDragAndDropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapKitDragAndDropViewController.m; sourceTree = "<group>"; };
 		AE407BAC193880AC009E0485 /* MapKitDragAndDropViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapKitDragAndDropViewController.xib; sourceTree = "<group>"; };
@@ -762,11 +754,7 @@
 		AE93BCC11A65227B0040AEB5 /* ContextLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ContextLocation.framework; sourceTree = "<group>"; };
 		AE93BCC31A65227B0040AEB5 /* DataModels.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DataModels.bundle; sourceTree = "<group>"; };
 		AE93BCC51A65227B0040AEB5 /* ContextProfiling.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ContextProfiling.framework; sourceTree = "<group>"; };
-		AE93BCC61A65227B0040AEB5 /* FYX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FYX.framework; sourceTree = "<group>"; };
 		AE93BCC81A65227B0040AEB5 /* NetworkServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NetworkServices.framework; sourceTree = "<group>"; };
-		AE93BCD11A6523010040AEB5 /* BeaconViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconViewController.h; sourceTree = "<group>"; };
-		AE93BCD21A6523010040AEB5 /* BeaconViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconViewController.m; sourceTree = "<group>"; };
-		AE93BCD31A6523010040AEB5 /* BeaconViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BeaconViewController.xib; sourceTree = "<group>"; };
 		AEB8481219666859004B6A81 /* ListFontSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListFontSize.h; sourceTree = "<group>"; };
 		AECE47F0195A935600D1E5DB /* AppIcon29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon29x29.png; sourceTree = "<group>"; };
 		AECE47F1195A935600D1E5DB /* AppIcon29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon29x29@2x.png"; sourceTree = "<group>"; };
@@ -992,6 +980,10 @@
 		E6E283951BAAF80A001736DF /* MenuUpperview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuUpperview.h; path = MenuView/Waseem/ViewDeck/MenuUpperview.h; sourceTree = "<group>"; };
 		E6E283961BAAF80A001736DF /* MenuUpperview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuUpperview.m; path = MenuView/Waseem/ViewDeck/MenuUpperview.m; sourceTree = "<group>"; };
 		E6E283971BAAF80A001736DF /* MenuUpperview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MenuUpperview.xib; path = MenuView/Waseem/ViewDeck/MenuUpperview.xib; sourceTree = "<group>"; };
+		E6FC27911BC2AAA000DB444B /* MNNotificationsManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MNNotificationsManager.framework; sourceTree = "<group>"; };
+		E6FC27931BC2AAB000DB444B /* MNProximityManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MNProximityManager.bundle; sourceTree = "<group>"; };
+		E6FC27951BC2AAD200DB444B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		E6FC27971BC2AAF200DB444B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		E92DFA441B4412CB000B91B0 /* PREIT_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PREIT_Logo.png; sourceTree = "<group>"; };
 		E92DFA461B4412D3000B91B0 /* PREIT_Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PREIT_Logo@2x.png"; sourceTree = "<group>"; };
 		E92DFA481B4412DA000B91B0 /* PREIT_Logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PREIT_Logo@3x.png"; sourceTree = "<group>"; };
@@ -1005,17 +997,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6FC27981BC2AAF200DB444B /* CoreTelephony.framework in Frameworks */,
+				AE93BCB71A651EC50040AEB5 /* CoreBluetooth.framework in Frameworks */,
+				70BF84BA17571B37003ACF3C /* MobileCoreServices.framework in Frameworks */,
+				E6FC27961BC2AAD200DB444B /* AdSupport.framework in Frameworks */,
+				E6FC27921BC2AAA000DB444B /* MNNotificationsManager.framework in Frameworks */,
 				70BF84BE17571C37003ACF3C /* libsqlite3.0.dylib in Frameworks */,
 				8CE9BF151AC95F3700C89A46 /* libGoogleAnalyticsServices.a in Frameworks */,
 				AE93BCBB1A651F400040AEB5 /* Security.framework in Frameworks */,
 				AE93BCCF1A65227C0040AEB5 /* NetworkServices.framework in Frameworks */,
 				AE93BCB91A651F2A0040AEB5 /* libz.dylib in Frameworks */,
 				7003D6DB170961B20031D69D /* CoreData.framework in Frameworks */,
-				AE93BCB71A651EC50040AEB5 /* CoreBluetooth.framework in Frameworks */,
 				AE8BAA77193853360019B44F /* AVFoundation.framework in Frameworks */,
 				AE93BCCB1A65227C0040AEB5 /* ContextLocation.framework in Frameworks */,
 				70BF84BC17571C03003ACF3C /* libz.1.2.5.dylib in Frameworks */,
-				70BF84BA17571B37003ACF3C /* MobileCoreServices.framework in Frameworks */,
 				AE93BCCD1A65227C0040AEB5 /* ContextProfiling.framework in Frameworks */,
 				70BF84B817571B23003ACF3C /* CFNetwork.framework in Frameworks */,
 				AE93BCCA1A65227B0040AEB5 /* ContextCore.framework in Frameworks */,
@@ -1024,7 +1019,6 @@
 				70D607E61737BD310084CFC9 /* Twitter.framework in Frameworks */,
 				7003D6D9170961940031D69D /* SystemConfiguration.framework in Frameworks */,
 				427ABA3515AB02DD0079FDC3 /* libsqlite3.dylib in Frameworks */,
-				AE93BCCE1A65227C0040AEB5 /* FYX.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -1160,13 +1154,15 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E6FC27971BC2AAF200DB444B /* CoreTelephony.framework */,
+				E6FC27951BC2AAD200DB444B /* AdSupport.framework */,
+				E6FC27901BC2AAA000DB444B /* MNNotificationsManager */,
 				BD69FAC51BB0136F00E78744 /* IIViewDeck */,
 				8CE9BF141AC95F3700C89A46 /* libGoogleAnalyticsServices.a */,
 				AE93BCBC1A65227B0040AEB5 /* Common.embeddedframework */,
 				AE93BCBE1A65227B0040AEB5 /* ContextCore.embeddedframework */,
 				AE93BCC01A65227B0040AEB5 /* ContextLocation.embeddedframework */,
 				AE93BCC41A65227B0040AEB5 /* ContextProfiling.embeddedframework */,
-				AE93BCC61A65227B0040AEB5 /* FYX.framework */,
 				AE93BCC71A65227B0040AEB5 /* NetworkServices.embeddedframework */,
 				AE93BCBA1A651F400040AEB5 /* Security.framework */,
 				AE93BCB81A651F2A0040AEB5 /* libz.dylib */,
@@ -1431,19 +1427,6 @@
 			name = "Utils Classes";
 			sourceTree = "<group>";
 		};
-		AE35CDB31A722B200008A54D /* ModelClass */ = {
-			isa = PBXGroup;
-			children = (
-				AE35CDB71A7245FE0008A54D /* Transmitter.h */,
-				AE35CDB81A7245FE0008A54D /* Transmitter.m */,
-				AE35CDB41A722B840008A54D /* BeaconModel.h */,
-				AE35CDB51A722B840008A54D /* BeaconModel.m */,
-				AE35CDBA1A724D510008A54D /* BeaconRequestManager.h */,
-				AE35CDBB1A724D510008A54D /* BeaconRequestManager.m */,
-			);
-			name = ModelClass;
-			sourceTree = "<group>";
-		};
 		AE875A41193C4B0F0052901E /* Launch */ = {
 			isa = PBXGroup;
 			children = (
@@ -1528,7 +1511,6 @@
 				BD4EF9661BBE560B0042EF6E /* Jobs Detail Screen */,
 				BD598C6D1BBD0ABB00E2232D /* WIN Screen */,
 				BD46BB6C1BB28CAC00FC5A43 /* Directory Screen */,
-				AE93BCD01A6522BA0040AEB5 /* iBeacon */,
 				AE875A48193C8ACE0052901E /* MBProgressHUD.h */,
 				AE875A49193C8ACE0052901E /* MBProgressHUD.m */,
 				AE87D2B619370C2500F5493D /* ParkScreen */,
@@ -1679,17 +1661,6 @@
 				AE93BCC81A65227B0040AEB5 /* NetworkServices.framework */,
 			);
 			path = NetworkServices.embeddedframework;
-			sourceTree = "<group>";
-		};
-		AE93BCD01A6522BA0040AEB5 /* iBeacon */ = {
-			isa = PBXGroup;
-			children = (
-				AE35CDB31A722B200008A54D /* ModelClass */,
-				AE93BCD11A6523010040AEB5 /* BeaconViewController.h */,
-				AE93BCD21A6523010040AEB5 /* BeaconViewController.m */,
-				AE93BCD31A6523010040AEB5 /* BeaconViewController.xib */,
-			);
-			name = iBeacon;
 			sourceTree = "<group>";
 		};
 		AECE47EF195A934200D1E5DB /* AppIcons */ = {
@@ -2135,6 +2106,15 @@
 			name = "Menu Upper View";
 			sourceTree = "<group>";
 		};
+		E6FC27901BC2AAA000DB444B /* MNNotificationsManager */ = {
+			isa = PBXGroup;
+			children = (
+				E6FC27931BC2AAB000DB444B /* MNProximityManager.bundle */,
+				E6FC27911BC2AAA000DB444B /* MNNotificationsManager.framework */,
+			);
+			path = MNNotificationsManager;
+			sourceTree = "<group>";
+		};
 		E92DFA431B4412BE000B91B0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -2454,7 +2434,6 @@
 				1B379A2A15BD58FC00F7DC9A /* more_info@2X.png in Resources */,
 				1B379A2B15BD58FC00F7DC9A /* text.png in Resources */,
 				AE2B5F951A47F18200460114 /* email_new@2x.png in Resources */,
-				AE93BCD51A6523010040AEB5 /* BeaconViewController.xib in Resources */,
 				1B379A2C15BD58FC00F7DC9A /* text@2X.png in Resources */,
 				1B379A2D15BD58FC00F7DC9A /* use_product_search.png in Resources */,
 				1B379A2E15BD58FC00F7DC9A /* use_product_search@2X.png in Resources */,
@@ -2486,6 +2465,7 @@
 				AE753F80193EFCF700D6F7B2 /* CustomWebViewController.xib in Resources */,
 				70D42EED173A44B900A9562E /* sharingbutton_pinterest_2x.png in Resources */,
 				AE2B5F921A47F18200460114 /* call_new.png in Resources */,
+				E6FC27941BC2AAB000DB444B /* MNProximityManager.bundle in Resources */,
 				AE87D2921936F3C300F5493D /* 1234.png in Resources */,
 				BD4EF9711BBE7B180042EF6E /* ScanReceiptViewController.xib in Resources */,
 				AE87D2E21937407D00F5493D /* main_screen_icon@2x.png in Resources */,
@@ -2536,7 +2516,6 @@
 				70BF84BF17571D6B003ACF3C /* ASIDataCompressor.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				AE407BAD193880AC009E0485 /* MapKitDragAndDropViewController.m in Sources */,
-				AE35CDB61A722B840008A54D /* BeaconModel.m in Sources */,
 				1D3623260D0F684500981E51 /* PreitAppDelegate.m in Sources */,
 				E2DFF14012410C3100F8687B /* NavigationRotateController.m in Sources */,
 				E2DFF2C91241311D00F8687B /* NSObject+SBJSON.m in Sources */,
@@ -2545,7 +2524,6 @@
 				BD46BB7B1BB2AA3A00FC5A43 /* DirectoryTableViewCell.m in Sources */,
 				E2DFF2CC1241311D00F8687B /* SBJsonBase.m in Sources */,
 				E2DFF2CD1241311D00F8687B /* SBJsonParser.m in Sources */,
-				AE35CDB91A7245FE0008A54D /* Transmitter.m in Sources */,
 				AE753F7F193EFCF700D6F7B2 /* CustomWebViewController.m in Sources */,
 				AE87D2BA19370C3A00F5493D /* ParkScreenViewController.m in Sources */,
 				BD598C711BBD0AE700E2232D /* WinViewController.m in Sources */,
@@ -2577,7 +2555,6 @@
 				E2DF372A1268279800A38543 /* DiningViewController.m in Sources */,
 				BD69FACB1BB0138A00E78744 /* IIWrapController.m in Sources */,
 				E2AFBBC5126C1C0400F84431 /* SelectMonthViewController.m in Sources */,
-				AE93BCD41A6523010040AEB5 /* BeaconViewController.m in Sources */,
 				E2880B09126C603C007B9D71 /* JobsViewController.m in Sources */,
 				E2B70A53126EE8B9006D2142 /* MyCLController.m in Sources */,
 				E2B70AFC126F0E04006D2142 /* LocationViewController.m in Sources */,
@@ -2599,7 +2576,6 @@
 				E6E283791BAABDCD001736DF /* MenuView.m in Sources */,
 				E292B50F1324E8A9000A77A6 /* OverlayViewController.m in Sources */,
 				E2DA547313251D790010CB48 /* StoreSearchViewController.m in Sources */,
-				AE35CDBC1A724D510008A54D /* BeaconRequestManager.m in Sources */,
 				4246FA69159DBBA600620E60 /* ShoppingListViewController.m in Sources */,
 				4246FA71159DC2E500620E60 /* ProductListView.m in Sources */,
 				4246FA75159DC33C00620E60 /* Product.m in Sources */,
@@ -2657,6 +2633,7 @@
 					"$(PROJECT_DIR)/ContextProfiling.embeddedframework",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/NetworkServices.embeddedframework",
+					"$(PROJECT_DIR)/MNNotificationsManager",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2672,6 +2649,7 @@
 					"\"$(SRCROOT)/GoogleAnalyticsServicesiOS_3.10\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1d46f217-036d-409b-bc8f-b5c73698ff76";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1d46f217-036d-409b-bc8f-b5c73698ff76";
@@ -2700,6 +2678,7 @@
 					"$(PROJECT_DIR)/ContextProfiling.embeddedframework",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/NetworkServices.embeddedframework",
+					"$(PROJECT_DIR)/MNNotificationsManager",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Preit_Prefix.pch;
@@ -2712,6 +2691,7 @@
 					"\"$(SRCROOT)/Library\"",
 					"\"$(SRCROOT)/GoogleAnalyticsServicesiOS_3.10\"",
 				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.r5i.preitTJ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9a14a316-d22f-4a46-99ad-3d4c2e683daa";

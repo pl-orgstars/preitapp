@@ -46,7 +46,6 @@
         }
         
         NSLog(@"tmpArray==%@",tmpArray);
-        //		[self.tableData removeAllObjects];
         beaconArray = [NSMutableArray arrayWithArray:tmpArray];
         [self updatingBeacondata];
         [self initilizeBeacon];
@@ -86,7 +85,6 @@
     __block NSString *iden;
     [beacon initilizeBeaconWithCallBack:^(BOOL hasdata, NSString *identifier) {
         iden=identifier;
-   // [self showMesage:identifier title:@"identifier"];
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:identifier forKey:@"identifier"];
         
         [[NSNotificationCenter defaultCenter]
@@ -99,7 +97,6 @@
 
 - (void) receiveTestNotification:(NSNotification *) notification
 {
-    // [notification name] should always be @"TestNotification"
     // unless you use this method for observation of other notifications
     // as well.
     NSDictionary *userInfo = notification.userInfo;
@@ -133,15 +130,10 @@
         [beacon removeBeaconSearch];
     }
     [beaconArray removeAllObjects];
-//    beacon = nil;
-//    beaconArray = nil;
 }
 -(void)showMesage:(NSString *)message title:(NSString *)title{
     
     PreitAppDelegate *delegate = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
-//    
-//    
-    //[delegate setlocationNotifcation];
     [delegate showLocalNotificationsWithMessage:message :title];
     
 }

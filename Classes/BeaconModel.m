@@ -17,15 +17,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BeaconModel);
 
 - (void)dealloc
 {
-    
     [visitManager stop];
-//    [super dealloc];
 }
 -(void)removeBeaconSearch{
     [visitManager stop];
     [transmitters removeAllObjects];
-//    visitManager = nil;
-//    transmitters = nil;
 }
 -(void)initilizeBeaconWithCallBack:(void(^)(BOOL hasdata, NSString *identifier))completion{
     callback = completion;
@@ -49,9 +45,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BeaconModel);
 - (void)serviceStarted
 {
     NSLog(@"#########Proximity service started!");
-//    [Utils showAlertMesage:@"Proximity service started"];
-//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"fyx_service_started_key"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
     
     transmitters = [NSMutableArray new];
     
@@ -62,14 +55,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BeaconModel);
     
     visitManager.delegate = self;
     [visitManager startWithOptions:@{
-//                                     FYXVisitOptionDepartureIntervalInSecondsKey:@15,
                                      FYXVisitOptionBackgroundDepartureIntervalInSecondsKey:@300,
                                           FYXSightingOptionSignalStrengthWindowKey:@(FYXSightingOptionSignalStrengthWindowNone)}];
     
     
 
-//FYXVisitOptionBackgroundDepartureIntervalInSecondsKey
-//  FYXSightingOptionSignalStrengthWindowLarge
 }
 
 - (void)startServiceFailed:(NSError *)error
@@ -90,69 +80,34 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BeaconModel);
 
 - (void)didArrive:(FYXVisit *)visit
 {
-//    callback(YES,@"yyyyyy");
-//    return;
-
-    
     NSLog(@"############## didArrive: %@", visit);
 }
 
 - (void)didDepart:(FYXVisit *)visit
 {
-//    [Utils showAlertMesage:visit.transmitter.identifier];
     NSLog(@"############## didDepart: %@", visit);
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
-//                                                    message:@"departing from here"
-//                                                   delegate:nil
-//                                          cancelButtonTitle:@"OK"
-//                                          otherButtonTitles:nil];
-//    [alert show];
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"currentMall"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-//    callback(YES,@"yyyyyy");
     if ([[UIApplication sharedApplication]applicationState] == UIApplicationStateBackground) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             Transmitter *transmitter = [[transmitters filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"identifier == %@", visit.transmitter.identifier]] firstObject];
-//            callback(YES,@"yyyyyy");
             
             [transmitters removeObject:transmitter];
         });
     }else{
         Transmitter *transmitter = [[transmitters filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"identifier == %@", visit.transmitter.identifier]] firstObject];
-//        callback(YES,@"yyyyyy");
         
         [transmitters removeObject:transmitter];
     }
     
-    
-//
-
-    
-//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[transmitters indexOfObject:transmitter] inSection:0];
-//    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-//    if ([cell isKindOfClass:[SightingsTableViewCell class]])
-//    {
-//        [self grayOutSightingsCell:((SightingsTableViewCell*)cell)];
-//    }
 }
 
 - (void)receivedSighting:(FYXVisit *)visit updateTime:(NSDate *)updateTime RSSI:(NSNumber *)RSSI
 {
     
-//    PreitAppDelegate *delegate = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
-//    [delegate showLocalNotificationsWithMessage:@"yyyyyyyeeehaaa receivedSighting"];
-//    [Utils showAlertMesage:@"yyyyyyyeeehaaa"];
-//    callback(YES,visit.transmitter.identifier);
-//    return;
-    
     if ([[UIApplication sharedApplication]applicationState] == UIApplicationStateBackground) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            //
-            
-            //    callback(YES,@"kkkkk");
-            //    return;
-            
             
             NSLog(@"############## receivedSighting: %@", visit);
             
@@ -173,16 +128,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BeaconModel);
                 
                 callback(YES,visit.transmitter.identifier);
                 
-                
-                
-                //        [tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.transmitters.count - 1 inSection:0]]
-                //                              withRowAnimation:UITableViewRowAnimationAutomatic];
-                
-                //        if ([self.transmitters count] == 1)
-                //        {
-                //            [self hideNoTransmittersView];
-                //        }
-            }
+              }
             
             transmitter.lastSighted = updateTime;
             
@@ -192,17 +138,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BeaconModel);
                 transmitter.rssi = RSSI;
                 transmitter.batteryLevel = visit.transmitter.battery;
                 transmitter.temperature = visit.transmitter.temperature;
-                
-                //        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[transmitters indexOfObject:transmitter] inSection:0];
-                
-                //        SightingsTableViewCell *cell = (SightingsTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-                
-                //        [self updateSightingsCell:cell withTransmitter:transmitter];
+  
             }
             
         });
     }else{
-        NSLog(@"############## receivedSighting: %@", visit);
         
         Transmitter *transmitter = [[transmitters filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"identifier == %@", visit.transmitter.identifier]] firstObject];
         if (transmitter == nil)
@@ -220,17 +160,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BeaconModel);
             
             
             callback(YES,visit.transmitter.identifier);
-            
-            
-            
-            //        [tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.transmitters.count - 1 inSection:0]]
-            //                              withRowAnimation:UITableViewRowAnimationAutomatic];
-            
-            //        if ([self.transmitters count] == 1)
-            //        {
-            //            [self hideNoTransmittersView];
-            //        }
-        }
+          }
         
         transmitter.lastSighted = updateTime;
         
@@ -240,12 +170,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BeaconModel);
             transmitter.rssi = RSSI;
             transmitter.batteryLevel = visit.transmitter.battery;
             transmitter.temperature = visit.transmitter.temperature;
-            
-            //        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[transmitters indexOfObject:transmitter] inSection:0];
-            
-            //        SightingsTableViewCell *cell = (SightingsTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-            
-            //        [self updateSightingsCell:cell withTransmitter:transmitter];
         }
     }
 }

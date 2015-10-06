@@ -31,8 +31,6 @@
 
 #define CONTACT_US @"CONTACT US"
 
-//#define BEACON @"BEACON"
-#import "BeaconViewController.h"
 
 #import "EventsViewController.h"
 #import "DiningViewController.h"
@@ -40,7 +38,6 @@
 #import "MovieListingViewController.h"
 #import "JobsViewController.h"
 #import "LocationViewController.h"
-//#import "SalesViewController.h"
 #import "DealScreenViewController.h"
 #import "ShoppingViewController.h"
 #import "MenuScreenViewController.h"
@@ -75,8 +72,7 @@
     [super viewWillAppear:animated];
     
     [self.navigationController.navigationBar setTranslucent:YES];
-    NSString *titleLabel = (NSString*)[appdelegate.mallData objectForKey:@"name"];
-    NSLog(@"navigationLabelnavigationLabel ==%@",[appdelegate.mallData objectForKey:@"name"]);
+
 
      [self.navigationController setNavigationBarHidden:YES];
     [self.navigationController.navigationBar setTranslucent:NO];
@@ -91,9 +87,10 @@
     [self.navigationController setNavigationBarHidden:NO];
     
 }
--(void)targetMethod:(NSTimer*)timer{
-    [appdelegate initilizeBeacon];
-}
+
+
+
+
 -(void)viewDidDisappear:(BOOL)animated{
     [beaconmsgUpdate invalidate];
     beaconmsgUpdate=nil;
@@ -109,13 +106,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    beaconmsgUpdate =[NSTimer scheduledTimerWithTimeInterval:100.0
-                                     target:self
-                                   selector:@selector(targetMethod:)
-                                   userInfo:nil
-                                    repeats:YES];
-    
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewWillAppear:) name:@"UpdateSideMenu" object:nil];
     
     // Do any additional setup after loading the view from its nib.

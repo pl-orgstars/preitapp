@@ -419,17 +419,14 @@
     [delegate.navController.view removeFromSuperview];
     
     [delegate.window addSubview:delegate.tabBarController.view];
-    [delegate initilizeBeacon];
     
 }
 
 -(void)errorCallback_Image:(NSError *)error{
-	NSLog(@"error");
 	[[LoadingAgent defaultAgent]makeBusy:NO];
     [delegate.navController.view removeFromSuperview];
     
     [delegate.window addSubview:delegate.tabBarController.view];
-    [delegate initilizeBeacon];
 }
 
 -(void)getDistance
@@ -535,15 +532,12 @@
     
     [[LoadingAgent defaultAgent]makeBusy:NO];
     [delegate setupPortraitUserInterface];
-//    [delegate.navController.view removeFromSuperview];
-//    [delegate.window addSubview:delegate.tabBarController.view];
     
     if (_presentMainView)
         [self showMainViewController];
     else
         [self.navigationController popToRootViewControllerAnimated:YES];
     
-    [delegate initilizeBeacon];
 }
 
 -(void)requestFailed:(NSError *)error{

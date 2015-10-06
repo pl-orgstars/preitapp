@@ -299,7 +299,6 @@
 //        [appdelegate.window addSubview:appdelegate.navController.view];
 //        [appdelegate.tabBarController.view removeFromSuperview];    //Waseem Menu
 //        
-//        [appdelegate disableBeacon];
         
 #warning handle navigation here
     }

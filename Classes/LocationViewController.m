@@ -516,7 +516,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    radiusSelected=row;
+    radiusSelected = (int)row;
 }
 
 
@@ -550,11 +550,9 @@
 	
 	[actionSheet addSubview:pickerView];
 	[pickerView selectRow:radiusSelected inComponent:0 animated:YES];
-//	[pickerView release];
 
 	[actionSheet showInView:self.view];	
 	[actionSheet setBounds:CGRectMake(0,0, 320, 480)];
-//	[actionSheet release];
 }
 
 
@@ -562,11 +560,6 @@
 /////////////////////
 ////////////////////
 -(void)fetchData:(NSDictionary*)tmpDict{
-    //    NSDictionary *tmpDict;//=[self.tableData objectAtIndex:indexPath.row];
-    
-    NSLog(@"appdelegate");
-    //////kuldeep
-    NSLog(@".............dictionare to prionnasjkdfnksa %@",tmpDict);
     
     delegate.mallData=tmpDict;
     delegate.mallId=[[tmpDict objectForKey:@"id"] longValue];
@@ -580,7 +573,6 @@
     [delegate.storeListContent removeAllObjects];
     
     delegate.website_url=[tmpDict objectForKey:@"website_url"];
-    NSLog(@"website Url=====%@",delegate.website_url);
     NSString *dining=[tmpDict objectForKey:@"dining"];
     delegate.isDinning=[dining isEqualToString:@"no"]?NO:YES;
     NSString *movie=[tmpDict objectForKey:@"movie"];
@@ -590,17 +582,11 @@
     
     NSString *url = [tmpDict objectForKey:@"website_resource_url"];
     
-    NSLog(@"uuuuuuuuuuuuuu %@",url);
     [self showHudWithMessage:@"Please Wait..." color:[UIColor whiteColor]];
     RequestAgent *req= [[RequestAgent alloc] init];// autorelease];
     [req requestToServer:self callBackSelector:@selector(requestSucceed:) errorSelector:@selector(requestFailed:) Url:url];
-//    [[LoadingAgent defaultAgent]makeBusy:YES];
 }
 -(void)requestSucceed:(NSData *)receiveData{
-    //	[indicator_ stopAnimating];
-    //	self.navigationItem.hidesBackButton=NO;
-    //	self.navigationItem.rightBarButtonItem.enabled=YES;
-//    NSLog(@"rec daTA :: %@",receiveData);
 	if(receiveData!=nil)
 	{
 
@@ -608,7 +594,6 @@
 		NSDictionary *tmpArray=[jsonString JSONValue];
         
         
-        NSLog(@"kuldeep %@,  %@",tmpArray,[jsonString JSONValue]);
         NSDictionary *dict = [tmpArray valueForKey:@"website"];
         
         NSDictionary *dd= [dict valueForKey:@"settings"];
@@ -623,14 +608,8 @@
         [GAI sharedInstance].defaultTracker = delegate.tracker;
         
         
-        
-        
-        
-        //        [GAI sharedInstance].defaultTracker =  [[GAI sharedInstance] trackerWithTrackingId:@"UA-39751767-1"];
         NSString *str = [NSString stringWithFormat:@"IOS %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] ];
-        NSLog(@"version +++ === %@",str);
         //change google
-      //  [delegate.tracker setAppVersion:str];
         
         [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:str];
         
@@ -639,35 +618,24 @@
     }
     [self hideHud];
     [delegate setupPortraitUserInterface];
-//	[delegate.navController.view removeFromSuperview];
-//    [delegate.window addSubview:delegate.tabBarController.view];
     
     if (_presentMainView)
         [self showMainViewController];
     else
         [self.navigationController popToRootViewControllerAnimated:YES];
     
-    [delegate initilizeBeacon];
-//    [self requestForImages];
 }
 -(void)requestFailed:(NSError *)error{
-    //	[indicator_ stopAnimating];
-    //	self.navigationItem.hidesBackButton=NO;
-    //	self.navigationItem.rightBarButtonItem.enabled=YES;
     [self hideHud];
     
     [[UIAlertView showWithTitle:@"Message" message:@"Sorry there was some error.Please check your internet connection and try again" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
         NSData *data2 = [[NSUserDefaults standardUserDefaults]objectForKey:@"mallData"];
         NSDictionary *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data2];
         
-        //		[navController.view removeFromSuperview];
-        //	[window addSubview:tabBarController.view];
-        NSLog(@"aaaaaa");
         [self fetchData:arr];
     }]show];
     
     
-//	[delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Message" buttontitle:@"Ok"];
 }
 - (NSString *)appNameAndVersionNumberDisplayString {
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
@@ -680,12 +648,8 @@
 }
 -(void)requestForImages{
     NSString *url=[NSString stringWithFormat:@"%@%@",[delegate.mallData objectForKey:@"resource_url"],NSLocalizedString(@"API_BgImages","")];
-    //NSString *url=NSLocalizedString(@"API_BgImages",@"");
-    NSLog(@"uuuuuuuuuuuuuu %@",url);
     RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
     [req requestToServer:self callBackSelector:@selector(responseData_Image:) errorSelector:@selector(errorCallback_Image:) Url:url];
-    //    [[LoadingAgent defaultAgent]makeBusy:YES];
-    
     
 }
 
@@ -703,7 +667,6 @@
 	delegate.image2=nil;
 	delegate.image3=nil;
 	
-	NSLog(@"tmpArray response Image===%@",tmpArray);
 	if([tmpArray count])
 	{
 		NSDictionary *tmpDict=[tmpArray objectAtIndex:0];
@@ -719,40 +682,31 @@
     [delegate.navController.view removeFromSuperview];
     
     [delegate.window addSubview:delegate.tabBarController.view];
-    [delegate initilizeBeacon];
 }
 
 -(void)errorCallback_Image:(NSError *)error{
 	NSLog(@"error");
     [self hideHud];
-    //	[[LoadingAgent defaultAgent]makeBusy:NO];
     [delegate.navController.view removeFromSuperview];
     
     [delegate.window addSubview:delegate.tabBarController.view];
-    [delegate initilizeBeacon];
 }
 
 -(void)getDataFromServer
 {
     [self showHudWithMessage:@"Locating Nearest PREIT Mall" color:[UIColor whiteColor]];
 	NSString *url=[NSString stringWithFormat:@"%@%@",NSLocalizedString(@"Server",""),NSLocalizedString(@"API0","")];
-	//NSLog(@"url====%@",url);
-//	if(self.radius)
-//		url=[NSString stringWithFormat:@"%@%?lat=%f&lng=%f&radius=%@",url,self.coordinates.latitude,self.coordinates.longitude,radius];
 	
 	self.navigationItem.hidesBackButton=YES;
 	self.navigationItem.rightBarButtonItem.enabled=NO;
-//	[indicator_ startAnimating];
     
 	RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
 	[req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
 }
 -(void)responseData:(NSData *)receivedData{
-//	[indicator_ stopAnimating];
     [self hideHud];
     
     NSMutableArray *array = [[NSMutableArray alloc]init];
-    NSLog(@"hereaaa");
 	self.navigationItem.hidesBackButton=NO;
 	self.navigationItem.rightBarButtonItem.enabled=YES;
     BOOL isNoData;
@@ -761,8 +715,6 @@
 	{
 		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];// autorelease];
 		NSArray *tmpArray=[jsonString JSONValue];
-		NSLog(@"tmpArray==%@",tmpArray);
-//		[self.tableData removeAllObjects];
 		if([tmpArray count]!=0){
 			isNoData=NO;
 			for(int i=0;i<[tmpArray count];i++)
@@ -777,9 +729,6 @@
                 }
 
             }
-            //			[self getDistance:array];
-//			if(self.radius)
-//				[self getDistance];
 		}
 		else
 		{
@@ -797,27 +746,20 @@
     }else {
         HomeScreen *screenHome=[[HomeScreen alloc]initWithNibName:@"HomeScreen" bundle:nil];
         self.navigationItem.title=@"Back";
-        //        screenHome.coordinates=coordinates;
-        //        screenHome.radius=[pickerItem objectAtIndex:radiusSelected];
         screenHome.isLocationEnabled = isLocationEnabled;
         screenHome.tableData = [[NSMutableArray alloc]initWithArray:array];
         screenHome.presentMainView = _presentMainView;
         [self.navigationController pushViewController:screenHome animated:YES];
     }
     
-
-    
-//	[tableHome reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
 }
 
 
 -(void)errorCallback:(NSError *)error{
     [self hideHud];
-//	[indicator_ stopAnimating];
 	self.navigationItem.hidesBackButton=NO;
 	self.navigationItem.rightBarButtonItem.enabled=YES;
     [self showAlertForNoData];
-//	[delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Message" buttontitle:@"Ok"];
 }
 -(void)showAlertForNoData{
     [[UIAlertView showWithTitle:@"" message:@"Sorry there was some error.Please check your internet connection and try again" cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
@@ -828,15 +770,14 @@
 -(BOOL)getDistance:(NSArray *)tableData
 {
 
-//    NSMutableArray *distanceData = [NSMutableArray new];
 	for(int i=0;i<[tableData count];i++)
 	{
 		NSDictionary *tmpDict=[tableData objectAtIndex:i];
 		
 		if([tmpDict objectForKey:@"location_lat"] ==[NSNull null] || [tmpDict objectForKey:@"location_lng"]==[NSNull null] )
 		{
-//			[distanceData addObject:@"NA"];
-		}
+
+        }
 		else
 		{
             double lat=[[tmpDict objectForKey:@"location_lat"]doubleValue];
@@ -859,20 +800,12 @@
                 return YES;
             }
             
-//			NSString *strDist = [NSString stringWithFormat:@"%.2f miles", dist_Miles];
-            
-            
-            
-//			[distanceData addObject:strDist];
-            //			[userLoc release];
-            //			[poiLoc release];
 		}
 	}
     return NO;
 }
 
 -(void)prefomLocalNotification{
-    NSLog(@"1234567890");
     if (!is_PUSH_NOTIFICATION_ON) {
         return;
     }
@@ -885,12 +818,10 @@
         
         
         NSString *location_message = [Utils checkForEmptyDatas:[delegate.mallData objectForKey:@"location_message"]]?@"":[delegate.mallData objectForKey:@"location_message"];
-        NSLog(@"aaaaaaaaaaaaaaaaaa  %@ %@",location_message_end_at,location_message);
         if (![Utils checkForEmptyString:location_message_end_at] && ![Utils checkForEmptyString:location_message]) {
         
         
         
-//        distance = .5;
         
             NSDateFormatter *format = [[NSDateFormatter alloc]init];
             [format setDateFormat:@"yyyy-MM-dd"];
@@ -902,8 +833,6 @@
                 NSLog(@"distance from mall %f",distance);
                 if (distance <= 1) {
 
-//            "3/20/2014","location_message_end_date":"4/20/2014","location_message":"Hello people, you're close to the Cherry Hill Mall.
-//            delegate.location_message_end_at = @"3/20/2014";
                     isNotificationShown = YES;
                     [locationController.locationManager stopUpdatingLocation];
                     
@@ -923,7 +852,6 @@
                         notifyAlarm.fireDate = [NSDate date];
                         notifyAlarm.timeZone = [NSTimeZone defaultTimeZone];
                         notifyAlarm.repeatInterval = 0;
-//                        notifyAlarm.soundName = @"bell_tree.mp3";
                         notifyAlarm.alertBody = location_message;//@"Staff meeting in 30 minutes";
                         notifyAlarm.soundName = UILocalNotificationDefaultSoundName;
                         notifyAlarm.applicationIconBadgeNumber += 1;
@@ -932,19 +860,14 @@
                     
                     
                     [UIAlertView showWithTitle:@"Message" message:location_message cancelButtonTitle:@"Ok" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                        //                "location_message" = "<null>";
-                        //                "location_message_end_at" = "<null>";
-                        //                "location_message_start_at" = "<null>";
                         
                     }];
                     
                     
                 }else{
                     [self updateLocation];
-//                    [self performSelector:@selector(updateLocation) withObject:nil afterDelay:0];
                 }
             }else{
-//                [self updateLocation];
                 [locationController.locationManager stopUpdatingLocation];
             }
             
@@ -952,15 +875,10 @@
             
         }else{
             [locationController.locationManager stopUpdatingLocation];
-            
-//            [self performSelector:@selector(updateLocation) withObject:nil afterDelay:0];
         }
-        
-        
         
     }else{
         [self updateLocation];
-//        [self performSelector:@selector(updateLocation) withObject:nil afterDelay:0];
     }
 }
 
