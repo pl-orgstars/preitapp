@@ -38,12 +38,10 @@
 #pragma mark - View lifecycle
 
 -(void)viewWillAppear:(BOOL)animated {
-//    [self.navigationItem setTitle:@"Product Search"];
     
     [self setNavigationTitle:@"Product Search" withBackButton:YES];
     
     [delegate hideProductScreen:YES];
-//    [delegate.mHomeViewController.view removeFromSuperview];
     
     [listCountLabel setText:[NSString stringWithFormat:@"%d",[[Database sharedDatabase] getCount]]];
 }
@@ -52,7 +50,6 @@
 {
 
     [super viewDidLoad];
-    ///kk
     [self addMaxMinTextField];
     
     delegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -70,18 +67,14 @@
     [listCountLabel setTextColor:[UIColor whiteColor]];
     [listCountLabel setFont:[UIFont boldSystemFontOfSize:14]];
     [listCountLabel setTextAlignment:UITextAlignmentCenter];
-//        [listCountLabel sizeToFit];
     [barV addSubview:listCountLabel];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self
                                                                          action:@selector(showShoppingList:)];
     [barV addGestureRecognizer:tap];
-//    [tap release];
+
     
     UIBarButtonItem *shoppingListView = [[UIBarButtonItem alloc]initWithCustomView:barV];
     [self.navigationItem setRightBarButtonItem:shoppingListView];
-//    [shoppingListView release];
-//    [barV release];
-    
     
     [lblFind setText:[NSString stringWithFormat:@"Find what you are looking for at %@ from participating retailers",(NSString*)[delegate.mallData objectForKey:@"name"]]];
     
@@ -90,7 +83,6 @@
     
     frame = self.view.frame;
     frame.origin.y = 69;
-    //kk
 
     if (is_iOS7) {
         frame.size.height -= 20;
@@ -108,7 +100,6 @@
     
     [self.view insertSubview:productListView belowSubview:pickerSort];
     [productListView setHidden:YES];
-//    [productListView release];
     spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [spinner setHidesWhenStopped:YES];
     [spinner setCenter:self.view.center];
@@ -133,7 +124,6 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -157,17 +147,6 @@
 }
 
 
-//-(void)dealloc {
-//    [super dealloc];
-//    [mainArray release];
-//    [sortArray release];
-//    [sortString release];
-//    [urlString release];
-//    
-//    [tabNavigation release];
-////    [searchString release];
-//}
-
 
 #pragma mark - search bar delegate
 
@@ -182,7 +161,6 @@
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     NSLog(@"textchange %lu",(unsigned long)searchText.length);
     if (searchBar.text.length == 0 && !spinner.isAnimating) {
-//        [productListView.productListTable setContentOffset:CGPointZero];
         [productListView.productsArray removeAllObjects];
         [barView setHidden:YES];
         [productListView setHidden:YES];
@@ -205,36 +183,27 @@
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-//    NSLog(@"search %@",searchBar.text);
     [searchBar resignFirstResponder];
     [overView setHidden:YES];
     [minmumPriceLabel setText:@""];
     [maximunPriceLabel setText:@""];
     
-//    searchString = searchBar.text;
     NSLog(@"searchstsring %@",searchBar.text);
     [self makeRequestForString:searchBar.text];
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-//    searchString = [[NSString alloc]initWithFormat:@"%@",searchBar.text];
     if (![productListView isHidden]) {
         [searchBar resignFirstResponder];
     }
-    NSLog(@"searchBarCancelButtonClicked::: %@",searchBar.text);
 }
 
 #pragma mark make request 
 ///kuldeep new api
 -(void)showStoreDetails{
 
-
-    //
     NSString *str = NSLocalizedString(@"PRODUCT_SEARCH_IDS","");
     NSString *url= [NSString stringWithFormat:@"%@property_id=%ld", str,delegate.mallId];
-    
-//    NSString *url= [NSString stringWithFormat:@"http://cherryhillmall.com/api/product_search_ids?property_id=%ld",delegate.mallId];
-    //    NSString *url= [NSString stringWithFormat:@"http://cherryhillmall.red5demo.com/api/product_search_ids?property_id=%ld",delegate.mallId];
     
     
 	RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
@@ -245,19 +214,13 @@
 -(void)responseSuccessForStoreID:(NSData *)receivedData
 {
     NSLog(@"responseSuccessForTenantID");
-    //	[self loadingView:NO];
 
     NSMutableString *storeId = [NSMutableString new];
 	if(receivedData!=nil)
     {
-		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];// autorelease];
+		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];
 		// test string
-//        Product *prod = [productsArray objectAtIndex:productIndex];
-		//NSLog(@"jsonString===%@",jsonString);
 		NSArray *tmpArray=[jsonString JSONValue];
-        //        NSLog(@"kkkkkkkkkkkk %@",tmpArray);
-
-
         
         BOOL isFirst = NO;
         for (NSDictionary *dict in tmpArray)
@@ -274,12 +237,8 @@
     
         }
 
-
-        NSLog(@"store id string == %@",storeId);
-        
     }
     
-//    [self makeRequestForStringAndStoreId:storeId];
 }
 
 
@@ -289,78 +248,20 @@
     [spinner setHidden:NO];
     [spinner startAnimating];
     
-    searchString = productStr;//[[NSString alloc]initWithFormat:@"%@",productStr];
-//    [self showStoreDetails];
-    [self makeRequestForStringAndStoreId];//:nil];
+    searchString = productStr;
+    [self makeRequestForStringAndStoreId];
     
 }
--(void)makeRequestForStringAndStoreId{//:(NSString*)storeid{
-//    page =1;
+-(void)makeRequestForStringAndStoreId{
     
     RequestAgent *req = [[RequestAgent alloc]init];
-    //    urlString = [[NSString alloc]initWithFormat:@"%@/%d/search?q=%@",NSLocalizedString(@"SEARCHAPI", @""),delegate.mallId,[productStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    //    urlString = [[NSString alloc]initWithFormat:@"%@/%ld?search=%@",NSLocalizedString(@"SEARCHAPI", @""),delegate.mallId,[productStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
     urlString = [[NSString alloc]initWithFormat:@"%@%@&property_id=%ld", NSLocalizedString(@"SEARCHAPI", @""), [searchString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],delegate.mallId];
     
-    ///change api...search
-    
-    NSLog(@"store id to get %@",delegate.mallData);
-
-//    urlString = [[NSString alloc]initWithFormat:@"%@%@&stores[]=%@&property_id=%ld", NSLocalizedString(@"SEARCHAPI", @""), [searchString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],storeid,delegate.mallId];
-    
-    NSLog(@"url new:::::: %@",urlString);
     NSString *url = [NSString stringWithFormat:@"%@&page=%d",urlString,page];
-    //    [req requestToServer:self callBackSelector:@selector(requestFinished:) errorSelector:@selector(requestError:) Url:urlString];
     [req requestToServer:self callBackSelector:@selector(requestForSearchFinishedSuccess:) errorSelector:@selector(requestError:) Url:url];
 }
-/*
--(void)requestFinished:(NSData*)responseData{
-    
-    NSString *jsonString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
 
-    NSDictionary *dict = [jsonString JSONValue];
-    
-//    NSLog(@"reply ===%@",dict);
-    totalCount = [[dict objectForKey:@"totalItems"] longValue];
-    [lblResultCount setText:[NSString stringWithFormat:@"%ld results",totalCount]];
-    NSArray *array = [dict objectForKey:@"items"];
-    NSLog(@"!!!!!!!!!!!!!!!!!!!!!!!!!!!!%d",array.count);
-    NSMutableArray *itemsArray = [[NSMutableArray alloc]initWithCapacity:array.count];
-    for (NSDictionary *d in array) {
-        Product *prod = [[Product alloc]initWithValues:d];
-        [itemsArray addObject:prod];
-        [prod release];
-    }
-    currentCount = itemsArray.count;
-    if (currentCount>=totalCount) {
-        productListView.hasMoreProducts = NO;
-    } else {
-        productListView.hasMoreProducts = YES;
-    }
-    [barView setHidden:NO];
-    [lblSort setText:[NSString stringWithFormat:@"Sort: %@",sortString]];
-    mainArray = [[NSMutableArray alloc]initWithArray:itemsArray];
-    if (productListView.productsArray) {
-        [productListView.productsArray release];
-    }
-    productListView.productsArray = [[NSMutableArray alloc]initWithArray:itemsArray];
-    [productListView setHidden:NO];
-
-    [overView setHidden:YES];
-    [spinner stopAnimating];
-    
-    if (itemsArray.count==0) {
-        [delegate showAlert:@"No product matching your criteria found" title:@"No result found" buttontitle:@"Dismiss"];
-    }
-    productListView.totalCount = totalCount;
-    productListView.currentCount = currentCount;
-    [self sort];
-
-    [itemsArray release];
-    
-}
- */
 -(void)requestForSearchFinishedSuccess:(NSData*)responseData{
     [productListView.productsArray removeAllObjects];
     [mainArray removeAllObjects];
@@ -371,11 +272,8 @@
     
     NSDictionary *dict = [jsonString JSONValue];
     
-    NSLog(@"reply ===%@",dict);
-   // change 22 june
    totalCount = [[dict objectForKey:@"count"] longValue];
   
-
     NSArray *array = [dict objectForKey:@"results"];
    
     NSMutableArray *itemsArray = [[NSMutableArray alloc]initWithCapacity:array.count];
@@ -383,18 +281,11 @@
     for (int i=0; i<array.count; i++) {
         Product *prod = [[Product alloc]initWithValues:[[array objectAtIndex:i] objectForKey:@"SearchResult"]];
         [itemsArray addObject:prod];
-//        [prod release];
         if (i==29) {
             break;
         }
     }
-//    for (NSDictionary *d in array) {
-//        Product *prod = [[Product alloc]initWithValues:d];
-//        [itemsArray addObject:prod];
-//        [prod release];
-//    }
-    NSLog(@"break at index,,,%d",itemsArray.count);
-    currentCount = itemsArray.count;
+    currentCount = (int)itemsArray.count;
     
     if (totalCount<10) {
         productListView.hasMoreProducts = NO;
@@ -405,7 +296,7 @@
     [lblSort setText:[NSString stringWithFormat:@"Sort: %@",sortString]];
     mainArray = [[NSMutableArray alloc]initWithArray:itemsArray];
     if (productListView.productsArray) {
-//        [productListView.productsArray release];
+
     }
     productListView.productsArray = [[NSMutableArray alloc]initWithArray:itemsArray];
     [productListView setHidden:NO];
@@ -416,76 +307,12 @@
     if (itemsArray.count==0) {
         [delegate showAlert:@"No product matching your criteria found" title:@"No result found" buttontitle:@"Dismiss"];
     }
-    productListView.totalCount = totalCount;
-    productListView.currentCount = currentCount;
-//    sortString = @"Price: Low-High";
-    [self sort];
-    
-//    [itemsArray release];
-}
-/*
--(void)requestForSearchFinished:(NSData*)responseData{
-    NSString *jsonString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
-    
-    NSDictionary *dict = [jsonString JSONValue];
-    NSLog(@"RESPONSE for search is ===%@",dict);
-    
-    NSArray *array = [[dict objectForKey:@"item_lists"]objectForKey:@"normal"];
-//    NSLog(@"arrar %@ %d",array,array.count);
-    
-
-    NSMutableArray *itemsArray = [[NSMutableArray alloc]initWithCapacity:array.count];
-    for (NSDictionary *d in array) {
-        Product *prod = [[Product alloc]initWithValues:d];
-        [prod compareForPrice:prod];
-        [itemsArray addObject:prod];
-        [prod release];
-    }
-    [barView setHidden:NO];
-//    currentCount = itemsArray.count;
-//    if (currentCount>=totalCount) {
-//        productListView.hasMoreProducts = NO;
-//    } else {
-//        productListView.hasMoreProducts = YES;
-//    }
-
-    mainArray = [[NSMutableArray alloc]initWithArray:itemsArray];
-    if (productListView.productsArray) {
-        [productListView.productsArray release];
-    }
-    productListView.productsArray = [[NSMutableArray alloc]initWithArray:itemsArray];
-
-    [productListView setHidden:NO];
-    
-    [overView setHidden:YES];
-    [spinner stopAnimating];
-    
-
-    if (array.count==0) {
-        [delegate showAlert:@"No product matching your criteria found" title:@"No result found" buttontitle:@"Dismiss"];
-    }else{
-        NSLog(@"here");
-    }
-//    [lblSort setText:[NSString stringWithFormat:@"Sort: %@",sortString]];
-    
-
-//    totalCount = [[dict objectForKey:@"totalItems"] longValue];
-//    [lblResultCount setText:[NSString stringWithFormat:@"%ld results",totalCount]];
-
-    [overView setHidden:YES];
-    [spinner stopAnimating];
-    
-    if (itemsArray.count==0) {
-        [delegate showAlert:@"No product matching your criteria found" title:@"No result found" buttontitle:@"Dismiss"];
-    }
-    productListView.totalCount = totalCount;
+    productListView.totalCount = (int)totalCount;
     productListView.currentCount = currentCount;
     [self sort];
     
-    [itemsArray release];
-//    [lblResultCount setText:[NSString stringWithFormat:@"%ld results",totalCount]];
 }
-*/
+
 -(void)requestError:(NSError*)error {
     [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Network error" buttontitle:@"Dismiss"];
     [spinner stopAnimating];
@@ -498,15 +325,11 @@
     if (![spinner isAnimating]) {
         [spinner setHidden:NO];
         [spinner startAnimating];
-        //kuldeep
         RequestAgent *req = [[RequestAgent alloc]init];//autorelease];
         page = (int)currentCount/10;
         page++;
         NSString *urlStringM = [NSString stringWithFormat:@"%@&page=%d",urlString,page];
         
-//        NSString *urlStringM =[[NSString alloc]initWithFormat:@"%@%@%d&property_id=%ld", NSLocalizedString(@"SEARCHAPI", @""), @"handbag&startIndex=",currentCount+30,delegate.mallId];
-        
-        NSLog(@"loadmoreurl %@",urlStringM);
         [req requestToServer:self callBackSelector:@selector(moreRequestFinished:) errorSelector:@selector(moreRequestFailed:) Url:urlStringM];
     }
 }
@@ -516,10 +339,7 @@
     [spinner stopAnimating];
     NSString *jsonString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
     NSDictionary *dict = [jsonString JSONValue];
-//    NSLog(@"::::::::dict===%@",dict);
-//    NSArray *array = [dict objectForKey:@"items"];
     NSArray *array = [dict objectForKey:@"results"];
-    //    NSLog(@"array count::::: %d",array.count);
     NSMutableArray *itemsArray = [[NSMutableArray alloc]initWithCapacity:array.count];
     
     totalCount = [[dict objectForKey:@"count"] longValue];
@@ -527,17 +347,10 @@
     for (int i=0; i<array.count; i++) {
         Product *prod = [[Product alloc]initWithValues:[[array objectAtIndex:i] objectForKey:@"SearchResult"]];
         [itemsArray addObject:prod];
-//        [prod release];
         if (i==29) {
             break;
         }
     }
-//    for (NSDictionary *d in array) {
-//        Product *prod = [[Product alloc]initWithValues:d];
-//        [itemsArray addObject:prod];
-//         NSLog(@"2");
-//        [prod release];
-//    }
     currentCount += itemsArray.count;
     
     NSLog(@"3");
@@ -550,55 +363,11 @@
     }
     [mainArray addObjectsFromArray:itemsArray];
     [productListView.productsArray addObjectsFromArray:itemsArray];
-//    if (productListView.productsArray.count>MAXROWS) {
-//        NSLog(@"z");
-//        [productListView.productsArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, REMOVEROWS)]];
-//        NSLog(@"z");
-//        [mainArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, REMOVEROWS)]];
-//        productListView.hasPreviousProducts = YES;
-//         NSLog(@"4");
-//    }
     NSLog(@"5");
     productListView.currentCount = currentCount; 
-    
-    
-//    [itemsArray release];
     [self sort];
 }
-/*
--(void)moreRequestSuccesfull:(NSData*)responseData {
-    [spinner stopAnimating];
-    NSString *jsonString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
-    NSDictionary *dict = [jsonString JSONValue];
-    NSLog(@"::::::::dict===%@",dict);
-    NSArray *array = [dict objectForKey:@"items"];
-    NSMutableArray *itemsArray = [[NSMutableArray alloc]initWithCapacity:array.count];
-    for (NSDictionary *d in array) {
-        Product *prod = [[Product alloc]initWithValues:d];
-        [itemsArray addObject:prod];
-        [prod release];
-    }
-    currentCount += itemsArray.count;
-    
-    if (currentCount>=totalCount) {
-        productListView.hasMoreProducts = NO;
-    } else {
-        productListView.hasMoreProducts = YES;
-    }
-    [mainArray addObjectsFromArray:itemsArray];
-    [productListView.productsArray addObjectsFromArray:itemsArray];
-    if (productListView.productsArray.count>MAXROWS) {
-        [productListView.productsArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, REMOVEROWS)]];
-        [mainArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, REMOVEROWS)]];
-        productListView.hasPreviousProducts = YES;
-    }
-    
-    productListView.currentCount = currentCount;
-    
-    [itemsArray release];
-    [self sort];
-}
-*/
+
 -(void)moreRequestFailed:(NSError*)error {
     [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Network error!" buttontitle:@"Dismiss"];
     [spinner stopAnimating];
@@ -607,7 +376,6 @@
 
 -(void)loadPrevious {
     
-    NSLog(@"load previous");
     
     if (![spinner isAnimating]) {
         [spinner setHidden:NO];
@@ -633,8 +401,6 @@
     [spinner stopAnimating];
     NSString *jsonString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
     NSDictionary *dict = [jsonString JSONValue];
-    //    NSLog(@"dict===%@",dict);
-//    NSArray *array = [dict objectForKey:@"items"];
     NSArray *array = [[dict objectForKey:@"item_lists"]objectForKey:@"normal"];
     NSMutableArray *itemsArray = [[NSMutableArray alloc]initWithCapacity:array.count];
     
@@ -642,16 +408,10 @@
     for (int i=0; i<array.count; i++) {
         Product *prod = [[Product alloc]initWithValues:[array objectAtIndex:i]];
         [itemsArray addObject:prod];
-//        [prod release];
         if (i==29) {
             break;
         }
     }
-//    for (NSDictionary *d in array) {
-//        Product *prod = [[Product alloc]initWithValues:d];
-//        [itemsArray addObject:prod];
-//        [prod release];
-//    }
     
     currentCount -= itemsArray.count;
     
@@ -676,7 +436,6 @@
     [mainArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(MAXROWS,mainArray.count-MAXROWS)]];
     [productListView.productsArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(MAXROWS, productListView.productsArray.count - MAXROWS)]];
     
-//    [itemsArray release];
     [self sort];
 }
 
@@ -687,14 +446,12 @@
         NSLog(@"show product detail");
         ProductDetailViewController *detailView = [[ProductDetailViewController alloc]initWithNibName:@"ProductDetailViewController" bundle:nil];
         [self.navigationItem setTitle:@"Back"];
-        //    NSLog(@"prodarr %@",productListView.productsArray);
         detailView.productsArray = [[NSMutableArray alloc]initWithArray:productListView.productsArray];
         detailView.productIndex = productIndex.intValue;
         
         delegate.searchURL = urlString;
 
         [self.navigationController pushViewController:detailView animated:YES];
-//        [detailView release];
         [self hidePicker];
     }
 }
@@ -737,26 +494,8 @@
     
     [lblResultCount setText:[NSString stringWithFormat:@"%ld results",productListView.productsArray.count]];
 
-//    [productListView.productListTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-//    [self setTheValueOfMaxAndMin];
 }
 
-#pragma mark - pickerdelegate
-
-//- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-//    switch (row) {
-//        case 0:
-//            return @"Sort: Relevance";
-//            break;
-//        case 1:    
-//            return @"Price: Low-High";
-//            break;
-//        case 2:
-//            return @"Price: High-Low";
-//            break;
-//    }
-//    return nil;
-//}
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     [pickerView reloadComponent:component];
@@ -778,7 +517,6 @@
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     UIView *pView = [[UIView alloc]initWithFrame:CGRectMake(10, 0, pickerView.frame.size.width, 40)] ;//autorelease];
     UIButton *check = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [check setBackgroundImage:[UIImage imageNamed:@"check.png"] forState:UIControlStateNormal];
     UIImage *checkImage = [UIImage imageNamed:@"check.png"];
     [check setImage:checkImage forState:UIControlStateNormal];
     [check setTag:pickerCheckTag];
@@ -801,10 +539,8 @@
     
     [pView addSubview:pLabel];
     [pLabel setText:[sortArray objectAtIndex:row]];
-//    [pLabel release];
     UITapGestureRecognizer *pickerTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickerViewTapped:)];
     [pView addGestureRecognizer:pickerTap];
-//    [pickerTap release];
     [pView setTag:row];
     return pView;
 }
@@ -870,19 +606,15 @@
         str = [NSString stringWithFormat:@"%@&price_low=%.2f&price_high=%.2f",productSearchBar.text,minmumPriceLabel.text.floatValue,maximunPriceLabel.text.floatValue];
         
     }
-//
-    
     
     [self makeRequestForString:str];
 }
 -(void)setTheValueOfMaxAndMin{
     float min= 0,max = 0;
     if(productListView.productsArray.count){
-//        NSLog(@"product array::: %@",productListView.productsArray);
         Product *prod = [productListView.productsArray objectAtIndex:0];
          min = prod.price;
         max = prod.price;
-//        [prod release];
         for (Product *d in productListView.productsArray) {
             if (d.price>max) {
                 max = d.price;
@@ -891,7 +623,6 @@
             
                 min = d.price;
             }
-//            [d release];
 
         }
         
@@ -914,8 +645,6 @@
     imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"box2.png"]];
     imgView.frame = CGRectMake(251, 3, 58, 22);
     [barView addSubview:imgView];
-//    [imgView release];
-//    imgView.frame = CGRectMake(182, 3, 55, 24);
     
     minmumPriceLabel = [[UITextField alloc]initWithFrame:CGRectMake(191, 7, 43, 16)];
     [minmumPriceLabel setBackgroundColor:[UIColor clearColor]];
@@ -986,21 +715,7 @@
     
     toolbar.items = itemsArray;
     
-    
     minmumPriceLabel.inputAccessoryView = maximunPriceLabel.inputAccessoryView = toolbar;
-    
-    
-//    [itemsArray release];
-//    [toolbar release];
-//    [doneButton release];
-//    [barSegment release];
-//    [flexButton release];
-//    [tabNavigation release];
-//    [lbl1 release];
-//    [lbl2 release];
-//    [lbl3 release];
-    //[custum getToolbarWithDone];
-    //    custum.currentSelectedTextboxIndex = text.tag;
     
 }
 - (void)segmentedControlHandler:(id)sender
@@ -1049,19 +764,19 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     
     if (textField == minmumPriceLabel && totalCount == 10) {
-//        minmumPriceLabel.userInteractionEnabled = NO;
         [tabNavigation setEnabled:NO forSegmentAtIndex:0];
         [tabNavigation setEnabled:YES forSegmentAtIndex:1];
     }else{
-//        maximunPriceLabel.userInteractionEnabled = NO;
         [tabNavigation setEnabled:YES forSegmentAtIndex:0];
         [tabNavigation setEnabled:NO forSegmentAtIndex:1];
         
     }
 }
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (textField == maximunPriceLabel || textField == minmumPriceLabel ) {
-        NSLog(@"asdhks %@,%@",textField.text,string);
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    if (textField == maximunPriceLabel || textField == minmumPriceLabel )
+    {
         if (string.length>0) {
             
             
