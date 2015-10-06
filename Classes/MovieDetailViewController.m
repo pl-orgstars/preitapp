@@ -46,7 +46,7 @@
 	{		
         arrayTable = [NSMutableArray new];
         
-		for(int i=1;i<[tmpArray count];i++)
+		for(int i=0;i<[tmpArray count];i++)
 		{
 			NSDictionary *movie_schedule_Dict=[[tmpArray objectAtIndex:i]objectForKey:@"movie_schedule_time"];
             [arrayTable addObject:[movie_schedule_Dict objectForKey:@"scheduled_time"]];

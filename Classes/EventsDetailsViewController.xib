@@ -18,6 +18,7 @@
                 <outlet property="labelMonthEnd" destination="tXt-KZ-pzj" id="hEW-SU-fOz"/>
                 <outlet property="labelMonthStart" destination="ltJ-wE-N5I" id="82h-9i-MHe"/>
                 <outlet property="labelName" destination="26" id="36"/>
+                <outlet property="labelTenantName" destination="RWs-uq-IEM" id="AXO-fx-6cU"/>
                 <outlet property="scrolviewMain" destination="89i-ji-jFu" id="ats-6b-Hm9"/>
                 <outlet property="titleWebView" destination="42" id="43"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -90,7 +91,7 @@
                                     </connections>
                                 </webView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DETAIL" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="ha4-3L-GMZ" userLabel="titleLabel">
-                                    <rect key="frame" x="10" y="70" width="300" height="50"/>
+                                    <rect key="frame" x="10" y="97" width="300" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -129,6 +130,22 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <webView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="31">
+                                    <rect key="frame" x="10" y="165" width="300" height="210"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <dataDetectorType key="dataDetectorTypes"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="41"/>
+                                    </connections>
+                                </webView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RWs-uq-IEM">
+                                    <rect key="frame" x="10" y="73" width="292" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -143,15 +160,6 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </imageView>
-                        <webView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="31">
-                            <rect key="frame" x="10" y="138" width="300" height="210"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <dataDetectorType key="dataDetectorTypes"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="41"/>
-                            </connections>
-                        </webView>
                     </subviews>
                 </scrollView>
             </subviews>

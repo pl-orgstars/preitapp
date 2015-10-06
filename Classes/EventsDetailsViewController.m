@@ -8,6 +8,9 @@
 
 #import "EventsDetailsViewController.h"
 #import "AsyncImageView.h"
+#import "RequestAgent.h"
+#import "JSON.h"
+
 //#import "NSAttributedString+HTML.h"
 
 @implementation EventsDetailsViewController
@@ -155,8 +158,51 @@
     [webView setOpaque:NO];
     
     
-    NSLog(@"webview %f",webView.scrollView.contentSize.height);
+    
+    if ([dictData objectForKeyWithNullCheck:@"tenant_id"])
+    {
+         [self getData];
+    }else{
+        labelTenantName.text = @"";
+        
+        
+        CGRect frame = headerLabel.frame;
+        CGPoint origiinStart = frame.origin;
+        origiinStart.y = origiinStart.y - 25;
+        frame.origin = origiinStart;
+        
+        headerLabel.frame = frame;
+        
+        
+        CGRect frame2 = webView.frame;
+        CGPoint origiinStart2 = frame2.origin;
+        origiinStart2.y = origiinStart2.y - 25;
+        frame2.origin = origiinStart2;
+        
+        webView.frame = frame2;
+        
+    }
+    
+   
+}
 
+
+-(void)getData
+{
+    
+    NSString *url=[NSString stringWithFormat:@"%@/tenants/%@",[delegate.mallData objectForKey:@"resource_url"],dictData[@"tenant_id"]];
+    
+    RequestAgent *req=[[RequestAgent alloc] init];
+    [req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
+}
+
+-(void)responseData:(NSData *)receivedData{
+    if(receivedData!=nil){
+        //kuldeep edit
+        NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];//autorelease];
+        NSMutableDictionary *tmpArray=[jsonString JSONValue];
+        labelTenantName.text = tmpArray[@"tenant"][@"name"];
+    }
 }
 
 
