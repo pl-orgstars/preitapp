@@ -308,6 +308,8 @@
 		BD4EF97A1BBEA09F0042EF6E /* productsearch-icon-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4EF9761BBEA09F0042EF6E /* productsearch-icon-list@2x.png */; };
 		BD598C711BBD0AE700E2232D /* WinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD598C6F1BBD0AE700E2232D /* WinViewController.m */; };
 		BD598C721BBD0AE700E2232D /* WinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD598C701BBD0AE700E2232D /* WinViewController.xib */; };
+		BD68D0C91BC3B53800C73ED7 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA3DEE31BC2950C00BA028A /* AFHTTPSessionManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BD68D0CA1BC3B53F00C73ED7 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA3DEEA1BC2950C00BA028A /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD69FACA1BB0138A00E78744 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD69FAC71BB0138A00E78744 /* IIViewDeckController.m */; };
 		BD69FACB1BB0138A00E78744 /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD69FAC91BB0138A00E78744 /* IIWrapController.m */; };
 		BD69FACF1BB01E0D00E78744 /* SideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BD69FACE1BB01E0D00E78744 /* SideMenu.m */; };
@@ -325,10 +327,8 @@
 		BD93E4901BB15AC400EB91F0 /* header-icon-menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD93E48F1BB15AC400EB91F0 /* header-icon-menu@2x.png */; };
 		BDA3DEF11BC2950C00BA028A /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA3DEDF1BC2950C00BA028A /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA3DEF21BC2950C00BA028A /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA3DEE11BC2950C00BA028A /* AFHTTPRequestOperationManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		BDA3DEF31BC2950C00BA028A /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA3DEE31BC2950C00BA028A /* AFHTTPSessionManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA3DEF41BC2950C00BA028A /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA3DEE61BC2950C00BA028A /* AFNetworkReachabilityManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA3DEF51BC2950C00BA028A /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA3DEE81BC2950C00BA028A /* AFSecurityPolicy.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		BDA3DEF61BC2950C00BA028A /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA3DEEA1BC2950C00BA028A /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA3DEF71BC2950C00BA028A /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA3DEEC1BC2950C00BA028A /* AFURLRequestSerialization.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA3DEF81BC2950C00BA028A /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA3DEEE1BC2950C00BA028A /* AFURLResponseSerialization.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA3DEF91BC2950C00BA028A /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA3DEF01BC2950C00BA028A /* AFURLSessionManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -2566,11 +2566,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD68D0CA1BC3B53F00C73ED7 /* AFURLConnectionOperation.m in Sources */,
 				AE8BAA7519384DEF0019B44F /* AudioRecorder.m in Sources */,
 				AE29A5C31935B2E300738C79 /* UIAlertView+Blocks.m in Sources */,
 				70BF84BF17571D6B003ACF3C /* ASIDataCompressor.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				AE407BAD193880AC009E0485 /* MapKitDragAndDropViewController.m in Sources */,
+				BD68D0C91BC3B53800C73ED7 /* AFHTTPSessionManager.m in Sources */,
 				1D3623260D0F684500981E51 /* PreitAppDelegate.m in Sources */,
 				E2DFF14012410C3100F8687B /* NavigationRotateController.m in Sources */,
 				E2DFF2C91241311D00F8687B /* NSObject+SBJSON.m in Sources */,
