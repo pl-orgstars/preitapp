@@ -12,6 +12,7 @@
 #define VOTIGO_SIGNUP @"http://sqa02demopartner.votigo.com/fbsweeps/sweeps/testsweepsforred5-1"
 #define VOTIGO_CONFIRM @"http://sqa02demopartner.votigo.com/fbsweeps/confirmation/testsweepsforred5-1"
 #define VOTIGO_MAIN @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/mainmenu"
+#define VOTIGO_SCAN_RECEIPT @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/scanreceipt"
 
 @interface WinViewController ()
 
@@ -75,6 +76,15 @@
         
         return YES;
     }
+    
+    else if ([url rangeOfString:VOTIGO_SCAN_RECEIPT].location != NSNotFound){
+        
+        ScanReceiptViewController* scanReceiptVC = [[ScanReceiptViewController alloc] initWithNibName:@"ScanReceiptViewController" bundle:[NSBundle mainBundle]];
+        [self.navigationController pushViewController:scanReceiptVC animated:NO];
+        
+        return NO;
+    }
+    
     
     else if ([url rangeOfString:VOTIGO_MAIN].location != NSNotFound){
         return YES;

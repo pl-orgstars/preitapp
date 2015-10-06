@@ -21,6 +21,15 @@
     
     originalImgArray = [[NSMutableDictionary alloc] init];
     
+    PreitAppDelegate* delegate = (PreitAppDelegate*)[UIApplication sharedApplication].delegate;
+    
+    
+    [mainLabel setText:[NSString stringWithFormat:mainLabel.text,[delegate.mallData objectForKey:@"name"]]];
+    
+    
+    [cancelBtn.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [cancelBtn.layer setBorderWidth:1.0];
+    
     
 
 }
@@ -64,15 +73,27 @@
         mainFrame.size.height = receiptImgView.frame.size.height;
         
         [receiptMainView setFrame:mainFrame];
-        [self addRetakeButtonToImageView:receiptImgView];
+        [self addRetakeButtonToImageView:receiptImgView withTag:200];
         [self receiptSizeChanged];
         
         [originalImgArray setObject:image forKey:@"receipt"];
         
+        if (![originalImgArray objectForKeyWithNullCheck:@"section2"] && ![originalImgArray objectForKey:@"section1"]) {
+            
+            [section2MainView setFrame:sectionMainView.frame];
+        }
+        else{
+            CGRect frame = section2MainView.frame;
+            frame.origin.y = sectionMainView.frame.origin.y + sectionMainView.frame.size.height +16;
+            
+            [section2MainView setFrame:frame];
+        }
+        
     }
     
     else{
-
+        
+        if (gettingSection1) {
             CGRect sectionImgFrame = sectionImgView.frame;
             sectionImgFrame.size.height = scaledImage.size.height;
             [sectionImgView setFrame:sectionImgFrame];
@@ -82,18 +103,52 @@
             CGRect mainFrame = sectionMainView.frame;
             mainFrame.size.height = sectionImgView.frame.size.height;
             [sectionMainView setFrame:mainFrame];
-            [self addRetakeButtonToImageView:sectionImgView];
+            [self addRetakeButtonToImageView:sectionImgView withTag:201];
             
             [originalImgArray setObject:image forKey:@"section1"];
-        
-        [sectionBtn setHidden:YES];
-        [longerLabel setHidden:YES];
-        [sectionBtn setEnabled:NO];
-        
             
-    
+            [sectionBtn setHidden:YES];
+            [longerLabel setHidden:YES];
+            [sectionBtn setEnabled:NO];
+            
+            CGRect sec2Frame = section2MainView.frame;
+            
+            sec2Frame.origin.y = sectionMainView.frame.origin.y + sectionMainView.frame.size.height + 16;
+            
+            [section2MainView setFrame:sec2Frame];
+            [section2MainView setHidden:NO];
+            [section2MainView setUserInteractionEnabled:YES];
+            
+        }
+        else{
+            
+            CGRect section2ImgFrame = section2ImgView.frame;
+            section2ImgFrame.size.height = scaledImage.size.height;
+            [section2ImgView setFrame:section2ImgFrame];
+            [section2ImgView setImage:scaledImage];
+            [section2ImgView setHidden:NO];
+            
+            CGRect section2MainFrame = section2MainView.frame;
+            section2MainFrame.size.height = section2ImgView.frame.size.height;
+            [section2MainView setFrame:section2MainFrame];
+            [self addRetakeButtonToImageView:section2ImgView withTag:202];
+            
+            [originalImgArray setObject:image forKey:@"section2"];
+            
+            [section2Btn setHidden:YES];
+            [section2Btn setEnabled:NO];
+            [longerlabel2 setHidden:YES];
+            
+            
+        }
         
-     
+   
+      
+        
+        
+        
+        
+        
     }
     [self updateScroll:mainScroll];
     
@@ -103,6 +158,8 @@
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
+
+
 
 #pragma mark - Button Actions
 - (IBAction)getReceiptBtnCall:(id)sender {
@@ -122,13 +179,29 @@
 
 - (IBAction)getSectionBtnCall:(id)sender {
     gettingReciept = NO;
+    gettingSection1 = YES;
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Chose Source" message:@"Please select the source" delegate:self cancelButtonTitle:@"Camera" otherButtonTitles:@"Photos", nil];
         [alertView show];
     }
     else{
-        [self showImagePickerWithSource:UIImagePickerControllerSourceTypePhotoLibrary];    }
+        [self showImagePickerWithSource:UIImagePickerControllerSourceTypePhotoLibrary];
+    }
+}
+
+-(IBAction)getSection2BtnCall:(UIButton*)sender {
+    gettingReciept = NO;
+    gettingSection1 = NO;
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Chose Source" message:@"Please select the source" delegate:self cancelButtonTitle:@"Camera" otherButtonTitles:@"Photos", nil];
+        [alertView show];
+    }
+    else{
+        [self showImagePickerWithSource:UIImagePickerControllerSourceTypePhotoLibrary];
+    }
+    
 }
 
 
@@ -138,10 +211,95 @@
         [self getReceiptBtnCall:nil];
     }
     else{
-        [self getSectionBtnCall:nil];
+        
+        if (gettingSection1) {
+            [self getSectionBtnCall:nil];
+
+        }
+        else{
+            [self getSection2BtnCall:nil];
+        }
     }
     
+    [sender removeFromSuperview];
+    
 }
+
+
+- (IBAction)uploadBtnCall:(id)sender {
+    
+    
+    if (![originalImgArray objectForKeyWithNullCheck:@"receipt"]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Receipt missing" message:@"Please add a receipt" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    else{
+        [self uploadImageToZiploop];
+    }
+    
+    
+}
+
+-(void)uploadImageToZiploop{
+    
+    NSString* api_key = @"fD5du1vI6Wo";
+    NSString* api_secret = @"NPmzuIvIziS";
+    
+    NSString* userId = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
+    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+    
+    [params setValue:api_key forKey:@"api_key"];
+    [params setValue:api_secret forKey:@"api_secret"];
+    [params setValue:userId forKey:@"customer_id"];
+    [params setValue:@"123654" forKey:@"receipt_id"];
+    [params setValue:[originalImgArray objectForKey:@"receipt"] forKey:@"file"];
+    
+    NSString* urlString = @"https://api.ziploop.com/partner/1/upload";
+    
+    
+    UIActivityIndicatorView* indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    
+    [self.view addSubview:indicator];
+    [indicator startAnimating];
+    [indicator setCenter:self.view.center];
+    
+    [self.view setUserInteractionEnabled:NO];
+    
+    
+    UIAlertView* errorAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@" Something went wrong please try again!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    
+    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager POST:urlString parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        for (NSString* key in [originalImgArray allKeys]) {
+            UIImage* image = [originalImgArray objectForKey:key];
+            [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 1.0) name:@"file" fileName:[NSString stringWithFormat:@"%@.jpg",key] mimeType:@"image/jpeg"];
+        }
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if ([responseObject objectForKeyWithNullCheck:@"error"]) {
+            [errorAlert show];
+            
+        }
+        
+        [indicator removeFromSuperview];
+        [self.view setUserInteractionEnabled:YES];
+        
+        NSLog(@"Success:  %@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error : %@",[error localizedDescription]);
+        
+        [errorAlert show];
+        [indicator removeFromSuperview];
+        [self.view setUserInteractionEnabled:YES];
+        
+    }];
+    
+
+    
+}
+
 
 
 
@@ -175,7 +333,7 @@
 
 #pragma mark - image methods
 
--(void)addRetakeButtonToImageView:(UIImageView*) imageView{
+-(void)addRetakeButtonToImageView:(UIImageView*) imageView withTag:(NSInteger)tag{
     
     CGSize btnSize = CGSizeMake(100, 40);
     CGRect frame = CGRectMake(imageView.frame.size.width - btnSize.width, imageView.frame.size.height - btnSize.height, btnSize.width, btnSize.height);
@@ -183,6 +341,7 @@
     [retakeBtn setTitle:@"Retake" forState:UIControlStateNormal];
     [retakeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [retakeBtn setBackgroundColor:[UIColor blackColor]];
+    [retakeBtn setTag:tag];
     
     [retakeBtn addTarget:self action:@selector(retakeImage:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -208,9 +367,9 @@
 -(void)updateScroll:(UIScrollView*)scroll{
     
 
-    if ((sectionMainView.frame.origin.y + sectionMainView.frame.size.height) > scroll.frame.size.height) {
+    if ((section2MainView.frame.origin.y + section2MainView.frame.size.height) > scroll.frame.size.height) {
         CGSize contentSize = scroll.frame.size;
-        float newHeight = sectionMainView.frame.origin.y + sectionMainView.frame.size.height + 8;
+        float newHeight = section2MainView.frame.origin.y + section2MainView.frame.size.height + 8;
         contentSize.height = newHeight;
         [scroll setContentSize:contentSize];
 
@@ -245,6 +404,7 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 - (void)dealloc {
     [longerLabel release];

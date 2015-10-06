@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PreitAppDelegate.h"
+#import "ScanReceiptViewController.h"
 
 @interface WinViewController : UIViewController <UIWebViewDelegate>
 {

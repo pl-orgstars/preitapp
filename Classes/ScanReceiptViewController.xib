@@ -15,11 +15,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScanReceiptViewController">
             <connections>
+                <outlet property="cancelBtn" destination="Cse-tf-ego" id="CI8-u6-DDu"/>
                 <outlet property="dividerLine2" destination="u2U-IP-1NR" id="lR8-xd-Tzi"/>
                 <outlet property="longerLabel" destination="EoT-E9-ldW" id="hM9-J2-Y5k"/>
+                <outlet property="longerlabel2" destination="xZm-8T-XfW" id="nuR-bh-eGq"/>
+                <outlet property="mainLabel" destination="XQ1-2T-iuv" id="Dsj-CE-kJf"/>
                 <outlet property="mainScroll" destination="zFt-hu-f5V" id="qRu-xY-wkM"/>
                 <outlet property="receiptImgView" destination="gWJ-9s-GGe" id="3ih-Au-RcJ"/>
                 <outlet property="receiptMainView" destination="yUD-st-Pyx" id="QAB-fP-8YE"/>
+                <outlet property="section2Btn" destination="swM-Lb-wks" id="hD2-FE-P5U"/>
+                <outlet property="section2ImgView" destination="eUN-Op-ujm" id="pq2-G0-xFr"/>
+                <outlet property="section2MainView" destination="tkh-k5-3AH" id="GMJ-aH-3NZ"/>
                 <outlet property="sectionBtn" destination="AVX-c7-72C" id="gr5-7z-A50"/>
                 <outlet property="sectionImgView" destination="pDJ-fc-zQD" id="RR9-js-nhR"/>
                 <outlet property="sectionMainView" destination="Hiy-MI-Twc" id="QYl-sO-muW"/>
@@ -87,7 +93,7 @@
                             <rect key="frame" x="20" y="49" width="280" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <string key="text">You will receive 1 entry for every dollar you spend at
-Cherry Hill Mall.</string>
+%@.</string>
                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -129,7 +135,7 @@ Cherry Hill Mall.</string>
                             <rect key="frame" x="0.0" y="286" width="320" height="161"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="pDJ-fc-zQD" userLabel="nextSection">
+                                <imageView hidden="YES" tag="201" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="pDJ-fc-zQD" userLabel="nextSection1">
                                     <rect key="frame" x="20" y="0.0" width="280" height="161"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -147,6 +153,37 @@ Cherry Hill Mall.</string>
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for long reciepts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EoT-E9-ldW">
+                                    <rect key="frame" x="118" y="42" width="100" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" id="tkh-k5-3AH">
+                            <rect key="frame" x="0.0" y="286" width="320" height="161"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView hidden="YES" tag="201" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="eUN-Op-ujm" userLabel="nextSection2">
+                                    <rect key="frame" x="20" y="0.0" width="280" height="161"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="swM-Lb-wks">
+                                    <rect key="frame" x="90" y="24" width="141" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="11"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="5" maxY="0.0"/>
+                                    <state key="normal" title="Next Section" image="productsearch-icon-list-add.png">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="getSection2BtnCall:" destination="-1" eventType="touchUpInside" id="bMo-jd-WCG"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for long reciepts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xZm-8T-XfW">
                                     <rect key="frame" x="118" y="42" width="100" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -175,6 +212,9 @@ Cherry Hill Mall.</string>
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="uploadBtnCall:" destination="-1" eventType="touchUpInside" id="Gkl-G0-WJB"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Cse-tf-ego">
                     <rect key="frame" x="20" y="530" width="135" height="30"/>
@@ -185,10 +225,13 @@ Cherry Hill Mall.</string>
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="backBtnCall:" destination="-1" eventType="touchUpInside" id="JGK-KQ-SAm"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="302" y="354"/>
+            <point key="canvasLocation" x="619" y="358"/>
         </view>
     </objects>
     <resources>

@@ -25,7 +25,7 @@
 #define HOURS @"HOURS"
 #define MOVIE @"MOVIE LISTINGS"
 #define JOB @"JOB OPENINGS"
-#define SCAN @"SCAN RECEIPT"
+
 
 #define SHOW_NEW_MALL @"Select a Different PREIT Property"
 
@@ -185,7 +185,7 @@
                      nil];
     }
     
-    [tableData addObject:SCAN];
+
     
     [tableView_ reloadData];
     
@@ -414,7 +414,7 @@
         }
     }
     
-    else if ([str isEqualToString:SCAN]){
+ /*   else if ([str isEqualToString:SCAN]){
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[ScanReceiptViewController class]]) {
             ScanReceiptViewController *scanVC = [[ScanReceiptViewController alloc] initWithNibName:@"ScanReceiptViewController" bundle:[NSBundle mainBundle]];
             
@@ -422,7 +422,7 @@
             [_navController pushViewController:scanVC animated:NO];
         }
         
-    }
+    }*/
     
     self.menuContainerViewController.menuState = MFSideMenuStateClosed;
     

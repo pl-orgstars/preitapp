@@ -142,12 +142,12 @@
 	self.callback = callbackSelector;
 	self.errorCallback=errorSelector;
     
-    theRequest   = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:URL]];
+    theRequest   = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:URL] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:240.0];
     
 
     [theRequest setHTTPMethod:@"POST"];
 //		[theRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [theRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [theRequest addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     [theRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
 //    [theRequest setValue:@"" forKeyPath:@""];
@@ -157,16 +157,24 @@
     
     [theRequest setHTTPBody:postData];
     
-    [theRequest setValue:[NSString stringWithFormat:@"%d",[postData length] ] forHTTPHeaderField:@"Content-Length"];
-        
+    [theRequest setValue:[NSString stringWithFormat:@"%lu",(unsigned long)[postData length] ] forHTTPHeaderField:@"Content-Length"];
+    
 	[[NSURLCache sharedURLCache] setMemoryCapacity:0];
 	[[NSURLCache sharedURLCache] setDiskCapacity:0];
+    
+    
+
+    
+  
     
     
     NSString *requestPath = [[theRequest URL] absoluteString];
 //    NSString* newStr = [[NSString alloc] initWithData:postData
 //                                              encoding:NSUTF8StringEncoding];
     NSLog(@"request:::::::::::::::::::::::::::::::::::::::::::: %@ postdata \n %@",theRequest,requestPath);
+    
+    
+    
 	theConnection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
     
 	if (theConnection)
