@@ -7,31 +7,47 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PreitAppDelegate.h"
+#import "RequestAgent.h"
+#include "JSON.h"
+#include "Base64.h"
+#include "AFNetworking.h"
+
 
 @interface ScanReceiptViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIAlertViewDelegate>{
     
 //    UIImagePickerController* imagePicker;
     
-    IBOutlet UIScrollView*  mainScroll;
+    IBOutlet UIScrollView   *mainScroll;
     
-    IBOutlet UIView* receiptMainView;
+    IBOutlet UILabel        *mainLabel;
     
-    IBOutlet UIImageView*   receiptImgView;
-    IBOutlet UIButton*      takeReceiptBtn;
+    IBOutlet UIView         *receiptMainView;
     
-    IBOutlet UIImageView*   dividerLine2;
+    IBOutlet UIImageView    *receiptImgView;
+    IBOutlet UIButton       *takeReceiptBtn;
     
-    IBOutlet UIView* sectionMainView;
+    IBOutlet UIImageView    *dividerLine2;
     
-    IBOutlet UIButton*      sectionBtn;
-    IBOutlet UILabel *longerLabel;
-    IBOutlet UIImageView*   sectionImgView;
+    IBOutlet UIView         *sectionMainView;
+    
+    IBOutlet UIButton       *sectionBtn;
+    IBOutlet UILabel        *longerLabel;
+    IBOutlet UIImageView    *sectionImgView;
+    
+    IBOutlet UIView         *section2MainView;
+    IBOutlet UIButton       *section2Btn;
+    IBOutlet UILabel        *longerlabel2;
+    IBOutlet UIImageView    *section2ImgView;
+    
+    IBOutlet UIButton       *cancelBtn;
     
     
     
     NSMutableDictionary* originalImgArray;
     
     BOOL gettingReciept; // yes for reciept img, no for section img
+    BOOL gettingSection1;   // yes for section 1 , no for section2;
 }
 
 @end
