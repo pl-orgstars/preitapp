@@ -87,7 +87,8 @@ CGFloat animatedDistance;
         [emailAddress becomeFirstResponder];
     }
 }
--(void)userClickedDone:(id)sender{
+-(void)userClickedDone:(id)sender
+{
     [name resignFirstResponder];
     [emailAddress resignFirstResponder];
 }

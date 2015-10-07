@@ -21,6 +21,8 @@
 @synthesize imageView;
 @synthesize retailerName;
 @synthesize storeID;
+@synthesize imgMain;
+
 //-(id)initWithValues:(NSDictionary *)dict {
 //    self = [super init];
 //    if (self) {

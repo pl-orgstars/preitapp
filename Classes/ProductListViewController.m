@@ -51,7 +51,7 @@
 
     [super viewDidLoad];
     [self addMaxMinTextField];
-    
+    viewPriceBAr.hidden = TRUE;
     delegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
     
     UIView *barV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 60, 40)];
@@ -82,13 +82,21 @@
     sortArray = [[NSArray alloc]initWithObjects:@"Sort: Relevance",@"Price: Low-High",@"Price: High-Low", nil];
     
     frame = self.view.frame;
-    frame.origin.y = 69;
+    frame.origin.y = 135;
 
-    if (is_iOS7) {
-        frame.size.height -= 20;
-    }
-        
-    if(isIPhone5){frame.size.height -= 81;}else{frame.size.height -= 155;}
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] > 6.0) {
+
+//    }
+    
+//    if(isIPhone5)
+//    {
+//        frame.size.height -= 81;
+//    }
+//    else
+//    {
+//        frame.size.height -= 155;
+//    }
+     frame.size.height -=  frame.origin.y ;
     [overView setBackgroundColor:[UIColor clearColor]];
     productListView = [[ProductListView alloc]initWithFrame:frame];
     productListView.loadMoreDelegate = self;
@@ -299,6 +307,7 @@
 
     }
     productListView.productsArray = [[NSMutableArray alloc]initWithArray:itemsArray];
+    productListView.backgroundColor = [UIColor clearColor];
     [productListView setHidden:NO];
     
     [overView setHidden:YES];
@@ -490,9 +499,9 @@
         [productListView.productsArray removeAllObjects];
         [productListView.productsArray addObjectsFromArray:mainArray];
     }
-    [productListView.productListTable reloadData];
+    [productListView.collectionView reloadData];
     
-    [lblResultCount setText:[NSString stringWithFormat:@"%ld results",productListView.productsArray.count]];
+    [lblResultCount setText:[NSString stringWithFormat:@"%ld results",(int)productListView.productsArray.count]];
 
 }
 
@@ -547,7 +556,7 @@
 
 -(void)pickerViewTapped:(UITapGestureRecognizer*)tap {
     
-    int row = [[tap view]tag];
+    int row = (int)[[tap view]tag];
     for (int i = 0; i<3; i++) {
         UIView *view = [pickerSort viewForRow:i forComponent:0];
         UILabel *label = (UILabel*)[view viewWithTag:pickerTextTag];
@@ -635,59 +644,63 @@
 
 
 
--(void)addMaxMinTextField{
+-(void)addMaxMinTextField
+{
+    
+    
+    
     [pickerBttn setHidden:YES];
     [lblSort setHidden:YES];
-    UIImageView *imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"box2.png"]];
-    imgView.frame = CGRectMake(179, 3, 58, 22);
-    [barView addSubview:imgView];
-    imgView = nil;
-    imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"box2.png"]];
-    imgView.frame = CGRectMake(251, 3, 58, 22);
-    [barView addSubview:imgView];
-    
-    minmumPriceLabel = [[UITextField alloc]initWithFrame:CGRectMake(191, 7, 43, 16)];
-    [minmumPriceLabel setBackgroundColor:[UIColor clearColor]];
-    [minmumPriceLabel setTextColor:[UIColor whiteColor]];
-    [minmumPriceLabel setFont:[UIFont systemFontOfSize:11]];
-    [minmumPriceLabel setTextAlignment:UITextAlignmentLeft];
-    
-    maximunPriceLabel = [[UITextField alloc]initWithFrame:CGRectMake(262, 7, 43, 16)];
-    [maximunPriceLabel setBackgroundColor:[UIColor clearColor]];
-    [maximunPriceLabel setTextColor:[UIColor whiteColor]];
-    [maximunPriceLabel setFont:[UIFont systemFontOfSize:11]];
-    [maximunPriceLabel setTextAlignment:UITextAlignmentLeft];
-    
-    UILabel *lbl1 = [[UILabel alloc]initWithFrame:CGRectMake(181, 7, 10, 16)];
-    [lbl1 setBackgroundColor:[UIColor clearColor]];
-    [lbl1 setTextColor:[UIColor whiteColor]];
-    [lbl1 setFont:[UIFont systemFontOfSize:11]];
-    [lbl1 setTextAlignment:UITextAlignmentRight];
-    [lbl1 setText:@"$"];
-    
-    UILabel *lbl2 = [[UILabel alloc]initWithFrame:CGRectMake(252, 7, 10, 16)];
-    [lbl2 setBackgroundColor:[UIColor clearColor]];
-    [lbl2 setTextColor:[UIColor whiteColor]];
-    [lbl2 setFont:[UIFont systemFontOfSize:11]];
-    [lbl2 setTextAlignment:UITextAlignmentRight];
-    [lbl2 setText:@"$"];
-    
-    UILabel *lbl3 = [[UILabel alloc]initWithFrame:CGRectMake(238, 5, 12, 20)];
-    [lbl3 setBackgroundColor:[UIColor clearColor]];
-    [lbl3 setTextColor:[UIColor whiteColor]];
-    [lbl3 setFont:[UIFont systemFontOfSize:11]];
-    [lbl3 setTextAlignment:UITextAlignmentCenter];
-    [lbl3 setText:@"to"];
-    
-    [maximunPriceLabel setKeyboardType:UIKeyboardTypeDecimalPad];
-    [minmumPriceLabel setKeyboardType:UIKeyboardTypeDecimalPad];
-    [maximunPriceLabel setDelegate:self];
-    [minmumPriceLabel setDelegate:self];
-    [barView addSubview:lbl3];
-    [barView addSubview:lbl1];
-    [barView addSubview:lbl2];
-    [barView addSubview:maximunPriceLabel];
-    [barView addSubview:minmumPriceLabel];
+//    UIImageView *imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"box2.png"]];
+//    imgView.frame = CGRectMake(179, 3, 58, 22);
+//    [barView addSubview:imgView];
+//    imgView = nil;
+//    imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"box2.png"]];
+//    imgView.frame = CGRectMake(251, 3, 58, 22);
+//    [barView addSubview:imgView];
+//    
+//    minmumPriceLabel = [[UITextField alloc]initWithFrame:CGRectMake(191, 7, 43, 16)];
+//    [minmumPriceLabel setBackgroundColor:[UIColor clearColor]];
+//    [minmumPriceLabel setTextColor:[UIColor whiteColor]];
+//    [minmumPriceLabel setFont:[UIFont systemFontOfSize:11]];
+//    [minmumPriceLabel setTextAlignment:NSTextAlignmentLeft];
+//    
+//    maximunPriceLabel = [[UITextField alloc]initWithFrame:CGRectMake(262, 7, 43, 16)];
+//    [maximunPriceLabel setBackgroundColor:[UIColor clearColor]];
+//    [maximunPriceLabel setTextColor:[UIColor whiteColor]];
+//    [maximunPriceLabel setFont:[UIFont systemFontOfSize:11]];
+//    [maximunPriceLabel setTextAlignment:NSTextAlignmentLeft];
+//    
+//    UILabel *lbl1 = [[UILabel alloc]initWithFrame:CGRectMake(181, 7, 10, 16)];
+//    [lbl1 setBackgroundColor:[UIColor clearColor]];
+//    [lbl1 setTextColor:[UIColor whiteColor]];
+//    [lbl1 setFont:[UIFont systemFontOfSize:11]];
+//    [lbl1 setTextAlignment:NSTextAlignmentRight];
+//    [lbl1 setText:@"$"];
+//    
+//    UILabel *lbl2 = [[UILabel alloc]initWithFrame:CGRectMake(252, 7, 10, 16)];
+//    [lbl2 setBackgroundColor:[UIColor clearColor]];
+//    [lbl2 setTextColor:[UIColor whiteColor]];
+//    [lbl2 setFont:[UIFont systemFontOfSize:11]];
+//    [lbl2 setTextAlignment:NSTextAlignmentRight];
+//    [lbl2 setText:@"$"];
+//    
+//    UILabel *lbl3 = [[UILabel alloc]initWithFrame:CGRectMake(238, 5, 12, 20)];
+//    [lbl3 setBackgroundColor:[UIColor clearColor]];
+//    [lbl3 setTextColor:[UIColor whiteColor]];
+//    [lbl3 setFont:[UIFont systemFontOfSize:11]];
+//    [lbl3 setTextAlignment:NSTextAlignmentCenter];
+//    [lbl3 setText:@"to"];
+//    
+//    [maximunPriceLabel setKeyboardType:UIKeyboardTypeDecimalPad];
+//    [minmumPriceLabel setKeyboardType:UIKeyboardTypeDecimalPad];
+//    [maximunPriceLabel setDelegate:self];
+//    [minmumPriceLabel setDelegate:self];
+//    [barView addSubview:lbl3];
+//    [barView addSubview:lbl1];
+//    [barView addSubview:lbl2];
+//    [barView addSubview:maximunPriceLabel];
+//    [barView addSubview:minmumPriceLabel];
     
     
     UIToolbar *toolbar = [[UIToolbar alloc] init];
@@ -741,10 +754,11 @@
         page = page +1;
     }
 }
-- (void)userClickedDone:(id)sender {
+- (void)userClickedDone:(id)sender
+{
     
     if (!maximunPriceLabel.text.length || minmumPriceLabel.text.floatValue<=maximunPriceLabel.text.floatValue) {
-        
+        viewPriceBAr.hidden = TRUE;
         [self getDataAccordingToMaxMin];
         
     }else{
@@ -831,5 +845,11 @@
     return YES;
 }
 
+
+-(IBAction)ShowPriceTab:(id)sender
+{
+
+    viewPriceBAr.hidden = FALSE;
+}
 
 @end
