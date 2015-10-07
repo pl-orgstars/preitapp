@@ -18,6 +18,7 @@
 
 #import "ProductListView.h"
 #import "AsyncImageView.h"
+#import "ProductSearchCC.h"
 
 @implementation ProductListView
 
@@ -37,6 +38,7 @@
 @synthesize hasMoreProducts;
 @synthesize showProductDetailDelegate;
 @synthesize showProductDetailSelector;
+@synthesize collectionView;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -45,56 +47,55 @@
         // Initialization code
     }
     frame.origin.y = 0;
-    productListTable = [[UITableView alloc]initWithFrame:frame];
-    
-    [productListTable setBackgroundColor:[UIColor clearColor]];
-    productListTable.delegate = self;
-    productListTable.dataSource = self;
-//    productListTable.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.4];
-    productListTable.backgroundColor = [UIColor clearColor];
-	productListTable.separatorColor=[UIColor whiteColor];
-    [self addSubview:productListTable];
-    
-    productListTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.itemSize = CGSizeMake(160  , 200.0);
+    layout.minimumInteritemSpacing = 0.0;
+    layout.minimumLineSpacing = 5.0;
+//    collectionView.collectionViewLayout = layout;
 
     
-//    [productListTable release];
+     collectionView= [[UICollectionView alloc]initWithFrame:frame collectionViewLayout:layout];
+    
+    [collectionView setBackgroundColor:[UIColor yellowColor]];
+    collectionView.delegate = self;
+    collectionView.dataSource = self;
+    [self addSubview:collectionView];
+
+    [collectionView registerNib:[UINib nibWithNibName:@"ProductSearchCC" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"ProductSearchCC"];
+
+    
+    [collectionView reloadData];
+    
+    
+    
+//    productListTable = [[UITableView alloc]initWithFrame:frame];
+//    
+//    [productListTable setBackgroundColor:[UIColor clearColor]];
+//    productListTable.delegate = self;
+//    productListTable.dataSource = self;
+//    productListTable.backgroundColor = [UIColor clearColor];
+//	productListTable.separatorColor=[UIColor whiteColor];
+//    [self addSubview:productListTable];
+    
+//    productListTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
     editFlag = 0;
     return self;
 }
 
-//-(void)dealloc {
-//    [productsArray release];
-//    [super dealloc];
-//}
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    NSLog(@"productsArray.count %d",productsArray.count);
-    if (productsArray.count>0) {
-//        if (hasMoreProducts && hasPreviousProducts) {
-//            return productsArray.count + 3 ;
-//        } else if (hasMoreProducts || hasPreviousProducts) {
-//            return productsArray.count + 2 ;
-//        } else if (isShoppingList){
-//            return productsArray.count + 2;
-//        } else {
+    if (productsArray.count > 0)
+    {
             if (self.hasMoreProducts) {
                 return productsArray.count + 1;
             }else{
                 return productsArray.count;
             }
             
-        }
-//    }
+    }
     
     return 0;
     
@@ -105,7 +106,7 @@
     
     cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"] ;//autorelease];
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"] ;
         } else {
             [[cell viewWithTag:imageTag]removeFromSuperview];
             [[cell viewWithTag:titleTag]removeFromSuperview];
@@ -117,49 +118,7 @@
             [cell setAccessoryType:UITableViewCellAccessoryNone];
     }
 
-//    if (isShoppingList && indexPath.row == 0){
-//        // blank cell
-//    }
-//    else if (hasPreviousProducts && indexPath.row == 0) {
-//        // load previous cell
-//        
-////        UIImageView *arrowImage = [[UIImageView alloc]initWithFrame:CGRectMake(70, 18, 14, 10)];// autorelease];
-////        [arrowImage setImage:[UIImage imageNamed:@"arrow_up.png"]];
-////        [arrowImage setBackgroundColor:[UIColor clearColor]];
-////        [arrowImage setTag:arrowTag];
-////        
-////        [cell addSubview:arrowImage];
-//        
-//        UILabel *nextLabel = [[UILabel alloc]initWithFrame:CGRectMake(90, 17, 200, 20)];// autorelease];
-//        [nextLabel setBackgroundColor:[UIColor clearColor]];
-//        [nextLabel setTextColor:LABEL_TEXT_COLOR];
-//        [nextLabel setFont:LABEL_TEXT_FONT];
-//        [nextLabel setText:@"Show previous 30 results"];
-//        [nextLabel setTag:showTag];
-//        [cell addSubview:nextLabel];
-//        
-//    } 
-//    else if (hasMoreProducts && indexPath.row == productsArray.count + hasPreviousProducts) {
-//        // load more cell
-//        
-////        UIImageView *arrowImage = [[UIImageView alloc]initWithFrame:CGRectMake(70, 23, 14, 10)];// autorelease];
-////        [arrowImage setImage:[UIImage imageNamed:@"arrow_down.png"]];
-////        [arrowImage setBackgroundColor:[UIColor clearColor]];
-////        [arrowImage setTag:arrowTag];
-////        [cell addSubview:arrowImage];
-//        
-//        UILabel *nextLabel = [[UILabel alloc]initWithFrame:CGRectMake(90, 17, 200, 20)];// autorelease];
-//        [nextLabel setBackgroundColor:[UIColor clearColor]];
-//        [nextLabel setTextColor:LABEL_TEXT_COLOR];
-//        [nextLabel setFont:LABEL_TEXT_FONT];
-//        int diff = totalCount - currentCount;
-//        [nextLabel setText:[NSString stringWithFormat:@"Show next %d results",diff>30?30:diff]];
-//        [nextLabel setTag:showTag];
-//        [cell addSubview:nextLabel];
-//        
-//    }
-//    else {
-        // normal cell
+
         
         if(indexPath.row==productsArray.count){
             
@@ -169,9 +128,6 @@
             
             Product *product;
             
-//            if (isShoppingList || hasPreviousProducts)
-//                product = [productsArray objectAtIndex:indexPath.row - 1];
-//            else
             product = [productsArray objectAtIndex:indexPath.row];
             
             [self createCell:cell withProduct:product];
@@ -190,8 +146,6 @@
             
         }
         
-        
-//    }
     
     [cell setBackgroundColor:[UIColor clearColor]];
     [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
@@ -210,7 +164,6 @@
     
     [titleLabel setCenter:cell.contentView.center];
     [cell setAccessoryType:UITableViewCellAccessoryNone];
-//    [titleLabel setNumberOfLines:3];
     [titleLabel setTextAlignment:NSTextAlignmentCenter];
     
     [titleLabel setBackgroundColor:[UIColor clearColor]];
@@ -219,7 +172,6 @@
     [titleLabel setTag:titleTag];
     [titleLabel setText:@"Load more 10 results"];
     [cell addSubview:titleLabel];
-//    [titleLabel setBackgroundColor:[UIColor greenColor]];
 
     UIImage *arr = [UIImage imageNamed:@"next_arrow.png"];
     UIImageView *arrow = [[UIImageView alloc]initWithFrame:CGRectMake(titleLabel.frame.origin.x-15, titleLabel.frame.origin.y, 17, 17)];
@@ -228,11 +180,8 @@
     arrow.transform = CGAffineTransformMakeRotation(M_PI_2);
     
     [arrow setContentMode:UIViewContentModeScaleAspectFit];
-//    UIViewContentModeCenter
     [arrow setTag:nextArrowTag];
     [cell addSubview:arrow];
-    
-    
     
     cell.accessoryView = nil;
 
@@ -249,7 +198,6 @@
             [imageView setTag:imageTag];
             [cell addSubview:imageView];    
             product.imageView = imageView;
-//            [imageView release];
             
         } else {
             [product.imageView setFrame:CGRectMake(0, 0, 50, 60)];
@@ -263,6 +211,7 @@
         [titleLabel setTextColor:LABEL_TEXT_COLOR];
         [titleLabel setTag:titleTag];
         [titleLabel setText:product.title];
+        
         [cell addSubview:titleLabel];
         
         UILabel *priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 40, 65, 15)] ;//autorelease];
@@ -280,10 +229,7 @@
         [arrow setTag:nextArrowTag];
         [cell addSubview:arrow];
         
-        //        CGSize s = [priceLabel.text sizeWithFont:[UIFont boldSystemFontOfSize:11.5]];
-        //        float l = s.width;
-        UILabel *storeLabel = [[UILabel alloc]initWithFrame:CGRectMake(arrow.frame.origin.x + 15, 40, 170, 15)];//[[[UILabel alloc]initWithFrame:CGRectMake(60 + l + 5, 40, 170, 15)] autorelease];
-        [storeLabel setBackgroundColor:[UIColor clearColor]];
+        UILabel *storeLabel = [[UILabel alloc]initWithFrame:CGRectMake(arrow.frame.origin.x + 15, 40, 170, 15)];        [storeLabel setBackgroundColor:[UIColor clearColor]];
         [storeLabel setFont:[UIFont boldSystemFontOfSize:11.5]];
         [storeLabel setTextColor:LABEL_TEXT_COLOR];
         [storeLabel setTag:storeTag];
@@ -302,22 +248,16 @@
         }
         [cell addSubview:storeLabel];
         
-        UIImageView *view = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"back_icon1.png"]];
-        [view setTag:nextArrowTag];
-        [view setFrame:CGRectMake(0, 0, 8, 14)];
-        
-        cell.accessoryView = view;
-//        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-        
-//        [arrow release];
+//        UIImageView *view = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"back_icon1.png"]];
+//        [view setTag:nextArrowTag];
+//        [view setFrame:CGRectMake(0, 0, 8, 14)];
+//        
+//        cell.accessoryView = view;
         
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (isShoppingList&&indexPath.row==0) {
-//        return 47;
-//    }
     return 60.4;
 }
 
@@ -347,18 +287,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    if (indexPath.row==productsArray.count) {
-//        [self loadMore];
-//    } else {
-    NSLog(@"shplist %d",indexPath.row);
-//    if (indexPath.row==0) {
         [self showProductDetail:(int)indexPath.row];
-//    } else {
-//        [self showProductDetail:indexPath.row-1];
-//    }
-    
-//    }
 }
 
 
@@ -396,9 +325,6 @@
     if (!removeFromShListSelector) {
         return NO;
     }
-//    if (indexPath.row==0) {
-//        return NO;
-//    } else {
         if (isEditing) {
             if (editFlag == 1) {
                 UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -409,7 +335,6 @@
             }
         }
         return YES;
-//    }
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -442,6 +367,94 @@
     
     [productListTable reloadData];
     
+}
+
+
+/// UIcollectationView
+- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section
+{
+    return productsArray.count;
+}
+// 2
+- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
+    return 1;
+}
+// 3
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView1 cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ProductSearchCC *cellcustom = [collectionView1 dequeueReusableCellWithReuseIdentifier:@"ProductSearchCC" forIndexPath:indexPath];
+    Product *product;
+    
+    product = [productsArray objectAtIndex:indexPath.row];
+    NSLog(@"index %d==%@",(int)indexPath.row,product.imgMain);
+    cellcustom.imageViewMain.image = nil;
+    if (!product.imgMain)
+    {
+        ImageLoader *imgLoader = [[ImageLoader alloc] init];
+        imgLoader.indexPath = indexPath;
+        imgLoader.delegate = self;
+        [imgLoader loadImage:product.imageUrl];
+
+        
+    } else
+    {
+        NSLog(@"index Inner %d==%@",(int)indexPath.row,product.imgMain);
+        cellcustom.imageViewMain.image = product.imgMain;
+    }
+
+
+
+    UIButton *btn = cellcustom.btnAdd;
+    [cellcustom.btnAdd removeFromSuperview];
+    [cellcustom addSubview:btn];
+    
+    
+    cellcustom.btnAdd.tag =indexPath.row;
+    [cellcustom.btnAdd addTarget:self action:@selector(AddMe:) forControlEvents:UIControlEventTouchUpInside];
+    
+    cellcustom.lblName.text = product.title;
+    cellcustom.lblDisc.text = product.retailerName;
+    cellcustom.lblPrice.text = [NSString stringWithFormat:@"$%.2f",product.price];
+   
+    NSLog(@"");
+    
+    return cellcustom;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self showProductDetail:(int)indexPath.row];
+}
+
+-(IBAction)AddMe:(UIButton *)btnSender
+{
+    Product *product;
+    
+    product = [productsArray objectAtIndex:btnSender.tag];
+
+    NSLog(@"%@ ",product.title);
+}
+
+
+-(void) imgLoader:(ImageLoader *)imgLoader processImage:(UIImage *)img indexPath:(NSIndexPath *)imgIndexPath
+{
+    if (img)
+    {
+        ProductSearchCC *cell = (ProductSearchCC*)[collectionView cellForItemAtIndexPath:imgIndexPath];
+//        cell.activity.hidden=TRUE;
+//        [cell.activity stopAnimating];
+        UIImageView *mainInage;
+        Product *product;
+        product = [productsArray objectAtIndex:imgIndexPath.row];
+        
+        product.imgMain = img;
+        
+        mainInage= cell.imageViewMain;
+        mainInage.image = img;
+        product.imageView = mainInage;
+        
+    }
 }
 
 

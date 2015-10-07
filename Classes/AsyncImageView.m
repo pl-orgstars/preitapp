@@ -13,36 +13,25 @@
 @implementation AsyncImageView
 @synthesize delegate,callback;
 
-//- (void)dealloc {
-//	[connection cancel]; //in case the URL is still downloading
-//	[connection release];
-//	[data release]; 
-//    [super dealloc];
-//}
+
 
 
 - (void)loadImageFromURL:(NSURL*)url delegate:(id)requestDelegate requestSelector:(SEL)requestSelector{
-	//NSLog(@"11111111");
 	delegate=requestDelegate;
 	self.callback=requestSelector;
 	
-	//NSLog(@"11111111");
 	
 	if (connection!=nil) {connection =nil; }//[connection release]; } //in case we are downloading a 2nd image
 	if (data!=nil) {data = nil; }//[data release]; }
-//	UIActivityIndicatorView *myIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//	myIndicator.center = CGPointMake(20,25);
-//	
-//	[myIndicator startAnimating];
+	myIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	myIndicator.center = self.center;
+	[myIndicator startAnimating];
+//    self.image = [[UIImage alloc]init];
 	
+	myIndicator.hidesWhenStopped = NO;
 	
-	//myIndicator.hidesWhenStopped = NO;
-	//[cell.contentView addSubview:myIndicator];
+	[self addSubview:myIndicator];
 	
-	//[self addSubview:myIndicator];
-	
-	//imageView.frame = self.bounds;
-	//[imageView setNeedsLayout];
 	[self setNeedsLayout];
 	NSURLRequest* request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
 	connection = [[NSURLConnection alloc] initWithRequest:request delegate:self]; //notice how delegate set to self object
@@ -73,7 +62,8 @@
 	}
 
 	UIImageView *imageView= [[UIImageView alloc] initWithImage:[UIImage imageWithData:data]] ;//autorelease];
-	
+    [myIndicator stopAnimating];
+    myIndicator.hidden = TRUE;
 	//make sizing choices based on your needs, experiment with these. maybe not all the calls below are needed.
 	imageView.contentMode = UIViewContentModeScaleAspectFit;
 	imageView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight );

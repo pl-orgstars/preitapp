@@ -285,6 +285,8 @@
         [indicator removeFromSuperview];
         [self.view setUserInteractionEnabled:YES];
         
+        [self.navigationController popViewControllerAnimated:NO];
+        
         NSLog(@"Success:  %@",responseObject);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

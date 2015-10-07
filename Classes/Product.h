@@ -20,7 +20,7 @@
 @property (nonatomic, retain) NSString *availability;
 @property (nonatomic) float price;
 @property (nonatomic, retain) id imageView;
-
+@property (nonatomic, retain) UIImage *imgMain;
 
 @property (nonatomic, retain) NSString *storeID;
 
