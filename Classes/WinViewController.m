@@ -37,19 +37,17 @@
     NSString* url;
     
     if (votigoUserID) {
-        url = [NSString stringWithFormat:@"%@",VOTIGO_MAIN];
+        url = VOTIGO_MAIN;
     }
     else{
-        url = [NSString stringWithFormat:@"%@?mall_id=%@",VOTIGO_SIGNUP,[delegate.mallData objectForKey:@"id"]];
+        url = VOTIGO_SIGNUP;
     }
     
-    
-    
+    NSString *toBeAppend = [NSString stringWithFormat:@"?mall_id=%@", [delegate.mallData objectForKey:@"id"]];
+    url = [url stringByAppendingString:toBeAppend];
     
     NSURLRequest* winRequest = [[NSURLRequest alloc] initWithURL:[[NSURL alloc] initWithString:url]];
     [winWebView loadRequest:winRequest];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
