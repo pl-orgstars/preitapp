@@ -170,9 +170,12 @@
     NSLog(@"textchange %lu",(unsigned long)searchText.length);
     if (searchBar.text.length == 0 && !spinner.isAnimating) {
         [productListView.productsArray removeAllObjects];
-        [barView setHidden:YES];
+//        [barView setHidden:YES];
         [productListView setHidden:YES];
-        [overView setHidden:NO];
+//        [overView setHidden:NO];
+        self.btnNext.hidden = TRUE;
+        self.btnPrevious.hidden = TRUE;
+        
         [self hidePicker];
         
         [searchBar setShowsCancelButton:NO];
@@ -270,7 +273,11 @@
     [req requestToServer:self callBackSelector:@selector(requestForSearchFinishedSuccess:) errorSelector:@selector(requestError:) Url:url];
 }
 
--(void)requestForSearchFinishedSuccess:(NSData*)responseData{
+-(void)requestForSearchFinishedSuccess:(NSData*)responseData
+{
+    self.btnPrevious.hidden = TRUE;
+    self.btnNext.hidden = TRUE;
+    
     [productListView.productsArray removeAllObjects];
     [mainArray removeAllObjects];
     productListView.hasMoreProducts = NO;
@@ -289,7 +296,8 @@
     for (int i=0; i<array.count; i++) {
         Product *prod = [[Product alloc]initWithValues:[[array objectAtIndex:i] objectForKey:@"SearchResult"]];
         [itemsArray addObject:prod];
-        if (i==29) {
+        if (i==29)
+        {
             break;
         }
     }
@@ -297,8 +305,10 @@
     
     if (totalCount<10) {
         productListView.hasMoreProducts = NO;
+        
     } else {
         productListView.hasMoreProducts = YES;
+        self.btnNext.hidden = FALSE;
     }
     [barView setHidden:NO];
     [lblSort setText:[NSString stringWithFormat:@"Sort: %@",sortString]];
@@ -335,8 +345,13 @@
         [spinner setHidden:NO];
         [spinner startAnimating];
         RequestAgent *req = [[RequestAgent alloc]init];//autorelease];
-        page = (int)currentCount/10;
+//        page = (int)currentCount/10;
         page++;
+        if (page > 1) {
+            self.btnPrevious.hidden = FALSE;
+        }else {
+            self.btnPrevious.hidden = TRUE;
+        }
         NSString *urlStringM = [NSString stringWithFormat:@"%@&page=%d",urlString,page];
         
         [req requestToServer:self callBackSelector:@selector(moreRequestFinished:) errorSelector:@selector(moreRequestFailed:) Url:urlStringM];
@@ -365,15 +380,20 @@
     NSLog(@"3");
     if (totalCount<10) {
         productListView.hasMoreProducts = NO;
+        self.btnNext.hidden = TRUE;
         NSLog(@"x");
     } else {
         productListView.hasMoreProducts = YES;
         NSLog(@"x");
+        self.btnNext.hidden = FALSE;
     }
+    NSLog(@"Count ====%d",(int)itemsArray.count);
+    [mainArray removeAllObjects];
     [mainArray addObjectsFromArray:itemsArray];
-    [productListView.productsArray addObjectsFromArray:itemsArray];
-    NSLog(@"5");
-    productListView.currentCount = currentCount; 
+//    [productListView.productsArray addObjectsFromArray:itemsArray];
+    [productListView.productsArray removeAllObjects];
+    productListView.productsArray = [[NSMutableArray alloc]initWithArray:itemsArray];
+    productListView.currentCount = currentCount;
     [self sort];
 }
 
@@ -390,8 +410,14 @@
         [spinner setHidden:NO];
         [spinner startAnimating];
         RequestAgent *req = [[RequestAgent alloc]init];
-        page = (int)currentCount/30;
         page--;
+        if (page == 1) {
+            self.btnPrevious.hidden = TRUE;
+        }
+        if (page < 1) {
+            page = 1;
+            self.btnPrevious.hidden = TRUE;
+        }
         NSString *urlStringM = [NSString stringWithFormat:@"%@&page=%d",urlString,page];//currentCount-mainArray.count-REMOVEROWS+1];
         NSLog(@"loadprevurl %@",urlStringM);
         [req requestToServer:self callBackSelector:@selector(prevRequestFinished:) errorSelector:@selector(prevRequestFailed:) Url:urlStringM];
@@ -405,47 +431,83 @@
 
 }
 
--(void)prevRequestFinished:(NSData *)responseData {
-    
+-(void)prevRequestFinished:(NSData *)responseData
+{
     [spinner stopAnimating];
     NSString *jsonString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
     NSDictionary *dict = [jsonString JSONValue];
-    NSArray *array = [[dict objectForKey:@"item_lists"]objectForKey:@"normal"];
+    NSArray *array = [dict objectForKey:@"results"];
     NSMutableArray *itemsArray = [[NSMutableArray alloc]initWithCapacity:array.count];
     
+    totalCount = [[dict objectForKey:@"count"] longValue];
     
     for (int i=0; i<array.count; i++) {
-        Product *prod = [[Product alloc]initWithValues:[array objectAtIndex:i]];
+        Product *prod = [[Product alloc]initWithValues:[[array objectAtIndex:i] objectForKey:@"SearchResult"]];
         [itemsArray addObject:prod];
         if (i==29) {
             break;
         }
     }
+     currentCount -= itemsArray.count;
     
-    currentCount -= itemsArray.count;
-    
-    int mod = currentCount % MAXROWS;
-    
-    if (mod>0) {
-        int diff = MAXROWS - mod;
-        currentCount += diff;
-    }
-    
-    productListView.hasMoreProducts = YES;
-    
-    if (currentCount<=MAXROWS) {
-        productListView.hasPreviousProducts = NO;
+    NSLog(@"3");
+    if (totalCount<10) {
+        productListView.hasMoreProducts = NO;
+        self.btnNext.hidden = TRUE;
+        NSLog(@"x");
     } else {
-        productListView.hasPreviousProducts = YES;
+        productListView.hasMoreProducts = YES;
+        NSLog(@"x");
+        self.btnNext.hidden = FALSE;
     }
+    NSLog(@"Count ====%d",(int)itemsArray.count);
+    [mainArray removeAllObjects];
+    [mainArray addObjectsFromArray:itemsArray];
+    //    [productListView.productsArray addObjectsFromArray:itemsArray];
+    [productListView.productsArray removeAllObjects];
+    productListView.productsArray = [[NSMutableArray alloc]initWithArray:itemsArray];
     productListView.currentCount = currentCount;
-    [mainArray insertObjects:itemsArray atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, itemsArray.count)]];
-    [productListView.productsArray insertObjects:itemsArray atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, itemsArray.count)]];
-    
-    [mainArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(MAXROWS,mainArray.count-MAXROWS)]];
-    [productListView.productsArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(MAXROWS, productListView.productsArray.count - MAXROWS)]];
-    
     [self sort];
+    
+//    [spinner stopAnimating];
+//    NSString *jsonString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
+//    NSDictionary *dict = [jsonString JSONValue];
+//    NSArray *array = [[dict objectForKey:@"item_lists"]objectForKey:@"normal"];
+//    NSMutableArray *itemsArray = [[NSMutableArray alloc]initWithCapacity:array.count];
+//    
+//    
+//    for (int i=0; i<array.count; i++) {
+//        Product *prod = [[Product alloc]initWithValues:[array objectAtIndex:i]];
+//        [itemsArray addObject:prod];
+//        if (i==29) {
+//            break;
+//        }
+//    }
+//    
+//    currentCount -= itemsArray.count;
+//    
+//    int mod = currentCount % MAXROWS;
+//    
+//    if (mod>0) {
+//        int diff = MAXROWS - mod;
+//        currentCount += diff;
+//    }
+//    
+//    productListView.hasMoreProducts = YES;
+//    
+//    if (currentCount<=MAXROWS) {
+//        productListView.hasPreviousProducts = NO;
+//    } else {
+//        productListView.hasPreviousProducts = YES;
+//    }
+//    productListView.currentCount = currentCount;
+//    [mainArray insertObjects:itemsArray atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, itemsArray.count)]];
+//    [productListView.productsArray insertObjects:itemsArray atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, itemsArray.count)]];
+//    
+//    [mainArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(MAXROWS,mainArray.count-MAXROWS)]];
+//    [productListView.productsArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(MAXROWS, productListView.productsArray.count - MAXROWS)]];
+//    
+//    [self sort];
 }
 
 #pragma mark - show detail
@@ -711,7 +773,7 @@
     
 
     tabNavigation = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Previous", @"Next", nil]];
-    tabNavigation.segmentedControlStyle = UISegmentedControlStyleBar;
+//    tabNavigation.segmentedControlStyle = UISegmentedControlStyleBar;
     [tabNavigation setEnabled:YES forSegmentAtIndex:0];
     [tabNavigation setEnabled:YES forSegmentAtIndex:1];
     tabNavigation.momentary = YES;
@@ -735,7 +797,7 @@
 {
 
     
-   currentSelectedTextboxIndex = [(UISegmentedControl *)sender selectedSegmentIndex];
+   currentSelectedTextboxIndex = (int)[(UISegmentedControl *)sender selectedSegmentIndex];
 
     if (currentSelectedTextboxIndex == 0 && page == 1) {
         return;
@@ -850,6 +912,17 @@
 {
 
     viewPriceBAr.hidden = FALSE;
+}
+
+
+-(IBAction)NxtCall:(id)sender
+{
+    [self loadMore];
+}
+
+-(IBAction)PreviousCall:(id)sender
+{
+    [self loadPrevious];
 }
 
 @end

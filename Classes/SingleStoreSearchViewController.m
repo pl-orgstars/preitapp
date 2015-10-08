@@ -180,8 +180,6 @@
         
         NSString *urlStringM = [NSString stringWithFormat:@"%@&page=%d",self.urlString,page];
         
-        //        NSString *urlStringM =[[NSString alloc]initWithFormat:@"%@%@%d&property_id=%ld", NSLocalizedString(@"SEARCHAPI", @""), @"handbag&startIndex=",currentCount+30,delegate.mallId];
-        
         NSLog(@"loadmoreurl %@",urlStringM);
         [req requestToServer:self callBackSelector:@selector(moreRequestFinished:) errorSelector:@selector(moreRequestFailed:) Url:urlStringM];
     }
