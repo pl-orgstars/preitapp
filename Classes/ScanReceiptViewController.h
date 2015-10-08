@@ -42,6 +42,14 @@
     IBOutlet UIButton       *cancelBtn;
     
     
+    IBOutlet UIView*        uploadedView;
+    
+    IBOutlet UIImageView*   divider;
+    IBOutlet UIImageView* divider1;
+    
+    IBOutlet UILabel* combo;
+    
+    
     
     NSMutableDictionary* originalImgArray;
     
