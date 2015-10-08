@@ -57,7 +57,7 @@
     
      collectionView= [[UICollectionView alloc]initWithFrame:frame collectionViewLayout:layout];
     
-    [collectionView setBackgroundColor:[UIColor yellowColor]];
+    [collectionView setBackgroundColor:[UIColor clearColor]];
     collectionView.delegate = self;
     collectionView.dataSource = self;
     [self addSubview:collectionView];
@@ -79,7 +79,7 @@
 //    [self addSubview:productListTable];
     
 //    productListTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
+    dbAgent = [Database sharedDatabase];
     editFlag = 0;
     return self;
 }
@@ -257,15 +257,15 @@
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return 60.4;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSLog(@"shplist %d",isShoppingList);    
     if (isShoppingList) {
-        [self showProductDetail:indexPath.row];
+        [self showProductDetail:(int)indexPath.row];
     } else {
         if (hasPreviousProducts && indexPath.row == 0) {
             [self loadPrevious];
@@ -279,7 +279,7 @@
                 
             }else{
                 
-                [self showProductDetail:indexPath.row];
+                [self showProductDetail:(int)indexPath.row];
             }
             
         }
@@ -338,9 +338,6 @@
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSLog(@"indexPath.row======%ld",(long)indexPath.row);
-    
     [showProductDetailDelegate performSelector:removeFromShListSelector withObject:[NSNumber numberWithInt:(int)indexPath.row]];
 }
 
@@ -434,6 +431,7 @@
     product = [productsArray objectAtIndex:btnSender.tag];
 
     NSLog(@"%@ ",product.title);
+    [dbAgent addProductToShoppingList:product];
 }
 
 

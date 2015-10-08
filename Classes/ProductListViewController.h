@@ -52,6 +52,9 @@
     NSString *searchString;
 }
 
+@property (nonatomic ,strong )IBOutlet UIButton *btnNext;
+@property (nonatomic ,strong )IBOutlet UIButton *btnPrevious;
+
 @property (nonatomic,retain) NSString* passedSearchString;
 
 -(void)makeRequestForString:(NSString*)productStr;
