@@ -447,6 +447,12 @@
 		E6FC27941BC2AAB000DB444B /* MNProximityManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6FC27931BC2AAB000DB444B /* MNProximityManager.bundle */; };
 		E6FC27961BC2AAD200DB444B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FC27951BC2AAD200DB444B /* AdSupport.framework */; };
 		E6FC27981BC2AAF200DB444B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FC27971BC2AAF200DB444B /* CoreTelephony.framework */; };
+		E6FCFC081BC69E3600B15121 /* NewfbBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC041BC69E3600B15121 /* NewfbBtn@2x.png */; };
+		E6FCFC091BC69E3600B15121 /* NewSavetoListBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC051BC69E3600B15121 /* NewSavetoListBtn@2x.png */; };
+		E6FCFC0A1BC69E3600B15121 /* NewSearchonStoreBTn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC061BC69E3600B15121 /* NewSearchonStoreBTn@2x.png */; };
+		E6FCFC0B1BC69E3600B15121 /* NewTwitterBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC071BC69E3600B15121 /* NewTwitterBtn@2x.png */; };
+		E6FCFC0D1BC6A27800B15121 /* NewStoreNAme@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC0C1BC6A27800B15121 /* NewStoreNAme@2x.png */; };
+		E6FCFC0F1BC6A8C700B15121 /* NewREmoveBTn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC0E1BC6A8C700B15121 /* NewREmoveBTn@2x.png */; };
 		E92DFA451B4412CB000B91B0 /* PREIT_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E92DFA441B4412CB000B91B0 /* PREIT_Logo.png */; };
 		E92DFA471B4412D3000B91B0 /* PREIT_Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E92DFA461B4412D3000B91B0 /* PREIT_Logo@2x.png */; };
 		E92DFA491B4412DA000B91B0 /* PREIT_Logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E92DFA481B4412DA000B91B0 /* PREIT_Logo@3x.png */; };
@@ -1025,6 +1031,12 @@
 		E6FC27931BC2AAB000DB444B /* MNProximityManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MNProximityManager.bundle; sourceTree = "<group>"; };
 		E6FC27951BC2AAD200DB444B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		E6FC27971BC2AAF200DB444B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		E6FCFC041BC69E3600B15121 /* NewfbBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewfbBtn@2x.png"; sourceTree = "<group>"; };
+		E6FCFC051BC69E3600B15121 /* NewSavetoListBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewSavetoListBtn@2x.png"; sourceTree = "<group>"; };
+		E6FCFC061BC69E3600B15121 /* NewSearchonStoreBTn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewSearchonStoreBTn@2x.png"; sourceTree = "<group>"; };
+		E6FCFC071BC69E3600B15121 /* NewTwitterBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewTwitterBtn@2x.png"; sourceTree = "<group>"; };
+		E6FCFC0C1BC6A27800B15121 /* NewStoreNAme@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewStoreNAme@2x.png"; sourceTree = "<group>"; };
+		E6FCFC0E1BC6A8C700B15121 /* NewREmoveBTn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewREmoveBTn@2x.png"; sourceTree = "<group>"; };
 		E92DFA441B4412CB000B91B0 /* PREIT_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PREIT_Logo.png; sourceTree = "<group>"; };
 		E92DFA461B4412D3000B91B0 /* PREIT_Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PREIT_Logo@2x.png"; sourceTree = "<group>"; };
 		E92DFA481B4412DA000B91B0 /* PREIT_Logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PREIT_Logo@3x.png"; sourceTree = "<group>"; };
@@ -1120,6 +1132,7 @@
 				AE0E511B1987B78D0065B9DA /* NSDictionary+Extension.h */,
 				AE0E511C1987B78D0065B9DA /* NSDictionary+Extension.m */,
 				AEB8481219666859004B6A81 /* ListFontSize.h */,
+				E6FCFC031BC69E3600B15121 /* New PRoduct Detail Images */,
 				E6FAE1601BC5515300AC1575 /* Image Loader */,
 				E60CFE1E1BA69E0600AA95AD /* Font */,
 				E92DFA431B4412BE000B91B0 /* Images */,
@@ -2207,6 +2220,19 @@
 			path = MNNotificationsManager;
 			sourceTree = "<group>";
 		};
+		E6FCFC031BC69E3600B15121 /* New PRoduct Detail Images */ = {
+			isa = PBXGroup;
+			children = (
+				E6FCFC0E1BC6A8C700B15121 /* NewREmoveBTn@2x.png */,
+				E6FCFC0C1BC6A27800B15121 /* NewStoreNAme@2x.png */,
+				E6FCFC041BC69E3600B15121 /* NewfbBtn@2x.png */,
+				E6FCFC051BC69E3600B15121 /* NewSavetoListBtn@2x.png */,
+				E6FCFC061BC69E3600B15121 /* NewSearchonStoreBTn@2x.png */,
+				E6FCFC071BC69E3600B15121 /* NewTwitterBtn@2x.png */,
+			);
+			path = "New PRoduct Detail Images";
+			sourceTree = "<group>";
+		};
 		E92DFA431B4412BE000B91B0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -2302,6 +2328,7 @@
 				AE87D2FC193765C100F5493D /* Stop_recording_icon@2x.png in Resources */,
 				AE87D2CF193710F600F5493D /* Deal_selected@2x.png in Resources */,
 				E2AB25C012660B1000F25111 /* ContactUsViewController.xib in Resources */,
+				E6FCFC081BC69E3600B15121 /* NewfbBtn@2x.png in Resources */,
 				BD93E4851BB14C4900EB91F0 /* mainmenu-icon-jobs@2x.png in Resources */,
 				E2AB25CE126611A900F25111 /* MovieListingViewController.xib in Resources */,
 				E2BC23941266CF3E00E871E7 /* WebViewController.xib in Resources */,
@@ -2348,6 +2375,7 @@
 				E2AD92941279AA450021D20C /* calendar.png in Resources */,
 				E2B0AF81127ACDE100B32837 /* select_hover.png in Resources */,
 				AECE4801195A935600D1E5DB /* AppIcon29x29@2x.png in Resources */,
+				E6FCFC0F1BC6A8C700B15121 /* NewREmoveBTn@2x.png in Resources */,
 				E2B0AF82127ACDE100B32837 /* select.png in Resources */,
 				E92DFA4B1B4415E7000B91B0 /* Images.xcassets in Resources */,
 				BD4EF9781BBEA09F0042EF6E /* productsearch-icon-list-email@2x.png in Resources */,
@@ -2386,6 +2414,7 @@
 				AECE4808195A935600D1E5DB /* AppIcon60x60.png in Resources */,
 				BD4EF9791BBEA09F0042EF6E /* productsearch-icon-list-remove@2x.png in Resources */,
 				BD46BB851BB2ABD100FC5A43 /* directory-icon-detail-deals@2x.png in Resources */,
+				E6FCFC0B1BC69E3600B15121 /* NewTwitterBtn@2x.png in Resources */,
 				E2B6672E135411740082934C /* icon111.png in Resources */,
 				4246FA6A159DBBA600620E60 /* ShoppingListViewController.xib in Resources */,
 				AE87D2D4193710F600F5493D /* Park_normal.png in Resources */,
@@ -2396,6 +2425,7 @@
 				427ABA3715AB1F5F0079FDC3 /* PreitDB.sqlite in Resources */,
 				42A3AB1115AC2C0500F5790B /* add-to-Slist@2X.png in Resources */,
 				42A3AB1215AC2C0500F5790B /* arrow_down@2X.png in Resources */,
+				E6FCFC0A1BC69E3600B15121 /* NewSearchonStoreBTn@2x.png in Resources */,
 				BD46BB861BB2ABD100FC5A43 /* directory-icon-detail-events@2x.png in Resources */,
 				BD46BB8F1BB2C28A00FC5A43 /* appback@3x.png in Resources */,
 				42A3AB1315AC2C0500F5790B /* arrow_up@2X.png in Resources */,
@@ -2500,6 +2530,7 @@
 				AE87D2D7193710F600F5493D /* Park_selected@2x.png in Resources */,
 				42AEED1315AE8FC300BE5B35 /* Sort.png in Resources */,
 				AE710DE219404D34003277B2 /* CameraImageViewController.xib in Resources */,
+				E6FCFC091BC69E3600B15121 /* NewSavetoListBtn@2x.png in Resources */,
 				42AEED1415AE8FC300BE5B35 /* Store_search.png in Resources */,
 				42AEED1515AE8FC300BE5B35 /* tic.png in Resources */,
 				AE2B5F941A47F18200460114 /* email_new.png in Resources */,
@@ -2582,6 +2613,7 @@
 				AE87D2DA193710F600F5493D /* search_selected.png in Resources */,
 				E9F8EB251B451085003212A5 /* LaunchPage.png in Resources */,
 				70C7098D1742172500503AE1 /* btn-showonmap.png in Resources */,
+				E6FCFC0D1BC6A27800B15121 /* NewStoreNAme@2x.png in Resources */,
 				AE2B5F8D1A47EC4300460114 /* back_new@2x.png in Resources */,
 				70C12CDB17532E4700A48C83 /* check_box.png in Resources */,
 				70C12CDC17532E4700A48C83 /* input.png in Resources */,

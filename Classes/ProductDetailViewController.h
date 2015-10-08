@@ -22,10 +22,10 @@
 @interface ProductDetailViewController : BaseViewController <UIScrollViewDelegate>
 {
     IBOutlet UIScrollView *scrollProductDetail;
-    IBOutlet UIToolbar *toolBar;
-    IBOutlet UIButton *btnNext;
-    IBOutlet UIButton *btnPrev;
-    IBOutlet UILabel *lblResultsCount;
+//    IBOutlet UIToolbar *toolBar;
+//    IBOutlet UIButton *btnNext;
+//    IBOutlet UIButton *btnPrev;
+//    IBOutlet UILabel *lblResultsCount;
     IBOutlet UIScrollView *showImageScrollView;
     IBOutlet UIImageView *productImageView;
     IBOutlet UIView *productBackView;
@@ -35,6 +35,13 @@
     Database *dbAgent;
     PreitAppDelegate *delegate;
     
+    
+    
+    
+    IBOutlet UILabel *lblName;
+    IBOutlet UILabel *lblPrice;
+    IBOutlet UILabel *lblStoreName;
+    IBOutlet UIImageView *imgViewMain;
     
     ///////
     
