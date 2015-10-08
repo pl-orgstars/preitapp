@@ -18,6 +18,7 @@
 #define ALREADY_CHECKED_IN  @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/already_checked_in?mobile=yes"
 #define CHECKED_IN          @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/successful?mobile=yes"
 #define NOT_PERMITTED       @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/no_permissions?mobile=yes"
+#define NOT_IN_MALL         @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
 
 @interface WinViewController ()
 
@@ -162,8 +163,9 @@
                         NSURL *url = [NSURL URLWithString:ALREADY_CHECKED_IN];
                         [winWebView loadRequest:[NSURLRequest requestWithURL:url]];
                     }
-                    else if (responseObject) {
-                        
+                    else {
+                        NSURL *url = [NSURL URLWithString:NOT_IN_MALL];
+                        [winWebView loadRequest:[NSURLRequest requestWithURL:url]];
                     }
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
