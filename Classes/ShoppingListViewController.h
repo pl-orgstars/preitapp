@@ -18,14 +18,12 @@
 @interface ShoppingListViewController : BaseViewController <UIAlertViewDelegate>
 {
     IBOutlet UILabel *lblResultCount;
-    IBOutlet UIButton *editBtn;
+//    IBOutlet UIButton *editBtn;
     IBOutlet UIToolbar *toolBar;
     ProductListView *productListView;
     PreitAppDelegate *delegate;    
     UIBarButtonItem *done;
     UIBarButtonItem *cancel;
-//    NSMutableArray *removeTempArray;
-//    BOOL editFlag;
     
 }
 
