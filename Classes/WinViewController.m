@@ -13,7 +13,12 @@
 #define VOTIGO_CONFIRM @"http://sqa02demopartner.votigo.com/fbsweeps/confirmation/testsweepsforred5-1"
 #define VOTIGO_MAIN @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/mainmenu"
 #define VOTIGO_SCAN_RECEIPT @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/scanreceipt"
+
 #define NOT_CHECKED_IN      @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
+#define ALREADY_CHECKED_IN  @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/already_checked_in?mobile=yes"
+#define CHECKED_IN          @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/successful?mobile=yes"
+#define NOT_PERMITTED       @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/no_permissions?mobile=yes"
+#define NOT_IN_MALL         @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
 
 @interface WinViewController ()
 
@@ -86,12 +91,21 @@
         return NO;
     }
     
+    else if ([url rangeOfString:@"/checkin"].location != NSNotFound) {
+        [self chekinMallAction];
+    }
     
     else if ([url rangeOfString:VOTIGO_MAIN].location != NSNotFound){
         return YES;
     }
     
     else if ([url rangeOfString:NOT_CHECKED_IN].location != NSNotFound) {
+        return YES;
+    }
+    else if ([url rangeOfString:ALREADY_CHECKED_IN].location != NSNotFound) {
+        return YES;
+    }
+    else if ([url rangeOfString:CHECKED_IN].location != NSNotFound) {
         return YES;
     }
     
@@ -110,7 +124,7 @@
     self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
 }
 
-- (IBAction)testButtonAction:(id)sender {
+- (void)chekinMallAction {
     double destinationLat = [delegate.mallData[@"location_lat"] doubleValue];
     double destinationLong = [delegate.mallData[@"location_lng"] doubleValue];
     
@@ -118,13 +132,15 @@
     CLLocation *current = [[CLLocation alloc] initWithLatitude:delegate.latitude longitude:delegate.longitude];
     
     CLLocationDistance distance = [current distanceFromLocation:destination];
-    if (distance >= 1609) { //1609 meters = 1 mile
+    if (distance <= 1609) { //1609 meters = 1 mile
         NSURL *url = [NSURL URLWithString:NOT_CHECKED_IN];
         [winWebView loadRequest:[NSURLRequest requestWithURL:url]];
     }
     else {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         [manager GET:@"http://smbaqa02code.votigo.com/api/signature.json?apiKey=fb86e75edb447a2b66e5db3471a26ddb" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"Response = %@", responseObject);
+            
             NSDictionary *params = @{@"sweepuserentry_id" : [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"],
                                      @"sweep_id" : @"7239",
                                      @"mall_id" : delegate.mallData[@"id"],
@@ -132,7 +148,26 @@
                                      @"action_type" : @"checkin"
                                      };
             [manager GET:@"http://smbaqa02code.votigo.com/sweeps/awardSweepentryCredits.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"Params = %@", responseObject);
+                NSLog(@"Response = %@", responseObject);
+                
+                if ([responseObject[@"status"] integerValue] == 1) {
+                    NSURL *url = [NSURL URLWithString:CHECKED_IN];
+                    [winWebView loadRequest:[NSURLRequest requestWithURL:url]];
+                }
+                else
+                    if (![CLLocationManager locationServicesEnabled] || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+                        NSURL *url = [NSURL URLWithString:NOT_PERMITTED];
+                        [winWebView loadRequest:[NSURLRequest requestWithURL:url]];
+                    }
+                    else if ([responseObject[@"message"] isEqualToString:@"Checkin limit reached for today"]) {
+                        NSURL *url = [NSURL URLWithString:ALREADY_CHECKED_IN];
+                        [winWebView loadRequest:[NSURLRequest requestWithURL:url]];
+                    }
+                    else {
+                        NSURL *url = [NSURL URLWithString:NOT_IN_MALL];
+                        [winWebView loadRequest:[NSURLRequest requestWithURL:url]];
+                    }
+                
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error = %@", error);
             }];
