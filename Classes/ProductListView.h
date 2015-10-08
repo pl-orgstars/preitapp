@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "Product.h"
+#import "ImageLoader.h"
+#import "Database.h"
 
-@interface ProductListView : UIView <UITableViewDelegate,UITableViewDataSource>
+@interface ProductListView : UIView <UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,ImageLoaderDelegate>{
+    Database *dbAgent;
+}
 
 @property (nonatomic,retain) NSMutableArray *productsArray;
 @property (nonatomic, retain) UITableView *productListTable;
+@property (nonatomic, retain) UICollectionView *collectionView;
 @property (nonatomic) BOOL isShoppingList;
 @property (nonatomic, retain) NSString *nextLink;
 @property (nonatomic, retain) id showProductDetailDelegate;

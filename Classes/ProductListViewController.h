@@ -39,10 +39,11 @@
     
     int currentSelectedTextboxIndex;
     IBOutlet UIButton *pickerBttn;
-    UITextField *maximunPriceLabel;
-    UITextField *minmumPriceLabel;
+   IBOutlet UITextField *maximunPriceLabel;
+  IBOutlet  UITextField *minmumPriceLabel;
 
-
+   IBOutlet UIView *viewPriceBAr;
+    
     UISegmentedControl *tabNavigation;
     
 //    NSString *searchString;
@@ -50,6 +51,9 @@
     
     NSString *searchString;
 }
+
+@property (nonatomic ,strong )IBOutlet UIButton *btnNext;
+@property (nonatomic ,strong )IBOutlet UIButton *btnPrevious;
 
 @property (nonatomic,retain) NSString* passedSearchString;
 

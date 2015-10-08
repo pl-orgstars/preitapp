@@ -27,9 +27,7 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-//-(void)dealloc {
-//    [productListView release];
-//}
+
 
 #pragma mark - View lifecycle
 
@@ -38,7 +36,6 @@
     [super viewWillAppear:YES];
     [delegate showTabBar:NO];
     
-//    [self.navigationItem setTitle:@"Shopping List"];
     
     [self setNavigationTitle:@"Shopping List" withBackButton:YES];
     
@@ -54,12 +51,19 @@
     delegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
     
     CGRect frame = self.view.frame;
-    frame.origin.y = toolBar.frame.size.height;
+    frame.origin.y = 135;
     //kk
-    if (is_iOS7) {
-        frame.size.height -= 20;
-    }
-    if(isIPhone5){frame.size.height -= 16;}else{frame.size.height -= 90;};
+//    if (is_iOS7) {
+//        frame.size.height -= 20;
+//    }
+//    if(isIPhone5)
+//    {
+//        frame.size.height -= 16;
+//    }
+//    else
+//    {
+//        frame.size.height -= 90;
+//    }
     productListView = [[ProductListView alloc]initWithFrame:frame];
     productListView.editFlag = 0;
     productListView.showProductDetailDelegate = self;
@@ -72,7 +76,7 @@
     [productListView setShowProductDetailSelector:@selector(showProductDetail:)];
     [self.view addSubview:productListView];
     [self.view insertSubview:toolBar aboveSubview:productListView];
-    [self.view insertSubview:editBtn aboveSubview:toolBar];
+//    [self.view insertSubview:editBtn aboveSubview:toolBar];
 
     [self.view insertSubview:lblResultCount aboveSubview:toolBar];
     
@@ -111,17 +115,17 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(IBAction)editClicked:(id)sender {
-//    editFlag = YES;
-    [self.navigationItem setLeftBarButtonItem:cancel];
-    [self.navigationItem setRightBarButtonItem:done];
-    productListView.editFlag = 1;
-    productListView.isEditing = YES;
-    [productListView.productListTable setEditing:YES animated:YES];
-//    removeTempArray = [[NSMutableArray alloc]init];
-    [lblResultCount setHidden:YES];
-    [editBtn setHidden:YES];    
-}
+//-(IBAction)editClicked:(id)sender {
+////    editFlag = YES;
+//    [self.navigationItem setLeftBarButtonItem:cancel];
+//    [self.navigationItem setRightBarButtonItem:done];
+//    productListView.editFlag = 1;
+//    productListView.isEditing = YES;
+//    [productListView.productListTable setEditing:YES animated:YES];
+////    removeTempArray = [[NSMutableArray alloc]init];
+//    [lblResultCount setHidden:YES];
+//    [editBtn setHidden:YES];    
+//}
 
 -(void)emailList {
     EmailListViewController *emailList = [[EmailListViewController alloc]initWithNibName:@"EmailListViewController" bundle:nil];
@@ -161,7 +165,7 @@
     [self.navigationItem setLeftBarButtonItem:nil];
     [self.navigationItem setRightBarButtonItem:nil];
     [lblResultCount setHidden:NO];
-    [editBtn setHidden:NO];
+//    [editBtn setHidden:NO];
     [lblResultCount setText:[NSString stringWithFormat:@"%d item%@",productListView.productsArray.count,productListView.productsArray.count==1?@"":@"s"]];
      [self setMssgicon];
 }
@@ -220,5 +224,20 @@
         [self clearList];
     }
 }
+
+#pragma mark - navigation
+
+- (IBAction)menuBtnCall:(id)sender {
+    
+    self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
+    
+}
+
+
+- (IBAction)backBtnCall:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
 
 @end
