@@ -454,6 +454,12 @@
 		E6FCFC0B1BC69E3600B15121 /* NewTwitterBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC071BC69E3600B15121 /* NewTwitterBtn@2x.png */; };
 		E6FCFC0D1BC6A27800B15121 /* NewStoreNAme@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC0C1BC6A27800B15121 /* NewStoreNAme@2x.png */; };
 		E6FCFC0F1BC6A8C700B15121 /* NewREmoveBTn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC0E1BC6A8C700B15121 /* NewREmoveBTn@2x.png */; };
+		E6FCFC151BC793A900B15121 /* NewCrossBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC141BC793A900B15121 /* NewCrossBtn@2x.png */; };
+		E6FCFC171BC7A2B600B15121 /* NewEmailBTn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC161BC7A2B600B15121 /* NewEmailBTn@2x.png */; };
+		E6FCFC1B1BC7B94B00B15121 /* NewCheckS@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC181BC7B94B00B15121 /* NewCheckS@2x.png */; };
+		E6FCFC1C1BC7B94B00B15121 /* NewCheckU@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC191BC7B94B00B15121 /* NewCheckU@2x.png */; };
+		E6FCFC1D1BC7B94B00B15121 /* NewTextFeildBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC1A1BC7B94B00B15121 /* NewTextFeildBG@2x.png */; };
+		E6FCFC1F1BC7BA4C00B15121 /* NewSendList@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC1E1BC7BA4C00B15121 /* NewSendList@2x.png */; };
 		E92DFA451B4412CB000B91B0 /* PREIT_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E92DFA441B4412CB000B91B0 /* PREIT_Logo.png */; };
 		E92DFA471B4412D3000B91B0 /* PREIT_Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E92DFA461B4412D3000B91B0 /* PREIT_Logo@2x.png */; };
 		E92DFA491B4412DA000B91B0 /* PREIT_Logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E92DFA481B4412DA000B91B0 /* PREIT_Logo@3x.png */; };
@@ -1039,6 +1045,12 @@
 		E6FCFC071BC69E3600B15121 /* NewTwitterBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewTwitterBtn@2x.png"; sourceTree = "<group>"; };
 		E6FCFC0C1BC6A27800B15121 /* NewStoreNAme@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewStoreNAme@2x.png"; sourceTree = "<group>"; };
 		E6FCFC0E1BC6A8C700B15121 /* NewREmoveBTn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewREmoveBTn@2x.png"; sourceTree = "<group>"; };
+		E6FCFC141BC793A900B15121 /* NewCrossBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewCrossBtn@2x.png"; sourceTree = "<group>"; };
+		E6FCFC161BC7A2B600B15121 /* NewEmailBTn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewEmailBTn@2x.png"; sourceTree = "<group>"; };
+		E6FCFC181BC7B94B00B15121 /* NewCheckS@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewCheckS@2x.png"; sourceTree = "<group>"; };
+		E6FCFC191BC7B94B00B15121 /* NewCheckU@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewCheckU@2x.png"; sourceTree = "<group>"; };
+		E6FCFC1A1BC7B94B00B15121 /* NewTextFeildBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewTextFeildBG@2x.png"; sourceTree = "<group>"; };
+		E6FCFC1E1BC7BA4C00B15121 /* NewSendList@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewSendList@2x.png"; sourceTree = "<group>"; };
 		E92DFA441B4412CB000B91B0 /* PREIT_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PREIT_Logo.png; sourceTree = "<group>"; };
 		E92DFA461B4412D3000B91B0 /* PREIT_Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PREIT_Logo@2x.png"; sourceTree = "<group>"; };
 		E92DFA481B4412DA000B91B0 /* PREIT_Logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PREIT_Logo@3x.png"; sourceTree = "<group>"; };
@@ -2226,6 +2238,12 @@
 		E6FCFC031BC69E3600B15121 /* New PRoduct Detail Images */ = {
 			isa = PBXGroup;
 			children = (
+				E6FCFC1E1BC7BA4C00B15121 /* NewSendList@2x.png */,
+				E6FCFC181BC7B94B00B15121 /* NewCheckS@2x.png */,
+				E6FCFC191BC7B94B00B15121 /* NewCheckU@2x.png */,
+				E6FCFC1A1BC7B94B00B15121 /* NewTextFeildBG@2x.png */,
+				E6FCFC161BC7A2B600B15121 /* NewEmailBTn@2x.png */,
+				E6FCFC141BC793A900B15121 /* NewCrossBtn@2x.png */,
 				E6FCFC0E1BC6A8C700B15121 /* NewREmoveBTn@2x.png */,
 				E6FCFC0C1BC6A27800B15121 /* NewStoreNAme@2x.png */,
 				E6FCFC041BC69E3600B15121 /* NewfbBtn@2x.png */,
@@ -2429,6 +2447,7 @@
 				42A3AB1115AC2C0500F5790B /* add-to-Slist@2X.png in Resources */,
 				42A3AB1215AC2C0500F5790B /* arrow_down@2X.png in Resources */,
 				E6FCFC0A1BC69E3600B15121 /* NewSearchonStoreBTn@2x.png in Resources */,
+				E6FCFC1C1BC7B94B00B15121 /* NewCheckU@2x.png in Resources */,
 				BD46BB861BB2ABD100FC5A43 /* directory-icon-detail-events@2x.png in Resources */,
 				BD46BB8F1BB2C28A00FC5A43 /* appback@3x.png in Resources */,
 				42A3AB1315AC2C0500F5790B /* arrow_up@2X.png in Resources */,
@@ -2462,6 +2481,7 @@
 				BD46BB7C1BB2AA3A00FC5A43 /* DirectoryTableViewCell.xib in Resources */,
 				AE87D2F5193765C100F5493D /* Record_icon.png in Resources */,
 				42A3AB1F15AC2C0500F5790B /* Send-list@2X.png in Resources */,
+				E6FCFC1B1BC7B94B00B15121 /* NewCheckS@2x.png in Resources */,
 				BD598C721BBD0AE700E2232D /* WinViewController.xib in Resources */,
 				42A3AB2015AC2C0500F5790B /* Sort@2X.png in Resources */,
 				BDCAF7381BB067F0009522E9 /* mainmenu-icon-productsearch@2x.png in Resources */,
@@ -2516,9 +2536,11 @@
 				AE29A5CA1935C27100738C79 /* back.png in Resources */,
 				E60CFE211BA69E0600AA95AD /* Proxima Nova Bold.ttf in Resources */,
 				AE87D2A819370BC200F5493D /* SearchScreenViewController.xib in Resources */,
+				E6FCFC1D1BC7B94B00B15121 /* NewTextFeildBG@2x.png in Resources */,
 				42AEED0C15AE8FC300BE5B35 /* next.png in Resources */,
 				AECE480E195A935600D1E5DB /* iTunesArtwork.png in Resources */,
 				AE87D2D3193710F600F5493D /* Map_selected@2x.png in Resources */,
+				E6FCFC171BC7A2B600B15121 /* NewEmailBTn@2x.png in Resources */,
 				AECE480F195A935600D1E5DB /* iTunesArtwork@2x.png in Resources */,
 				42AEED0D15AE8FC300BE5B35 /* powered_by_google.png in Resources */,
 				42AEED0E15AE8FC300BE5B35 /* previous.png in Resources */,
@@ -2566,10 +2588,12 @@
 				1B379A2C15BD58FC00F7DC9A /* text@2X.png in Resources */,
 				1B379A2D15BD58FC00F7DC9A /* use_product_search.png in Resources */,
 				1B379A2E15BD58FC00F7DC9A /* use_product_search@2X.png in Resources */,
+				E6FCFC151BC793A900B15121 /* NewCrossBtn@2x.png in Resources */,
 				70FE3A9217392C7F00E64874 /* ProductListViewController copy.xib in Resources */,
 				70FE3A9717392CE600E64874 /* SuperViewController.xib in Resources */,
 				70FE3A9917392EF400E64874 /* ProductSearchHome copy.xib in Resources */,
 				70FE3A9F173936D400E64874 /* Default-568h@2x.png in Resources */,
+				E6FCFC1F1BC7BA4C00B15121 /* NewSendList@2x.png in Resources */,
 				AECE480C195A935600D1E5DB /* AppIcon76x76.png in Resources */,
 				70FE3AA11739370200E64874 /* LocationViewController copy.xib in Resources */,
 				BD4EF96B1BBE56380042EF6E /* JobsDetailViewController.xib in Resources */,

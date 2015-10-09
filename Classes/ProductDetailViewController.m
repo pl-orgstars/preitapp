@@ -43,18 +43,9 @@
 #pragma mark - View lifecycle
 
 -(void)viewWillAppear:(BOOL)animated {
-//    NSLog(@"url string :::::: %@",self.urlString);
-//    [self.navigationItem setTitle:@"Product Detail"];
     [self setNavigationTitle:@"Product Detail" withBackButton:YES];
     
     [listCountLabel setText:[NSString stringWithFormat:@"%d",[dbAgent getCount]]];
-    
-//    if (productIndex == 0) {
-//        [btnPrev setEnabled:NO];
-//    } 
-//    if (productIndex == productsArray.count-1) {
-//        [btnNext setEnabled:NO];
-//    }
     
      [self createScrollView:[productsArray objectAtIndex:productIndex]];
 }
@@ -172,12 +163,11 @@
     if (![self checkForEmptyString:ss]) {
         urlStr = ss;
     }else{
-        NSLog(@"yyyyyyy");
+
     }
 
     length += (int)urlStr.length;
     
-    NSLog(@"urlstring %@",urlStr);
     NSURL *url = [NSURL URLWithString:urlStr];
     
     
@@ -209,11 +199,9 @@
     NSLog(@"length :::::%d",length);
 
     length = ((NSString*)[delegate.mallData objectForKey:@"name"]).length;
-    NSLog(@"length :::::%d",length);
-    NSLog(@"length %@",[delegate.mallData objectForKey:@"name"]);
     if (length>0 && length<61) {
         if ((int)message.length < (58-length+9)) {
-            //        [controller setInitialText:[NSString stringWithFormat:@"%@ from %@", message,pName]];
+
         }else{
             NSLog(@"short the message::");
             message = [message substringToIndex:(59-length+9)];
@@ -231,12 +219,10 @@
     [self presentViewController:controller animated:YES completion:Nil];
 }
 -(NSString *)urlEncodeForEscapesForString:(NSString *)urlString{
-    //    NSLog(@"urlStringurlString===========%@",urlString);
     
     NSString *trimmedString = [urlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
 	return [trimmedString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    //            AddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 -(void)faceBookShare{
@@ -378,194 +364,7 @@
 
     }
 
-    
-    
-    
-    //name
-    /*
-    UILabel *name=[[UILabel alloc]initWithFrame:CGRectMake(xAxis,0,253,20)];
-    [name setText:objectToBeUsed.title];
-    name.tag=1000;
-    [name setTextColor:[UIColor whiteColor]];
-    name.lineBreakMode = UILineBreakModeWordWrap;
-    name.numberOfLines = 0;
-    name.font = [UIFont boldSystemFontOfSize:15];
-    [name setBackgroundColor:[UIColor clearColor]];
-    CGSize maximumLabelSize1 = CGSizeMake(253,300);
-    CGSize expectedLabelSize1 = [name.text sizeWithFont:name.font constrainedToSize:maximumLabelSize1 lineBreakMode:UILineBreakModeWordWrap];
-    CGRect make1=name.frame;
-    make1.size.height=expectedLabelSize1.height;
-    name.frame=make1;
-    [name sizeToFit];
-    [scrollProductDetail addSubview:name];
-    float y=name.frame.size.height+name.frame.origin.y;
-    
-    // store
-    UILabel *store=[[UILabel alloc]initWithFrame:CGRectMake(20 , y + 10, 170, 21)];
 
-    [store setBackgroundColor:[UIColor yellowColor]];
-    store.textAlignment = UITextAlignmentLeft;
-    [store setFont:[UIFont boldSystemFontOfSize:15]];
-    [store setTextColor:[UIColor whiteColor]];
-    
-    if (self.isShoppingList) {
-        
-        NSArray *stringArray = [objectToBeUsed.store componentsSeparatedByString:@"-"];
-        
-        NSString *retailerNameString = [[stringArray objectAtIndex:0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        
-        [store setText:retailerNameString];
-        
-    }else{
-        
-        [store setText:objectToBeUsed.retailerName];
-    }
-    store.tag=1001;
-    store.lineBreakMode = UILineBreakModeWordWrap;
-    store.numberOfLines = 0;
-    CGSize maximumLabelSize2 = CGSizeMake(170,50);
-    CGSize expectedLabelSize2 = [store.text sizeWithFont:store.font constrainedToSize:maximumLabelSize2 lineBreakMode:UILineBreakModeWordWrap];
-    
-    CGRect make2=store.frame;
-    make2.size.height=expectedLabelSize2.height;
-    store.frame=make2;
-    [store sizeToFit];
-    
-    // Disclosure Button
-    UIButton *disclosureBtn = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    CGRect btnFrame= disclosureBtn.frame;
-    
-    disclosureBtn.tag=1002;
-    
-    btnFrame.origin.x= 275;
-    btnFrame.origin.y=y+4;
-    disclosureBtn.frame=btnFrame;
-    [disclosureBtn addTarget:self action:@selector(showStore) forControlEvents:UIControlEventTouchUpInside];
-//    [scrollProductDetail addSubview:disclosureBtn];
-    
-    make2 = store.frame;
-    make2.origin.x = btnFrame.origin.x - store.frame.size.width - 5;
-    store.frame = make2;
-    
-    UITapGestureRecognizer *storeTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showStoreTap:)];
-    [storeTap setCancelsTouchesInView:NO];
-    [store addGestureRecognizer:storeTap];
-    [store setBackgroundColor:[UIColor clearColor]];
-    [store setUserInteractionEnabled:YES];
-    
-    [scrollProductDetail addSubview:store];
-    //price
-    UILabel *price=[[UILabel alloc]initWithFrame:CGRectMake(250 , store.frame.origin.y, 71, 21)];
-    NSString *priceString = [NSString stringWithFormat:@"$%.2f", objectToBeUsed.price];
-    price.textAlignment = UITextAlignmentCenter;
-    [price setText:priceString];
-    price.tag=1003;
-    [price setTextColor:[UIColor whiteColor]];
-    price.font = [UIFont boldSystemFontOfSize:15];
-    CGSize maximumLabelSize3 = CGSizeMake(50,100);
-    CGSize expectedLabelSize3 = [price.text sizeWithFont:price.font constrainedToSize:maximumLabelSize3 lineBreakMode:UILineBreakModeWordWrap];
-    CGRect make3=price.frame;
-    make3.size.height=expectedLabelSize3.height;
-    price.frame=make3;
-    price.backgroundColor=[UIColor clearColor];
-    [price sizeToFit];
-    [scrollProductDetail addSubview:price];
-    float y1=price.frame.size.height;
- 
-    //ImageView
-    
-    UIImage *img = [imagesArray objectAtIndex:productIndex];
-    CGRect imageFrame;
-    imageFrame = CGRectMake(56 , y+y1+30, 185, 185);
-    
-    float y2;
-    
-    
-    
-    if ([img isKindOfClass:[UIImage class]]) {
-        UIImageView *imageDetail=[[UIImageView alloc]initWithImage:img];
-        
-        imageDetail.frame = imageFrame;
-        y2=imageDetail.frame.size.height;
-        imageDetail.backgroundColor=[UIColor clearColor];
-        [scrollProductDetail addSubview:imageDetail];
-        [imageDetail setContentMode:UIViewContentModeScaleAspectFit];
-        [imageDetail setBackgroundColor:[UIColor clearColor]];
-    }
-    else {
-        DetailAsyncImageVIew *imageDetail=[[DetailAsyncImageVIew alloc]init];
-        [imageDetail setProductIndex:productIndex];
-        [imageDetail setTag:tagImageView];
-        [imageDetail loadImageFromURL:[NSURL URLWithString:objectToBeUsed.imageUrl] delegate:self requestSelector:@selector(imageDownloaded:)];
-        imageDetail.frame = imageFrame;
-        y2=imageDetail.frame.size.height;
-        imageDetail.backgroundColor=[UIColor clearColor];
-        [scrollProductDetail addSubview:imageDetail];
-        [imageDetail setBackgroundColor:[UIColor clearColor]];
-    }
-    
-    
-    //description
-    UILabel *desc=[[UILabel alloc]initWithFrame:CGRectMake(xAxis , imageFrame.origin.y + imageFrame.size.height + 20,253,20)];
-    desc.textAlignment = UITextAlignmentLeft;
-    [desc setText:objectToBeUsed.desc];
-    [desc setTextColor:[UIColor whiteColor]];
-    desc.lineBreakMode = UILineBreakModeWordWrap;
-    desc.numberOfLines = 0;
-    desc.font = [UIFont systemFontOfSize:13];
-    CGSize maximumLabelSize = CGSizeMake(253,1000);
-    CGSize expectedLabelSize = [desc.text sizeWithFont:desc.font constrainedToSize:maximumLabelSize lineBreakMode:UILineBreakModeWordWrap];
-    [desc sizeToFit];
-    CGRect make=desc.frame;
-    make.size.height=expectedLabelSize.height;
-    desc.frame=make;
-    desc.backgroundColor=[UIColor clearColor];
-    [scrollProductDetail addSubview:desc];
-    
-    UIButton *shoppingList = [UIButton buttonWithType:UIButtonTypeCustom];
-    CGRect btnFrame2= shoppingList.frame;
-    
-    UIImage *removeImage = [UIImage imageNamed:@"remove-from-list.png"];
-    UIImage *addImage = [UIImage imageNamed:@"add-to-Slist.png"];
-    UIImage *searchImage = [UIImage imageNamed:@"Search_only-this-store.png"];
-    
-    if (isShoppingList) {
-        btnFrame2.origin.y=desc.frame.origin.y + desc.frame.size.height + 30;
-        [shoppingList setBackgroundImage:removeImage forState:UIControlStateNormal];
-        [shoppingList addTarget:self action:@selector(removeFromList:) forControlEvents:UIControlEventTouchUpInside];
-    } else {
-            // Button For search only this store
-        UIButton *searchStore = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGRect btnFrame1= searchStore.frame;
-        btnFrame1.origin.x= 15 ;
-        btnFrame1.origin.y=desc.frame.origin.y + desc.frame.size.height + 30;
-        btnFrame1.size = searchImage.size;
-        searchStore.frame=btnFrame1;
-        [searchStore setBackgroundImage:searchImage forState:UIControlStateNormal];
-        
-        [searchStore addTarget:self action:@selector(searchStore) forControlEvents:UIControlEventTouchUpInside];
-        
-        [scrollProductDetail addSubview:searchStore];
-        
-        if ([dbAgent productIsPresent:objectToBeUsed.productId]) {
-            [shoppingList setBackgroundImage:removeImage forState:UIControlStateNormal];
-            [shoppingList addTarget:self action:@selector(removeFromList:) forControlEvents:UIControlEventTouchUpInside];
-        } else {
-            [shoppingList setBackgroundImage:addImage forState:UIControlStateNormal];
-            [shoppingList addTarget:self action:@selector(addToList:) forControlEvents:UIControlEventTouchUpInside];
-        }
-        btnFrame2.origin.y= searchStore.frame.size.height + searchStore.frame.origin.y + 10;        
-    }
-        
-    // Button for shopping list.
-    
-    btnFrame2.origin.x= 15 ;
-    btnFrame2.size = removeImage.size;
-    shoppingList.frame=btnFrame2;
-    
-    [scrollProductDetail addSubview:shoppingList];
- 
-    */
     
     
     UIButton *shoppingList = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -650,8 +449,6 @@
     desc.numberOfLines = 0;
     desc.font = [UIFont systemFontOfSize:13];
    
-//    CGSize maximumLabelSize = CGSizeMake(253,1000);
-//    CGSize expectedLabelSize = [desc.text sizeWithFont:desc.font constrainedToSize:maximumLabelSize lineBreakMode:UILineBreakModeWordWrap];
     
     NSDictionary *fontAttributes = @{NSFontAttributeName : desc.font};
     CGSize expectedLabelSize = [objectToBeUsed.desc sizeWithAttributes:fontAttributes];
@@ -704,9 +501,7 @@
     
     [scrollProductDetail setContentOffset:CGPointZero];
     
-//    [lblResultsCount setText:[NSString stringWithFormat:@"%d of %d result%@",productIndex+1,productsArray.count,productsArray.count==1?@"":@"s"]];
     
-//    */
 
 }
 
@@ -721,35 +516,6 @@
         }
     }
 }
-
-//-(IBAction)nextClicked:(id)sender {
-//    
-//    if (productIndex<productsArray.count-1) 
-//    {
-//        productIndex++;
-//        Product *obj=[productsArray objectAtIndex:productIndex];
-//        [self createScrollView:obj];
-//        if (productIndex==productsArray.count-1) {
-//            [btnNext setEnabled:NO];
-//        }
-//        [btnPrev setEnabled:YES];
-//    }
-//}
-
-//-(IBAction)prevClicked:(id)sender {
-//
-//    if (productIndex>0)
-//    {
-//        // NSLog(@"prodindx %d",productIndex);
-//        productIndex--;
-//        Product *obj=[productsArray objectAtIndex:productIndex];
-//        [self createScrollView:obj];
-//        if (productIndex==0) {
-//            [btnPrev setEnabled:NO];
-//        }
-//        [btnNext setEnabled:YES];
-//    }    
-//}
 
 -(CGRect)getFrameForImageWithSize:(CGSize)size compareSize:(CGSize)cSize {
     CGRect frame = CGRectZero;
@@ -792,7 +558,6 @@
 
 -(IBAction)hideImage:(UIButton*)sender {
     [delegate showTabBar:NO];
-//    [self.navigationController setNavigationBarHidden:NO];
     [showImageScrollView setHidden:YES];
     [showImageScrollView setZoomScale:1.0];
     [hideImage setHidden:YES];
@@ -854,12 +619,6 @@
         [self prevClicked:nil];
     } 
     
-//    if (productIndex == 0) {
-//        [btnPrev setEnabled:NO];
-//    } 
-//    if (productIndex == productsArray.count-1) {
-//        [btnNext setEnabled:NO];
-//    }
 }
 
 -(void)showShoppingList {

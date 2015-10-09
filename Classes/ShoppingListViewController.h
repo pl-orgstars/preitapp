@@ -27,7 +27,7 @@
     
 }
 
--(IBAction)editClicked:(id)sender;
+//-(IBAction)editClicked:(id)sender;
 -(void)showProductDetail:(NSNumber *)productIndex;
 
 @end

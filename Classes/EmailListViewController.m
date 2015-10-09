@@ -76,8 +76,6 @@ CGFloat animatedDistance;
     [self addToolBar];
     
     [self setNavigationTitle:@"Email List" withBackButton:YES];
-//    [cellPhoneNo setUserInteractionEnabled:isUpdate];
-//    [self.tabBarController setHidesBottomBarWhenPushed:YES];
     // Do any additional setup after loading the view from its nib.
 }
 -(void)segmentedControlHandler:(UISegmentedControl *)segment{
@@ -138,11 +136,6 @@ CGFloat animatedDistance;
     }
     NSLog(@"urlstring %@",urlString);
     
-    
-    //    NSURLRequest *reqobj = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:urlString]];
-    
-    
-    
     //kk brgins
     NSMutableString *urlStringss = [NSMutableString stringWithFormat:@"%@",NSLocalizedString(@"EMAILLISTAPI", @"")];
     NSMutableString *strr = [NSMutableString stringWithFormat:@"&list="];
@@ -159,13 +152,8 @@ CGFloat animatedDistance;
     
     NSURL *urls = [NSURL URLWithString:urlStringss];
     NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:urls];
-    //
-    //    // POST the username password
     
-    //    [requestObj setHTTPMethod:@"POST"];
     [requestObj setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    //    [requestObj setHTTPBody:@""];
-    //    [requestObj setHTTPBody:[@"email=kuldeep_but@yahoo.com"  dataUsingEncoding: NSUTF8StringEncoding]];
     [requestObj setHTTPBody:[strr dataUsingEncoding: NSUTF8StringEncoding]];
     [requestObj setValue:[NSString stringWithFormat:@"%d",[strr length] ] forHTTPHeaderField:@"Content-Length"];
     
@@ -180,13 +168,9 @@ CGFloat animatedDistance;
     // Load the request
     webview.delegate = self;
     
-    NSLog(@":::::::%@ %@ %@",urlStringss,strr,requestObj);
-    //    NSURL *url = [NSURL URLWithString:urlString];
-    //    NSURLRequest *requests = [[NSURLRequest alloc] initWithURL:url];
     [webview loadRequest:requestObj];
     
     
-    //    [webview loadRequest:reqobj];
     [spinner startAnimating];
 }
 - (void)viewDidUnload
@@ -209,10 +193,10 @@ CGFloat animatedDistance;
     
     UIButton *bttn = (UIButton *)sender;
     if (flag) {
-        [bttn setImage:[UIImage imageNamed:@"check_box.png"] forState:UIControlStateNormal];
+        [bttn setImage:[UIImage imageNamed:@"NewCheckU.png"] forState:UIControlStateNormal];
         return NO;
     }else{
-        [bttn setImage:[UIImage imageNamed:@"tic.png"] forState:UIControlStateNormal];
+        [bttn setImage:[UIImage imageNamed:@"NewCheckS.png"] forState:UIControlStateNormal];
         return YES;
     }
     
@@ -226,7 +210,6 @@ CGFloat animatedDistance;
 }
 -(IBAction)updateBttnTapped:(id)sender{
     isUpdate = [self chageButtnImage:sender forFlag:isUpdate];
-//    [cellPhoneNo setUserInteractionEnabled:isUpdate];
 }
 -(IBAction)sendListBttnTaped:(id)sender{
     BOOL flag = NO;
@@ -236,18 +219,12 @@ CGFloat animatedDistance;
     if ([self checkForEmptyString:name.text]||[self checkForEmptyString:emailAddress.text]) {
         flag = YES;
     }
-//    if (isUpdate ){
-//        if ([self checkForEmptyString:cellPhoneNo.text]) {
-//            flag = YES;
-//        }
-//    }
     
     if (flag == YES) {
         [delegate showAlert:@"Please fill out all of the necessary information." title:@"Form is incomplete." buttontitle:@"Back"];
     }
     
     else{
-//        [self demoRequest];
         if ([self validateEmail:emailAddress.text]) {
             [self requestEmailExtra];
         }
@@ -255,7 +232,6 @@ CGFloat animatedDistance;
             [delegate showAlert:@"Enter Valid email id" title:@"Form is incomplete." buttontitle:@"Back"];
         }
         
-//        [self request];
     }
     
     
@@ -291,7 +267,6 @@ CGFloat animatedDistance;
     
     if (isUpdate) {
         [dict setValue:@"1" forKey:@"yes_sms"];
-//        [dict setValue:cellPhoneNo.text forKey:@"cell_number"];
     }
 
     NSMutableArray *arr = [NSMutableArray new];
@@ -307,176 +282,12 @@ CGFloat animatedDistance;
     
     NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@",NSLocalizedString(@"EMAILLISTAPI", @"")];
     
-    NSLog(@"request body %@",[dict JSONRepresentation]);
-    NSLog(@"url string == %@",urlString);
-    
     [req postEmailList:self callBackSelector:@selector(requestSuccess:) errorSelector:@selector(requestError:) Url:urlString postDict:dict];
 
 
 }
 
-/*
--(void)request{
-    RequestAgent *req = [[RequestAgent alloc]init];
-    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@?name=%@&email=%@&property_id=%ld",NSLocalizedString(@"EMAILLISTAPI", @""),name.text,emailAddress.text,delegate.mallId];
-    
-//    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@",NSLocalizedString(@"EMAILLISTAPI", @"")];
-//    
-//    NSMutableDictionary *dict = [NSMutableDictionary new];
-//    [dict setObject:name.text forKey:@"name"];
-//    [dict setObject:emailAddress.text forKey:@"email"];
-//    [dict setObject:[NSString stringWithFormat:@"%ld", delegate.mallId] forKey:@"property_id"];
-//    
-//    if (isSubscribe) {
-//        
-//        [dict setObject:@"1" forKey:@"subscribe"];
-//    }
-//    if (isUpdate) {
-//        //        [urlString appendFormat:@"&yes_sms=/'1/'&cell_number=%@",cellPhoneNo.text];
-//        [dict setObject:@"1" forKey:@"yes_sms"];
-//        [dict setObject:cellPhoneNo.text forKey:@"cell_number"];
-//    }
-//    
-    
-    
-    
-//    NSMutableString *listdata = [NSMutableString new];
-//    
-//    if (isSubscribe) {
-//        
-//        //        [dict setObject:@"1" forKey:@"subscribe"];
-//        [listdata appendFormat:@"subscribe=1"];
-//    }
-//    if (isUpdate) {
-//        [listdata appendFormat:@"&yes_sms=1&cell_number=%@",cellPhoneNo.text];
-//        //        [dict setObject:@"1" forKey:@"yes_sms"];
-//        //        [dict setObject:cellPhoneNo.text forKey:@"cell_number"];
-//    }
-//    
-//    [listdata appendFormat:@"list=({"];
-//    int i=0;
-//    for (Product *p in productsArray) {
-//        if (i==0) {
-//            [listdata appendFormat:@"name=%@",p.title];
-//            [listdata appendFormat:@"&description=%@",p.desc];
-//            [listdata appendFormat:@"&price=%f}",p.price];
-//            
-//        } else {
-//            [listdata appendFormat:@",{name=%@",p.title];
-//            [listdata appendFormat:@"&description=%@",p.desc];
-//            [listdata appendFormat:@"&price=%f}",p.price];
-//        }
-//        
-//        i++;
-//    }
-//    
-//    [listdata appendFormat:@");"];
-////    NSLog(@"reqbody \nurlstr %@ list data %@",urlString,listdata);
-//    
-//    //    NSString *ll = @"shopping_list[][name]=\"Lawnmower\"&shopping_list[][description]=\"This is a nice lawnmower.\"&shopping_list[][price]=399.80&shopping_list[][name]=\"Coffee cup\"&Shopping_list[][description]=\"Drink out of me\"&shopping_list[][price]=5.99";
-//    
-//    
-//    req.isPost = YES;
-//    //    req.requestBody = [req stringFromDictionary:dict];
-//    req.requestBody = [NSString stringWithFormat:@"name=%@&email=%@&property_id=%ld",name.text,emailAddress.text,delegate.mallId];
-    
-    NSLog(@"url new:::::: %@ %@",urlString,req.requestBody);
-    [req requestToServer:self callBackSelector:@selector(requestSuccess:) errorSelector:@selector(requestError:) Url:urlString];
-}
--(void)requestForEmail{
-    
-    alertView = [[UIAlertView alloc] initWithTitle:@"Sending..."
-                                           message:@"\n"
-                                          delegate:self
-                                 cancelButtonTitle:nil
-                                 otherButtonTitles:nil];
-    
-    
-    UIActivityIndicatorView *spinnr = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    spinnr.center = CGPointMake(139.5, 75.5); // .5 so it doesn't blur
-    [alertView addSubview:spinnr];
-    [spinnr startAnimating];
-    [alertView show];
-    
-    RequestAgent *req = [[RequestAgent alloc]init];
 
-    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@",NSLocalizedString(@"EMAILLISTAPI", @"")];
-    
-    NSMutableDictionary *dict = [NSMutableDictionary new];
-    [dict setObject:name.text forKey:@"name"];
-    [dict setObject:emailAddress.text forKey:@"email"];
-    [dict setObject:[NSString stringWithFormat:@"%ld", delegate.mallId] forKey:@"property_id"];
-    
-    if (isSubscribe) {
-
-        [dict setObject:@"1" forKey:@"subscribe"];
-    }
-    if (isUpdate) {
-//        [urlString appendFormat:@"&yes_sms=/'1/'&cell_number=%@",cellPhoneNo.text];
-        [dict setObject:@"1" forKey:@"yes_sms"];
-//        [dict setObject:cellPhoneNo.text forKey:@"cell_number"];
-    }
-
-    
-
-//    int i=0;
-    NSMutableArray *arr = [NSMutableArray new];
-    for (Product *p in productsArray) {
-//        if (i==0) {
-        NSString *price = [NSString stringWithFormat:@"%f",p.price];
-            NSDictionary *dict = [[NSDictionary alloc]initWithObjectsAndKeys:p.title,@"name",p.desc,@"description",price,@"price", nil];
-        [arr addObject:dict];
-//            [listdata appendFormat:@"name=%@",p.title];
-//            [listdata appendFormat:@"&description=%@",p.desc];
-//            [listdata appendFormat:@"&price=%f}",p.price];
-
-//        } else {
-//            [listdata appendFormat:@",{name=%@",p.title];
-//            [listdata appendFormat:@"&description=%@",p.desc];
-//            [listdata appendFormat:@"&price=%f}",p.price];
-//        }
-//        
-//        i++;
-    }
-//    NSMutableDictionary *dd = [NSMutableDictionary new];
-//    [dd setObject:arr forKey:@"list"];
-    
-//    NSString *str = [arr JSONRepresentation];
-    [dict setObject:arr forKey:@"list"];
-//    [listdata appendFormat:@");"];
-    NSLog(@"reqbody \nurlstr %@",dict);
-
-//    NSString *ll = @"shopping_list[][name]=\"Lawnmower\"&shopping_list[][description]=\"This is a nice lawnmower.\"&shopping_list[][price]=399.80&shopping_list[][name]=\"Coffee cup\"&Shopping_list[][description]=\"Drink out of me\"&shopping_list[][price]=5.99";
-    
-    
-//    req.isPost = YES;
-//    req.requestBody = [req stringFromDictionary:dict];
-    
-
-//    req.requestBody = [NSString stringWithFormat:@"%@",dict];
-    
-    //[NSString stringWithFormat:@"name=%@&email=%@&property_id=%ld",name.text,emailAddress.text,delegate.mallId];
-    
-//    NSLog(@"url new:::::: %@",req.requestBody);
-//    [req requestToServer:self callBackSelector:@selector(requestSuccess:) errorSelector:@selector(requestError:) Url:urlString];
-    
-//    NSDictionary *postDict;
-    
-    NSLog(@"dict to post %@",dict);
-    NSString *postStr = [NSString stringWithFormat:@"name=kuldeep&email=kuldeep_but@yahoo.com&property_id=42&subscribe=1&yes_sms=1&cell_number=123456789&list=h"];
-    
-    req.isPost = YES;
-    
-    req.requestBody = postStr;
-    
-    [req requestToServer:self callBackSelector:@selector(requestSuccess:) errorSelector:@selector(requestError:) Url:urlString];
-
-    
-//    [req postEmailList:self callBackSelector:@selector(requestSuccess:) errorSelector:@selector(requestError:) Url:urlString postDict:dict];
-    
-}
-
-*/
 -(void)requestSuccess:(NSData*)responseData{
 
     
@@ -501,16 +312,10 @@ CGFloat animatedDistance;
 #pragma mark
 #pragma mark Textfield-delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    
-    NSLog(@"return %d",textField.tag);
     [textField resignFirstResponder];
     return YES;
 }
 
-//-(BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-//    [textField resignFirstResponder];
-//    return YES;
-//}
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     [scrollView setContentSize:CGSizeMake(320, 700)];
@@ -604,6 +409,18 @@ CGFloat animatedDistance;
     [spinner stopAnimating];
 }
 
+#pragma mark - navigation
+
+- (IBAction)menuBtnCall:(id)sender {
+    
+    self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
+    
+}
+
+- (IBAction)backBtnCall:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:NO];
+}
 
 
 
