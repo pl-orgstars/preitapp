@@ -84,18 +84,6 @@
     frame = self.view.frame;
     frame.origin.y = 135;
 
-//    if ([[[UIDevice currentDevice] systemVersion] floatValue] > 6.0) {
-
-//    }
-    
-//    if(isIPhone5)
-//    {
-//        frame.size.height -= 81;
-//    }
-//    else
-//    {
-//        frame.size.height -= 155;
-//    }
      frame.size.height -=  frame.origin.y ;
     [overView setBackgroundColor:[UIColor clearColor]];
     productListView = [[ProductListView alloc]initWithFrame:frame];
@@ -170,9 +158,7 @@
     NSLog(@"textchange %lu",(unsigned long)searchText.length);
     if (searchBar.text.length == 0 && !spinner.isAnimating) {
         [productListView.productsArray removeAllObjects];
-//        [barView setHidden:YES];
         [productListView setHidden:YES];
-//        [overView setHidden:NO];
         self.btnNext.hidden = TRUE;
         self.btnPrevious.hidden = TRUE;
         
@@ -345,7 +331,6 @@
         [spinner setHidden:NO];
         [spinner startAnimating];
         RequestAgent *req = [[RequestAgent alloc]init];//autorelease];
-//        page = (int)currentCount/10;
         page++;
         if (page > 1) {
             self.btnPrevious.hidden = FALSE;
@@ -377,20 +362,15 @@
     }
     currentCount += itemsArray.count;
     
-    NSLog(@"3");
     if (totalCount<10) {
         productListView.hasMoreProducts = NO;
         self.btnNext.hidden = TRUE;
-        NSLog(@"x");
     } else {
         productListView.hasMoreProducts = YES;
-        NSLog(@"x");
         self.btnNext.hidden = FALSE;
     }
-    NSLog(@"Count ====%d",(int)itemsArray.count);
     [mainArray removeAllObjects];
     [mainArray addObjectsFromArray:itemsArray];
-//    [productListView.productsArray addObjectsFromArray:itemsArray];
     [productListView.productsArray removeAllObjects];
     productListView.productsArray = [[NSMutableArray alloc]initWithArray:itemsArray];
     productListView.currentCount = currentCount;
@@ -468,46 +448,6 @@
     productListView.productsArray = [[NSMutableArray alloc]initWithArray:itemsArray];
     productListView.currentCount = currentCount;
     [self sort];
-    
-//    [spinner stopAnimating];
-//    NSString *jsonString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
-//    NSDictionary *dict = [jsonString JSONValue];
-//    NSArray *array = [[dict objectForKey:@"item_lists"]objectForKey:@"normal"];
-//    NSMutableArray *itemsArray = [[NSMutableArray alloc]initWithCapacity:array.count];
-//    
-//    
-//    for (int i=0; i<array.count; i++) {
-//        Product *prod = [[Product alloc]initWithValues:[array objectAtIndex:i]];
-//        [itemsArray addObject:prod];
-//        if (i==29) {
-//            break;
-//        }
-//    }
-//    
-//    currentCount -= itemsArray.count;
-//    
-//    int mod = currentCount % MAXROWS;
-//    
-//    if (mod>0) {
-//        int diff = MAXROWS - mod;
-//        currentCount += diff;
-//    }
-//    
-//    productListView.hasMoreProducts = YES;
-//    
-//    if (currentCount<=MAXROWS) {
-//        productListView.hasPreviousProducts = NO;
-//    } else {
-//        productListView.hasPreviousProducts = YES;
-//    }
-//    productListView.currentCount = currentCount;
-//    [mainArray insertObjects:itemsArray atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, itemsArray.count)]];
-//    [productListView.productsArray insertObjects:itemsArray atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, itemsArray.count)]];
-//    
-//    [mainArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(MAXROWS,mainArray.count-MAXROWS)]];
-//    [productListView.productsArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(MAXROWS, productListView.productsArray.count - MAXROWS)]];
-//    
-//    [self sort];
 }
 
 #pragma mark - show detail
@@ -708,62 +648,9 @@
 
 -(void)addMaxMinTextField
 {
-    
-    
-    
+
     [pickerBttn setHidden:YES];
     [lblSort setHidden:YES];
-//    UIImageView *imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"box2.png"]];
-//    imgView.frame = CGRectMake(179, 3, 58, 22);
-//    [barView addSubview:imgView];
-//    imgView = nil;
-//    imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"box2.png"]];
-//    imgView.frame = CGRectMake(251, 3, 58, 22);
-//    [barView addSubview:imgView];
-//    
-//    minmumPriceLabel = [[UITextField alloc]initWithFrame:CGRectMake(191, 7, 43, 16)];
-//    [minmumPriceLabel setBackgroundColor:[UIColor clearColor]];
-//    [minmumPriceLabel setTextColor:[UIColor whiteColor]];
-//    [minmumPriceLabel setFont:[UIFont systemFontOfSize:11]];
-//    [minmumPriceLabel setTextAlignment:NSTextAlignmentLeft];
-//    
-//    maximunPriceLabel = [[UITextField alloc]initWithFrame:CGRectMake(262, 7, 43, 16)];
-//    [maximunPriceLabel setBackgroundColor:[UIColor clearColor]];
-//    [maximunPriceLabel setTextColor:[UIColor whiteColor]];
-//    [maximunPriceLabel setFont:[UIFont systemFontOfSize:11]];
-//    [maximunPriceLabel setTextAlignment:NSTextAlignmentLeft];
-//    
-//    UILabel *lbl1 = [[UILabel alloc]initWithFrame:CGRectMake(181, 7, 10, 16)];
-//    [lbl1 setBackgroundColor:[UIColor clearColor]];
-//    [lbl1 setTextColor:[UIColor whiteColor]];
-//    [lbl1 setFont:[UIFont systemFontOfSize:11]];
-//    [lbl1 setTextAlignment:NSTextAlignmentRight];
-//    [lbl1 setText:@"$"];
-//    
-//    UILabel *lbl2 = [[UILabel alloc]initWithFrame:CGRectMake(252, 7, 10, 16)];
-//    [lbl2 setBackgroundColor:[UIColor clearColor]];
-//    [lbl2 setTextColor:[UIColor whiteColor]];
-//    [lbl2 setFont:[UIFont systemFontOfSize:11]];
-//    [lbl2 setTextAlignment:NSTextAlignmentRight];
-//    [lbl2 setText:@"$"];
-//    
-//    UILabel *lbl3 = [[UILabel alloc]initWithFrame:CGRectMake(238, 5, 12, 20)];
-//    [lbl3 setBackgroundColor:[UIColor clearColor]];
-//    [lbl3 setTextColor:[UIColor whiteColor]];
-//    [lbl3 setFont:[UIFont systemFontOfSize:11]];
-//    [lbl3 setTextAlignment:NSTextAlignmentCenter];
-//    [lbl3 setText:@"to"];
-//    
-//    [maximunPriceLabel setKeyboardType:UIKeyboardTypeDecimalPad];
-//    [minmumPriceLabel setKeyboardType:UIKeyboardTypeDecimalPad];
-//    [maximunPriceLabel setDelegate:self];
-//    [minmumPriceLabel setDelegate:self];
-//    [barView addSubview:lbl3];
-//    [barView addSubview:lbl1];
-//    [barView addSubview:lbl2];
-//    [barView addSubview:maximunPriceLabel];
-//    [barView addSubview:minmumPriceLabel];
-    
     
     UIToolbar *toolbar = [[UIToolbar alloc] init];
     [toolbar setBarStyle:UIBarStyleBlackTranslucent];
@@ -773,7 +660,6 @@
     
 
     tabNavigation = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Previous", @"Next", nil]];
-//    tabNavigation.segmentedControlStyle = UISegmentedControlStyleBar;
     [tabNavigation setEnabled:YES forSegmentAtIndex:0];
     [tabNavigation setEnabled:YES forSegmentAtIndex:1];
     tabNavigation.momentary = YES;

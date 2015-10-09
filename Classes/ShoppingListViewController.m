@@ -68,23 +68,6 @@
 
     [self.view insertSubview:lblResultCount aboveSubview:toolBar];
     
-//    UIBarButtonItem *emailBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"messege.png"] style:UIBarButtonItemStylePlain target:self action:@selector(emailList)];
-//    [self.navigationItem setRightBarButtonItem:emailBtn];
-//    
-//    [emailBtn release];
-//    
-//    UIImageView *emailBtnImage = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"messege.png"]];
-//    [emailBtnImage addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self
-//                                                                               action:@selector(emailList)]];
-//    [emailBtnImage setUserInteractionEnabled:YES];
-//    UIBarButtonItem *emailBtn = [[UIBarButtonItem alloc]initWithCustomView:emailBtnImage];
-//    [self.navigationItem setRightBarButtonItem:emailBtn];
-//    
-//    done = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(doneClicked)];
-//    
-//    cancel = [[UIBarButtonItem alloc]initWithTitle:@"Clear" style:UIBarButtonItemStyleDone target:self action:@selector(cancelClicked)];
-    
-    // Do any additional setup after loading the view from its nib.
 }
 
 
@@ -108,69 +91,20 @@
     NSLog(@"show product detail %d ",productIndex.intValue);
     [lblResultCount setText:[NSString stringWithFormat:@"%lu item%@",(unsigned long)productListView.productsArray.count,productListView.productsArray.count==1?@"":@"s"]];
 
-//    ProductDetailViewController *detailView = [[ProductDetailViewController alloc]initWithNibName:@"ProductDetailViewController" bundle:nil];
-//    detailView.productsArray = productListView.productsArray;
-//    detailView.productIndex = productIndex.intValue;
-//    detailView.isShoppingList = YES;
-//    [self.navigationController pushViewController:detailView animated:YES];
-//    [self.navigationItem setTitle:@"Back"];
 }
-//kuldeep
+
 -(IBAction)EmailBtn:(id)sender
 {
     [self emailList];
-//    UIImageView *emailBtnImage = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"messege.png"]];
-//    [emailBtnImage addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self
-//                                                                               action:@selector(emailList)]];
-//    [emailBtnImage setUserInteractionEnabled:YES];
-//    UIBarButtonItem *emailBtn = [[UIBarButtonItem alloc]initWithCustomView:emailBtnImage];
-//    [self.navigationItem setRightBarButtonItem:emailBtn];
+
 }
-//-(void)doneClicked {
-//   
-//    
-//    productListView.editFlag = 2;
-//    [productListView.productListTable setEditing:NO animated:YES];
-//    productListView.isEditing = NO;
-//    [self.navigationItem setLeftBarButtonItem:nil];
-//    [self.navigationItem setRightBarButtonItem:nil];
-//    [lblResultCount setHidden:NO];
-//    [lblResultCount setText:[NSString stringWithFormat:@"%d item%@",(int)productListView.productsArray.count,productListView.productsArray.count==1?@"":@"s"]];
-////     [self setMssgicon];
-//}
-
-//-(void)cancelClicked {
-//
-//    [[[UIAlertView alloc] initWithTitle:@"Clear List?" message:@"Are you sure you want to delete all items in your shopping list?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete All", nil]show];// autorelease]show];
-//}
-
-
-//-(void)clearList {
-//    for (Product* p in productListView.productsArray) {
-//        [[Database sharedDatabase]removeProductFromShoppingList:p.productId];
-//    }
-//    [self.navigationController popViewControllerAnimated:YES];
-//}
-
 
 -(void)deleteFromTable:(NSNumber*)row {
     [lblResultCount setText:[NSString stringWithFormat:@"%lu item%@",(unsigned long)productListView.productsArray.count,productListView.productsArray.count==1?@"":@"s"]];
 
-//        NSLog(@"single delete");
-//        Product *p = [productListView.productsArray objectAtIndex:row.intValue];
-//        [[Database sharedDatabase]removeProductFromShoppingList:p.productId];
-//        [productListView.productsArray removeObjectAtIndex:(row.intValue)];
-//        [productListView.productListTable reloadData];
-//        [lblResultCount setText:[NSString stringWithFormat:@"%d item%@",(int)productListView.productsArray.count,productListView.productsArray.count==1?@"":@"s"]];
-//    
-//    if ([[Database sharedDatabase]getCount]==0)
-//        [self.navigationController popViewControllerAnimated:YES];
-    
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-//    if (buttonIndex==1)
-//        [self clearList];
     
 }
 
