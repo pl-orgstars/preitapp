@@ -854,12 +854,6 @@
         [self prevClicked:nil];
     } 
     
-//    if (productIndex == 0) {
-//        [btnPrev setEnabled:NO];
-//    } 
-//    if (productIndex == productsArray.count-1) {
-//        [btnNext setEnabled:NO];
-//    }
 }
 
 -(void)showShoppingList {

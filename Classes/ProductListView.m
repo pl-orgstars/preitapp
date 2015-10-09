@@ -384,7 +384,6 @@
     Product *product;
     
     product = [productsArray objectAtIndex:indexPath.row];
-    NSLog(@"index %d==%@",(int)indexPath.row,product.imgMain);
     cellcustom.imageViewMain.image = nil;
     if (!product.imgMain)
     {
@@ -408,6 +407,9 @@
     
     
     cellcustom.btnAdd.tag =indexPath.row;
+    if (self.isShoppingList)            // show Cross Btn For Shopping List
+        [cellcustom.btnAdd setImage:[UIImage imageNamed:@"NewCrossBtn.png"] forState:UIControlStateNormal];
+    
     [cellcustom.btnAdd addTarget:self action:@selector(AddMe:) forControlEvents:UIControlEventTouchUpInside];
     
     cellcustom.lblName.text = product.title;
@@ -421,27 +423,56 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self showProductDetail:(int)indexPath.row];
+    if (self.isShoppingList)
+    {
+        
+        [self RemoveFromDB:(int)indexPath.row];
+    }else
+    {
+        [self showProductDetail:(int)indexPath.row];
+    }
+    
+}
+
+-(void)RemoveFromDB:(int)index
+{
+    Product *product;
+    
+    product = [productsArray objectAtIndex:index];
+
+    [dbAgent removeProductFromShoppingList:product.productId];
+    
+    [productsArray removeAllObjects];
+    [productsArray addObjectsFromArray:[[Database sharedDatabase]getShoppingList]];
+    [collectionView reloadData];
+    [showProductDetailDelegate performSelector:removeFromShListSelector withObject:nil];
 }
 
 -(IBAction)AddMe:(UIButton *)btnSender
 {
-    Product *product;
     
-    product = [productsArray objectAtIndex:btnSender.tag];
-
-    NSLog(@"%@ ",product.title);
-    [dbAgent addProductToShoppingList:product];
+    if (self.isShoppingList)
+    {
+        [self RemoveFromDB:(int)btnSender.tag];
+    }else
+    {
+        Product *product;
+        
+        product = [productsArray objectAtIndex:btnSender.tag];
+        
+        NSLog(@"%@ ",product.title);
+        [dbAgent addProductToShoppingList:product];
+    }
+    
+   
 }
 
 
 -(void) imgLoader:(ImageLoader *)imgLoader processImage:(UIImage *)img indexPath:(NSIndexPath *)imgIndexPath
 {
-    if (img)
+    if (img && productsArray.count >= imgIndexPath.row)
     {
         ProductSearchCC *cell = (ProductSearchCC*)[collectionView cellForItemAtIndexPath:imgIndexPath];
-//        cell.activity.hidden=TRUE;
-//        [cell.activity stopAnimating];
         UIImageView *mainInage;
         Product *product;
         product = [productsArray objectAtIndex:imgIndexPath.row];
