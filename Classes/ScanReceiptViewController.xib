@@ -16,6 +16,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScanReceiptViewController">
             <connections>
                 <outlet property="cancelBtn" destination="Cse-tf-ego" id="CI8-u6-DDu"/>
+                <outlet property="combo" destination="h9D-CC-clZ" id="8wk-Zl-coB"/>
+                <outlet property="divider" destination="2RZ-ni-VVk" id="Mzp-Xu-K6h"/>
+                <outlet property="divider1" destination="nsg-qF-OMR" id="B4n-4U-Sqa"/>
                 <outlet property="dividerLine2" destination="u2U-IP-1NR" id="lR8-xd-Tzi"/>
                 <outlet property="longerLabel" destination="EoT-E9-ldW" id="hM9-J2-Y5k"/>
                 <outlet property="longerlabel2" destination="xZm-8T-XfW" id="nuR-bh-eGq"/>
@@ -30,6 +33,7 @@
                 <outlet property="sectionImgView" destination="pDJ-fc-zQD" id="RR9-js-nhR"/>
                 <outlet property="sectionMainView" destination="Hiy-MI-Twc" id="QYl-sO-muW"/>
                 <outlet property="takeReceiptBtn" destination="Yzg-JG-F0M" id="bqK-bV-1uh"/>
+                <outlet property="uploadedView" destination="gGj-Mt-8pr" id="Ra1-Uj-ZOV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -193,6 +197,35 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
+                        <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" id="gGj-Mt-8pr">
+                            <rect key="frame" x="0.0" y="8" width="320" height="160"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ok.png" id="Kwv-CT-jVq">
+                                    <rect key="frame" x="148" y="8" width="25" height="25"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O9j-om-2Wa">
+                                    <rect key="frame" x="28" y="80" width="272" height="72"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <string key="text">We are precessing your receipt to
+extract sunnary information. You will
+receive 1 entry for every dolar you 
+spend at %@</string>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receipt Uploaded" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Y0S-vT-fgg">
+                                    <rect key="frame" x="91" y="41" width="139" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
                     </subviews>
                     <connections>
                         <outlet property="delegate" destination="-1" id="vrW-fo-iiH"/>
@@ -236,6 +269,7 @@
     </objects>
     <resources>
         <image name="BackWhite.png" width="25" height="25"/>
+        <image name="Ok.png" width="25" height="25"/>
         <image name="appback.png" width="375" height="667"/>
         <image name="header-icon-menu.png" width="22" height="18"/>
         <image name="park_image_icon" width="32" height="32"/>

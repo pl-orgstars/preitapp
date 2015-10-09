@@ -207,12 +207,12 @@
 
 -(IBAction)retakeImage:(UIButton*)sender{
     
-    if (sender.superview.tag == 101) {
+    if (sender.tag == 200) {
         [self getReceiptBtnCall:nil];
     }
     else{
         
-        if (gettingSection1) {
+        if (sender.tag == 201) {
             [self getSectionBtnCall:nil];
 
         }
@@ -227,7 +227,7 @@
 
 
 - (IBAction)uploadBtnCall:(id)sender {
-    
+   
     
     if (![originalImgArray objectForKeyWithNullCheck:@"receipt"]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Receipt missing" message:@"Please add a receipt" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -277,15 +277,20 @@
         }
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
+        
+        [indicator removeFromSuperview];
+        [self.view setUserInteractionEnabled:YES];
         if ([responseObject objectForKeyWithNullCheck:@"error"]) {
             [errorAlert show];
             
         }
+        else{
+//            [self.navigationController popViewControllerAnimated:NO];
+            [self imageUploadSuccessful];
+        }
         
-        [indicator removeFromSuperview];
-        [self.view setUserInteractionEnabled:YES];
         
-        [self.navigationController popViewControllerAnimated:NO];
+        
         
         NSLog(@"Success:  %@",responseObject);
         
@@ -407,6 +412,96 @@
 }
 */
 
+
+-(void)imageUploadSuccessful{
+    
+    [originalImgArray removeAllObjects];
+    
+    [combo setHidden:YES];
+    [mainLabel setHidden:YES];
+    
+    [uploadedView setHidden:NO];
+    
+    
+    [self setLowerView:(UIView*)divider1 upperView:(UIView*)uploadedView];
+    
+    [takeReceiptBtn setEnabled:YES];
+    [takeReceiptBtn setHidden:NO];
+    
+    receiptImgView.image = nil;
+    
+    for (UIView* subview in receiptImgView.subviews) {
+        [subview removeFromSuperview];
+    }
+    [receiptImgView setHidden:YES];
+    
+    CGRect frame = receiptImgView.frame;
+    frame = receiptImgView.frame;
+    frame.size.height = 171.0;
+    [receiptImgView setFrame:frame];
+    
+    frame = receiptMainView.frame;
+    frame.size.height = 171.0;
+    [receiptMainView setFrame:frame];
+    
+    [self setLowerView:(UIView*)receiptMainView upperView:(UIView*)divider1];
+    
+    [self setLowerView:(UIView*)dividerLine2 upperView:(UIView*)receiptMainView];
+    
+    sectionImgView.image = nil;
+    [sectionImgView setHidden:YES];
+    
+    for (UIView* subview in sectionImgView.subviews) {
+        [subview removeFromSuperview];
+    }
+    
+    [sectionBtn setHidden:NO];
+    [sectionBtn setEnabled:YES];
+    
+    frame = sectionImgView.frame;
+    frame.size.height = 171.0;
+    [sectionImgView setFrame:frame];
+    
+    frame = sectionMainView.frame;
+    frame.size.height = 171.0;
+    [sectionMainView setFrame:frame];
+    
+    
+    [self setLowerView:(UIView*)sectionMainView upperView:(UIView*)dividerLine2];
+    
+    section2ImgView.image = nil;
+    [section2ImgView setHidden:YES];
+    
+    for (UIView* subview in section2ImgView.subviews) {
+        [subview removeFromSuperview];
+    }
+    
+    frame = section2ImgView.frame;
+    frame.size.height = 171.0;
+    [section2ImgView setFrame:frame];
+    
+    [section2MainView setHidden:YES];
+    [section2MainView setFrame:sectionMainView.frame];
+    [section2MainView setUserInteractionEnabled:NO];
+    
+    [section2Btn setHidden:NO];
+    [section2Btn setEnabled:YES];
+    
+    [longerLabel setHidden:NO];
+    
+    
+    [self updateScroll:mainScroll];
+
+    
+}
+
+-(void)setLowerView:(UIView*)lower upperView:(UIView*)upper{
+    CGRect frame = lower.frame;
+    
+    frame.origin.y = upper.frame.origin.y + upper.frame.size.height + 8.0;
+    
+    [lower setFrame:frame];
+}
 
 - (void)dealloc {
     [longerLabel release];
