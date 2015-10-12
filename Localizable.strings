@@ -97,7 +97,7 @@
 
 "Gps"="\PREIT\" Would you like to Use your Current Location";
 // "Gps"="\PREIT\" Would you like to search malls nearest to you?";
- "ShowAll"="Sorry no mall near your location,would you like to get list of all malls?";
+ "ShowAll"="Sorry no mall near your location, would you like to get list of all malls?";
 
 //  "MOREINFOAPI" = "red5demo.com/product_search";
 "MOREINFOAPI" = "com/product_search";
