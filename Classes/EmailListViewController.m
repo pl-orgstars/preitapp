@@ -99,15 +99,15 @@ CGFloat animatedDistance;
     NSMutableArray *itemsArray = [[NSMutableArray alloc] init];
     
     
-    tabNavigation = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Previous", @"Next", nil]];
-    tabNavigation.segmentedControlStyle = UISegmentedControlStyleBar;
-    [tabNavigation setEnabled:YES forSegmentAtIndex:0];
-    [tabNavigation setEnabled:YES forSegmentAtIndex:1];
-    tabNavigation.momentary = YES;
-    [tabNavigation addTarget:self action:@selector(segmentedControlHandler:) forControlEvents:UIControlEventValueChanged];
-    UIBarButtonItem *barSegment = [[UIBarButtonItem alloc] initWithCustomView:tabNavigation];
-    
-    [itemsArray addObject:barSegment];
+//    tabNavigation = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Previous", @"Next", nil]];
+//    tabNavigation.segmentedControlStyle = UISegmentedControlStyleBar;
+//    [tabNavigation setEnabled:YES forSegmentAtIndex:0];
+//    [tabNavigation setEnabled:YES forSegmentAtIndex:1];
+//    tabNavigation.momentary = YES;
+//    [tabNavigation addTarget:self action:@selector(segmentedControlHandler:) forControlEvents:UIControlEventValueChanged];
+//    UIBarButtonItem *barSegment = [[UIBarButtonItem alloc] initWithCustomView:tabNavigation];
+//    
+//    [itemsArray addObject:barSegment];
     
     UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     [itemsArray addObject:flexButton];
