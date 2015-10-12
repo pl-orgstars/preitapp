@@ -378,6 +378,14 @@ static NSString *const kAllowTracking = @"allowTracking";
     
 //    self.tabBarController.tabBar.frame = CGRectMake(0, 0, 0, 0);
     
+    UILocalNotification *notification = launchOptions[UIApplicationLaunchOptionsLocalNotificationKey];
+    BOOL isNotificationsManagerNotification = [MNNotificationsManager processLocalNotification:notification];
+    if (isNotificationsManagerNotification) {
+        NSLog(@"Notifications Manager has processed the local notification for us, it was a Notifications SDK generated local notification");
+    } else {
+        NSLog(@"Notifications Manager has not processed the local notification, we should do it here because it is a notification related to our own app");
+    }
+    
     return YES;
 }
 
@@ -777,9 +785,32 @@ static NSString *const kAllowTracking = @"allowTracking";
     [mHomeViewController.view setHidden:hide];
 }
 
--(void)initilizeBeacon
-{
-
+- (void)initilizeBeacon {
+    MNAppKey *appKey = [[MNAppKey alloc] initWithAppKey:@"0b47040c219cb0b632a538e1c907dbd5" andSecretKey:@"18e7d79d401c2dd84e74296cb42c510d"];
+    self.notificationsDelegate = [[MNNotificationsManagerCustomDelegate alloc] init];
+    
+    // MNNotificationsManager instantiation
+    [MNNotificationsManager notificationsManagerWithAppKey:appKey
+                                                   options:nil
+                                                      user:nil
+                                                  delegate:self.notificationsDelegate
+                                         completionHandler:^(MNNotificationsManager *notificationsManager, NSError *error)
+    {
+        if (!error) {
+            NSLog(@"NMNotificationsManager instantiation success");
+            self.notificationsManager = notificationsManager;
+            [self.notificationsManager start];
+            
+            MNNMOptions *options = [[MNNMOptions alloc] init];
+            options.statsTrackingValues = @{@"specificapp" : @"Preit"};
+            
+        }
+        else {
+            NSLog(@"NMNotificationsManager instantiation error: %@", error.localizedDescription);
+        }
+    }];
+     
+    
 //    if (self.beaconRequestManager)
 //        [self.beaconRequestManager removeRequestManager];
 //    else{
@@ -841,17 +872,20 @@ static NSString *const kAllowTracking = @"allowTracking";
     localNotif.applicationIconBadgeNumber= badgeVal;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
-{
-    NSLog(@"sadfsdfsdfsd");
-
-    
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     [tracker send:
-     [[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+    [[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
                                              action:@"notification_read"
                                               label:[notification.userInfo valueForKey:@"beacon_id"]
                                               value:nil] build]];
     
+    BOOL isNotificationsManagerNotification = [MNNotificationsManager processLocalNotification:notification];
+    if (isNotificationsManagerNotification) {
+        NSLog(@"SDK owned local notification, do nothing");
+    } else {
+        NSLog(@"SDK did not process the notification");
+        // Process the notification
+    }
 }
 
 
