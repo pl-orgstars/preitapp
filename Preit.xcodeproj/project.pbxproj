@@ -97,9 +97,6 @@
 		612FBB5E1BB14FBA00D9E30C /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5A1BB14FBA00D9E30C /* MFSideMenuShadow.m */; };
 		612FBB5F1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5C1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m */; };
 		61C8FDDE1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C8FDDD1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m */; settings = {ASSET_TAGS = (); }; };
-		61C8FDE21BCBEA4F006428BB /* MNNotificationsManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C8FDE01BCBEA4F006428BB /* MNNotificationsManager.framework */; settings = {ASSET_TAGS = (); }; };
-		61C8FDE31BCBEA4F006428BB /* MNProximityManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61C8FDE11BCBEA4F006428BB /* MNProximityManager.bundle */; settings = {ASSET_TAGS = (); }; };
-		61C8FDE41BCBEA53006428BB /* MNProximityManager.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C8FDE11BCBEA4F006428BB /* MNProximityManager.bundle */; };
 		7003D6D9170961940031D69D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003D6D8170961920031D69D /* SystemConfiguration.framework */; };
 		7003D6DB170961B20031D69D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003D6DA170961B10031D69D /* CoreData.framework */; };
 		704554321740B2840038838F /* MapViewController copy.xib in Resources */ = {isa = PBXBuildFile; fileRef = 704554311740B2840038838F /* MapViewController copy.xib */; };
@@ -451,7 +448,6 @@
 		E6E283991BAAF80A001736DF /* MenuUpperview.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6E283971BAAF80A001736DF /* MenuUpperview.xib */; };
 		E6FAE1651BC5515300AC1575 /* ImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FAE1621BC5515300AC1575 /* ImageLoader.m */; };
 		E6FAE1661BC5515300AC1575 /* SimpleImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FAE1641BC5515300AC1575 /* SimpleImageLoader.m */; };
-		E6FC27941BC2AAB000DB444B /* MNProximityManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6FC27931BC2AAB000DB444B /* MNProximityManager.bundle */; };
 		E6FC27961BC2AAD200DB444B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FC27951BC2AAD200DB444B /* AdSupport.framework */; };
 		E6FC27981BC2AAF200DB444B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FC27971BC2AAF200DB444B /* CoreTelephony.framework */; };
 		E6FCFC081BC69E3600B15121 /* NewfbBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC041BC69E3600B15121 /* NewfbBtn@2x.png */; };
@@ -583,8 +579,6 @@
 		612FBB5C1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
 		61C8FDDC1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNNotificationsManagerCustomDelegate.h; sourceTree = "<group>"; };
 		61C8FDDD1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNNotificationsManagerCustomDelegate.m; sourceTree = "<group>"; };
-		61C8FDE01BCBEA4F006428BB /* MNNotificationsManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MNNotificationsManager.framework; sourceTree = "<group>"; };
-		61C8FDE11BCBEA4F006428BB /* MNProximityManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MNProximityManager.bundle; sourceTree = "<group>"; };
 		7003D6D8170961920031D69D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7003D6DA170961B10031D69D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		704554311740B2840038838F /* MapViewController copy.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MapViewController copy.xib"; sourceTree = "<group>"; };
@@ -1048,8 +1042,6 @@
 		E6FAE1621BC5515300AC1575 /* ImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoader.m; sourceTree = "<group>"; };
 		E6FAE1631BC5515300AC1575 /* SimpleImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleImageLoader.h; sourceTree = "<group>"; };
 		E6FAE1641BC5515300AC1575 /* SimpleImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleImageLoader.m; sourceTree = "<group>"; };
-		E6FC27911BC2AAA000DB444B /* MNNotificationsManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MNNotificationsManager.framework; sourceTree = "<group>"; };
-		E6FC27931BC2AAB000DB444B /* MNProximityManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MNProximityManager.bundle; sourceTree = "<group>"; };
 		E6FC27951BC2AAD200DB444B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		E6FC27971BC2AAF200DB444B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		E6FCFC041BC69E3600B15121 /* NewfbBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewfbBtn@2x.png"; sourceTree = "<group>"; };
@@ -1077,8 +1069,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61C8FDE21BCBEA4F006428BB /* MNNotificationsManager.framework in Frameworks */,
-				61C8FDE41BCBEA53006428BB /* MNProximityManager.bundle in Frameworks */,
 				AE93BCB71A651EC50040AEB5 /* CoreBluetooth.framework in Frameworks */,
 				E6FC27961BC2AAD200DB444B /* AdSupport.framework in Frameworks */,
 				E6FC27981BC2AAF200DB444B /* CoreTelephony.framework in Frameworks */,
@@ -1237,11 +1227,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				61C8FDE01BCBEA4F006428BB /* MNNotificationsManager.framework */,
-				61C8FDE11BCBEA4F006428BB /* MNProximityManager.bundle */,
 				E6FC27971BC2AAF200DB444B /* CoreTelephony.framework */,
 				E6FC27951BC2AAD200DB444B /* AdSupport.framework */,
-				E6FC27901BC2AAA000DB444B /* MNNotificationsManager */,
 				BD69FAC51BB0136F00E78744 /* IIViewDeck */,
 				8CE9BF141AC95F3700C89A46 /* libGoogleAnalyticsServices.a */,
 				AE93BCBC1A65227B0040AEB5 /* Common.embeddedframework */,
@@ -2252,15 +2239,6 @@
 			path = "Image Loader";
 			sourceTree = "<group>";
 		};
-		E6FC27901BC2AAA000DB444B /* MNNotificationsManager */ = {
-			isa = PBXGroup;
-			children = (
-				E6FC27931BC2AAB000DB444B /* MNProximityManager.bundle */,
-				E6FC27911BC2AAA000DB444B /* MNNotificationsManager.framework */,
-			);
-			path = MNNotificationsManager;
-			sourceTree = "<group>";
-		};
 		E6FCFC031BC69E3600B15121 /* New PRoduct Detail Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -2649,10 +2627,8 @@
 				AE753F80193EFCF700D6F7B2 /* CustomWebViewController.xib in Resources */,
 				70D42EED173A44B900A9562E /* sharingbutton_pinterest_2x.png in Resources */,
 				AE2B5F921A47F18200460114 /* call_new.png in Resources */,
-				E6FC27941BC2AAB000DB444B /* MNProximityManager.bundle in Resources */,
 				AE87D2921936F3C300F5493D /* 1234.png in Resources */,
 				BD4EF9711BBE7B180042EF6E /* ScanReceiptViewController.xib in Resources */,
-				61C8FDE31BCBEA4F006428BB /* MNProximityManager.bundle in Resources */,
 				AE87D2E21937407D00F5493D /* main_screen_icon@2x.png in Resources */,
 				70D42EEF173A53FF00A9562E /* box.png in Resources */,
 				70D42EF1173A545600A9562E /* box2.png in Resources */,
