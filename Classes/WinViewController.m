@@ -33,18 +33,14 @@
     delegate = (PreitAppDelegate*)[UIApplication sharedApplication].delegate;
     
     NSString* votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
-    
     NSString* url;
     
     if (votigoUserID) {
-        url = VOTIGO_MAIN;
+        url = [NSString stringWithFormat:@"%@?mall_id=%@&sweepuserentry_id=%@", VOTIGO_MAIN, [delegate.mallData objectForKey:@"id"], votigoUserID];
     }
     else{
-        url = VOTIGO_SIGNUP;
+        url = [NSString stringWithFormat:@"%@?mall_id=%@", VOTIGO_SIGNUP, [delegate.mallData objectForKey:@"id"]];
     }
-    
-    NSString *toBeAppend = [NSString stringWithFormat:@"?mall_id=%@", [delegate.mallData objectForKey:@"id"]];
-    url = [url stringByAppendingString:toBeAppend];
     
     NSURLRequest* winRequest = [[NSURLRequest alloc] initWithURL:[[NSURL alloc] initWithString:url]];
     [winWebView loadRequest:winRequest];
