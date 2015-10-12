@@ -97,6 +97,9 @@
 		612FBB5E1BB14FBA00D9E30C /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5A1BB14FBA00D9E30C /* MFSideMenuShadow.m */; };
 		612FBB5F1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5C1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m */; };
 		61C8FDDE1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C8FDDD1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m */; settings = {ASSET_TAGS = (); }; };
+		61C8FDE71BCBF5CC006428BB /* MNNotificationsManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C8FDE51BCBF5CC006428BB /* MNNotificationsManager.framework */; settings = {ASSET_TAGS = (); }; };
+		61C8FDE81BCBF5CC006428BB /* MNProximityManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */; settings = {ASSET_TAGS = (); }; };
+		61C8FDE91BCBF5D1006428BB /* MNProximityManager.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */; };
 		7003D6D9170961940031D69D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003D6D8170961920031D69D /* SystemConfiguration.framework */; };
 		7003D6DB170961B20031D69D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003D6DA170961B10031D69D /* CoreData.framework */; };
 		704554321740B2840038838F /* MapViewController copy.xib in Resources */ = {isa = PBXBuildFile; fileRef = 704554311740B2840038838F /* MapViewController copy.xib */; };
@@ -579,6 +582,8 @@
 		612FBB5C1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
 		61C8FDDC1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNNotificationsManagerCustomDelegate.h; sourceTree = "<group>"; };
 		61C8FDDD1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNNotificationsManagerCustomDelegate.m; sourceTree = "<group>"; };
+		61C8FDE51BCBF5CC006428BB /* MNNotificationsManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MNNotificationsManager.framework; sourceTree = "<group>"; };
+		61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MNProximityManager.bundle; sourceTree = "<group>"; };
 		7003D6D8170961920031D69D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7003D6DA170961B10031D69D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		704554311740B2840038838F /* MapViewController copy.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MapViewController copy.xib"; sourceTree = "<group>"; };
@@ -1069,6 +1074,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61C8FDE71BCBF5CC006428BB /* MNNotificationsManager.framework in Frameworks */,
+				61C8FDE91BCBF5D1006428BB /* MNProximityManager.bundle in Frameworks */,
 				AE93BCB71A651EC50040AEB5 /* CoreBluetooth.framework in Frameworks */,
 				E6FC27961BC2AAD200DB444B /* AdSupport.framework in Frameworks */,
 				E6FC27981BC2AAF200DB444B /* CoreTelephony.framework in Frameworks */,
@@ -1227,6 +1234,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				61C8FDE51BCBF5CC006428BB /* MNNotificationsManager.framework */,
+				61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */,
 				E6FC27971BC2AAF200DB444B /* CoreTelephony.framework */,
 				E6FC27951BC2AAD200DB444B /* AdSupport.framework */,
 				BD69FAC51BB0136F00E78744 /* IIViewDeck */,
@@ -2509,6 +2518,7 @@
 				AE87D29B193707E200F5493D /* Menu_selected@2x.png in Resources */,
 				BD93E4891BB14CBA00EB91F0 /* mainmenu-icon-stores@2x.png in Resources */,
 				AE875A52193CA5E10052901E /* refresh_icon.png in Resources */,
+				61C8FDE81BCBF5CC006428BB /* MNProximityManager.bundle in Resources */,
 				BD46BB8B1BB2ABD100FC5A43 /* directory-icon-list-phone@2x.png in Resources */,
 				BDAFA4A11BB05A5C00BE5CE8 /* menuback@2x.png in Resources */,
 				42ABCE1815AD8EA70082E57D /* check@2x.png in Resources */,
