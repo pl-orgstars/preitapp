@@ -39,14 +39,15 @@
     
     int currentSelectedTextboxIndex;
     IBOutlet UIButton *pickerBttn;
-   IBOutlet UITextField *maximunPriceLabel;
-  IBOutlet  UITextField *minmumPriceLabel;
-
-   IBOutlet UIView *viewPriceBAr;
+    IBOutlet UITextField *maximunPriceLabel;
+    IBOutlet  UITextField *minmumPriceLabel;
+    IBOutlet UIImageView *imgViewCircleBG;
+    IBOutlet UILabel *lblTotalNumber;
+    
+    IBOutlet UIView *viewPriceBAr;
     
     UISegmentedControl *tabNavigation;
     
-//    NSString *searchString;
     int page;
     
     NSString *searchString;
@@ -67,6 +68,6 @@
 -(void)sort;
 -(void)hidePicker;
 -(void)loadPrevious;
-
+-(void)AddinList:(int)totalIndex;
 -(void)addMaxMinTextField;
 @end

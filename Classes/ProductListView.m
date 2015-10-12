@@ -81,9 +81,17 @@
 //    productListTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     dbAgent = [Database sharedDatabase];
     editFlag = 0;
+    
+    [self RefreshView];
     return self;
 }
-
+-(void)RefreshView
+{
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d",[dbAgent getCount]] forKey:@"total"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShoppingListRefresh" object:nil userInfo:dictionary];
+    
+    NSLog(@"Get Count %d",[dbAgent getCount]);
+}
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -385,6 +393,7 @@
     
     product = [productsArray objectAtIndex:indexPath.row];
     cellcustom.imageViewMain.image = nil;
+    NSLog(@"Image URL %@",product.imageUrl);
     if (!product.imgMain)
     {
         ImageLoader *imgLoader = [[ImageLoader alloc] init];
@@ -397,6 +406,7 @@
     {
         NSLog(@"index Inner %d==%@",(int)indexPath.row,product.imgMain);
         cellcustom.imageViewMain.image = product.imgMain;
+         cellcustom.imageViewMain.clipsToBounds = YES;
     }
 
 
@@ -464,7 +474,10 @@
         [dbAgent addProductToShoppingList:product];
     }
     
-   
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d",[dbAgent getCount]] forKey:@"total"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShoppingListRefresh" object:nil userInfo:dictionary];
+    
+    NSLog(@"Get Count %d",[dbAgent getCount]);
 }
 
 
@@ -478,7 +491,7 @@
         product = [productsArray objectAtIndex:imgIndexPath.row];
         
         product.imgMain = img;
-        
+        cell.imageViewMain.clipsToBounds = YES;
         mainInage= cell.imageViewMain;
         mainInage.image = img;
         product.imageView = mainInage;
