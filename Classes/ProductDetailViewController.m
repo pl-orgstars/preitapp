@@ -331,7 +331,6 @@
     UIImage *img = [imagesArray objectAtIndex:productIndex];
     
     float y2;
-    
     UITapGestureRecognizer *ImageTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ShowImageView:)];
     [ImageTap setCancelsTouchesInView:NO];
     
@@ -347,6 +346,7 @@
         [imageDetail setBackgroundColor:[UIColor clearColor]];
         [imageDetail addGestureRecognizer:ImageTap];
         [imageDetail setUserInteractionEnabled:YES];
+        [self.view bringSubviewToFront:imgViewZoom];
 
     }
     else {
@@ -361,6 +361,8 @@
         [imageDetail setBackgroundColor:[UIColor clearColor]];
         [imageDetail addGestureRecognizer:ImageTap];
         [imageDetail setUserInteractionEnabled:YES];
+        [self.view bringSubviewToFront:imgViewZoom];
+
 
     }
 
@@ -376,7 +378,7 @@
     
     if (isShoppingList)
     {
-        btnFrame2.origin.y=430;
+        btnFrame2.origin.y=imgViewMain.frame.origin.y + imgViewMain.frame.size.height+ 05;
         [shoppingList setBackgroundImage:removeImage forState:UIControlStateNormal];
         [shoppingList addTarget:self action:@selector(removeFromList:) forControlEvents:UIControlEventTouchUpInside];
     } else
@@ -385,7 +387,7 @@
         UIButton *searchStore = [UIButton buttonWithType:UIButtonTypeCustom];
         CGRect btnFrame1= searchStore.frame;
         btnFrame1.origin.x= 10 ;
-        btnFrame1.origin.y=380;
+        btnFrame1.origin.y=imgViewMain.frame.origin.y + imgViewMain.frame.size.height+ 50;
         btnFrame1.size = searchImage.size;
         searchStore.frame=btnFrame1;
         [searchStore setBackgroundImage:searchImage forState:UIControlStateNormal];
@@ -401,7 +403,7 @@
             [shoppingList setBackgroundImage:addImage forState:UIControlStateNormal];
             [shoppingList addTarget:self action:@selector(addToList:) forControlEvents:UIControlEventTouchUpInside];
         }
-        btnFrame2.origin.y= 430;;
+        btnFrame2.origin.y= imgViewMain.frame.origin.y + imgViewMain.frame.size.height+ 05;;
     }
     
     // Button for shopping list.
@@ -422,7 +424,7 @@
                        action:@selector(twiterBttnTapped:)
              forControlEvents:UIControlEventTouchDown];
     [twitterbutton setTitle:@"twitter" forState:UIControlStateNormal];
-    twitterbutton.frame = CGRectMake(68+99, 500, 42, 43);
+    twitterbutton.frame = CGRectMake(68+99, imgViewMain.frame.origin.y + imgViewMain.frame.size.height + 135 , 42, 43);
     [scrollProductDetail addSubview:twitterbutton];
     
     
@@ -432,7 +434,7 @@
                action:@selector(facebookBttnTapped:)
      forControlEvents:UIControlEventTouchDown];
     [facebookbutton setTitle:@"facebook" forState:UIControlStateNormal];
-    facebookbutton.frame = CGRectMake(68+33, 500, 42, 43);
+    facebookbutton.frame = CGRectMake(68+33, imgViewMain.frame.origin.y + imgViewMain.frame.size.height + 135, 42, 43);
     [scrollProductDetail addSubview:facebookbutton];
      float googleHeight =twitterbutton.frame.origin.y+twitterbutton.frame.size.height;
     
@@ -513,6 +515,8 @@
             DetailAsyncImageVIew *asyn = (DetailAsyncImageVIew*)[imgDict objectForKey:@"imgView"] ;//retain];
             [imagesArray replaceObjectAtIndex:asyn.productIndex withObject:[UIImage imageWithData:[imgDict objectForKey:@"imgData"]]];
             [asyn performSelector:@selector(setImage2:) withObject:[imgDict objectForKey:@"imgData"]];
+            [scrollProductDetail bringSubviewToFront:imgViewZoom];
+
         }
     }
 }
@@ -547,6 +551,9 @@
         DetailAsyncImageVIew *detailImage = [[DetailAsyncImageVIew alloc]initWithFrame:frame];
         Product *p = [productsArray objectAtIndex:productIndex];
         [detailImage loadImageFromURL:[NSURL URLWithString:p.imageUrl] delegate:self requestSelector:@selector(detailImageDownloaded:)];
+        
+        
+        
     }
     
     [delegate hideTabBar:NO];
@@ -621,13 +628,18 @@
     
 }
 
+-(IBAction)ShowShoppingListView:(id)sender
+{
+    [self showShoppingList];
+}
+
 -(void)showShoppingList {
     
     if ([[Database sharedDatabase]getCount]) {
     
-    ShoppingListViewController *shoppingList = [[ShoppingListViewController alloc]initWithNibName:@"ShoppingListViewController" bundle:nil];
-    [self.navigationController pushViewController:shoppingList animated:YES];
-    [self.navigationItem setTitle:@"Back"];
+        ShoppingListViewController *shoppingList = [[ShoppingListViewController alloc]initWithNibName:@"ShoppingListViewController" bundle:nil];
+        [self.navigationController pushViewController:shoppingList animated:YES];
+        [self.navigationItem setTitle:@"Back"];
     }
 }
 //////kuldeep
@@ -734,6 +746,10 @@
     [self settingsForGetdata];
 }
 
+-(IBAction)ShowStoreInfo:(id)sender
+{
+      [self settingsForGetdata];
+}
 
 -(void)ShowImageView:(UITapGestureRecognizer*)tap {
     NSLog(@"showStoreTap");
