@@ -393,7 +393,6 @@
     
     product = [productsArray objectAtIndex:indexPath.row];
     cellcustom.imageViewMain.image = nil;
-    NSLog(@"Image URL %@",product.imageUrl);
     if (!product.imgMain)
     {
         ImageLoader *imgLoader = [[ImageLoader alloc] init];
@@ -404,7 +403,6 @@
         
     } else
     {
-        NSLog(@"index Inner %d==%@",(int)indexPath.row,product.imgMain);
         cellcustom.imageViewMain.image = product.imgMain;
          cellcustom.imageViewMain.clipsToBounds = YES;
     }
@@ -423,7 +421,10 @@
     [cellcustom.btnAdd addTarget:self action:@selector(AddMe:) forControlEvents:UIControlEventTouchUpInside];
     
     cellcustom.lblName.text = product.title;
-    cellcustom.lblDisc.text = product.retailerName;
+    if (self.isShoppingList)
+        cellcustom.lblDisc.text = product.store;
+    else
+        cellcustom.lblDisc.text = product.retailerName;
     cellcustom.lblPrice.text = [NSString stringWithFormat:@"$%.2f",product.price];
    
     NSLog(@"");
