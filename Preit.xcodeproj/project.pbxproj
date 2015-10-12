@@ -441,6 +441,7 @@
 		E6210DD41BC5184C008D579C /* ProductSearchCC.m in Sources */ = {isa = PBXBuildFile; fileRef = E6210DD21BC5184C008D579C /* ProductSearchCC.m */; };
 		E6210DD51BC5184C008D579C /* ProductSearchCC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6210DD31BC5184C008D579C /* ProductSearchCC.xib */; };
 		E634685C1BA94BDB0088FADB /* backNavigation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E634685B1BA94BDB0088FADB /* backNavigation@2x.png */; };
+		E6D367731BCBADFE004F6E76 /* NewCircleBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D367721BCBADFE004F6E76 /* NewCircleBG@2x.png */; };
 		E6E283791BAABDCD001736DF /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E283771BAABDCD001736DF /* MenuView.m */; };
 		E6E2837A1BAABDCD001736DF /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6E283781BAABDCD001736DF /* MenuView.xib */; };
 		E6E283931BAAEC67001736DF /* MenuNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6E283921BAAEC67001736DF /* MenuNew@2x.png */; };
@@ -1031,6 +1032,7 @@
 		E6210DD21BC5184C008D579C /* ProductSearchCC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductSearchCC.m; path = "Product Search CC/ProductSearchCC.m"; sourceTree = "<group>"; };
 		E6210DD31BC5184C008D579C /* ProductSearchCC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProductSearchCC.xib; path = "Product Search CC/ProductSearchCC.xib"; sourceTree = "<group>"; };
 		E634685B1BA94BDB0088FADB /* backNavigation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backNavigation@2x.png"; sourceTree = "<group>"; };
+		E6D367721BCBADFE004F6E76 /* NewCircleBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewCircleBG@2x.png"; sourceTree = "<group>"; };
 		E6E283761BAABDCD001736DF /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuView.h; path = MenuView/MenuView.h; sourceTree = "<group>"; };
 		E6E283771BAABDCD001736DF /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuView.m; path = MenuView/MenuView.m; sourceTree = "<group>"; };
 		E6E283781BAABDCD001736DF /* MenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MenuView.xib; path = MenuView/MenuView.xib; sourceTree = "<group>"; };
@@ -2258,6 +2260,7 @@
 		E6FCFC031BC69E3600B15121 /* New PRoduct Detail Images */ = {
 			isa = PBXGroup;
 			children = (
+				E6D367721BCBADFE004F6E76 /* NewCircleBG@2x.png */,
 				E6FCFC1E1BC7BA4C00B15121 /* NewSendList@2x.png */,
 				E6FCFC181BC7B94B00B15121 /* NewCheckS@2x.png */,
 				E6FCFC191BC7B94B00B15121 /* NewCheckU@2x.png */,
@@ -2665,6 +2668,7 @@
 				E6FCFC0D1BC6A27800B15121 /* NewStoreNAme@2x.png in Resources */,
 				AE2B5F8D1A47EC4300460114 /* back_new@2x.png in Resources */,
 				70C12CDB17532E4700A48C83 /* check_box.png in Resources */,
+				E6D367731BCBADFE004F6E76 /* NewCircleBG@2x.png in Resources */,
 				70C12CDC17532E4700A48C83 /* input.png in Resources */,
 				70C12CDF17532F4600A48C83 /* check_box_2x.png in Resources */,
 				E60CFE221BA69E0600AA95AD /* Proxima Nova Reg.ttf in Resources */,

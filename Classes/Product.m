@@ -59,8 +59,10 @@ accountId = SearchResult->location->id
         title = [[NSString alloc] initWithFormat:@"%@",[[dict objectForKey:@"product"]objectForKey:@"name"]];
         desc = [[NSString alloc] initWithFormat:@"%@",[[dict objectForKey:@"product"]objectForKey:@"descriptionLong"]];
         price = [[[NSString alloc] initWithFormat:@"%@",[dict objectForKey:@"price"] ] floatValue];
-        imageUrl = [[NSString alloc] initWithFormat:@"%@",[[[[[dict objectForKey:@"product"]objectForKey:@"images"] objectAtIndex:0] objectForKey:@"ImageInfo"] objectForKey:@"link"]]; //objectAtIndex:0]];
+
         store = [[NSString alloc] initWithFormat:@"%@",[[dict objectForKey:@"location"] objectForKey:@"name"]];
+        
+            imageUrl = [[NSString alloc] initWithFormat:@"%@",[[[[[dict objectForKey:@"product"]objectForKey:@"images"] objectAtIndex:0] objectForKey:@"ImageInfo"] objectForKey:@"link"]]; //objectAtIndex:0]];
         
         retailerName = [[NSString alloc] initWithFormat:@"%@",[dict2 objectForKey:@"name"]];
         
