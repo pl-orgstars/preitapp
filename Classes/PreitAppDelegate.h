@@ -18,6 +18,9 @@
 #import "IIViewDeckController.h"
 #import "SideMenu.h"
 
+#import <MNNotificationsManager/MNNotificationsManager.h>
+#import "MNNotificationsManagerCustomDelegate.h"
+#import <MNNotificationsManager/MNNMOptions+Internal.h>
 
 @interface PreitAppDelegate : NSObject <UIApplicationDelegate,UITabBarControllerDelegate>
 {
@@ -92,8 +95,6 @@
 @property(nonatomic) BOOL mAllowSelectTab;
 @property(nonatomic,retain) id shoppingViewController;
 
-
-
 @property (nonatomic,retain) ProductSearchHome *mHomeViewController; 
 @property (nonatomic,retain) UINavigationController *searchHomeNavController;
 
@@ -116,6 +117,10 @@
 
 //ibnetariq
 @property(retain,nonatomic) NSArray* viewsArray;
+
+// MNNotification By Jawad Ahmed
+@property (retain, nonatomic) MNNotificationsManager *notificationsManager;
+@property (retain, nonatomic) MNNotificationsManagerCustomDelegate *notificationsDelegate;
 
 
 -(void)showLocalNotificationsWithMessage:(NSString *)message :(NSString*)beacon_id;
