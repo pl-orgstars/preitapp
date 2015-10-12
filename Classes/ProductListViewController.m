@@ -48,9 +48,11 @@
 
 - (void)viewDidLoad
 {
-
+    
     [super viewDidLoad];
     [self addMaxMinTextField];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ShoppingListRefresh:) name:@"ShoppingListRefresh" object:nil];
+
     viewPriceBAr.hidden = TRUE;
     delegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
     
@@ -71,7 +73,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self
                                                                          action:@selector(showShoppingList:)];
     [barV addGestureRecognizer:tap];
-
+    
     
     UIBarButtonItem *shoppingListView = [[UIBarButtonItem alloc]initWithCustomView:barV];
     [self.navigationItem setRightBarButtonItem:shoppingListView];
@@ -82,10 +84,9 @@
     sortArray = [[NSArray alloc]initWithObjects:@"Sort: Relevance",@"Price: Low-High",@"Price: High-Low", nil];
     
     frame = self.view.frame;
-    frame.origin.y = 135;
-
-     frame.size.height -=  frame.origin.y ;
-    [overView setBackgroundColor:[UIColor clearColor]];
+    frame.origin.y = 175;
+    
+    frame.size.height -=  frame.origin.y ;
     productListView = [[ProductListView alloc]initWithFrame:frame];
     productListView.loadMoreDelegate = self;
     productListView.loadMoreSelector = @selector(loadMore);
@@ -133,7 +134,7 @@
 - (IBAction)menuBtnCall:(id)sender {
     
     self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
-
+    
 }
 
 
@@ -151,10 +152,12 @@
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    viewPriceBAr.hidden = TRUE;
     return YES;
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    viewPriceBAr.hidden = TRUE;
     NSLog(@"textchange %lu",(unsigned long)searchText.length);
     if (searchBar.text.length == 0 && !spinner.isAnimating) {
         [productListView.productsArray removeAllObjects];
@@ -181,7 +184,7 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
-    [overView setHidden:YES];
+    //    [overView setHidden:YES];
     [minmumPriceLabel setText:@""];
     [maximunPriceLabel setText:@""];
     
@@ -195,29 +198,29 @@
     }
 }
 
-#pragma mark make request 
+#pragma mark make request
 ///kuldeep new api
 -(void)showStoreDetails{
-
+    
     NSString *str = NSLocalizedString(@"PRODUCT_SEARCH_IDS","");
     NSString *url= [NSString stringWithFormat:@"%@property_id=%ld", str,delegate.mallId];
     
     
-	RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
-	[req requestToServer:self callBackSelector:@selector(responseSuccessForStoreID:) errorSelector:@selector(requestError:) Url:url];
+    RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
+    [req requestToServer:self callBackSelector:@selector(responseSuccessForStoreID:) errorSelector:@selector(requestError:) Url:url];
     
     
 }
 -(void)responseSuccessForStoreID:(NSData *)receivedData
 {
     NSLog(@"responseSuccessForTenantID");
-
+    
     NSMutableString *storeId = [NSMutableString new];
-	if(receivedData!=nil)
+    if(receivedData!=nil)
     {
-		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];
-		// test string
-		NSArray *tmpArray=[jsonString JSONValue];
+        NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];
+        // test string
+        NSArray *tmpArray=[jsonString JSONValue];
         
         BOOL isFirst = NO;
         for (NSDictionary *dict in tmpArray)
@@ -231,9 +234,9 @@
                 [storeId appendString:@","];
                 [storeId appendString:[dict2 valueForKey:@"store_id"]];
             }
-    
+            
         }
-
+        
     }
     
 }
@@ -273,10 +276,10 @@
     
     NSDictionary *dict = [jsonString JSONValue];
     
-   totalCount = [[dict objectForKey:@"count"] longValue];
-  
+    totalCount = [[dict objectForKey:@"count"] longValue];
+    
     NSArray *array = [dict objectForKey:@"results"];
-   
+    
     NSMutableArray *itemsArray = [[NSMutableArray alloc]initWithCapacity:array.count];
     
     for (int i=0; i<array.count; i++) {
@@ -300,13 +303,13 @@
     [lblSort setText:[NSString stringWithFormat:@"Sort: %@",sortString]];
     mainArray = [[NSMutableArray alloc]initWithArray:itemsArray];
     if (productListView.productsArray) {
-
+        
     }
     productListView.productsArray = [[NSMutableArray alloc]initWithArray:itemsArray];
     productListView.backgroundColor = [UIColor clearColor];
     [productListView setHidden:NO];
     
-    [overView setHidden:YES];
+    //    [overView setHidden:YES];
     [spinner stopAnimating];
     
     if (itemsArray.count==0) {
@@ -405,10 +408,10 @@
 }
 
 -(void)prevRequestFailed:(NSError *)error {
-
+    
     [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Network error!" buttontitle:@"Dismiss"];
     [spinner stopAnimating];
-
+    
 }
 
 -(void)prevRequestFinished:(NSData *)responseData
@@ -428,7 +431,7 @@
             break;
         }
     }
-     currentCount -= itemsArray.count;
+    currentCount -= itemsArray.count;
     
     NSLog(@"3");
     if (totalCount<10) {
@@ -461,7 +464,7 @@
         detailView.productIndex = productIndex.intValue;
         
         delegate.searchURL = urlString;
-
+        
         [self.navigationController pushViewController:detailView animated:YES];
         [self hidePicker];
     }
@@ -472,10 +475,10 @@
     
     if ([[Database sharedDatabase]getCount]) {
         
-    
-    ShoppingListViewController *shoppingList = [[ShoppingListViewController alloc]initWithNibName:@"ShoppingListViewController" bundle:nil];
-    [self.navigationController pushViewController:shoppingList animated:YES];
-    [self.navigationItem setTitle:@"Back"];
+        
+        ShoppingListViewController *shoppingList = [[ShoppingListViewController alloc]initWithNibName:@"ShoppingListViewController" bundle:nil];
+        [self.navigationController pushViewController:shoppingList animated:YES];
+        [self.navigationItem setTitle:@"Back"];
     }
 }
 
@@ -494,17 +497,17 @@
     [lblSort setText:[NSString stringWithFormat:@"%@",sortString]];
     if ([sortString isEqualToString:@"Price: Low-High"]) {
         [productListView.productsArray sortUsingSelector:@selector(compareForPrice:)];
-
+        
     } else if ([sortString isEqualToString:@"Price: High-Low"]) {
-        [productListView.productsArray sortUsingSelector:@selector(compareForPriceDesc:)];        
+        [productListView.productsArray sortUsingSelector:@selector(compareForPriceDesc:)];
     } else {
         [productListView.productsArray removeAllObjects];
         [productListView.productsArray addObjectsFromArray:mainArray];
     }
     [productListView.collectionView reloadData];
     
-    [lblResultCount setText:[NSString stringWithFormat:@"%ld results",(int)productListView.productsArray.count]];
-
+    lblResultCount.text = [NSString stringWithFormat:@"Page %d",page];
+    
 }
 
 
@@ -571,7 +574,7 @@
             [check setHidden:YES];
         }
     }
-        
+    
     sortString = [sortArray objectAtIndex:[[tap view]tag]];
 }
 
@@ -590,7 +593,7 @@
     
 }
 -(void)doneWithNumberPad:(id)sender{
-
+    
 }
 
 #pragma mark - maxMinValueSet
@@ -601,7 +604,7 @@
     NSString *str;
     
     if (!minmumPriceLabel.text.length) {
-    
+        
         str = [NSString stringWithFormat:@"%@&price_low=%@&price_high=%.2f",productSearchBar.text,minmumPriceLabel.text,maximunPriceLabel.text.floatValue];
         
     }else if(!maximunPriceLabel.text.length){
@@ -609,7 +612,7 @@
         str = [NSString stringWithFormat:@"%@&price_low=%.2f&price_high=%@",productSearchBar.text,minmumPriceLabel.text.floatValue,maximunPriceLabel.text];
         
     }else if(!minmumPriceLabel.text.length && !maximunPriceLabel.text.length){
-     
+        
         str = [NSString stringWithFormat:@"%@&price_low=%@&price_high=%@",productSearchBar.text,minmumPriceLabel.text,maximunPriceLabel.text];
         
     }else{
@@ -624,31 +627,31 @@
     float min= 0,max = 0;
     if(productListView.productsArray.count){
         Product *prod = [productListView.productsArray objectAtIndex:0];
-         min = prod.price;
+        min = prod.price;
         max = prod.price;
         for (Product *d in productListView.productsArray) {
             if (d.price>max) {
                 max = d.price;
             }
             if (d.price<min) {
-            
+                
                 min = d.price;
             }
-
+            
         }
         
     }
     maximunPriceLabel.text = [NSString stringWithFormat:@"%.2f",max];
     minmumPriceLabel.text = [NSString stringWithFormat:@"%.2f",min];
     
-
+    
 }
 
 
 
 -(void)addMaxMinTextField
 {
-
+    
     [pickerBttn setHidden:YES];
     [lblSort setHidden:YES];
     
@@ -658,15 +661,15 @@
     
     NSMutableArray *itemsArray = [[NSMutableArray alloc] init];
     
-
-    tabNavigation = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Previous", @"Next", nil]];
-    [tabNavigation setEnabled:YES forSegmentAtIndex:0];
-    [tabNavigation setEnabled:YES forSegmentAtIndex:1];
-    tabNavigation.momentary = YES;
-    [tabNavigation addTarget:self action:@selector(segmentedControlHandler:) forControlEvents:UIControlEventValueChanged];
-    UIBarButtonItem *barSegment = [[UIBarButtonItem alloc] initWithCustomView:tabNavigation];
     
-    [itemsArray addObject:barSegment];
+    //    tabNavigation = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Previous", @"Next", nil]];
+    //    [tabNavigation setEnabled:YES forSegmentAtIndex:0];
+    //    [tabNavigation setEnabled:YES forSegmentAtIndex:1];
+    //    tabNavigation.momentary = YES;
+    //    [tabNavigation addTarget:self action:@selector(segmentedControlHandler:) forControlEvents:UIControlEventValueChanged];
+    //    UIBarButtonItem *barSegment = [[UIBarButtonItem alloc] initWithCustomView:tabNavigation];
+    //
+    //    [itemsArray addObject:barSegment];
     
     UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     [itemsArray addObject:flexButton];
@@ -681,10 +684,10 @@
 }
 - (void)segmentedControlHandler:(id)sender
 {
-
     
-   currentSelectedTextboxIndex = (int)[(UISegmentedControl *)sender selectedSegmentIndex];
-
+    
+    currentSelectedTextboxIndex = (int)[(UISegmentedControl *)sender selectedSegmentIndex];
+    
     if (currentSelectedTextboxIndex == 0 && page == 1) {
         return;
     }
@@ -719,7 +722,7 @@
     minmumPriceLabel.userInteractionEnabled = YES;
     [maximunPriceLabel resignFirstResponder];
     [minmumPriceLabel resignFirstResponder];
-
+    
 }
 
 #pragma mark - textFieldDelegate
@@ -761,7 +764,7 @@
                         if (str2.length>=range.location) {
                             return YES;
                         }else{
-                        return NO;
+                            return NO;
                         }
                     }else{
                         return YES;
@@ -781,7 +784,7 @@
         } else {
             return YES;
         }
-     
+        
     }
     
     return YES;
@@ -796,7 +799,7 @@
 
 -(IBAction)ShowPriceTab:(id)sender
 {
-
+    
     viewPriceBAr.hidden = FALSE;
 }
 
@@ -811,4 +814,24 @@
     [self loadPrevious];
 }
 
+- (void)ShoppingListRefresh:(NSNotification *)notification
+{
+    NSDictionary *dictionary = [notification userInfo];
+    [self AddinList:[dictionary[@"total"] intValue]];
+}
+
+-(void)AddinList:(int)totalIndex
+{
+ 
+    if (totalIndex > 0)
+    {
+        lblTotalNumber.hidden = FALSE;
+        imgViewCircleBG.hidden = FALSE;
+        lblTotalNumber.text = [NSString stringWithFormat:@"%d",totalIndex];
+    }else
+    {
+        lblTotalNumber.hidden = TRUE;
+        imgViewCircleBG.hidden = TRUE;
+    }
+}
 @end

@@ -103,7 +103,7 @@ CGFloat MAX_IMG_H = 64.;
 	if (receivedData != nil) {
 		if (self.delegate) {
                 [self.delegate imgLoader:self
-                            processImage:[self thumbnailImageWithData: receivedData]
+                            processImage:[UIImage imageWithData: receivedData]
                                indexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
 		}
 		

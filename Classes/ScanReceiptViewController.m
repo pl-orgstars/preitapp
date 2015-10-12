@@ -167,7 +167,7 @@
     
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Chose Source" message:@"Please select the source" delegate:self cancelButtonTitle:@"Camera" otherButtonTitles:@"Photos", nil];
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Choose Source" message:@"Please select the source" delegate:self cancelButtonTitle:@"Camera" otherButtonTitles:@"Photos", nil];
         [alertView show];
     }
     else{
@@ -182,7 +182,7 @@
     gettingSection1 = YES;
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Chose Source" message:@"Please select the source" delegate:self cancelButtonTitle:@"Camera" otherButtonTitles:@"Photos", nil];
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Choose Source" message:@"Please select the source" delegate:self cancelButtonTitle:@"Camera" otherButtonTitles:@"Photos", nil];
         [alertView show];
     }
     else{
@@ -195,7 +195,7 @@
     gettingSection1 = NO;
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Chose Source" message:@"Please select the source" delegate:self cancelButtonTitle:@"Camera" otherButtonTitles:@"Photos", nil];
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Choose Source" message:@"Please select the source" delegate:self cancelButtonTitle:@"Camera" otherButtonTitles:@"Photos", nil];
         [alertView show];
     }
     else{

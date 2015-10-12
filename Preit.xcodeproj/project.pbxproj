@@ -96,6 +96,10 @@
 		612FBB5D1BB14FBA00D9E30C /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB581BB14FBA00D9E30C /* MFSideMenuContainerViewController.m */; };
 		612FBB5E1BB14FBA00D9E30C /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5A1BB14FBA00D9E30C /* MFSideMenuShadow.m */; };
 		612FBB5F1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5C1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m */; };
+		61C8FDDE1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C8FDDD1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m */; settings = {ASSET_TAGS = (); }; };
+		61C8FDE71BCBF5CC006428BB /* MNNotificationsManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C8FDE51BCBF5CC006428BB /* MNNotificationsManager.framework */; settings = {ASSET_TAGS = (); }; };
+		61C8FDE81BCBF5CC006428BB /* MNProximityManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */; settings = {ASSET_TAGS = (); }; };
+		61C8FDE91BCBF5D1006428BB /* MNProximityManager.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */; };
 		7003D6D9170961940031D69D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003D6D8170961920031D69D /* SystemConfiguration.framework */; };
 		7003D6DB170961B20031D69D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003D6DA170961B10031D69D /* CoreData.framework */; };
 		704554321740B2840038838F /* MapViewController copy.xib in Resources */ = {isa = PBXBuildFile; fileRef = 704554311740B2840038838F /* MapViewController copy.xib */; };
@@ -437,6 +441,9 @@
 		E6210DD41BC5184C008D579C /* ProductSearchCC.m in Sources */ = {isa = PBXBuildFile; fileRef = E6210DD21BC5184C008D579C /* ProductSearchCC.m */; };
 		E6210DD51BC5184C008D579C /* ProductSearchCC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6210DD31BC5184C008D579C /* ProductSearchCC.xib */; };
 		E634685C1BA94BDB0088FADB /* backNavigation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E634685B1BA94BDB0088FADB /* backNavigation@2x.png */; };
+		E6D367731BCBADFE004F6E76 /* NewCircleBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D367721BCBADFE004F6E76 /* NewCircleBG@2x.png */; };
+		E6D367751BCBCFA1004F6E76 /* NewListDetail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D367741BCBCFA1004F6E76 /* NewListDetail@2x.png */; };
+		E6D367771BCBDE2C004F6E76 /* NewZoomBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D367761BCBDE2C004F6E76 /* NewZoomBtn@2x.png */; };
 		E6E283791BAABDCD001736DF /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E283771BAABDCD001736DF /* MenuView.m */; };
 		E6E2837A1BAABDCD001736DF /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6E283781BAABDCD001736DF /* MenuView.xib */; };
 		E6E283931BAAEC67001736DF /* MenuNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6E283921BAAEC67001736DF /* MenuNew@2x.png */; };
@@ -444,8 +451,6 @@
 		E6E283991BAAF80A001736DF /* MenuUpperview.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6E283971BAAF80A001736DF /* MenuUpperview.xib */; };
 		E6FAE1651BC5515300AC1575 /* ImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FAE1621BC5515300AC1575 /* ImageLoader.m */; };
 		E6FAE1661BC5515300AC1575 /* SimpleImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FAE1641BC5515300AC1575 /* SimpleImageLoader.m */; };
-		E6FC27921BC2AAA000DB444B /* MNNotificationsManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FC27911BC2AAA000DB444B /* MNNotificationsManager.framework */; };
-		E6FC27941BC2AAB000DB444B /* MNProximityManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6FC27931BC2AAB000DB444B /* MNProximityManager.bundle */; };
 		E6FC27961BC2AAD200DB444B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FC27951BC2AAD200DB444B /* AdSupport.framework */; };
 		E6FC27981BC2AAF200DB444B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FC27971BC2AAF200DB444B /* CoreTelephony.framework */; };
 		E6FCFC081BC69E3600B15121 /* NewfbBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FCFC041BC69E3600B15121 /* NewfbBtn@2x.png */; };
@@ -575,6 +580,10 @@
 		612FBB5A1BB14FBA00D9E30C /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
 		612FBB5B1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFSideMenuAdditions.h"; sourceTree = "<group>"; };
 		612FBB5C1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
+		61C8FDDC1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNNotificationsManagerCustomDelegate.h; sourceTree = "<group>"; };
+		61C8FDDD1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNNotificationsManagerCustomDelegate.m; sourceTree = "<group>"; };
+		61C8FDE51BCBF5CC006428BB /* MNNotificationsManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MNNotificationsManager.framework; sourceTree = "<group>"; };
+		61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MNProximityManager.bundle; sourceTree = "<group>"; };
 		7003D6D8170961920031D69D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7003D6DA170961B10031D69D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		704554311740B2840038838F /* MapViewController copy.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MapViewController copy.xib"; sourceTree = "<group>"; };
@@ -1024,6 +1033,9 @@
 		E6210DD21BC5184C008D579C /* ProductSearchCC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductSearchCC.m; path = "Product Search CC/ProductSearchCC.m"; sourceTree = "<group>"; };
 		E6210DD31BC5184C008D579C /* ProductSearchCC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProductSearchCC.xib; path = "Product Search CC/ProductSearchCC.xib"; sourceTree = "<group>"; };
 		E634685B1BA94BDB0088FADB /* backNavigation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backNavigation@2x.png"; sourceTree = "<group>"; };
+		E6D367721BCBADFE004F6E76 /* NewCircleBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewCircleBG@2x.png"; sourceTree = "<group>"; };
+		E6D367741BCBCFA1004F6E76 /* NewListDetail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewListDetail@2x.png"; sourceTree = "<group>"; };
+		E6D367761BCBDE2C004F6E76 /* NewZoomBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewZoomBtn@2x.png"; sourceTree = "<group>"; };
 		E6E283761BAABDCD001736DF /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuView.h; path = MenuView/MenuView.h; sourceTree = "<group>"; };
 		E6E283771BAABDCD001736DF /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuView.m; path = MenuView/MenuView.m; sourceTree = "<group>"; };
 		E6E283781BAABDCD001736DF /* MenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MenuView.xib; path = MenuView/MenuView.xib; sourceTree = "<group>"; };
@@ -1035,8 +1047,6 @@
 		E6FAE1621BC5515300AC1575 /* ImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoader.m; sourceTree = "<group>"; };
 		E6FAE1631BC5515300AC1575 /* SimpleImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleImageLoader.h; sourceTree = "<group>"; };
 		E6FAE1641BC5515300AC1575 /* SimpleImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleImageLoader.m; sourceTree = "<group>"; };
-		E6FC27911BC2AAA000DB444B /* MNNotificationsManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MNNotificationsManager.framework; sourceTree = "<group>"; };
-		E6FC27931BC2AAB000DB444B /* MNProximityManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MNProximityManager.bundle; sourceTree = "<group>"; };
 		E6FC27951BC2AAD200DB444B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		E6FC27971BC2AAF200DB444B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		E6FCFC041BC69E3600B15121 /* NewfbBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewfbBtn@2x.png"; sourceTree = "<group>"; };
@@ -1064,11 +1074,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6FC27981BC2AAF200DB444B /* CoreTelephony.framework in Frameworks */,
+				61C8FDE71BCBF5CC006428BB /* MNNotificationsManager.framework in Frameworks */,
+				61C8FDE91BCBF5D1006428BB /* MNProximityManager.bundle in Frameworks */,
 				AE93BCB71A651EC50040AEB5 /* CoreBluetooth.framework in Frameworks */,
-				70BF84BA17571B37003ACF3C /* MobileCoreServices.framework in Frameworks */,
 				E6FC27961BC2AAD200DB444B /* AdSupport.framework in Frameworks */,
-				E6FC27921BC2AAA000DB444B /* MNNotificationsManager.framework in Frameworks */,
+				E6FC27981BC2AAF200DB444B /* CoreTelephony.framework in Frameworks */,
+				70BF84BA17571B37003ACF3C /* MobileCoreServices.framework in Frameworks */,
 				70BF84BE17571C37003ACF3C /* libsqlite3.0.dylib in Frameworks */,
 				8CE9BF151AC95F3700C89A46 /* libGoogleAnalyticsServices.a in Frameworks */,
 				AE93BCBB1A651F400040AEB5 /* Security.framework in Frameworks */,
@@ -1223,9 +1234,10 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				61C8FDE51BCBF5CC006428BB /* MNNotificationsManager.framework */,
+				61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */,
 				E6FC27971BC2AAF200DB444B /* CoreTelephony.framework */,
 				E6FC27951BC2AAD200DB444B /* AdSupport.framework */,
-				E6FC27901BC2AAA000DB444B /* MNNotificationsManager */,
 				BD69FAC51BB0136F00E78744 /* IIViewDeck */,
 				8CE9BF141AC95F3700C89A46 /* libGoogleAnalyticsServices.a */,
 				AE93BCBC1A65227B0040AEB5 /* Common.embeddedframework */,
@@ -1403,6 +1415,15 @@
 				612FBB5C1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m */,
 			);
 			path = MFSideMenu;
+			sourceTree = "<group>";
+		};
+		61C8FDDF1BCBA1D9006428BB /* MNNotification Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				61C8FDDC1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.h */,
+				61C8FDDD1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m */,
+			);
+			name = "MNNotification Delegate";
 			sourceTree = "<group>";
 		};
 		70BF84961757173E003ACF3C /* ASIRequest */ = {
@@ -2142,6 +2163,7 @@
 				612FBB551BB14FBA00D9E30C /* MFSideMenu */,
 				70BF84B3175719B2003ACF3C /* Reachability */,
 				E2DFF2B91241311D00F8687B /* JSON */,
+				61C8FDDF1BCBA1D9006428BB /* MNNotification Delegate */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -2226,18 +2248,12 @@
 			path = "Image Loader";
 			sourceTree = "<group>";
 		};
-		E6FC27901BC2AAA000DB444B /* MNNotificationsManager */ = {
-			isa = PBXGroup;
-			children = (
-				E6FC27931BC2AAB000DB444B /* MNProximityManager.bundle */,
-				E6FC27911BC2AAA000DB444B /* MNNotificationsManager.framework */,
-			);
-			path = MNNotificationsManager;
-			sourceTree = "<group>";
-		};
 		E6FCFC031BC69E3600B15121 /* New PRoduct Detail Images */ = {
 			isa = PBXGroup;
 			children = (
+				E6D367761BCBDE2C004F6E76 /* NewZoomBtn@2x.png */,
+				E6D367741BCBCFA1004F6E76 /* NewListDetail@2x.png */,
+				E6D367721BCBADFE004F6E76 /* NewCircleBG@2x.png */,
 				E6FCFC1E1BC7BA4C00B15121 /* NewSendList@2x.png */,
 				E6FCFC181BC7B94B00B15121 /* NewCheckS@2x.png */,
 				E6FCFC191BC7B94B00B15121 /* NewCheckU@2x.png */,
@@ -2340,6 +2356,7 @@
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				BD24B63D1BB92C0C00066F15 /* collapseArrow@2x.png in Resources */,
 				E2DFF14312410D8000F8687B /* Localizable.strings in Resources */,
+				E6D367751BCBCFA1004F6E76 /* NewListDetail@2x.png in Resources */,
 				E2DFF1591241104F00F8687B /* Default.png in Resources */,
 				AE87D2D2193710F600F5493D /* Map_selected.png in Resources */,
 				E2DFF381124142A200F8687B /* HomeScreen.xib in Resources */,
@@ -2501,6 +2518,7 @@
 				AE87D29B193707E200F5493D /* Menu_selected@2x.png in Resources */,
 				BD93E4891BB14CBA00EB91F0 /* mainmenu-icon-stores@2x.png in Resources */,
 				AE875A52193CA5E10052901E /* refresh_icon.png in Resources */,
+				61C8FDE81BCBF5CC006428BB /* MNProximityManager.bundle in Resources */,
 				BD46BB8B1BB2ABD100FC5A43 /* directory-icon-list-phone@2x.png in Resources */,
 				BDAFA4A11BB05A5C00BE5CE8 /* menuback@2x.png in Resources */,
 				42ABCE1815AD8EA70082E57D /* check@2x.png in Resources */,
@@ -2582,6 +2600,7 @@
 				BDAFA4AE1BB0674400BE5CE8 /* mainmenu-icon-home@2x.png in Resources */,
 				1B379A2915BD58FC00F7DC9A /* more_info.png in Resources */,
 				E92DFA471B4412D3000B91B0 /* PREIT_Logo@2x.png in Resources */,
+				E6D367771BCBDE2C004F6E76 /* NewZoomBtn@2x.png in Resources */,
 				1B379A2A15BD58FC00F7DC9A /* more_info@2X.png in Resources */,
 				1B379A2B15BD58FC00F7DC9A /* text.png in Resources */,
 				AE2B5F951A47F18200460114 /* email_new@2x.png in Resources */,
@@ -2618,7 +2637,6 @@
 				AE753F80193EFCF700D6F7B2 /* CustomWebViewController.xib in Resources */,
 				70D42EED173A44B900A9562E /* sharingbutton_pinterest_2x.png in Resources */,
 				AE2B5F921A47F18200460114 /* call_new.png in Resources */,
-				E6FC27941BC2AAB000DB444B /* MNProximityManager.bundle in Resources */,
 				AE87D2921936F3C300F5493D /* 1234.png in Resources */,
 				BD4EF9711BBE7B180042EF6E /* ScanReceiptViewController.xib in Resources */,
 				AE87D2E21937407D00F5493D /* main_screen_icon@2x.png in Resources */,
@@ -2644,6 +2662,7 @@
 				E6FCFC0D1BC6A27800B15121 /* NewStoreNAme@2x.png in Resources */,
 				AE2B5F8D1A47EC4300460114 /* back_new@2x.png in Resources */,
 				70C12CDB17532E4700A48C83 /* check_box.png in Resources */,
+				E6D367731BCBADFE004F6E76 /* NewCircleBG@2x.png in Resources */,
 				70C12CDC17532E4700A48C83 /* input.png in Resources */,
 				70C12CDF17532F4600A48C83 /* check_box_2x.png in Resources */,
 				E60CFE221BA69E0600AA95AD /* Proxima Nova Reg.ttf in Resources */,
@@ -2728,6 +2747,7 @@
 				E2BDADCE12783E8300B52E14 /* MapViewController.m in Sources */,
 				E2BDAE0912785EC000B52E14 /* AsyncImageView.m in Sources */,
 				E25A58C1128070F600630E6C /* DiningDetailViewController.m in Sources */,
+				61C8FDDE1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m in Sources */,
 				E28A3E4C12B746BA004368D5 /* JSBridgeWebView.m in Sources */,
 				E28A3E4D12B746BA004368D5 /* JSBridgeViewController.m in Sources */,
 				E6E283981BAAF80A001736DF /* MenuUpperview.m in Sources */,
@@ -2805,6 +2825,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Preit_Prefix.pch;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Headers/Public/MNNotificationsManager$(SRCROOT)/Headers/Public/MNNotificationsManager\n";
 				INFOPLIST_FILE = "Preit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -2848,6 +2869,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Preit_Prefix.pch;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Headers/Public/MNNotificationsManager$(SRCROOT)/Headers/Public/MNNotificationsManager\n";
 				INFOPLIST_FILE = "Preit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (

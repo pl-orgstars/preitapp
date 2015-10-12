@@ -35,7 +35,7 @@
     Database *dbAgent;
     PreitAppDelegate *delegate;
     
-    
+    IBOutlet UIImageView *imgViewZoom;
     
     
     IBOutlet UILabel *lblName;
