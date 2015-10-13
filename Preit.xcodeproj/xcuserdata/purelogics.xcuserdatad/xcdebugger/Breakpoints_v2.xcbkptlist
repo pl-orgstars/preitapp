@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/SingleStoreSearchViewController.m"
-            timestampString = "466422044.139817"
+            timestampString = "466422553.129662"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "-loadMore"
             landmarkType = "5">
          </BreakpointContent>
