@@ -618,6 +618,7 @@
     }
     [self hideHud];
     [delegate setupPortraitUserInterface];
+    [delegate initilizeBeacon];
     
     if (_presentMainView)
         [self showMainViewController];
@@ -682,6 +683,7 @@
     [delegate.navController.view removeFromSuperview];
     
     [delegate.window addSubview:delegate.tabBarController.view];
+    [delegate initilizeBeacon];
 }
 
 -(void)errorCallback_Image:(NSError *)error{
@@ -690,6 +692,7 @@
     [delegate.navController.view removeFromSuperview];
     
     [delegate.window addSubview:delegate.tabBarController.view];
+    [delegate initilizeBeacon];
 }
 
 -(void)getDataFromServer

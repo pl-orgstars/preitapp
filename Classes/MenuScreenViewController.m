@@ -103,10 +103,15 @@
 }
 
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 
+    beaconmsgUpdate =[NSTimer scheduledTimerWithTimeInterval:100.0
+                                                      target:self
+                                                    selector:@selector(targetMethod:)
+                                                    userInfo:nil
+                                                     repeats:YES];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewWillAppear:) name:@"UpdateSideMenu" object:nil];
     
     // Do any additional setup after loading the view from its nib.
@@ -116,6 +121,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)targetMethod:(NSTimer*)timer{
+    [appdelegate initilizeBeacon];
+    NSLog(@"updating data");
 }
 
 - (void)setSideMenuItems {
@@ -498,6 +508,7 @@
 - (IBAction)selectAnotherCall:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowLocationView" object:nil];
     self.menuContainerViewController.menuState = MFSideMenuStateClosed;
+    [appdelegate disableBeacon];
 }
 
 

@@ -419,7 +419,7 @@
     [delegate.navController.view removeFromSuperview];
     
     [delegate.window addSubview:delegate.tabBarController.view];
-    
+    [delegate initilizeBeacon];
 }
 
 -(void)errorCallback_Image:(NSError *)error{
@@ -427,6 +427,7 @@
     [delegate.navController.view removeFromSuperview];
     
     [delegate.window addSubview:delegate.tabBarController.view];
+    [delegate initilizeBeacon];
 }
 
 -(void)getDistance
@@ -532,6 +533,7 @@
     
     [[LoadingAgent defaultAgent]makeBusy:NO];
     [delegate setupPortraitUserInterface];
+    [delegate initilizeBeacon];
     
     if (_presentMainView)
         [self showMainViewController];

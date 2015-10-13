@@ -181,7 +181,7 @@
 		[self.delegate.tabBarController.view removeFromSuperview];   //Waseem Menu
 		[self.delegate.window addSubview:delegate.navController.view];
         
-
+        [delegate disableBeacon];
 	}
 }
 
