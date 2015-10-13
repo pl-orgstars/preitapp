@@ -30,5 +30,5 @@
 - (void)loadImageFromURL:(NSURL*)url delegate:(id)requestDelegate requestSelector:(SEL)requestSelector;
 
 - (void) setImage2:(NSData*)imgData;
-
+- (void) setImageNew:(NSData*)imgData WithFrame:(float)xPoint;
 @end

@@ -9,7 +9,7 @@
 #import "ProductDetailViewController.h"
 #import <Twitter/Twitter.h>
 #import "PinterestWebViewController.h"
-
+#import "JSBridgeViewController.h"
 
 @implementation ProductDetailViewController
 
@@ -47,20 +47,23 @@
     
     [listCountLabel setText:[NSString stringWithFormat:@"%d",[dbAgent getCount]]];
     
-     [self createScrollView:[productsArray objectAtIndex:productIndex]];
+    [self createScrollView:[productsArray objectAtIndex:productIndex]];
+    [self CallForDBCount];
 }
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    imgviewCircle.hidden = TRUE;
+    lblCount.hidden = TRUE;
     spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [spinner setHidesWhenStopped:YES];
     [spinner setCenter:self.view.center];
     [self.view addSubview:spinner];
     [spinner stopAnimating];
     
-    delegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];    
+    delegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
     
     dbAgent = [Database sharedDatabase];
     if (!isShoppingList) {
@@ -84,7 +87,7 @@
         
         UIBarButtonItem *shoppingListView = [[UIBarButtonItem alloc]initWithCustomView:barView];
         [self.navigationItem setRightBarButtonItem:shoppingListView];
-
+        
     }
     
     imagesArray = [[NSMutableArray alloc]initWithCapacity:productsArray.count];
@@ -96,7 +99,7 @@
             [imagesArray addObject:imgv.image];
         }
     }
-        
+    
     
     [productImageView setFrame:CGRectMake(0, 0, 320, 460)];
     // Do any additional setup after loading the view from its nib.
@@ -133,9 +136,9 @@
     NSString *pName = [[removeSlash componentsSeparatedByString:@"."] objectAtIndex:0];
     NSString *urlStr = [NSString stringWithFormat:@"http://%@.%@?search=%@",pName, NSLocalizedString(@"MOREINFOAPI", @""),prod.title];
     
-
+    
     urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-
+    
     NSLog(@"urlllll %@",urlStr);
     
     PinterestWebViewController *viewCntroller = [[PinterestWebViewController alloc]initWithNibName:@"PinterestWebViewController" bundle:nil];
@@ -144,7 +147,7 @@
     viewCntroller.description =  [NSString stringWithFormat:@"%@ from %@", prod.title,[delegate.mallData objectForKey:@"name"]];
     NSLog(@"description %@",[delegate.mallData objectForKey:@"name"]);
     [self.navigationController pushViewController:viewCntroller animated:YES];
-
+    
 }
 
 -(void)twitterShareDemo{
@@ -163,9 +166,9 @@
     if (![self checkForEmptyString:ss]) {
         urlStr = ss;
     }else{
-
+        
     }
-
+    
     length += (int)urlStr.length;
     
     NSURL *url = [NSURL URLWithString:urlStr];
@@ -173,7 +176,7 @@
     
     NSString *imgeUrll = prod.imageUrl;//= [self tinyUrl:prod.imageUrl];
     length += (int)imgeUrll.length;
-
+    
     
     NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgeUrll]];
     
@@ -194,20 +197,20 @@
     };
     controller.completionHandler =myBlock;
     
-  
+    
     
     NSLog(@"length :::::%d",length);
-
+    
     length = ((NSString*)[delegate.mallData objectForKey:@"name"]).length;
     if (length>0 && length<61) {
         if ((int)message.length < (58-length+9)) {
-
+            
         }else{
             NSLog(@"short the message::");
             message = [message substringToIndex:(59-length+9)];
             message = [NSString stringWithFormat:@"%@-",message];
         }
-
+        
     }
     
     
@@ -222,15 +225,15 @@
     
     NSString *trimmedString = [urlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
-	return [trimmedString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    return [trimmedString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
 }
 
 -(void)faceBookShare{
     
-
+    
     NSLog(@"mall data %@",delegate.mallData);
     
-      Product *prod = [productsArray objectAtIndex:productIndex];
+    Product *prod = [productsArray objectAtIndex:productIndex];
     NSString *message = prod.title;
     
     
@@ -240,16 +243,16 @@
     NSString *urlStr = [NSString stringWithFormat:@"http://%@.%@?search=%@",pName, NSLocalizedString(@"MOREINFOAPI", @""),prod.title];
     urlStr = [self urlEncodeForEscapesForString:urlStr];
     
-
+    
     NSString *ss = [self tinyUrl:urlStr];
     if (![self checkForEmptyString:ss]) {
         urlStr = ss;
     }
     NSURL *url = [NSURL URLWithString:urlStr];
-
+    
     
     SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-
+    
     SLComposeViewControllerCompletionHandler myBlock = ^(SLComposeViewControllerResult result){
         if (result == SLComposeViewControllerResultCancelled) {
             
@@ -266,14 +269,14 @@
     controller.completionHandler =myBlock;
     
     [controller setInitialText:[NSString stringWithFormat:@"%@ from %@", message,[delegate.mallData objectForKey:@"name"]]];
-     NSLog(@"addURL %@",[delegate.mallData objectForKey:@"name"]);
+    NSLog(@"addURL %@",[delegate.mallData objectForKey:@"name"]);
     [controller addURL:url];
     [controller addImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:prod.imageUrl]]]];
     [self presentViewController:controller animated:YES completion:Nil];
 }
 -(NSString *)tinyUrl:(NSString *)origUrl{
     NSLog(@"origna %@",origUrl);
-
+    
     origUrl = [origUrl stringByReplacingOccurrencesOfString:@"-" withString:@"%20"];
     origUrl = [origUrl stringByReplacingOccurrencesOfString:@"|" withString:@"%20"];
     origUrl = [origUrl stringByReplacingOccurrencesOfString:@"\"" withString:@"%20"];
@@ -292,7 +295,7 @@
     NSLog(@"tiitititiitit %@",myTinyUrl);
     return myTinyUrl;
     
- 
+    
 }
 
 #pragma mark - button metthod
@@ -327,7 +330,7 @@
         
         [lblStoreName setText:objectToBeUsed.retailerName];
     }
-
+    
     UIImage *img = [imagesArray objectAtIndex:productIndex];
     
     float y2;
@@ -347,12 +350,14 @@
         [imageDetail addGestureRecognizer:ImageTap];
         [imageDetail setUserInteractionEnabled:YES];
         [self.view bringSubviewToFront:imgViewZoom];
-
+        imgViewZoom.hidden = FALSE;
     }
     else {
         DetailAsyncImageVIew *imageDetail=[[DetailAsyncImageVIew alloc]init];
         [imageDetail setProductIndex:productIndex];
         [imageDetail setTag:tagImageView];
+        imageDetail.backgroundColor=[UIColor clearColor];
+        NSLog(@"img %@",objectToBeUsed.imageUrl);
         [imageDetail loadImageFromURL:[NSURL URLWithString:objectToBeUsed.imageUrl] delegate:self requestSelector:@selector(imageDownloaded:)];
         imageDetail.frame = imgViewMain.frame;
         y2=imageDetail.frame.size.height;
@@ -362,11 +367,12 @@
         [imageDetail addGestureRecognizer:ImageTap];
         [imageDetail setUserInteractionEnabled:YES];
         [self.view bringSubviewToFront:imgViewZoom];
-
-
+        //        imgViewZoom.hidden = FALSE;
+        
+        
     }
-
-
+    
+    
     
     
     UIButton *shoppingList = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -375,7 +381,7 @@
     UIImage *removeImage = [UIImage imageNamed:@"NewREmoveBTn.png"];
     UIImage *addImage = [UIImage imageNamed:@"NewSavetoListBtn.png"];
     UIImage *searchImage = [UIImage imageNamed:@"NewSearchonStoreBTn.png"];
-    
+    CGRect btnFrame1;
     if (isShoppingList)
     {
         btnFrame2.origin.y=imgViewMain.frame.origin.y + imgViewMain.frame.size.height+ 05;
@@ -385,7 +391,7 @@
     {
         // Button For search only this store
         UIButton *searchStore = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGRect btnFrame1= searchStore.frame;
+        btnFrame1= searchStore.frame;
         btnFrame1.origin.x= 10 ;
         btnFrame1.origin.y=imgViewMain.frame.origin.y + imgViewMain.frame.size.height+ 50;
         btnFrame1.size = searchImage.size;
@@ -417,45 +423,19 @@
     
     /////
     
-    
-    UIButton *twitterbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [twitterbutton setImage:[UIImage imageNamed:@"NewTwitterBtn.png"] forState:UIControlStateNormal];
-    [twitterbutton addTarget:self
-                       action:@selector(twiterBttnTapped:)
-             forControlEvents:UIControlEventTouchDown];
-    [twitterbutton setTitle:@"twitter" forState:UIControlStateNormal];
-    twitterbutton.frame = CGRectMake(68+99, imgViewMain.frame.origin.y + imgViewMain.frame.size.height + 135 , 42, 43);
-    [scrollProductDetail addSubview:twitterbutton];
-    
-    
-    UIButton *facebookbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [facebookbutton setImage:[UIImage imageNamed:@"NewfbBtn.png"] forState:UIControlStateNormal];
-    [facebookbutton addTarget:self
-               action:@selector(facebookBttnTapped:)
-     forControlEvents:UIControlEventTouchDown];
-    [facebookbutton setTitle:@"facebook" forState:UIControlStateNormal];
-    facebookbutton.frame = CGRectMake(68+33, imgViewMain.frame.origin.y + imgViewMain.frame.size.height + 135, 42, 43);
-    [scrollProductDetail addSubview:facebookbutton];
-     float googleHeight =twitterbutton.frame.origin.y+twitterbutton.frame.size.height;
-    
-   
-    
-    
-    
-    
-    UILabel *desc=[[UILabel alloc]initWithFrame:CGRectMake(xAxis , facebookbutton.frame.origin.y + facebookbutton.frame.size.height + 20,253,20)];
+    UILabel *desc=[[UILabel alloc]initWithFrame:CGRectMake(xAxis , btnFrame1.origin.y + btnFrame1.size.height + 20,253,20)];
     desc.textAlignment = UITextAlignmentLeft;
     [desc setText:objectToBeUsed.desc];
     [desc setTextColor:[UIColor whiteColor]];
     desc.lineBreakMode = UILineBreakModeWordWrap;
     desc.numberOfLines = 0;
     desc.font = [UIFont systemFontOfSize:13];
-   
+    
     
     NSDictionary *fontAttributes = @{NSFontAttributeName : desc.font};
     CGSize expectedLabelSize = [objectToBeUsed.desc sizeWithAttributes:fontAttributes];
     
-
+    
     
     [desc sizeToFit];
     CGRect make=desc.frame;
@@ -463,9 +443,31 @@
     desc.frame=make;
     desc.backgroundColor=[UIColor clearColor];
     [scrollProductDetail addSubview:desc];
-
     
-    UILabel *note=[[UILabel alloc]initWithFrame:CGRectMake(xAxis + 5, desc.frame.origin.y+desc.frame.size.height+15, 35, 20)];
+    
+    
+    lblShareVia.frame = CGRectMake(lblShareVia.frame.origin.x, desc.frame.origin.y+ desc.frame.size.height +15, lblShareVia.frame.size.width, lblShareVia.frame.size.height);
+    UIButton *twitterbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [twitterbutton setImage:[UIImage imageNamed:@"NewTwitterBtn.png"] forState:UIControlStateNormal];
+    [twitterbutton addTarget:self
+                      action:@selector(twiterBttnTapped:)
+            forControlEvents:UIControlEventTouchDown];
+    [twitterbutton setTitle:@"twitter" forState:UIControlStateNormal];
+    twitterbutton.frame = CGRectMake(68+99, lblShareVia.frame.origin.y + lblShareVia.frame.size.height + 20 , 42, 43);
+    [scrollProductDetail addSubview:twitterbutton];
+    
+    
+    UIButton *facebookbutton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [facebookbutton setImage:[UIImage imageNamed:@"NewfbBtn.png"] forState:UIControlStateNormal];
+    [facebookbutton addTarget:self
+                       action:@selector(facebookBttnTapped:)
+             forControlEvents:UIControlEventTouchDown];
+    [facebookbutton setTitle:@"facebook" forState:UIControlStateNormal];
+    facebookbutton.frame = CGRectMake(68+33, lblShareVia.frame.origin.y + lblShareVia.frame.size.height + 20, 42, 43);
+    [scrollProductDetail addSubview:facebookbutton];
+    float googleHeight =twitterbutton.frame.origin.y+twitterbutton.frame.size.height;
+    
+    UILabel *note=[[UILabel alloc]initWithFrame:CGRectMake(xAxis + 5, facebookbutton.frame.origin.y+facebookbutton.frame.size.height+15, 35, 20)];
     note.textAlignment = UITextAlignmentCenter;
     [note setText:@"NOTE:"];
     [note setTextColor:[UIColor whiteColor]];
@@ -504,19 +506,32 @@
     [scrollProductDetail setContentOffset:CGPointZero];
     
     
-
+    
 }
 
 -(void)imageDownloaded:(NSDictionary*)imgDict {
-
+    
     NSLog(@"crash here 1");
     if (imgDict!=nil) {
-        if ([imgDict objectForKey:@"imgData"]) {        
+        if ([imgDict objectForKey:@"imgData"]) {
             DetailAsyncImageVIew *asyn = (DetailAsyncImageVIew*)[imgDict objectForKey:@"imgView"] ;//retain];
             [imagesArray replaceObjectAtIndex:asyn.productIndex withObject:[UIImage imageWithData:[imgDict objectForKey:@"imgData"]]];
-            [asyn performSelector:@selector(setImage2:) withObject:[imgDict objectForKey:@"imgData"]];
+            
             [scrollProductDetail bringSubviewToFront:imgViewZoom];
-
+            
+            
+            UIImage *img = [UIImage imageWithData:[imgDict objectForKey:@"imgData"]];
+            imgViewMain.frame = CGRectMake(0, imgViewMain.frame.origin.y, img.size.width, img.size.height);
+            imgViewMain.center = CGPointMake(self.view.center.x, imgViewMain.center.y);
+            imgViewZoom.frame= CGRectMake(imgViewMain.frame.origin.x + imgViewMain.frame.size.width - imgViewZoom.frame.size.width, imgViewMain.frame.origin.y, imgViewZoom.frame.size.width, imgViewZoom.frame.size.height);
+            
+            [scrollProductDetail bringSubviewToFront:imgViewMain];
+            imgViewZoom.hidden = FALSE;
+            
+            
+            [asyn setImageNew:[imgDict objectForKey:@"imgData"] WithFrame:imgViewMain.frame.origin.x];
+            
+            
         }
     }
 }
@@ -576,7 +591,7 @@
 
 -(void)detailImageDownloaded:(NSDictionary *)imgDict {
     if (imgDict!=nil) {
-        if ([imgDict objectForKey:@"imgData"]) {        
+        if ([imgDict objectForKey:@"imgData"]) {
             DetailAsyncImageVIew *asyn = (DetailAsyncImageVIew*)[imgDict objectForKey:@"imgView"] ;//retain];
             UIImage *img = [UIImage imageWithData:[imgDict objectForKey:@"imgData"]];
             [imagesArray replaceObjectAtIndex:asyn.productIndex withObject:img];
@@ -599,8 +614,22 @@
     [sender setBackgroundImage:[UIImage imageNamed:@"NewREmoveBTn.png"] forState:UIControlStateNormal];
     [sender addTarget:self action:@selector(removeFromList:) forControlEvents:UIControlEventTouchUpInside];
     [listCountLabel setText:[NSString stringWithFormat:@"%d",[dbAgent getCount]]];
+    
+    [self CallForDBCount];
 }
 
+-(void)CallForDBCount{
+    int count  = [dbAgent getCount];
+    if (count > 0) {
+        lblCount.text = [NSString stringWithFormat:@"%d",count];
+        lblCount.hidden = FALSE;
+        imgviewCircle.hidden = FALSE;
+    }else {
+        lblCount.hidden = TRUE;
+        imgviewCircle.hidden = TRUE;
+    }
+    
+}
 -(IBAction)removeFromList:(UIButton*)sender {
     [dbAgent removeProductFromShoppingList:[[productsArray objectAtIndex:productIndex] productId]];
     [listCountLabel setText:[NSString stringWithFormat:@"%d",[dbAgent getCount]]];
@@ -613,6 +642,7 @@
         [sender addTarget:self action:@selector(addToList:) forControlEvents:UIControlEventTouchUpInside];
         
     }
+    [self CallForDBCount];
 }
 
 -(void)refresh {
@@ -624,7 +654,7 @@
         [self createScrollView:[productsArray objectAtIndex:productIndex]];
     } else if (productIndex>=productsArray.count) {
         [self prevClicked:nil];
-    } 
+    }
     
 }
 
@@ -636,7 +666,7 @@
 -(void)showShoppingList {
     
     if ([[Database sharedDatabase]getCount]) {
-    
+        
         ShoppingListViewController *shoppingList = [[ShoppingListViewController alloc]initWithNibName:@"ShoppingListViewController" bundle:nil];
         [self.navigationController pushViewController:shoppingList animated:YES];
         [self.navigationItem setTitle:@"Back"];
@@ -647,7 +677,7 @@
     
     ////here
     [self makeRequestForStringAndStoreId];
-
+    
 }
 
 #pragma mark - get tenant id
@@ -659,23 +689,23 @@
     NSString *str = NSLocalizedString(@"PRODUCT_SEARCH_IDS","");
     NSString *url= [NSString stringWithFormat:@"%@property_id=%ld", str,delegate.mallId];
     
-	RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
-	[req requestToServer:self callBackSelector:@selector(responseSuccessForTenantID:) errorSelector:@selector(errorCallback:) Url:url];
-
-
+    RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
+    [req requestToServer:self callBackSelector:@selector(responseSuccessForTenantID:) errorSelector:@selector(errorCallback:) Url:url];
+    
+    
 }
 -(void)responseSuccessForTenantID:(NSData *)receivedData
 {
     NSLog(@"responseSuccessForTenantID");
     NSString *tanentID;
-	if(receivedData!=nil)
+    if(receivedData!=nil)
     {
-		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];
-		// test string
+        NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];
+        // test string
         Product *prod = [productsArray objectAtIndex:productIndex];
         
         NSLog(@"iiiiiiiiiddddddddd %@",prod.storeID);
-		NSArray *tmpArray=[jsonString JSONValue];
+        NSArray *tmpArray=[jsonString JSONValue];
         
         // change 1 july 2015
         for (NSDictionary *dict in tmpArray)
@@ -709,11 +739,11 @@
     NSLog(@">>>>>>>>>list content === %@",listContent);
     
     for (NSArray *array in listContent)
-	{
-		for (NSDictionary *dict in array)
-		{
+    {
+        for (NSDictionary *dict in array)
+        {
             
-			tmpDict =[dict objectForKey:@"tenant"];
+            tmpDict =[dict objectForKey:@"tenant"];
             
             NSString *tempStr = [[tmpDict objectForKey:@"suite"]objectForKey:@"tenant_id"];
             NSLog(@"temp string === %@ .. %@",tempStr,tanentID);
@@ -731,7 +761,7 @@
     if (breakFlag) {
         if (tmpDict!=nil) {
             StoreDetailsViewController *screenStoreDetail=[[StoreDetailsViewController alloc]initWithNibName:@"CustomStoreDetailViewController" bundle:nil];
-            screenStoreDetail.dictData = tmpDict;	
+            screenStoreDetail.dictData = tmpDict;
             [self.navigationController pushViewController:screenStoreDetail animated:YES];
         } else {
             [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Message" buttontitle:@"Ok"];
@@ -748,7 +778,10 @@
 
 -(IBAction)ShowStoreInfo:(id)sender
 {
-      [self settingsForGetdata];
+    [self settingsForGetdata];
+    //        JSBridgeViewController *screenMap=[[JSBridgeViewController alloc]initWithNibName:@"JSBridgeViewController" bundle:nil];
+    //				screenMap.mapUrl=[NSString stringWithFormat:@"%@/areas/getarea?suit_id=%d",[delegate.mallData objectForKey:@"resource_url"],suiteID];
+    //				[self.navigationController pushViewController:screenMap animated:YES];
 }
 
 -(void)ShowImageView:(UITapGestureRecognizer*)tap {
@@ -763,10 +796,10 @@
 
 -(void)settingsForGetdata {
     
-    if([listContent count]==0)         
+    if([listContent count]==0)
         listContent = [[NSMutableArray alloc] init];
-	
-    if([delegate.storeListContent count]>0) 
+    
+    if([delegate.storeListContent count]>0)
     {
         
         [listContent addObjectsFromArray:delegate.storeListContent];
@@ -839,113 +872,113 @@
         [tempArray addObject:@"Z"];
         
         [self getData];
-
+        
     }
     
 }
 
 -(void)makeLoadingView
 {
-	UIWindow* keywindow = [[UIApplication sharedApplication] keyWindow];
-	CGRect keyFrame=[keywindow frame];
-	CGRect frame=CGRectMake(keyFrame.origin.x, keyFrame.origin.y, keyFrame.size.width, keyFrame.size.height);
+    UIWindow* keywindow = [[UIApplication sharedApplication] keyWindow];
+    CGRect keyFrame=[keywindow frame];
+    CGRect frame=CGRectMake(keyFrame.origin.x, keyFrame.origin.y, keyFrame.size.width, keyFrame.size.height);
     
-	main_view = [[UIView alloc] initWithFrame:frame];
-	main_view.backgroundColor = [UIColor clearColor];
-	main_view.alpha =1.0;
-	
-	UIActivityIndicatorView *wait = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-	wait.hidesWhenStopped = NO;			
-	
-	frame=CGRectMake(56.0,180.0, 211.0, 121.0);
-	UIView *loadingView=[[UIView alloc]initWithFrame:frame];
-	loadingView.backgroundColor=[UIColor darkGrayColor];
+    main_view = [[UIView alloc] initWithFrame:frame];
+    main_view.backgroundColor = [UIColor clearColor];
+    main_view.alpha =1.0;
     
-	frame=CGRectMake(32.0,20.0, 159.0,60.0);
-	UILabel *loadingLabel = [[UILabel alloc] initWithFrame:frame];
-	loadingLabel.textColor = [UIColor whiteColor];
-	loadingLabel.backgroundColor = [UIColor clearColor];
-	loadingLabel.font=[UIFont boldSystemFontOfSize:18];
-	loadingLabel.textAlignment = UITextAlignmentCenter;
-	loadingLabel.text = @"Please wait loading stores...";
-	loadingLabel.numberOfLines=0;
-	[loadingView addSubview:loadingLabel];
-	[loadingView addSubview:wait];
-	
-	frame=CGRectMake(86.0, 77.0, 37.0,37.0);
-	wait.frame=frame;
-	
-	CALayer *l=[loadingView layer];
-	[l setCornerRadius:10.0];
-	[l setBorderWidth:3.0];
-	[l setBorderColor:[[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]CGColor]];
-	
-	[main_view addSubview:loadingView];
-	[wait startAnimating];
+    UIActivityIndicatorView *wait = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    wait.hidesWhenStopped = NO;
+    
+    frame=CGRectMake(56.0,180.0, 211.0, 121.0);
+    UIView *loadingView=[[UIView alloc]initWithFrame:frame];
+    loadingView.backgroundColor=[UIColor darkGrayColor];
+    
+    frame=CGRectMake(32.0,20.0, 159.0,60.0);
+    UILabel *loadingLabel = [[UILabel alloc] initWithFrame:frame];
+    loadingLabel.textColor = [UIColor whiteColor];
+    loadingLabel.backgroundColor = [UIColor clearColor];
+    loadingLabel.font=[UIFont boldSystemFontOfSize:18];
+    loadingLabel.textAlignment = UITextAlignmentCenter;
+    loadingLabel.text = @"Please wait loading stores...";
+    loadingLabel.numberOfLines=0;
+    [loadingView addSubview:loadingLabel];
+    [loadingView addSubview:wait];
+    
+    frame=CGRectMake(86.0, 77.0, 37.0,37.0);
+    wait.frame=frame;
+    
+    CALayer *l=[loadingView layer];
+    [l setCornerRadius:10.0];
+    [l setBorderWidth:3.0];
+    [l setBorderColor:[[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]CGColor]];
+    
+    [main_view addSubview:loadingView];
+    [wait startAnimating];
 }
 
 -(void)loadingView:(BOOL)flag
 {
-	if(flag){
-		[[[UIApplication sharedApplication] keyWindow] addSubview:main_view];
-		[[[UIApplication sharedApplication] keyWindow] bringSubviewToFront:main_view];
-	}else 
-		[main_view removeFromSuperview];
+    if(flag){
+        [[[UIApplication sharedApplication] keyWindow] addSubview:main_view];
+        [[[UIApplication sharedApplication] keyWindow] bringSubviewToFront:main_view];
+    }else
+        [main_view removeFromSuperview];
 }
 
--(void)getData {	
+-(void)getData {
     [self makeLoadingView];
-	NSString *url=[NSString stringWithFormat:@"%@%@",[delegate.mallData objectForKey:@"resource_url"],NSLocalizedString(@"API1.1","")];
+    NSString *url=[NSString stringWithFormat:@"%@%@",[delegate.mallData objectForKey:@"resource_url"],NSLocalizedString(@"API1.1","")];
     
-	RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
-	[req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
-	[self loadingView:YES];
+    RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
+    [req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
+    [self loadingView:YES];
 }
 
 -(void)responseData:(NSData *)receivedData{
-	[self loadingView:NO];
+    [self loadingView:NO];
     
-	if(receivedData!=nil){
-		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];
-		// test string
+    if(receivedData!=nil){
+        NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];
+        // test string
         
-		NSArray *tmpArray=[jsonString JSONValue];
+        NSArray *tmpArray=[jsonString JSONValue];
         
-		[listContent removeAllObjects];
-		if([tmpArray count]!=0){
-			
-			for(int i=0;i<[tmpArray count];i++)
-			{
-				NSDictionary *tmpDict=[[tmpArray objectAtIndex:i]objectForKey:@"tenant"];
-				[self checkIndex:[tmpDict objectForKey:@"name"] forindex:i];
-			}
-			
-			for(int i=0;i<[indexArray count];i++)
-			{
-				int x,y;				
-				int number=[[indexArray objectAtIndex:i] intValue];
+        [listContent removeAllObjects];
+        if([tmpArray count]!=0){
+            
+            for(int i=0;i<[tmpArray count];i++)
+            {
+                NSDictionary *tmpDict=[[tmpArray objectAtIndex:i]objectForKey:@"tenant"];
+                [self checkIndex:[tmpDict objectForKey:@"name"] forindex:i];
+            }
+            
+            for(int i=0;i<[indexArray count];i++)
+            {
+                int x,y;
+                int number=[[indexArray objectAtIndex:i] intValue];
                 
-				if(number==-1)
-				{
-					NSArray *emptyArray=[[NSArray alloc]init];
-					[listContent addObject:emptyArray];
-				}
-				else 
-				{	
-                    x=number;	
+                if(number==-1)
+                {
+                    NSArray *emptyArray=[[NSArray alloc]init];
+                    [listContent addObject:emptyArray];
+                }
+                else
+                {
+                    x=number;
                     if([[tempArray objectAtIndex:i] isEqualToString:@"Z"])
                     {
-                        y=[tmpArray count]-x;				
+                        y=[tmpArray count]-x;
                     }
-                    else 
+                    else
                     {
                         int z=i+1;
                         int num=[[indexArray objectAtIndex:z] intValue];
                         
                         if([[tempArray objectAtIndex:z] isEqualToString:@"Z"] && num==-1)
-							num=-2;
+                            num=-2;
                         
-                        while (num==-1) 
+                        while (num==-1)
                         {
                             z++;
                             num=[[indexArray objectAtIndex:z] intValue];
@@ -959,7 +992,7 @@
                         else
                             y=num-x;
                     }
-					
+                    
                     // Starting at position x, get y characters
                     NSRange range={x,y};
                     NSIndexSet *indexes=[NSIndexSet indexSetWithIndexesInRange:range];
@@ -967,253 +1000,253 @@
                     
                     [listContent addObject:objectArray];
                 }
-			}
-			
-			delegate.storeListContent=listContent;
+            }
+            
+            delegate.storeListContent=listContent;
             [self showStoreDetails];
             
             
-		}
-		else{
+        }
+        else{
             [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Message" buttontitle:@"Ok"];
             
-		}
-	}
-	else {
+        }
+    }
+    else {
         [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Message" buttontitle:@"Ok"];
     }
-	
+    
 }
 
 -(void)errorCallback:(NSError *)error{
     [self loadingView:NO];
-	[delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Message" buttontitle:@"Ok"];
+    [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Message" buttontitle:@"Ok"];
 }
 
 
 
 -(void)checkIndex:(NSString*)name forindex:(int)i
-{	
-	NSRange range = {0,1};
-	name = [name substringWithRange:range];
-	name=[name uppercaseString];
-	NSNumber *num=[NSNumber numberWithInt:i];
-	if(![name caseInsensitiveCompare:@"A"])
-	{	
-		if([[checkDict valueForKey:@"A"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"A"];
-		}		
-	}
-	else if(![name caseInsensitiveCompare:@"B"])
-	{	
-		if([[checkDict valueForKey:@"B"]intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"B"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"C"])
-	{	
-		if([[checkDict valueForKey:@"C"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"C"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"D"])
-	{	
-		if([[checkDict valueForKey:@"D"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"D"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"E"])
-	{	
-		if([[checkDict valueForKey:@"E"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"E"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"F"])
-	{	
-		if([[checkDict valueForKey:@"F"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"F"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"G"])
-	{	
-		if([[checkDict valueForKey:@"G"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"G"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"H"])
-	{	
-		if([[checkDict valueForKey:@"H"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"H"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"I"])
-	{	
-		if([[checkDict valueForKey:@"i"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"I"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"J"])
-	{	
-		if([[checkDict valueForKey:@"J"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"J"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"K"])
-	{	
-		if([[checkDict valueForKey:@"K"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"K"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"L"])
-	{	
-		if([[checkDict valueForKey:@"L"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"L"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"M"])
-	{	
-		if([[checkDict valueForKey:@"M"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"M"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"N"])
-	{	
-		if([[checkDict valueForKey:@"N"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"N"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"O"])
-	{	
-		if([[checkDict valueForKey:@"O"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"O"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"P"])
-	{	
-		if([[checkDict valueForKey:@"P"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"P"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"Q"])
-	{	
-		if([[checkDict valueForKey:@"Q"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"Q"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"R"])
-	{	
-		if([[checkDict valueForKey:@"R"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"R"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"S"])
-	{	
-		if([[checkDict valueForKey:@"S"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"S"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"T"])
-	{	
-		if([[checkDict valueForKey:@"T"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"T"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"U"])
-	{	
-		if([[checkDict valueForKey:@"U"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"U"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"V"])
-	{	
-		if([[checkDict valueForKey:@"V"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"V"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"W"])
-	{	
-		if([[checkDict valueForKey:@"W"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"W"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"X"])
-	{	
-		if([[checkDict valueForKey:@"X"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"X"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"Y"])
-	{	
-		if([[checkDict valueForKey:@"Y"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"Y"];
-		}
-	}
-	else if(![name caseInsensitiveCompare:@"Z"])
-	{	
-		if([[checkDict valueForKey:@"Z"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
-			[checkDict setValue:num forKey:@"Z"];
-		}
-	}	
-	else
-	{	
-		if([[checkDict valueForKey:@"123"] intValue]==-1)
-		{
-			[indexArray insertObject:num atIndex:[tempArray indexOfObject:@"123"]];
-			[checkDict setValue:num forKey:@"123"];
-		}
-	}	
+{
+    NSRange range = {0,1};
+    name = [name substringWithRange:range];
+    name=[name uppercaseString];
+    NSNumber *num=[NSNumber numberWithInt:i];
+    if(![name caseInsensitiveCompare:@"A"])
+    {
+        if([[checkDict valueForKey:@"A"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"A"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"B"])
+    {
+        if([[checkDict valueForKey:@"B"]intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"B"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"C"])
+    {
+        if([[checkDict valueForKey:@"C"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"C"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"D"])
+    {
+        if([[checkDict valueForKey:@"D"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"D"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"E"])
+    {
+        if([[checkDict valueForKey:@"E"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"E"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"F"])
+    {
+        if([[checkDict valueForKey:@"F"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"F"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"G"])
+    {
+        if([[checkDict valueForKey:@"G"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"G"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"H"])
+    {
+        if([[checkDict valueForKey:@"H"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"H"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"I"])
+    {
+        if([[checkDict valueForKey:@"i"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"I"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"J"])
+    {
+        if([[checkDict valueForKey:@"J"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"J"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"K"])
+    {
+        if([[checkDict valueForKey:@"K"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"K"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"L"])
+    {
+        if([[checkDict valueForKey:@"L"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"L"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"M"])
+    {
+        if([[checkDict valueForKey:@"M"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"M"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"N"])
+    {
+        if([[checkDict valueForKey:@"N"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"N"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"O"])
+    {
+        if([[checkDict valueForKey:@"O"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"O"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"P"])
+    {
+        if([[checkDict valueForKey:@"P"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"P"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"Q"])
+    {
+        if([[checkDict valueForKey:@"Q"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"Q"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"R"])
+    {
+        if([[checkDict valueForKey:@"R"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"R"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"S"])
+    {
+        if([[checkDict valueForKey:@"S"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"S"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"T"])
+    {
+        if([[checkDict valueForKey:@"T"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"T"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"U"])
+    {
+        if([[checkDict valueForKey:@"U"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"U"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"V"])
+    {
+        if([[checkDict valueForKey:@"V"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"V"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"W"])
+    {
+        if([[checkDict valueForKey:@"W"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"W"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"X"])
+    {
+        if([[checkDict valueForKey:@"X"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"X"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"Y"])
+    {
+        if([[checkDict valueForKey:@"Y"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"Y"];
+        }
+    }
+    else if(![name caseInsensitiveCompare:@"Z"])
+    {
+        if([[checkDict valueForKey:@"Z"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:name]];
+            [checkDict setValue:num forKey:@"Z"];
+        }
+    }
+    else
+    {
+        if([[checkDict valueForKey:@"123"] intValue]==-1)
+        {
+            [indexArray insertObject:num atIndex:[tempArray indexOfObject:@"123"]];
+            [checkDict setValue:num forKey:@"123"];
+        }
+    }
 }
 #pragma mark - request
 -(void)makeRequestForStringAndStoreId{
@@ -1250,10 +1283,10 @@
             break;
         }
     }
-
+    
     int currentCount = itemsArray.count;
     
-
+    
     NSMutableArray *mainArray = [[NSMutableArray alloc]initWithArray:itemsArray];
     [spinner stopAnimating];
     
@@ -1272,7 +1305,7 @@
     storeView.currentCount = currentCount;
     storeView.productsArray = [[NSMutableArray alloc]initWithArray:mainArray];
     [self.navigationController pushViewController:storeView animated:YES];
-
+    
 }
 
 -(void)requestError:(NSError*)error {
@@ -1284,7 +1317,7 @@
 
 - (IBAction)menuBtnCall:(id)sender {
     
-        self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
+    self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
 }
 
 - (IBAction)backBtnCall:(id)sender {
