@@ -55,10 +55,12 @@
     [spinner stopAnimating];
     
     CGRect frame = self.view.frame;
-    if (is_iOS7) {
-        frame.size.height -= 20;
-    }
-    frame.size.height -= isIPhone5?15:100;
+   
+    frame = self.view.frame;
+    frame.origin.y = 60;
+    
+    frame.size.height -=  frame.origin.y ;
+    
     productListView = [[ProductListView alloc]initWithFrame:frame];
     [productListView setProductsArray:self.productsArray];
     [productListView setShowProductDetailDelegate:self];
@@ -336,5 +338,15 @@
     
     //    [productListView.productListTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 //    [self setTheValueOfMaxAndMin];
+}
+
+-(IBAction)BackBtn:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)menuBtnCall:(id)sender {
+    
+    self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
+    
 }
 @end
