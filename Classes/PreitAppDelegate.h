@@ -129,5 +129,9 @@
 
 -(void)ShowMenuViewOnTop;
 -(void)HideMenuViewOnTop;
+
+- (void)initilizeBeacon;
+- (void)disableBeacon;
+
 @end
 

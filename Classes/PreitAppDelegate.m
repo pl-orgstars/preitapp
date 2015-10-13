@@ -825,7 +825,9 @@ static NSString *const kAllowTracking = @"allowTracking";
 //    [self.beaconRequestManager intWithUrl:url];
     
 }
--(void)disableBeacon{
+- (void)disableBeacon {
+    [self.notificationsManager stop];
+    self.notificationsManager = nil;
 //    [self.beaconRequestManager removeRequestManager];
 }
 
