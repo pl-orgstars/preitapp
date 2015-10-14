@@ -315,6 +315,15 @@
 {
     
     
+    for (UIView *viewInner in scrollProductDetail.subviews) {
+        if(viewInner.tag < 0){
+            
+        }else {
+            [viewInner removeFromSuperview];    
+        }
+            
+        
+    }
     lblName.text =objectToBeUsed.title;
     lblPrice.text =[NSString stringWithFormat:@"$%.2f", objectToBeUsed.price];
     
