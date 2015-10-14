@@ -96,6 +96,10 @@
 		612FBB5D1BB14FBA00D9E30C /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB581BB14FBA00D9E30C /* MFSideMenuContainerViewController.m */; };
 		612FBB5E1BB14FBA00D9E30C /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5A1BB14FBA00D9E30C /* MFSideMenuShadow.m */; };
 		612FBB5F1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5C1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m */; };
+		613828951BCE6B140024F116 /* MessagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 613828931BCE6B140024F116 /* MessagesCell.m */; settings = {ASSET_TAGS = (); }; };
+		613828961BCE6B140024F116 /* MessagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 613828941BCE6B140024F116 /* MessagesCell.xib */; settings = {ASSET_TAGS = (); }; };
+		615604DC1BCE8B9C00FAD487 /* MessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 615604DB1BCE8B9C00FAD487 /* MessagesView.m */; settings = {ASSET_TAGS = (); }; };
+		615604DE1BCE8BAD00FAD487 /* MessagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 615604DD1BCE8BAD00FAD487 /* MessagesView.xib */; settings = {ASSET_TAGS = (); }; };
 		61C8FDDE1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C8FDDD1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m */; settings = {ASSET_TAGS = (); }; };
 		61C8FDE71BCBF5CC006428BB /* MNNotificationsManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C8FDE51BCBF5CC006428BB /* MNNotificationsManager.framework */; settings = {ASSET_TAGS = (); }; };
 		61C8FDE81BCBF5CC006428BB /* MNProximityManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */; settings = {ASSET_TAGS = (); }; };
@@ -578,6 +582,12 @@
 		612FBB5A1BB14FBA00D9E30C /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
 		612FBB5B1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFSideMenuAdditions.h"; sourceTree = "<group>"; };
 		612FBB5C1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
+		613828921BCE6B140024F116 /* MessagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesCell.h; sourceTree = "<group>"; };
+		613828931BCE6B140024F116 /* MessagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesCell.m; sourceTree = "<group>"; };
+		613828941BCE6B140024F116 /* MessagesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesCell.xib; sourceTree = "<group>"; };
+		615604DA1BCE8B9C00FAD487 /* MessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesView.h; sourceTree = "<group>"; };
+		615604DB1BCE8B9C00FAD487 /* MessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesView.m; sourceTree = "<group>"; };
+		615604DD1BCE8BAD00FAD487 /* MessagesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesView.xib; sourceTree = "<group>"; };
 		61C8FDDC1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNNotificationsManagerCustomDelegate.h; sourceTree = "<group>"; };
 		61C8FDDD1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNNotificationsManagerCustomDelegate.m; sourceTree = "<group>"; };
 		61C8FDE51BCBF5CC006428BB /* MNNotificationsManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MNNotificationsManager.framework; sourceTree = "<group>"; };
@@ -1413,6 +1423,27 @@
 			path = MFSideMenu;
 			sourceTree = "<group>";
 		};
+		6138288B1BCE69B10024F116 /* Messagee View */ = {
+			isa = PBXGroup;
+			children = (
+				615604DA1BCE8B9C00FAD487 /* MessagesView.h */,
+				615604DB1BCE8B9C00FAD487 /* MessagesView.m */,
+				615604DD1BCE8BAD00FAD487 /* MessagesView.xib */,
+				613828911BCE6AEC0024F116 /* MessagesCell */,
+			);
+			name = "Messagee View";
+			sourceTree = "<group>";
+		};
+		613828911BCE6AEC0024F116 /* MessagesCell */ = {
+			isa = PBXGroup;
+			children = (
+				613828921BCE6B140024F116 /* MessagesCell.h */,
+				613828931BCE6B140024F116 /* MessagesCell.m */,
+				613828941BCE6B140024F116 /* MessagesCell.xib */,
+			);
+			name = MessagesCell;
+			sourceTree = "<group>";
+		};
 		61C8FDDF1BCBA1D9006428BB /* MNNotification Delegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -1596,6 +1627,7 @@
 		AE87D29C19370B1B00F5493D /* New Group */ = {
 			isa = PBXGroup;
 			children = (
+				6138288B1BCE69B10024F116 /* Messagee View */,
 				BD4EF96C1BBE7ABF0042EF6E /* ScanReceipt Screen */,
 				BD4EF9661BBE560B0042EF6E /* Jobs Detail Screen */,
 				BD598C6D1BBD0ABB00E2232D /* WIN Screen */,
@@ -2436,6 +2468,7 @@
 				E2DA547413251D790010CB48 /* StoreSearchViewController.xib in Resources */,
 				E29818D0133C77E900EEC50C /* checkDict.plist in Resources */,
 				E2B8410C133D0105009816D6 /* shopping.jpg in Resources */,
+				615604DE1BCE8BAD00FAD487 /* MessagesView.xib in Resources */,
 				BD93E4871BB14CA100EB91F0 /* mainmenu-icon-movies@2x.png in Resources */,
 				E2B8412F133D025D009816D6 /* dinning.jpg in Resources */,
 				AE2B5F931A47F18200460114 /* call_new@2x.png in Resources */,
@@ -2632,6 +2665,7 @@
 				AECE480D195A935600D1E5DB /* AppIcon76x76@2x.png in Resources */,
 				AE753F80193EFCF700D6F7B2 /* CustomWebViewController.xib in Resources */,
 				70D42EED173A44B900A9562E /* sharingbutton_pinterest_2x.png in Resources */,
+				613828961BCE6B140024F116 /* MessagesCell.xib in Resources */,
 				AE2B5F921A47F18200460114 /* call_new.png in Resources */,
 				AE87D2921936F3C300F5493D /* 1234.png in Resources */,
 				BD4EF9711BBE7B180042EF6E /* ScanReceiptViewController.xib in Resources */,
@@ -2722,11 +2756,13 @@
 				E2AB25BF12660B1000F25111 /* ContactUsViewController.m in Sources */,
 				AE92AF6C193DEF970094FA4F /* UIViewController+NavigationMethods.m in Sources */,
 				E6FAE1651BC5515300AC1575 /* ImageLoader.m in Sources */,
+				615604DC1BCE8B9C00FAD487 /* MessagesView.m in Sources */,
 				E2AB25CD126611A900F25111 /* MovieListingViewController.m in Sources */,
 				E2BC23931266CF3E00E871E7 /* WebViewController.m in Sources */,
 				AE87D2A719370BC200F5493D /* SearchScreenViewController.m in Sources */,
 				E2BC245C1267083700E871E7 /* TrendsViewController.m in Sources */,
 				BDA3DEF81BC2950C00BA028A /* AFURLResponseSerialization.m in Sources */,
+				613828951BCE6B140024F116 /* MessagesCell.m in Sources */,
 				E2BC24E61267245300E871E7 /* ParkingMapViewController.m in Sources */,
 				E2BC273412676D3F00E871E7 /* EventsDetailsViewController.m in Sources */,
 				E2DF372A1268279800A38543 /* DiningViewController.m in Sources */,
@@ -2821,7 +2857,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Preit_Prefix.pch;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/Headers/Public/MNNotificationsManager$(SRCROOT)/Headers/Public/MNNotificationsManager\n";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Headers/Public/MNNotificationsManager$(SRCROOT)/Headers/Public/MNNotificationsManager";
 				INFOPLIST_FILE = "Preit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -2865,7 +2901,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Preit_Prefix.pch;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/Headers/Public/MNNotificationsManager$(SRCROOT)/Headers/Public/MNNotificationsManager\n";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Headers/Public/MNNotificationsManager$(SRCROOT)/Headers/Public/MNNotificationsManager";
 				INFOPLIST_FILE = "Preit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
