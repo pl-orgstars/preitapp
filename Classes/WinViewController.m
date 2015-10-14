@@ -8,7 +8,6 @@
 
 #import "WinViewController.h"
 
-
 #define VOTIGO_SIGNUP @"http://sqa02demopartner.votigo.com/fbsweeps/sweeps/testsweepsforred5-1"
 #define VOTIGO_CONFIRM @"http://sqa02demopartner.votigo.com/fbsweeps/confirmation/testsweepsforred5-1"
 #define VOTIGO_MAIN @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/mainmenu"
@@ -19,6 +18,7 @@
 #define CHECKED_IN          @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/successful?mobile=yes"
 #define NOT_PERMITTED       @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/no_permissions?mobile=yes"
 #define NOT_IN_MALL         @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
+#define MAIN_MENU           @"http://staging.cherryhillmall.red5demo.com/main_menu"
 
 @interface WinViewController ()
 
@@ -101,6 +101,12 @@
     }
     else if ([url rangeOfString:CHECKED_IN].location != NSNotFound) {
         return YES;
+    }
+    else if ([url rangeOfString:MAIN_MENU].location != NSNotFound) {
+        NSString* votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
+        NSString* url = [NSString stringWithFormat:@"%@?mall_id=%@&sweepuserentry_id=%@", VOTIGO_MAIN, [delegate.mallData objectForKey:@"id"], votigoUserID];
+        
+        [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     }
     
     return NO;

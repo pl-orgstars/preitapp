@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-
-
+#import "MessagesView.h"
 
 @interface ProductSearchHome : SuperViewController <UIWebViewDelegate>
 
@@ -27,6 +25,7 @@
     IBOutlet UIButton *webViewBackButton;
     UIWebView *mobileWebView;
 }
+
 -(IBAction)webViewBackButtonTapped:(id)sender;
 -(IBAction)hideMoreInfo:(id)sender;
 

@@ -42,6 +42,8 @@
     [productListView.productListTable reloadData];
     
     [lblResultCount setText:[NSString stringWithFormat:@"%lu item%@",(unsigned long)productListView.productsArray.count,productListView.productsArray.count==1?@"":@"s"]];
+    productListView.productsArray = [[NSMutableArray alloc]initWithArray:[[Database sharedDatabase]getShoppingList]];
+    [productListView refreshNow];
 }
 
 - (void)viewDidLoad
@@ -89,7 +91,19 @@
 
 -(void)showProductDetail:(NSNumber *)productIndex {
     NSLog(@"show product detail %d ",productIndex.intValue);
-    [lblResultCount setText:[NSString stringWithFormat:@"%lu item%@",(unsigned long)productListView.productsArray.count,productListView.productsArray.count==1?@"":@"s"]];
+//    [lblResultCount setText:[NSString stringWithFormat:@"%lu item%@",(unsigned long)productListView.productsArray.count,productListView.productsArray.count==1?@"":@"s"]];
+    
+    ProductDetailViewController *detailView = [[ProductDetailViewController alloc]initWithNibName:@"ProductDetailViewController" bundle:nil];
+    [self.navigationItem setTitle:@"Back"];
+    detailView.productsArray = [[NSMutableArray alloc]initWithArray:productListView.productsArray];
+    detailView.productIndex = productIndex.intValue;
+    
+    delegate.searchURL = @"";
+    
+    [self.navigationController pushViewController:detailView animated:YES];
+//    [self hidePicker];
+
+    
 
 }
 

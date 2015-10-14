@@ -31,51 +31,51 @@
                     <rect key="frame" x="0.0" y="63" width="320" height="505"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="5yf-lc-DL8">
+                        <label opaque="NO" userInteractionEnabled="NO" tag="-10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="5yf-lc-DL8">
                             <rect key="frame" x="20" y="49" width="280" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="jAi-Vv-F3R">
+                        <label opaque="NO" userInteractionEnabled="NO" tag="-10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="jAi-Vv-F3R">
                             <rect key="frame" x="250" y="105" width="62" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="available at" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="IVF-gk-byt">
+                        <label opaque="NO" userInteractionEnabled="NO" tag="-10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="available at" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="IVF-gk-byt">
                             <rect key="frame" x="55" y="105" width="62" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="available at" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="3OV-91-ovB">
+                        <label opaque="NO" userInteractionEnabled="NO" tag="-10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="available at" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="3OV-91-ovB">
                             <rect key="frame" x="55" y="122" width="163" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="hl1-2Q-zvG">
+                        <imageView userInteractionEnabled="NO" tag="-10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="hl1-2Q-zvG">
                             <rect key="frame" x="20" y="146" width="280" height="280"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NewStoreNAme.png" id="6vG-IC-WvI">
+                        <imageView userInteractionEnabled="NO" tag="-10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NewStoreNAme.png" id="6vG-IC-WvI">
                             <rect key="frame" x="29" y="114" width="17" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="share via" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="LTe-bh-ckQ">
+                        <label opaque="NO" userInteractionEnabled="NO" tag="-10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="share via" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="LTe-bh-ckQ">
                             <rect key="frame" x="129" y="522" width="62" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="huB-kf-cWc">
+                        <button opaque="NO" tag="-10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="huB-kf-cWc">
                             <rect key="frame" x="214" y="11" width="90" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="NewListDetail.png">
@@ -85,7 +85,7 @@
                                 <action selector="ShowShoppingListView:" destination="-1" eventType="touchUpInside" id="irq-0q-gPY"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vQb-AN-Z1K">
+                        <button opaque="NO" tag="-10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vQb-AN-Z1K">
                             <rect key="frame" x="29" y="110" width="88" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal">
@@ -95,15 +95,15 @@
                                 <action selector="ShowStoreInfo:" destination="-1" eventType="touchUpInside" id="sNE-oY-NJR"/>
                             </connections>
                         </button>
-                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NewZoomBtn.png" id="2Hc-mg-ITY">
+                        <imageView hidden="YES" userInteractionEnabled="NO" tag="-10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NewZoomBtn.png" id="2Hc-mg-ITY">
                             <rect key="frame" x="277" y="146" width="23" height="23"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NewCircleBG.png" id="Wue-BZ-R28">
+                        <imageView userInteractionEnabled="NO" tag="-10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NewCircleBG.png" id="Wue-BZ-R28">
                             <rect key="frame" x="239" y="9" width="20" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3l7-QZ-Yy0">
+                        <label opaque="NO" userInteractionEnabled="NO" tag="-10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3l7-QZ-Yy0">
                             <rect key="frame" x="236" y="12" width="20" height="11"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="10"/>

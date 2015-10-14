@@ -371,7 +371,7 @@
 -(void)refreshNow{
     
     [productListTable reloadData];
-    
+    [collectionView reloadData];
 }
 
 
@@ -436,8 +436,9 @@
 {
     if (self.isShoppingList)
     {
-        
-        [self RemoveFromDB:(int)indexPath.row];
+            [self showProductDetail:(int)indexPath.row];
+
+//        [self RemoveFromDB:(int)indexPath.row];
     }else
     {
         [self showProductDetail:(int)indexPath.row];

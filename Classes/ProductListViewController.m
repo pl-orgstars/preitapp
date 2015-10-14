@@ -456,7 +456,8 @@
 #pragma mark - show detail
 
 -(void)showProductDetail:(NSNumber *)productIndex {
-    if (!spinner.isAnimating) {
+    if (!spinner.isAnimating)
+    {
         NSLog(@"show product detail");
         ProductDetailViewController *detailView = [[ProductDetailViewController alloc]initWithNibName:@"ProductDetailViewController" bundle:nil];
         [self.navigationItem setTitle:@"Back"];
@@ -464,7 +465,7 @@
         detailView.productIndex = productIndex.intValue;
         
         delegate.searchURL = urlString;
-        
+        NSLog(@"urlString %@",urlString);
         [self.navigationController pushViewController:detailView animated:YES];
         [self hidePicker];
     }
