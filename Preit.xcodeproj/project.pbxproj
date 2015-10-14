@@ -96,9 +96,9 @@
 		612FBB5D1BB14FBA00D9E30C /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB581BB14FBA00D9E30C /* MFSideMenuContainerViewController.m */; };
 		612FBB5E1BB14FBA00D9E30C /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5A1BB14FBA00D9E30C /* MFSideMenuShadow.m */; };
 		612FBB5F1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5C1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m */; };
-		61C8FDDE1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C8FDDD1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m */; settings = {ASSET_TAGS = (); }; };
-		61C8FDE71BCBF5CC006428BB /* MNNotificationsManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C8FDE51BCBF5CC006428BB /* MNNotificationsManager.framework */; settings = {ASSET_TAGS = (); }; };
-		61C8FDE81BCBF5CC006428BB /* MNProximityManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */; settings = {ASSET_TAGS = (); }; };
+		61C8FDDE1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C8FDDD1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m */; };
+		61C8FDE71BCBF5CC006428BB /* MNNotificationsManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C8FDE51BCBF5CC006428BB /* MNNotificationsManager.framework */; };
+		61C8FDE81BCBF5CC006428BB /* MNProximityManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */; };
 		61C8FDE91BCBF5D1006428BB /* MNProximityManager.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */; };
 		7003D6D9170961940031D69D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003D6D8170961920031D69D /* SystemConfiguration.framework */; };
 		7003D6DB170961B20031D69D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003D6DA170961B10031D69D /* CoreData.framework */; };
