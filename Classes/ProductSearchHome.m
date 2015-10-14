@@ -294,8 +294,10 @@
     }else{
         [self showLocationView];
         
-//        PreitAppDelegate *appdelegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
-//        appdelegate.isOnForeGround = YES;
+        PreitAppDelegate *appdelegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
+        appdelegate.isOnForeGround = YES;
+        [appdelegate disableBeacon];
+        
 //        [appdelegate.window addSubview:appdelegate.navController.view];
 //        [appdelegate.tabBarController.view removeFromSuperview];    //Waseem Menu
 //        

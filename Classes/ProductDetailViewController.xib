@@ -9,8 +9,11 @@
                 <outlet property="hideImage" destination="30" id="32"/>
                 <outlet property="imgViewMain" destination="hl1-2Q-zvG" id="65b-ho-phj"/>
                 <outlet property="imgViewZoom" destination="2Hc-mg-ITY" id="XbA-br-M18"/>
+                <outlet property="imgviewCircle" destination="Wue-BZ-R28" id="CI4-JY-QIY"/>
+                <outlet property="lblCount" destination="3l7-QZ-Yy0" id="OJL-SE-9Oi"/>
                 <outlet property="lblName" destination="5yf-lc-DL8" id="90r-4r-HaR"/>
                 <outlet property="lblPrice" destination="jAi-Vv-F3R" id="vL5-JH-yl0"/>
+                <outlet property="lblShareVia" destination="LTe-bh-ckQ" id="zF7-RS-h7l"/>
                 <outlet property="lblStoreName" destination="3OV-91-ovB" id="0Up-zc-eI8"/>
                 <outlet property="productBackView" destination="35" id="36"/>
                 <outlet property="productImageView" destination="27" id="29"/>
@@ -92,15 +95,26 @@
                                 <action selector="ShowStoreInfo:" destination="-1" eventType="touchUpInside" id="sNE-oY-NJR"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NewZoomBtn.png" id="2Hc-mg-ITY">
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NewZoomBtn.png" id="2Hc-mg-ITY">
                             <rect key="frame" x="277" y="146" width="23" height="23"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NewCircleBG.png" id="Wue-BZ-R28">
+                            <rect key="frame" x="239" y="9" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3l7-QZ-Yy0">
+                            <rect key="frame" x="236" y="12" width="20" height="11"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </scrollView>
                 <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="2" id="26">
-                    <rect key="frame" x="1000" y="63" width="320" height="505"/>
+                    <rect key="frame" x="0.0" y="63" width="320" height="505"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" id="35">
@@ -180,6 +194,7 @@
     </objects>
     <resources>
         <image name="BackWhite.png" width="25" height="25"/>
+        <image name="NewCircleBG.png" width="15" height="15"/>
         <image name="NewListDetail.png" width="90" height="29"/>
         <image name="NewStoreNAme.png" width="17" height="22"/>
         <image name="NewZoomBtn.png" width="23" height="23"/>

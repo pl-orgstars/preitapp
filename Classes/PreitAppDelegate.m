@@ -383,7 +383,7 @@ static NSString *const kAllowTracking = @"allowTracking";
     if (isNotificationsManagerNotification) {
         NSLog(@"Notifications Manager has processed the local notification for us, it was a Notifications SDK generated local notification");
     } else {
-        NSLog(@"Notifications Manager has not processed the local notification, we should do it here because it is a notification related to our own app");
+        NSLog(@"Notifications Manager has not processed the local notification %@", notification.userInfo);
     }
     
     return YES;
@@ -825,7 +825,9 @@ static NSString *const kAllowTracking = @"allowTracking";
 //    [self.beaconRequestManager intWithUrl:url];
     
 }
--(void)disableBeacon{
+- (void)disableBeacon {
+    [self.notificationsManager stop];
+    self.notificationsManager = nil;
 //    [self.beaconRequestManager removeRequestManager];
 }
 

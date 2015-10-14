@@ -140,8 +140,6 @@
 		70D5D33D179E653D00E911D4 /* bg_home@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 70D5D33C179E653D00E911D4 /* bg_home@2x.jpg */; };
 		70D5D33F179E693600E911D4 /* bg_home.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 70D5D33E179E693600E911D4 /* bg_home.jpg */; };
 		70D607E61737BD310084CFC9 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70D607E51737BD310084CFC9 /* Twitter.framework */; };
-		70F8B89A172E5769001E2235 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 70F8B898172E5769001E2235 /* libGoogleAnalytics.a */; };
-		70F8B89B172E5769001E2235 /* libGoogleAnalytics_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 70F8B899172E5769001E2235 /* libGoogleAnalytics_debug.a */; };
 		70FE3A8A17392AC500E64874 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70FE3A8917392AC500E64874 /* Social.framework */; };
 		70FE3A8C17392ACB00E64874 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70FE3A8B17392ACA00E64874 /* Accounts.framework */; };
 		70FE3A9217392C7F00E64874 /* ProductListViewController copy.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70FE3A9117392C7E00E64874 /* ProductListViewController copy.xib */; };
@@ -1106,8 +1104,6 @@
 				E2C992D0127038C500F83CDD /* MapKit.framework in Frameworks */,
 				E2B65F5E128838DF00924760 /* QuartzCore.framework in Frameworks */,
 				AE93BCC91A65227B0040AEB5 /* Common.framework in Frameworks */,
-				70F8B89A172E5769001E2235 /* libGoogleAnalytics.a in Frameworks */,
-				70F8B89B172E5769001E2235 /* libGoogleAnalytics_debug.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2836,7 +2832,7 @@
 					"\"$(SRCROOT)/GoogleAnalyticsServicesiOS_3.10\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1d46f217-036d-409b-bc8f-b5c73698ff76";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1d46f217-036d-409b-bc8f-b5c73698ff76";
@@ -2879,7 +2875,7 @@
 					"\"$(SRCROOT)/Library\"",
 					"\"$(SRCROOT)/GoogleAnalyticsServicesiOS_3.10\"",
 				);
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.r5i.preitTJ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9a14a316-d22f-4a46-99ad-3d4c2e683daa";

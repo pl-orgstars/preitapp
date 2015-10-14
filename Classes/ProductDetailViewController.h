@@ -22,10 +22,10 @@
 @interface ProductDetailViewController : BaseViewController <UIScrollViewDelegate>
 {
     IBOutlet UIScrollView *scrollProductDetail;
-//    IBOutlet UIToolbar *toolBar;
-//    IBOutlet UIButton *btnNext;
-//    IBOutlet UIButton *btnPrev;
-//    IBOutlet UILabel *lblResultsCount;
+    //    IBOutlet UIToolbar *toolBar;
+    //    IBOutlet UIButton *btnNext;
+    //    IBOutlet UIButton *btnPrev;
+    //    IBOutlet UILabel *lblResultsCount;
     IBOutlet UIScrollView *showImageScrollView;
     IBOutlet UIImageView *productImageView;
     IBOutlet UIView *productBackView;
@@ -42,7 +42,9 @@
     IBOutlet UILabel *lblPrice;
     IBOutlet UILabel *lblStoreName;
     IBOutlet UIImageView *imgViewMain;
-    
+    IBOutlet UILabel *lblCount;
+    IBOutlet UIImageView *imgviewCircle;;
+    IBOutlet UILabel *lblShareVia;
     ///////
     
     UIView *main_view;
@@ -52,7 +54,7 @@
     
     UIActivityIndicatorView *spinner;
     
-
+    
     NSString *urlString;
 }
 

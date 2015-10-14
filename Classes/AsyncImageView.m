@@ -117,5 +117,23 @@
     
 //    [imageView release];
 }
+- (void) setImageNew:(NSData*)imgData WithFrame:(float)xPoint
+{
+    UIImage *img = [UIImage imageWithData:imgData];
+    CGRect rect = self.frame;
+    rect.origin.x = xPoint - self.frame.origin.x;
+    rect.origin.y = 0;
+    rect.size.width = img.size.width;
+    rect.size.height = img.size.height;
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:rect];
+    [imageView setTag:100];
+    [imageView setImage:img];
+    
+    [imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [self addSubview:imageView];
+    [self setBackgroundColor:[UIColor clearColor]];
+    
+    //    [imageView release];
+}
 
 @end
