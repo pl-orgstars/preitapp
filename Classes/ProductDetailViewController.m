@@ -79,7 +79,7 @@
         [listCountLabel setBackgroundColor:[UIColor clearColor]];
         [listCountLabel setTextColor:[UIColor whiteColor]];
         [listCountLabel setFont:[UIFont boldSystemFontOfSize:14]];
-        [listCountLabel setTextAlignment:UITextAlignmentCenter];
+        [listCountLabel setTextAlignment:NSTextAlignmentCenter];
         [barView addSubview:listCountLabel];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self
                                                                              action:@selector(showShoppingList)];
@@ -201,7 +201,7 @@
     
     NSLog(@"length :::::%d",length);
     
-    length = ((NSString*)[delegate.mallData objectForKey:@"name"]).length;
+    length = (int)((NSString*)[delegate.mallData objectForKey:@"name"]).length;
     if (length>0 && length<61) {
         if ((int)message.length < (58-length+9)) {
             
@@ -221,9 +221,9 @@
     NSLog(@"from %@",[delegate.mallData objectForKey:@"name"]);
     [self presentViewController:controller animated:YES completion:Nil];
 }
--(NSString *)urlEncodeForEscapesForString:(NSString *)urlString{
+-(NSString *)urlEncodeForEscapesForString:(NSString *)urlString1{
     
-    NSString *trimmedString = [urlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *trimmedString = [urlString1 stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     return [trimmedString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
 }
@@ -324,6 +324,7 @@
             
         
     }
+
     lblName.text =objectToBeUsed.title;
     lblPrice.text =[NSString stringWithFormat:@"$%.2f", objectToBeUsed.price];
     
@@ -347,7 +348,8 @@
     [ImageTap setCancelsTouchesInView:NO];
     
     
-    if ([img isKindOfClass:[UIImage class]]) {
+    if ([img isKindOfClass:[UIImage class]])
+    {
         UIImageView *imageDetail=[[UIImageView alloc]initWithImage:img];
         
         imageDetail.frame = imgViewMain.frame;
@@ -361,12 +363,12 @@
         [self.view bringSubviewToFront:imgViewZoom];
         imgViewZoom.hidden = FALSE;
     }
-    else {
+    else
+    {
         DetailAsyncImageVIew *imageDetail=[[DetailAsyncImageVIew alloc]init];
         [imageDetail setProductIndex:productIndex];
         [imageDetail setTag:tagImageView];
         imageDetail.backgroundColor=[UIColor clearColor];
-        NSLog(@"img %@",objectToBeUsed.imageUrl);
         [imageDetail loadImageFromURL:[NSURL URLWithString:objectToBeUsed.imageUrl] delegate:self requestSelector:@selector(imageDownloaded:)];
         imageDetail.frame = imgViewMain.frame;
         y2=imageDetail.frame.size.height;
@@ -376,67 +378,19 @@
         [imageDetail addGestureRecognizer:ImageTap];
         [imageDetail setUserInteractionEnabled:YES];
         [self.view bringSubviewToFront:imgViewZoom];
-        //        imgViewZoom.hidden = FALSE;
         
         
     }
     
     
     
+    //// Add discription /////////
     
-    UIButton *shoppingList = [UIButton buttonWithType:UIButtonTypeCustom];
-    CGRect btnFrame2= shoppingList.frame;
-    
-    UIImage *removeImage = [UIImage imageNamed:@"NewREmoveBTn.png"];
-    UIImage *addImage = [UIImage imageNamed:@"NewSavetoListBtn.png"];
-    UIImage *searchImage = [UIImage imageNamed:@"NewSearchonStoreBTn.png"];
-    CGRect btnFrame1;
-    if (isShoppingList)
-    {
-        btnFrame2.origin.y=imgViewMain.frame.origin.y + imgViewMain.frame.size.height+ 05;
-        [shoppingList setBackgroundImage:removeImage forState:UIControlStateNormal];
-        [shoppingList addTarget:self action:@selector(removeFromList:) forControlEvents:UIControlEventTouchUpInside];
-    } else
-    {
-        // Button For search only this store
-        UIButton *searchStore = [UIButton buttonWithType:UIButtonTypeCustom];
-        btnFrame1= searchStore.frame;
-        btnFrame1.origin.x= 10 ;
-        btnFrame1.origin.y=imgViewMain.frame.origin.y + imgViewMain.frame.size.height+ 50;
-        btnFrame1.size = searchImage.size;
-        searchStore.frame=btnFrame1;
-        [searchStore setBackgroundImage:searchImage forState:UIControlStateNormal];
-        
-        [searchStore addTarget:self action:@selector(searchStore) forControlEvents:UIControlEventTouchUpInside];
-        
-        [scrollProductDetail addSubview:searchStore];
-        
-        if ([dbAgent productIsPresent:objectToBeUsed.productId]) {
-            [shoppingList setBackgroundImage:removeImage forState:UIControlStateNormal];
-            [shoppingList addTarget:self action:@selector(removeFromList:) forControlEvents:UIControlEventTouchUpInside];
-        } else {
-            [shoppingList setBackgroundImage:addImage forState:UIControlStateNormal];
-            [shoppingList addTarget:self action:@selector(addToList:) forControlEvents:UIControlEventTouchUpInside];
-        }
-        btnFrame2.origin.y= imgViewMain.frame.origin.y + imgViewMain.frame.size.height+ 05;;
-    }
-    
-    // Button for shopping list.
-    
-    btnFrame2.origin.x= 10 ;
-    btnFrame2.size = removeImage.size;
-    shoppingList.frame=btnFrame2;
-    
-    [scrollProductDetail addSubview:shoppingList];
-    
-    
-    /////
-    
-    UILabel *desc=[[UILabel alloc]initWithFrame:CGRectMake(xAxis , btnFrame1.origin.y + btnFrame1.size.height + 20,253,20)];
-    desc.textAlignment = UITextAlignmentLeft;
+    UILabel *desc=[[UILabel alloc]initWithFrame:CGRectMake(xAxis , imgViewMain.frame.origin.y + imgViewMain.frame.size.height + 20,253,20)];
+    desc.textAlignment = NSTextAlignmentLeft;
     [desc setText:objectToBeUsed.desc];
     [desc setTextColor:[UIColor whiteColor]];
-    desc.lineBreakMode = UILineBreakModeWordWrap;
+    desc.lineBreakMode = NSLineBreakByWordWrapping;
     desc.numberOfLines = 0;
     desc.font = [UIFont systemFontOfSize:13];
     
@@ -452,10 +406,80 @@
     desc.frame=make;
     desc.backgroundColor=[UIColor clearColor];
     [scrollProductDetail addSubview:desc];
+
     
     
     
-    lblShareVia.frame = CGRectMake(lblShareVia.frame.origin.x, desc.frame.origin.y+ desc.frame.size.height +15, lblShareVia.frame.size.width, lblShareVia.frame.size.height);
+    
+    ////// Add Buttons ///////
+    
+    
+    UIButton *shoppingList = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGRect btnFrame2= shoppingList.frame;
+    
+    UIImage *removeImage = [UIImage imageNamed:@"NewREmoveBTn.png"];
+    UIImage *addImage = [UIImage imageNamed:@"NewSavetoListBtn.png"];
+    UIImage *searchImage = [UIImage imageNamed:@"NewSearchonStoreBTn.png"];
+    CGRect btnFrame1;
+    
+    if (isShoppingList)
+    {
+        btnFrame2.origin.y=desc.frame.origin.y + desc.frame.size.height+ 15;
+        [shoppingList setBackgroundImage:removeImage forState:UIControlStateNormal];
+        [shoppingList addTarget:self action:@selector(removeFromList:) forControlEvents:UIControlEventTouchUpInside];
+    } else
+    {
+        // Button For search only this store
+        UIButton *searchStore = [UIButton buttonWithType:UIButtonTypeCustom];
+        btnFrame1= searchStore.frame;
+        btnFrame1.origin.x= 10 ;
+        btnFrame1.origin.y=desc.frame.origin.y + desc.frame.size.height+ 65;
+        btnFrame1.size = searchImage.size;
+        searchStore.frame=btnFrame1;
+        [searchStore setBackgroundImage:searchImage forState:UIControlStateNormal];
+        
+        [searchStore addTarget:self action:@selector(searchStore) forControlEvents:UIControlEventTouchUpInside];
+        
+        if (self.isShoppingList)
+        {
+            
+        }else
+        {
+          [scrollProductDetail addSubview:searchStore];
+        }
+        
+        if ([dbAgent productIsPresent:objectToBeUsed.productId])
+        {
+            [shoppingList setBackgroundImage:removeImage forState:UIControlStateNormal];
+            [shoppingList addTarget:self action:@selector(removeFromList:) forControlEvents:UIControlEventTouchUpInside];
+        } else {
+            [shoppingList setBackgroundImage:addImage forState:UIControlStateNormal];
+            [shoppingList addTarget:self action:@selector(addToList:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        btnFrame2.origin.y= desc.frame.origin.y + desc.frame.size.height+ 15;
+    }
+    
+    // Button for shopping list.
+    
+    btnFrame2.origin.x= 10 ;
+    btnFrame2.size = removeImage.size;
+    shoppingList.frame=btnFrame2;
+    
+    [scrollProductDetail addSubview:shoppingList];
+    
+    
+    ///// Add Share Btn
+    
+    if (self.isShoppingList)
+    {
+        lblShareVia.frame = CGRectMake(lblShareVia.frame.origin.x, btnFrame2.origin.y+ btnFrame2.size.height +15, lblShareVia.frame.size.width, lblShareVia.frame.size.height);
+
+    }else
+    {
+        lblShareVia.frame = CGRectMake(lblShareVia.frame.origin.x, btnFrame1.origin.y+ btnFrame1.size.height +15, lblShareVia.frame.size.width, lblShareVia.frame.size.height);
+    }
+    
+    
     UIButton *twitterbutton = [UIButton buttonWithType:UIButtonTypeCustom];
     [twitterbutton setImage:[UIImage imageNamed:@"NewTwitterBtn.png"] forState:UIControlStateNormal];
     [twitterbutton addTarget:self
@@ -474,10 +498,10 @@
     [facebookbutton setTitle:@"facebook" forState:UIControlStateNormal];
     facebookbutton.frame = CGRectMake(68+33, lblShareVia.frame.origin.y + lblShareVia.frame.size.height + 20, 42, 43);
     [scrollProductDetail addSubview:facebookbutton];
-    float googleHeight =twitterbutton.frame.origin.y+twitterbutton.frame.size.height;
+//    float googleHeight = twitterbutton.frame.origin.y + twitterbutton.frame.size.height;
     
     UILabel *note=[[UILabel alloc]initWithFrame:CGRectMake(xAxis + 5, facebookbutton.frame.origin.y+facebookbutton.frame.size.height+15, 35, 20)];
-    note.textAlignment = UITextAlignmentCenter;
+    note.textAlignment = NSTextAlignmentCenter;
     [note setText:@"NOTE:"];
     [note setTextColor:[UIColor whiteColor]];
     note.numberOfLines = 0;
@@ -492,10 +516,10 @@
     
     // Note Description.
     UILabel *noteDesc=[[UILabel alloc]initWithFrame:CGRectMake(xAxis + 5, note.frame.origin.y+note.frame.size.height+15,240, 20)];
-    noteDesc.textAlignment = UITextAlignmentLeft;
+    noteDesc.textAlignment = NSTextAlignmentLeft;
     [noteDesc setText:@"Item shown may not be available at your local store. To check availability please call your local store."];
     [noteDesc setTextColor:[UIColor whiteColor]];
-    noteDesc.lineBreakMode = UILineBreakModeWordWrap;
+    noteDesc.lineBreakMode = NSLineBreakByWordWrapping;
     noteDesc.numberOfLines = 0;
     noteDesc.font = [UIFont systemFontOfSize:10];
     CGSize maximumLabelSize5 = CGSizeMake(240,100);
@@ -530,13 +554,20 @@
             
             
             UIImage *img = [UIImage imageWithData:[imgDict objectForKey:@"imgData"]];
-            imgViewMain.frame = CGRectMake(0, imgViewMain.frame.origin.y, img.size.width, img.size.height);
+            
+            if ( img.size.height > 280)
+            {
+                imgViewMain.frame = CGRectMake(0, imgViewMain.frame.origin.y, 280, 280);
+
+            }else {
+                imgViewMain.frame = CGRectMake(0, imgViewMain.frame.origin.y, img.size.width, img.size.height);
+
+            }
             imgViewMain.center = CGPointMake(self.view.center.x, imgViewMain.center.y);
             imgViewZoom.frame= CGRectMake(imgViewMain.frame.origin.x + imgViewMain.frame.size.width - imgViewZoom.frame.size.width, imgViewMain.frame.origin.y, imgViewZoom.frame.size.width, imgViewZoom.frame.size.height);
             
             [scrollProductDetail bringSubviewToFront:imgViewMain];
             imgViewZoom.hidden = FALSE;
-            
             
             [asyn setImageNew:[imgDict objectForKey:@"imgData"] WithFrame:imgViewMain.frame.origin.x];
             
@@ -642,15 +673,15 @@
 -(IBAction)removeFromList:(UIButton*)sender {
     [dbAgent removeProductFromShoppingList:[[productsArray objectAtIndex:productIndex] productId]];
     [listCountLabel setText:[NSString stringWithFormat:@"%d",[dbAgent getCount]]];
-    if (isShoppingList) {
-        [imagesArray removeObjectAtIndex:productIndex];
-        [productsArray removeObjectAtIndex:productIndex];
-        [self refresh];
-    } else {
+//    if (isShoppingList) {
+//        [imagesArray removeObjectAtIndex:productIndex];
+//        [productsArray removeObjectAtIndex:productIndex];
+//        [self refresh];
+//    } else {
         [sender setBackgroundImage:[UIImage imageNamed:@"NewSavetoListBtn.png"] forState:UIControlStateNormal];
         [sender addTarget:self action:@selector(addToList:) forControlEvents:UIControlEventTouchUpInside];
         
-    }
+//    }
     [self CallForDBCount];
 }
 
@@ -662,7 +693,7 @@
     } else if(productIndex<productsArray.count-1) {
         [self createScrollView:[productsArray objectAtIndex:productIndex]];
     } else if (productIndex>=productsArray.count) {
-        [self prevClicked:nil];
+//        [self prevClicked:nil];
     }
     
 }
@@ -908,7 +939,7 @@
     loadingLabel.textColor = [UIColor whiteColor];
     loadingLabel.backgroundColor = [UIColor clearColor];
     loadingLabel.font=[UIFont boldSystemFontOfSize:18];
-    loadingLabel.textAlignment = UITextAlignmentCenter;
+    loadingLabel.textAlignment = NSTextAlignmentCenter;
     loadingLabel.text = @"Please wait loading stores...";
     loadingLabel.numberOfLines=0;
     [loadingView addSubview:loadingLabel];
@@ -977,7 +1008,7 @@
                     x=number;
                     if([[tempArray objectAtIndex:i] isEqualToString:@"Z"])
                     {
-                        y=[tmpArray count]-x;
+                        y=(int)[tmpArray count]-x;
                     }
                     else
                     {
@@ -996,7 +1027,7 @@
                         }
                         if(num==-2)
                         {
-                            y=[tmpArray count]-x;
+                            y=(int)[tmpArray count] - x;
                         }
                         else
                             y=num-x;
@@ -1293,7 +1324,7 @@
         }
     }
     
-    int currentCount = itemsArray.count;
+    int currentCount = (int)itemsArray.count;
     
     
     NSMutableArray *mainArray = [[NSMutableArray alloc]initWithArray:itemsArray];

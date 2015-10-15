@@ -35,7 +35,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
+		PreitAppDelegate *delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
 
 //	[[LoadingAgent defaultAgent]makeBusy:YES];
 //	locationController = [[MyCLController alloc] init];
@@ -110,6 +110,8 @@
    }
 }
 -(void)startLocatioService{
+    PreitAppDelegate *delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
+    
     if(CLLocationManager.locationServicesEnabled)
     {
         [Utils setLocationServiceForApp:YES];
@@ -289,7 +291,7 @@
 	{
 		flag=NO;
 	}
-	
+	PreitAppDelegate *delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
     if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"mallData"]isKindOfClass:[NSData class]] && !delegate.isOnForeGround){
         
     }else
@@ -398,7 +400,7 @@
 	[locationController.locationManager stopUpdatingLocation];
     coordinates=[location coordinate];
 	[[LoadingAgent defaultAgent]makeBusy:NO];
-	
+	PreitAppDelegate *delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
 	delegate.latitude = coordinates.latitude;//=39.9581;
 	delegate.longitude = coordinates.longitude;//=-77.5772;
 	
@@ -561,7 +563,7 @@
 /////////////////////
 ////////////////////
 -(void)fetchData:(NSDictionary*)tmpDict{
-    
+    PreitAppDelegate *delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
     delegate.mallData=tmpDict;
     delegate.mallId=[[tmpDict objectForKey:@"id"] longValue];
     [delegate.tabBarController setSelectedIndex:0];
@@ -588,6 +590,8 @@
     [req requestToServer:self callBackSelector:@selector(requestSucceed:) errorSelector:@selector(requestFailed:) Url:url];
 }
 -(void)requestSucceed:(NSData *)receiveData{
+    PreitAppDelegate *delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
+    
 	if(receiveData!=nil)
 	{
 
@@ -649,6 +653,7 @@
             appDisplayName, majorVersion, minorVersion];
 }
 -(void)requestForImages{
+    PreitAppDelegate *delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
     NSString *url=[NSString stringWithFormat:@"%@%@",[delegate.mallData objectForKey:@"resource_url"],NSLocalizedString(@"API_BgImages","")];
     RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
     [req requestToServer:self callBackSelector:@selector(responseData_Image:) errorSelector:@selector(errorCallback_Image:) Url:url];
@@ -661,7 +666,7 @@
 	NSString *jsonString = [[NSString alloc] initWithBytes:[receiveData bytes] length:[receiveData length] encoding:NSUTF8StringEncoding] ;//autorelease];
     
 	NSArray *tmpArray=[jsonString JSONValue];
-    
+    PreitAppDelegate *delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
 	delegate.imageLink1=nil;
 	delegate.imageLink2=nil;
 	delegate.imageLink3=nil;
@@ -688,6 +693,7 @@
 }
 
 -(void)errorCallback_Image:(NSError *)error{
+    PreitAppDelegate *delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
 	NSLog(@"error");
     [self hideHud];
     [delegate.navController.view removeFromSuperview];
@@ -773,7 +779,7 @@
 
 -(BOOL)getDistance:(NSArray *)tableData
 {
-
+PreitAppDelegate *delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
 	for(int i=0;i<[tableData count];i++)
 	{
 		NSDictionary *tmpDict=[tableData objectAtIndex:i];
@@ -810,6 +816,7 @@
 }
 
 -(void)prefomLocalNotification{
+    PreitAppDelegate *delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
     if (!is_PUSH_NOTIFICATION_ON) {
         return;
     }

@@ -437,8 +437,6 @@
     if (self.isShoppingList)
     {
             [self showProductDetail:(int)indexPath.row];
-
-//        [self RemoveFromDB:(int)indexPath.row];
     }else
     {
         [self showProductDetail:(int)indexPath.row];

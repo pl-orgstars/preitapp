@@ -349,14 +349,26 @@ static NSString *const kAllowTracking = @"allowTracking";
     
     storeListContent=[[NSMutableArray alloc]init];
     
-    LocationViewController *loaction = [[LocationViewController alloc]initWithNibName:@"LocationViewController" bundle:nil];
-    loaction.presentMainView = YES;
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"mallData"] isKindOfClass:[NSData class]])
-        loaction.shouldReload = NO;
     
-    navController = [[UINavigationController alloc]initWithRootViewController:loaction];
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"viewShow"])
+//    {
+        LocationViewController *loaction = [[LocationViewController alloc]initWithNibName:@"LocationViewController" bundle:nil];
+        loaction.presentMainView = YES;
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"mallData"] isKindOfClass:[NSData class]])
+            loaction.shouldReload = NO;
+        
+        navController = [[UINavigationController alloc]initWithRootViewController:loaction];
+//    }else
+//    {
+//        IntroductionView *loaction = [[IntroductionView alloc]initWithNibName:@"IntroductionView" bundle:nil];
+//        
+//        navController = [[UINavigationController alloc]initWithRootViewController:loaction];
+//    }
     
+   
     
+    navController.navigationBarHidden= TRUE;
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
@@ -628,10 +640,10 @@ static NSString *const kAllowTracking = @"allowTracking";
 }
 
 -(void)tabBarController:(UITabBarController *)tabBarControllers didSelectViewController:(UIViewController *)viewController {
-    NSLog(@"didselect tab %d",[tabBarControllers selectedIndex]);
+    NSLog(@"didselect tab %d",(int)[tabBarControllers selectedIndex]);
     
     
-    int  i = [tabBarControllers selectedIndex];
+    int  i = (int)[tabBarControllers selectedIndex];
     
     [((UIButton *)[tabBarController.view viewWithTag:First_Button_Tag])setSelected:i==0?YES:NO];
     [((UIButton *)[tabBarController.view viewWithTag:Second_Button_Tag])setSelected:i==1?YES:NO];

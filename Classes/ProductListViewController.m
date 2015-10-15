@@ -42,8 +42,9 @@
     [self setNavigationTitle:@"Product Search" withBackButton:YES];
     
     [delegate hideProductScreen:YES];
+    [self AddinList:[[Database sharedDatabase] getCount]];
     
-    [listCountLabel setText:[NSString stringWithFormat:@"%d",[[Database sharedDatabase] getCount]]];
+//    [listCountLabel setText:[NSString stringWithFormat:@"%d",[[Database sharedDatabase] getCount]]];
 }
 
 - (void)viewDidLoad
@@ -184,7 +185,6 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
-    //    [overView setHidden:YES];
     [minmumPriceLabel setText:@""];
     [maximunPriceLabel setText:@""];
     
@@ -463,7 +463,7 @@
         [self.navigationItem setTitle:@"Back"];
         detailView.productsArray = [[NSMutableArray alloc]initWithArray:productListView.productsArray];
         detailView.productIndex = productIndex.intValue;
-        
+        detailView.isShoppingList = FALSE;
         delegate.searchURL = urlString;
         NSLog(@"urlString %@",urlString);
         [self.navigationController pushViewController:detailView animated:YES];
@@ -661,16 +661,6 @@
     [toolbar sizeToFit];
     
     NSMutableArray *itemsArray = [[NSMutableArray alloc] init];
-    
-    
-    //    tabNavigation = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Previous", @"Next", nil]];
-    //    [tabNavigation setEnabled:YES forSegmentAtIndex:0];
-    //    [tabNavigation setEnabled:YES forSegmentAtIndex:1];
-    //    tabNavigation.momentary = YES;
-    //    [tabNavigation addTarget:self action:@selector(segmentedControlHandler:) forControlEvents:UIControlEventValueChanged];
-    //    UIBarButtonItem *barSegment = [[UIBarButtonItem alloc] initWithCustomView:tabNavigation];
-    //
-    //    [itemsArray addObject:barSegment];
     
     UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     [itemsArray addObject:flexButton];

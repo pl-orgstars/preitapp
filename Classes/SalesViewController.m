@@ -158,7 +158,7 @@
 		CGSize constraint = CGSizeMake(280.0000, 20000.0f);
 		CGSize titlesize = [[tmpDict objectForKey:@"headline"] sizeWithFont:[UIFont boldSystemFontOfSize:18] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
 		NSString *dateString=[NSString stringWithFormat:@"%@ - %@",[tmpDict objectForKey:@"startsOn"],[tmpDict objectForKey:@"endsOn"]];
-		CGSize datesize = [dateString sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+		CGSize datesize = [dateString sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
 		
 		NSString *teaserString=[tmpDict objectForKey:@"teaser"];
 		

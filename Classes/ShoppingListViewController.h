@@ -13,12 +13,11 @@
 #import "ProductDetailViewController.h"
 #import "EmailListViewController.h"
 #import "BaseViewController.h"
-
+#import "Database.h"
 
 @interface ShoppingListViewController : BaseViewController <UIAlertViewDelegate>
 {
     IBOutlet UILabel *lblResultCount;
-//    IBOutlet UIButton *editBtn;
     IBOutlet UIToolbar *toolBar;
     ProductListView *productListView;
     PreitAppDelegate *delegate;    
