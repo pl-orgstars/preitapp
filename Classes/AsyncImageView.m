@@ -123,9 +123,18 @@
     CGRect rect = self.frame;
     rect.origin.x = xPoint - self.frame.origin.x;
     rect.origin.y = 0;
-    rect.size.width = img.size.width;
-    rect.size.height = img.size.height;
+    if ( img.size.height > 280)
+    {
+        rect.size.height = 280;
+        
+    }else
+    {
+        rect.size.width = img.size.width;
+        rect.size.height = img.size.height;
+
+    }
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:rect];
+    imageView.backgroundColor = [UIColor yellowColor];
     [imageView setTag:100];
     [imageView setImage:img];
     

@@ -51,13 +51,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Classes/ProductListViewController.m"
-            timestampString = "466525054.627483"
+            filePath = "Classes/ShoppingListViewController.m"
+            timestampString = "466525295.188066"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "467"
-            endingLineNumber = "467"
-            landmarkName = "-showProductDetail:"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -67,13 +67,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Classes/ShoppingListViewController.m"
-            timestampString = "466525295.188066"
+            filePath = "Classes/AsyncImageView.m"
+            timestampString = "466585252.970131"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "-viewWillAppear:"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "-setImageNew:WithFrame:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

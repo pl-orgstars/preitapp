@@ -324,6 +324,7 @@
             
         
     }
+
     lblName.text =objectToBeUsed.title;
     lblPrice.text =[NSString stringWithFormat:@"$%.2f", objectToBeUsed.price];
     
@@ -366,7 +367,6 @@
         [imageDetail setProductIndex:productIndex];
         [imageDetail setTag:tagImageView];
         imageDetail.backgroundColor=[UIColor clearColor];
-        NSLog(@"img %@",objectToBeUsed.imageUrl);
         [imageDetail loadImageFromURL:[NSURL URLWithString:objectToBeUsed.imageUrl] delegate:self requestSelector:@selector(imageDownloaded:)];
         imageDetail.frame = imgViewMain.frame;
         y2=imageDetail.frame.size.height;
@@ -376,67 +376,19 @@
         [imageDetail addGestureRecognizer:ImageTap];
         [imageDetail setUserInteractionEnabled:YES];
         [self.view bringSubviewToFront:imgViewZoom];
-        //        imgViewZoom.hidden = FALSE;
         
         
     }
     
     
     
+    //// Add discription /////////
     
-    UIButton *shoppingList = [UIButton buttonWithType:UIButtonTypeCustom];
-    CGRect btnFrame2= shoppingList.frame;
-    
-    UIImage *removeImage = [UIImage imageNamed:@"NewREmoveBTn.png"];
-    UIImage *addImage = [UIImage imageNamed:@"NewSavetoListBtn.png"];
-    UIImage *searchImage = [UIImage imageNamed:@"NewSearchonStoreBTn.png"];
-    CGRect btnFrame1;
-    if (isShoppingList)
-    {
-        btnFrame2.origin.y=imgViewMain.frame.origin.y + imgViewMain.frame.size.height+ 05;
-        [shoppingList setBackgroundImage:removeImage forState:UIControlStateNormal];
-        [shoppingList addTarget:self action:@selector(removeFromList:) forControlEvents:UIControlEventTouchUpInside];
-    } else
-    {
-        // Button For search only this store
-        UIButton *searchStore = [UIButton buttonWithType:UIButtonTypeCustom];
-        btnFrame1= searchStore.frame;
-        btnFrame1.origin.x= 10 ;
-        btnFrame1.origin.y=imgViewMain.frame.origin.y + imgViewMain.frame.size.height+ 50;
-        btnFrame1.size = searchImage.size;
-        searchStore.frame=btnFrame1;
-        [searchStore setBackgroundImage:searchImage forState:UIControlStateNormal];
-        
-        [searchStore addTarget:self action:@selector(searchStore) forControlEvents:UIControlEventTouchUpInside];
-        
-        [scrollProductDetail addSubview:searchStore];
-        
-        if ([dbAgent productIsPresent:objectToBeUsed.productId]) {
-            [shoppingList setBackgroundImage:removeImage forState:UIControlStateNormal];
-            [shoppingList addTarget:self action:@selector(removeFromList:) forControlEvents:UIControlEventTouchUpInside];
-        } else {
-            [shoppingList setBackgroundImage:addImage forState:UIControlStateNormal];
-            [shoppingList addTarget:self action:@selector(addToList:) forControlEvents:UIControlEventTouchUpInside];
-        }
-        btnFrame2.origin.y= imgViewMain.frame.origin.y + imgViewMain.frame.size.height+ 05;;
-    }
-    
-    // Button for shopping list.
-    
-    btnFrame2.origin.x= 10 ;
-    btnFrame2.size = removeImage.size;
-    shoppingList.frame=btnFrame2;
-    
-    [scrollProductDetail addSubview:shoppingList];
-    
-    
-    /////
-    
-    UILabel *desc=[[UILabel alloc]initWithFrame:CGRectMake(xAxis , btnFrame1.origin.y + btnFrame1.size.height + 20,253,20)];
-    desc.textAlignment = UITextAlignmentLeft;
+    UILabel *desc=[[UILabel alloc]initWithFrame:CGRectMake(xAxis , imgViewMain.frame.origin.y + imgViewMain.frame.size.height + 20,253,20)];
+    desc.textAlignment = NSTextAlignmentLeft;
     [desc setText:objectToBeUsed.desc];
     [desc setTextColor:[UIColor whiteColor]];
-    desc.lineBreakMode = UILineBreakModeWordWrap;
+    desc.lineBreakMode = NSLineBreakByWordWrapping;
     desc.numberOfLines = 0;
     desc.font = [UIFont systemFontOfSize:13];
     
@@ -452,10 +404,67 @@
     desc.frame=make;
     desc.backgroundColor=[UIColor clearColor];
     [scrollProductDetail addSubview:desc];
+
     
     
     
-    lblShareVia.frame = CGRectMake(lblShareVia.frame.origin.x, desc.frame.origin.y+ desc.frame.size.height +15, lblShareVia.frame.size.width, lblShareVia.frame.size.height);
+    
+    ////// Add Buttons ///////
+    
+    
+    UIButton *shoppingList = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGRect btnFrame2= shoppingList.frame;
+    
+    UIImage *removeImage = [UIImage imageNamed:@"NewREmoveBTn.png"];
+    UIImage *addImage = [UIImage imageNamed:@"NewSavetoListBtn.png"];
+    UIImage *searchImage = [UIImage imageNamed:@"NewSearchonStoreBTn.png"];
+    CGRect btnFrame1;
+    
+    if (isShoppingList)
+    {
+        btnFrame2.origin.y=desc.frame.origin.y + desc.frame.size.height+ 15;
+        [shoppingList setBackgroundImage:removeImage forState:UIControlStateNormal];
+        [shoppingList addTarget:self action:@selector(removeFromList:) forControlEvents:UIControlEventTouchUpInside];
+    } else
+    {
+        // Button For search only this store
+        UIButton *searchStore = [UIButton buttonWithType:UIButtonTypeCustom];
+        btnFrame1= searchStore.frame;
+        btnFrame1.origin.x= 10 ;
+        btnFrame1.origin.y=desc.frame.origin.y + desc.frame.size.height+ 65;
+        btnFrame1.size = searchImage.size;
+        searchStore.frame=btnFrame1;
+        [searchStore setBackgroundImage:searchImage forState:UIControlStateNormal];
+        
+        [searchStore addTarget:self action:@selector(searchStore) forControlEvents:UIControlEventTouchUpInside];
+        
+        [scrollProductDetail addSubview:searchStore];
+        
+        if ([dbAgent productIsPresent:objectToBeUsed.productId]) {
+            [shoppingList setBackgroundImage:removeImage forState:UIControlStateNormal];
+            [shoppingList addTarget:self action:@selector(removeFromList:) forControlEvents:UIControlEventTouchUpInside];
+        } else {
+            [shoppingList setBackgroundImage:addImage forState:UIControlStateNormal];
+            [shoppingList addTarget:self action:@selector(addToList:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        btnFrame2.origin.y= desc.frame.origin.y + desc.frame.size.height+ 15;
+    }
+    
+    // Button for shopping list.
+    
+    btnFrame2.origin.x= 10 ;
+    btnFrame2.size = removeImage.size;
+    shoppingList.frame=btnFrame2;
+    
+    [scrollProductDetail addSubview:shoppingList];
+    
+    
+    /////
+    
+    
+    
+    
+    lblShareVia.frame = CGRectMake(lblShareVia.frame.origin.x, btnFrame1.origin.y+ btnFrame1.size.height +15, lblShareVia.frame.size.width, lblShareVia.frame.size.height);
     UIButton *twitterbutton = [UIButton buttonWithType:UIButtonTypeCustom];
     [twitterbutton setImage:[UIImage imageNamed:@"NewTwitterBtn.png"] forState:UIControlStateNormal];
     [twitterbutton addTarget:self
@@ -530,13 +539,20 @@
             
             
             UIImage *img = [UIImage imageWithData:[imgDict objectForKey:@"imgData"]];
-            imgViewMain.frame = CGRectMake(0, imgViewMain.frame.origin.y, img.size.width, img.size.height);
+            
+            if ( img.size.height > 280)
+            {
+                imgViewMain.frame = CGRectMake(0, imgViewMain.frame.origin.y, 280, 280);
+
+            }else {
+                imgViewMain.frame = CGRectMake(0, imgViewMain.frame.origin.y, img.size.width, img.size.height);
+
+            }
             imgViewMain.center = CGPointMake(self.view.center.x, imgViewMain.center.y);
             imgViewZoom.frame= CGRectMake(imgViewMain.frame.origin.x + imgViewMain.frame.size.width - imgViewZoom.frame.size.width, imgViewMain.frame.origin.y, imgViewZoom.frame.size.width, imgViewZoom.frame.size.height);
             
             [scrollProductDetail bringSubviewToFront:imgViewMain];
             imgViewZoom.hidden = FALSE;
-            
             
             [asyn setImageNew:[imgDict objectForKey:@"imgData"] WithFrame:imgViewMain.frame.origin.x];
             
