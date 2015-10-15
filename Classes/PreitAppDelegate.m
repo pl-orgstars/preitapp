@@ -349,14 +349,26 @@ static NSString *const kAllowTracking = @"allowTracking";
     
     storeListContent=[[NSMutableArray alloc]init];
     
-    LocationViewController *loaction = [[LocationViewController alloc]initWithNibName:@"LocationViewController" bundle:nil];
-    loaction.presentMainView = YES;
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"mallData"] isKindOfClass:[NSData class]])
-        loaction.shouldReload = NO;
     
-    navController = [[UINavigationController alloc]initWithRootViewController:loaction];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"viewShow"])
+    {
+        LocationViewController *loaction = [[LocationViewController alloc]initWithNibName:@"LocationViewController" bundle:nil];
+        loaction.presentMainView = YES;
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"mallData"] isKindOfClass:[NSData class]])
+            loaction.shouldReload = NO;
+        
+        navController = [[UINavigationController alloc]initWithRootViewController:loaction];
+    }else
+    {
+        IntroductionView *loaction = [[IntroductionView alloc]initWithNibName:@"IntroductionView" bundle:nil];
+        
+        navController = [[UINavigationController alloc]initWithRootViewController:loaction];
+    }
     
+   
     
+    navController.navigationBarHidden= TRUE;
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];

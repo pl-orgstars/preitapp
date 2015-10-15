@@ -18,7 +18,7 @@
 	CLLocationCoordinate2D coordinates;
 	NSArray *pickerItem;
 	
-	PreitAppDelegate *delegate;
+
 	BOOL isFirstTime;
 	int radiusSelected;
     
