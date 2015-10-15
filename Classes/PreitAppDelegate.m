@@ -350,20 +350,20 @@ static NSString *const kAllowTracking = @"allowTracking";
     storeListContent=[[NSMutableArray alloc]init];
     
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"viewShow"])
-    {
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"viewShow"])
+//    {
         LocationViewController *loaction = [[LocationViewController alloc]initWithNibName:@"LocationViewController" bundle:nil];
         loaction.presentMainView = YES;
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"mallData"] isKindOfClass:[NSData class]])
             loaction.shouldReload = NO;
         
         navController = [[UINavigationController alloc]initWithRootViewController:loaction];
-    }else
-    {
-        IntroductionView *loaction = [[IntroductionView alloc]initWithNibName:@"IntroductionView" bundle:nil];
-        
-        navController = [[UINavigationController alloc]initWithRootViewController:loaction];
-    }
+//    }else
+//    {
+//        IntroductionView *loaction = [[IntroductionView alloc]initWithNibName:@"IntroductionView" bundle:nil];
+//        
+//        navController = [[UINavigationController alloc]initWithRootViewController:loaction];
+//    }
     
    
     
