@@ -155,7 +155,7 @@ CGFloat animatedDistance;
     
     [requestObj setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [requestObj setHTTPBody:[strr dataUsingEncoding: NSUTF8StringEncoding]];
-    [requestObj setValue:[NSString stringWithFormat:@"%d",[strr length] ] forHTTPHeaderField:@"Content-Length"];
+    [requestObj setValue:[NSString stringWithFormat:@"%lu",(unsigned long)[strr length] ] forHTTPHeaderField:@"Content-Length"];
     
     
     

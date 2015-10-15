@@ -64,8 +64,8 @@
 
 
 -(void)createScrollView:(Product *)objectToBeUsed;
--(IBAction)nextClicked:(id)sender;
--(IBAction)prevClicked:(id)sender;
+//-(IBAction)nextClicked:(id)sender;
+//-(IBAction)prevClicked:(id)sender;
 -(void)showImage;
 -(IBAction)hideImage:(UIButton*)sender;
 -(void)refresh;

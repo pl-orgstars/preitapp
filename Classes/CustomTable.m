@@ -69,7 +69,7 @@
     titleLabel.textColor = [UIColor whiteColor];
 	titleLabel.font=[UIFont boldSystemFontOfSize:18];
 	titleLabel.shadowColor=[UIColor blackColor];
-	titleLabel.textAlignment=UITextAlignmentCenter;
+	titleLabel.textAlignment=NSTextAlignmentCenter;
 	titleLabel.backgroundColor=[UIColor clearColor];
 	[headerView addSubview:titleLabel];
     //kuldeep
@@ -186,7 +186,7 @@
             cell.textLabel.text=@"No Result";
             cell.textLabel.textColor=LABEL_TEXT_COLOR;
             cell.textLabel.backgroundColor=[UIColor clearColor];
-            cell.textLabel.textAlignment=UITextAlignmentCenter;
+            cell.textLabel.textAlignment=NSTextAlignmentCenter;
         }
     }
     

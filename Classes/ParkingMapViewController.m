@@ -69,7 +69,7 @@
 	titleLabel.textColor=[UIColor whiteColor];
 	titleLabel.font=[UIFont boldSystemFontOfSize:18];
 	titleLabel.shadowColor=[UIColor blackColor];
-	titleLabel.textAlignment=UITextAlignmentCenter;
+	titleLabel.textAlignment=NSTextAlignmentCenter;
 	titleLabel.backgroundColor=[UIColor clearColor];
 	[headerView addSubview:titleLabel];
 //	[titleLabel release];
@@ -82,7 +82,7 @@
 	titleLabel.text=title;
 	titleLabel.textColor=[UIColor whiteColor];
 	titleLabel.font=[UIFont systemFontOfSize:14];
-	titleLabel.textAlignment=UITextAlignmentCenter;
+	titleLabel.textAlignment=NSTextAlignmentCenter;
 	titleLabel.backgroundColor=[UIColor clearColor];
 	[headerView addSubview:titleLabel];
 //	[titleLabel release];

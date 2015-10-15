@@ -40,11 +40,18 @@
             [self getDistance];
         }
         
+        if (_presentMainView)
+            menuButton.hidden = YES;
         
-        [tableHome reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationBottom];
+        [searchBar_ setReturnKeyType:UIReturnKeyDone];
+        locateButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        locateButton.layer.borderWidth = 1.5;
+        
+        [self setDataByState];
+        [tableHome reloadData];
     }
-
 }
+
 -(void)loadInitialView{
     [self loadDefaultValues];
     [self getData];
@@ -52,48 +59,34 @@
 
 -(void)loadDefaultValues
 {
-    self.navigationController.navigationBar.hidden=NO;
-
-    
 	delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
-
-    [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
-     [self.navigationController.navigationBar setTranslucent:YES];
-	CGSize constraint = CGSizeMake(250.0000, 20000.0f);
-	CGSize titlesize = [NSLocalizedString(@"HomeTitle", @"") sizeWithFont:[UIFont boldSystemFontOfSize:18] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-    
-	UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, titlesize.width, 25.0)];
-	titleLabel.text=NSLocalizedString(@"HomeTitle", @"");
-	titleLabel.font=[UIFont systemFontOfSize:15];
-    titleLabel.textColor=[UIColor whiteColor];
-	titleLabel.backgroundColor=[UIColor clearColor];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-	self.navigationItem.titleView=titleLabel;
-	UIButton *buttn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [buttn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [buttn setImage:[UIImage imageNamed:@"refresh_icon.png"] forState:UIControlStateNormal];
-    [buttn setFrame:CGRectMake(0, 0, 30, 30)];
-    UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithCustomView:buttn];
-
-	refreshButton.tag=100;
-	self.navigationItem.rightBarButtonItem=refreshButton;
-	
-
-    [self setHeaderViewForTable];
-	
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton addTarget:self action:@selector(backButttontapped:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setImage:[UIImage imageNamed:@"back_icon.png"] forState:UIControlStateNormal];
-    [backButton setFrame:CGRectMake(0, 0, 30, 30)];
-    UIBarButtonItem *backBtton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    backBtton.tag=101;
-	self.navigationItem.leftBarButtonItem=backBtton;
-    [self.navigationController.navigationBar setTranslucent:NO];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"backNavigation.png"] forBarMetrics:UIBarMetricsDefault];
+//    [self setHeaderViewForTable];
 }
+
+- (void)setDataByState {
+    if (!sections)
+        sections = [NSMutableDictionary new];
+    
+    [sections removeAllObjects];
+    
+    for (NSDictionary *dict in tableData) {
+        NSString *state = [dict objectForKey:@"address_state"];
+        NSMutableArray *mallsArray = [sections objectForKey:state];
+        if (!mallsArray) {
+            mallsArray = [NSMutableArray new];
+        }
+        
+        [mallsArray addObject:dict];
+        [sections setObject:mallsArray forKey:state];
+    }
+    
+    sectionKeys = [[sections allKeys] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)];
+}
+
 -(void)backButttontapped:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 -(void)setHeaderViewForTable{
     UIView *headerView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, isNoData?15:50)];
     if (!isNoData) {
@@ -131,24 +124,170 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (NSDictionary *)getTempDictionary:(NSIndexPath *)indexPath {
+    NSDictionary *tmpDict;
+    if (displayOrder == DisplayOrderByState) {
+        NSString *key = [sectionKeys objectAtIndex:indexPath.section];
+        NSArray *arr = [sections objectForKey:key];
+        tmpDict = [arr objectAtIndex:indexPath.row];
+    }
+    else if (displayOrder == DisplayOrderBySearch) {
+        tmpDict = [searchArray objectAtIndex:indexPath.row];
+    }
+    else if (displayOrder == DisplayOrderNearestMall) {
+        tmpDict = nearestMall;
+    }
+    else {
+        tmpDict = [tableData objectAtIndex:indexPath.row];
+    }
+    
+    return tmpDict;
+}
 
 
-#pragma mark Action methods
+#pragma mark - Action methods
 
 -(void)buttonAction:(id)sender{
 	[self getData];
 }
 
+- (IBAction)menuBtnCall:(id)sender {
+    
+    self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
+    
+}
+
+
+- (IBAction)locateNearestMallAction:(id)sender {
+    CLLocation *locA = [[CLLocation alloc] initWithLatitude:self.coordinates.latitude longitude:self.coordinates.longitude];
+    CLLocationDistance distance = 0;
+    
+    for (NSDictionary *dict in tableData) {
+        CLLocation *locB = [[CLLocation alloc] initWithLatitude:[[dict objectForKey:@"location_lat"] doubleValue]
+                                                      longitude:[[dict objectForKey:@"location_lng"] doubleValue]];
+        CLLocationDistance tempDistance = [locA distanceFromLocation:locB];
+        if (tempDistance < distance || distance == 0) {
+            distance = tempDistance;
+            nearestMall = dict;
+        }
+    }
+    
+    byStateUnderline.hidden = YES;
+    byAlphabetUnderline.hidden = YES;
+    
+    displayOrder = DisplayOrderNearestMall;
+    [self reloadTableView];
+}
+
+- (IBAction)byStateAction:(id)sender {
+    byStateUnderline.hidden = NO;
+    byAlphabetUnderline.hidden = YES;
+    
+    displayOrder = DisplayOrderByState;
+    [self reloadTableView];
+}
+
+- (IBAction)byAlphabetAction:(id)sender {
+    byStateUnderline.hidden = YES;
+    byAlphabetUnderline.hidden = NO;
+    
+    displayOrder = DisplayOrderByAlphabet;
+    [self reloadTableView];
+}
+
+#pragma mark - SearchBar Methods
+
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    byStateUnderline.hidden = YES;
+    byAlphabetUnderline.hidden = YES;
+    
+    displayOrder = DisplayOrderBySearch;
+    if (!searchArray)
+        searchArray = [NSMutableArray new];
+    
+    [searchArray removeAllObjects];
+    
+    for (NSDictionary *dict in tableData) {
+        if ([[dict objectForKey:@"name"] localizedCaseInsensitiveContainsString:searchText]) {
+            [searchArray addObject:dict];
+        }
+    }
+    
+    [self reloadTableView];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    searchBar.text = @"";
+    [self byStateAction:nil];
+}
+
+- (void)resignSearchBar {
+    if (displayOrder != DisplayOrderBySearch)
+        searchBar_.text = @"";
+    [searchBar_ resignFirstResponder];
+}
+
 #pragma mark UITableViewDelegate methods
 
+- (void)reloadTableView {
+    NSInteger count;
+    if (displayOrder == DisplayOrderByState) {
+        count = sectionKeys;
+    }
+    else if (displayOrder == DisplayOrderByAlphabet) {
+        count = tableData.count;
+    }
+    else if (displayOrder == DisplayOrderBySearch) {
+        count = searchArray.count;
+    }
+    else if (displayOrder == DisplayOrderNearestMall) {
+        count = 1;
+    }
+    
+    isNoData = (count == 0) ? YES : NO;
+    [tableHome reloadData];
+    if (displayOrder != DisplayOrderBySearch)
+        [self resignSearchBar];
+}
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    return (displayOrder == DisplayOrderByState) ? sections.count : 1;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return (displayOrder == DisplayOrderByState) ? [sectionKeys objectAtIndex:section] : @"";
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return isNoData?1:[tableData count];
+    NSInteger count;
+    if (displayOrder == DisplayOrderByState) {
+        NSString *key = [sectionKeys objectAtIndex:section];
+        NSArray *arr = [sections objectForKey:key];
+        count = arr.count;
+    }
+    else if (displayOrder == DisplayOrderBySearch) {
+        count = searchArray.count;
+    }
+    else if (displayOrder == DisplayOrderNearestMall) {
+        count = 1;
+    }
+    else {
+        count = tableData.count;
+    }
+    
+	return isNoData ? 1 : count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 	CGFloat height=40.0;
 	if(!isNoData){
-		NSDictionary *tmpDict=[self.tableData objectAtIndex:indexPath.row];
+        NSDictionary *tmpDict = [self getTempDictionary:indexPath];
+        
 		CGSize constraint = CGSizeMake(200.0000, 20000.0f);
 		CGSize titlesize = [[tmpDict objectForKey:@"name"] sizeWithFont:[UIFont boldSystemFontOfSize:18] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
 		height= (titlesize.height<40?50:(titlesize.height+20));
@@ -176,7 +315,8 @@
 	
     if([cellIdentifier isEqualToString:@"Cell"]){
 		cell.textLabel.numberOfLines=0;
-		NSDictionary *tmpDict=[self.tableData objectAtIndex:indexPath.row];
+        
+        NSDictionary *tmpDict = [self getTempDictionary:indexPath];
 		cell.textLabel.text=[tmpDict objectForKey:@"name"];
 		cell.textLabel.font=LABEL_TEXT_FONT;
         cell.textLabel.backgroundColor=[UIColor clearColor];
@@ -216,7 +356,7 @@
 		cell.textLabel.text=@"No Result";
 		cell.textLabel.textColor=[UIColor grayColor];
 		cell.textLabel.backgroundColor=[UIColor clearColor];
-		cell.textLabel.textAlignment=UITextAlignmentCenter;
+		cell.textLabel.textAlignment=NSTextAlignmentCenter;
 		cell.selectionStyle=UITableViewCellSelectionStyleNone;
 	}	
 	return cell;	
@@ -228,7 +368,7 @@
     NSLog(@"selectrow");
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	if(!isNoData){
-		NSMutableDictionary *tmpDict=[self.tableData objectAtIndex:indexPath.row];
+		NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithDictionary:[self getTempDictionary:indexPath]];
         
         if ([[tmpDict objectForKey:@"name"] isEqualToString:@"Cherry Hill Mall"]) {
             [tmpDict setObject:@"http://staging.cherryhillmall.red5demo.com" forKey:@"website_url"];
@@ -281,7 +421,7 @@
 {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	if(!isNoData){
-		NSDictionary *tmpDict=[self.tableData objectAtIndex:indexPath.row];
+		NSDictionary *tmpDict = [self getTempDictionary:indexPath];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:tmpDict];
@@ -331,7 +471,7 @@
 -(void)getData{
 	NSString *url=[NSString stringWithFormat:@"%@%@",NSLocalizedString(@"Server",""),NSLocalizedString(@"API0","")];
 	if(self.radius)
-		url=[NSString stringWithFormat:@"%@%?lat=%f&lng=%f&radius=%@",url,self.coordinates.latitude,self.coordinates.longitude,radius];
+		url=[NSString stringWithFormat:@"%@?lat=%f&lng=%f&radius=%@",url,self.coordinates.latitude,self.coordinates.longitude,radius];
 	
 	self.navigationItem.rightBarButtonItem.enabled=NO;
 	[indicator_ startAnimating];

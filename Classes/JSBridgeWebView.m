@@ -130,7 +130,7 @@
 		
 		NSRange range = [strUrl rangeOfString:@"="];
 		
-		int index = range.location + range.length;
+		int index = (int)range.location + (int)range.length;
 		
 		result = [strUrl substringFromIndex:index];
 	}
@@ -184,7 +184,7 @@
 	} else if ([type compare:@"array"] == NSOrderedSame) {
 		
 		NSDictionary* arrayData = (NSDictionary*) value;
-		int count = [arrayData count];
+		int count = (int)[arrayData count];
 		NSMutableArray* array = [NSMutableArray arrayWithCapacity:count];
 		
 		for (int i = 0; i < count; i++) {

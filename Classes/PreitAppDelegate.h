@@ -21,6 +21,7 @@
 #import <MNNotificationsManager/MNNotificationsManager.h>
 #import "MNNotificationsManagerCustomDelegate.h"
 #import <MNNotificationsManager/MNNMOptions+Internal.h>
+#import "IntroductionView.h"
 
 @interface PreitAppDelegate : NSObject <UIApplicationDelegate,UITabBarControllerDelegate>
 {

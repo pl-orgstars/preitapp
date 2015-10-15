@@ -187,7 +187,7 @@
 		cell.textLabel.text=@"No Result";
 		cell.textLabel.textColor= LABEL_TEXT_COLOR;//[UIColor whiteColor];
 		cell.textLabel.backgroundColor=[UIColor clearColor];
-		cell.textLabel.textAlignment=UITextAlignmentCenter;
+		cell.textLabel.textAlignment=NSTextAlignmentCenter;
 	}	
 	return cell;	
 }

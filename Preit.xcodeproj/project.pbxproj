@@ -450,6 +450,12 @@
 		E6E283931BAAEC67001736DF /* MenuNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6E283921BAAEC67001736DF /* MenuNew@2x.png */; };
 		E6E283981BAAF80A001736DF /* MenuUpperview.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E283961BAAF80A001736DF /* MenuUpperview.m */; };
 		E6E283991BAAF80A001736DF /* MenuUpperview.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6E283971BAAF80A001736DF /* MenuUpperview.xib */; };
+		E6E397341BCFBE1C0048F00E /* IntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E397321BCFBE1C0048F00E /* IntroductionView.m */; };
+		E6E397351BCFBE1C0048F00E /* IntroductionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6E397331BCFBE1C0048F00E /* IntroductionView.xib */; };
+		E6E3973A1BCFC3320048F00E /* New1.png in Resources */ = {isa = PBXBuildFile; fileRef = E6E397361BCFC3320048F00E /* New1.png */; };
+		E6E3973B1BCFC3320048F00E /* New2.png in Resources */ = {isa = PBXBuildFile; fileRef = E6E397371BCFC3320048F00E /* New2.png */; };
+		E6E3973C1BCFC3320048F00E /* New3.png in Resources */ = {isa = PBXBuildFile; fileRef = E6E397381BCFC3320048F00E /* New3.png */; };
+		E6E3973D1BCFC3320048F00E /* New4.png in Resources */ = {isa = PBXBuildFile; fileRef = E6E397391BCFC3320048F00E /* New4.png */; };
 		E6FAE1651BC5515300AC1575 /* ImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FAE1621BC5515300AC1575 /* ImageLoader.m */; };
 		E6FAE1661BC5515300AC1575 /* SimpleImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FAE1641BC5515300AC1575 /* SimpleImageLoader.m */; };
 		E6FC27961BC2AAD200DB444B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6FC27951BC2AAD200DB444B /* AdSupport.framework */; };
@@ -587,6 +593,7 @@
 		615604DA1BCE8B9C00FAD487 /* MessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesView.h; sourceTree = "<group>"; };
 		615604DB1BCE8B9C00FAD487 /* MessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesView.m; sourceTree = "<group>"; };
 		615604DD1BCE8BAD00FAD487 /* MessagesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesView.xib; sourceTree = "<group>"; };
+		61C21BB91BCFDE7E0081635A /* orientation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orientation@2x.png"; sourceTree = "<group>"; };
 		61C8FDDC1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNNotificationsManagerCustomDelegate.h; sourceTree = "<group>"; };
 		61C8FDDD1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNNotificationsManagerCustomDelegate.m; sourceTree = "<group>"; };
 		61C8FDE51BCBF5CC006428BB /* MNNotificationsManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MNNotificationsManager.framework; sourceTree = "<group>"; };
@@ -1049,6 +1056,13 @@
 		E6E283951BAAF80A001736DF /* MenuUpperview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuUpperview.h; path = MenuView/Waseem/ViewDeck/MenuUpperview.h; sourceTree = "<group>"; };
 		E6E283961BAAF80A001736DF /* MenuUpperview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuUpperview.m; path = MenuView/Waseem/ViewDeck/MenuUpperview.m; sourceTree = "<group>"; };
 		E6E283971BAAF80A001736DF /* MenuUpperview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MenuUpperview.xib; path = MenuView/Waseem/ViewDeck/MenuUpperview.xib; sourceTree = "<group>"; };
+		E6E397311BCFBE1C0048F00E /* IntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroductionView.h; path = IntroductionView/IntroductionView.h; sourceTree = "<group>"; };
+		E6E397321BCFBE1C0048F00E /* IntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroductionView.m; path = IntroductionView/IntroductionView.m; sourceTree = "<group>"; };
+		E6E397331BCFBE1C0048F00E /* IntroductionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IntroductionView.xib; path = IntroductionView/IntroductionView.xib; sourceTree = "<group>"; };
+		E6E397361BCFC3320048F00E /* New1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = New1.png; sourceTree = "<group>"; };
+		E6E397371BCFC3320048F00E /* New2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = New2.png; sourceTree = "<group>"; };
+		E6E397381BCFC3320048F00E /* New3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = New3.png; sourceTree = "<group>"; };
+		E6E397391BCFC3320048F00E /* New4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = New4.png; sourceTree = "<group>"; };
 		E6FAE1611BC5515300AC1575 /* ImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoader.h; sourceTree = "<group>"; };
 		E6FAE1621BC5515300AC1575 /* ImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLoader.m; sourceTree = "<group>"; };
 		E6FAE1631BC5515300AC1575 /* SimpleImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleImageLoader.h; sourceTree = "<group>"; };
@@ -1574,6 +1588,7 @@
 			isa = PBXGroup;
 			children = (
 				BDC954E61BC6A8DB00D33683 /* Ok@2x.png */,
+				61C21BB91BCFDE7E0081635A /* orientation@2x.png */,
 				BD4EF9721BBEA0900042EF6E /* Product Search */,
 				BD3DAD801BBAB2B100933F74 /* SOCIAL */,
 				BD3223101BB99AF8002D5146 /* BackBlackThick@2x.png */,
@@ -2138,6 +2153,7 @@
 		E2DFF13912410C1600F8687B /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				E6E397301BCFBE050048F00E /* New View */,
 				1D3623240D0F684500981E51 /* PreitAppDelegate.h */,
 				1D3623250D0F684500981E51 /* PreitAppDelegate.m */,
 				70FE3A9317392CD000E64874 /* SuperViewController.h */,
@@ -2261,6 +2277,16 @@
 			name = "Menu Upper View";
 			sourceTree = "<group>";
 		};
+		E6E397301BCFBE050048F00E /* New View */ = {
+			isa = PBXGroup;
+			children = (
+				E6E397311BCFBE1C0048F00E /* IntroductionView.h */,
+				E6E397321BCFBE1C0048F00E /* IntroductionView.m */,
+				E6E397331BCFBE1C0048F00E /* IntroductionView.xib */,
+			);
+			name = "New View";
+			sourceTree = "<group>";
+		};
 		E6FAE1601BC5515300AC1575 /* Image Loader */ = {
 			isa = PBXGroup;
 			children = (
@@ -2275,6 +2301,10 @@
 		E6FCFC031BC69E3600B15121 /* New PRoduct Detail Images */ = {
 			isa = PBXGroup;
 			children = (
+				E6E397361BCFC3320048F00E /* New1.png */,
+				E6E397371BCFC3320048F00E /* New2.png */,
+				E6E397381BCFC3320048F00E /* New3.png */,
+				E6E397391BCFC3320048F00E /* New4.png */,
 				E6D367761BCBDE2C004F6E76 /* NewZoomBtn@2x.png */,
 				E6D367741BCBCFA1004F6E76 /* NewListDetail@2x.png */,
 				E6D367721BCBADFE004F6E76 /* NewCircleBG@2x.png */,
@@ -2416,6 +2446,7 @@
 				6101E25A1BB96DB000A8BD65 /* email-us@2x.png in Resources */,
 				AE87D298193707E200F5493D /* Menu_normal.png in Resources */,
 				E92DFA491B4412DA000B91B0 /* PREIT_Logo@3x.png in Resources */,
+				E6E3973C1BCFC3320048F00E /* New3.png in Resources */,
 				E2AFBBC6126C1C0400F84431 /* SelectMonthViewController.xib in Resources */,
 				AECE4802195A935600D1E5DB /* AppIcon40x40.png in Resources */,
 				BD03C5451BCF70A0001BD95E /* MessagesView.xib in Resources */,
@@ -2481,9 +2512,11 @@
 				E2B6672E135411740082934C /* icon111.png in Resources */,
 				4246FA6A159DBBA600620E60 /* ShoppingListViewController.xib in Resources */,
 				AE87D2D4193710F600F5493D /* Park_normal.png in Resources */,
+				E6E3973D1BCFC3320048F00E /* New4.png in Resources */,
 				42CC8F3715A5C6B6004B0CDE /* ProductListViewController.xib in Resources */,
 				BDF060911BB92A1100B79BB9 /* exoandArrowDown50@2x.png in Resources */,
 				42CC8F3C15A5C756004B0CDE /* ProductDetailViewController.xib in Resources */,
+				E6E3973A1BCFC3320048F00E /* New1.png in Resources */,
 				AE87D2DD19373FA400F5493D /* Default@2x.png in Resources */,
 				427ABA3715AB1F5F0079FDC3 /* PreitDB.sqlite in Resources */,
 				42A3AB1115AC2C0500F5790B /* add-to-Slist@2X.png in Resources */,
@@ -2534,6 +2567,7 @@
 				BDAFA4B01BB0675C00BE5CE8 /* mainmenu-icon-gift@2x.png in Resources */,
 				42A3AB2215AC2C0500F5790B /* tic@2X.png in Resources */,
 				42A3AB2315AC2C0500F5790B /* view-shopping-list@2X.png in Resources */,
+				E6E397351BCFBE1C0048F00E /* IntroductionView.xib in Resources */,
 				BD93E4901BB15AC400EB91F0 /* header-icon-menu@2x.png in Resources */,
 				AE87D2F4193765C100F5493D /* play_icon@2x.png in Resources */,
 				42A3AB2415AC2C0500F5790B /* zoom@2X.png in Resources */,
@@ -2649,6 +2683,7 @@
 				70D42EE1173A080200A9562E /* SalesViewController copy.xib in Resources */,
 				AE522160196E59C100487C3A /* main_screen_icon2.png in Resources */,
 				AE87D2F1193765C100F5493D /* Delete_icon.png in Resources */,
+				61C21BBA1BCFDE7E0081635A /* orientation@2x.png in Resources */,
 				AE710DE619406905003277B2 /* camera_icon.png in Resources */,
 				70D42EE3173A443A00A9562E /* sharingbutton_twitter.png in Resources */,
 				70D42EE9173A44B900A9562E /* sharingbutton_twitter_2x.png in Resources */,
@@ -2668,6 +2703,7 @@
 				AE87D2E21937407D00F5493D /* main_screen_icon@2x.png in Resources */,
 				70D42EEF173A53FF00A9562E /* box.png in Resources */,
 				70D42EF1173A545600A9562E /* box2.png in Resources */,
+				E6E3973B1BCFC3320048F00E /* New2.png in Resources */,
 				AE6D0CA1196D0B0100AD25D7 /* shopping_selected@2x.png in Resources */,
 				70C23F41173B5C4500E509CC /* PinterestWebViewController.xib in Resources */,
 				AE6D0C9E196D0B0100AD25D7 /* shopping_normal.png in Resources */,
@@ -2805,6 +2841,7 @@
 				70C23F40173B5C4500E509CC /* PinterestWebViewController.m in Sources */,
 				BD4EF9701BBE7B180042EF6E /* ScanReceiptViewController.m in Sources */,
 				70BF84AB1757173E003ACF3C /* ASIAuthenticationDialog.m in Sources */,
+				E6E397341BCFBE1C0048F00E /* IntroductionView.m in Sources */,
 				70BF84AD1757173E003ACF3C /* ASIDataDecompressor.m in Sources */,
 				BDA3DEF51BC2950C00BA028A /* AFSecurityPolicy.m in Sources */,
 				BD46BB751BB28D6000FC5A43 /* DirectoryViewController.m in Sources */,
