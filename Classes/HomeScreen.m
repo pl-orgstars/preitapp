@@ -216,7 +216,7 @@
 		cell.textLabel.text=@"No Result";
 		cell.textLabel.textColor=[UIColor grayColor];
 		cell.textLabel.backgroundColor=[UIColor clearColor];
-		cell.textLabel.textAlignment=UITextAlignmentCenter;
+		cell.textLabel.textAlignment=NSTextAlignmentCenter;
 		cell.selectionStyle=UITableViewCellSelectionStyleNone;
 	}	
 	return cell;	

@@ -386,7 +386,7 @@
 				x=number;	
 				if([[tempArray objectAtIndex:i] isEqualToString:@"Z"])
 				{
-					y=[tmpArray count]-x;				
+					y=(int)[tmpArray count]-x;
 				}
 				else 
 				{
@@ -405,7 +405,7 @@
 					}
 	                if(num==-2)
 					{
-						y=[tmpArray count]-x;
+						y=(int)[tmpArray count]-x;
 					}
 					else
 						y=num-x;

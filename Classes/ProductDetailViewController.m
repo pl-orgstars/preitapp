@@ -79,7 +79,7 @@
         [listCountLabel setBackgroundColor:[UIColor clearColor]];
         [listCountLabel setTextColor:[UIColor whiteColor]];
         [listCountLabel setFont:[UIFont boldSystemFontOfSize:14]];
-        [listCountLabel setTextAlignment:UITextAlignmentCenter];
+        [listCountLabel setTextAlignment:NSTextAlignmentCenter];
         [barView addSubview:listCountLabel];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self
                                                                              action:@selector(showShoppingList)];
@@ -201,7 +201,7 @@
     
     NSLog(@"length :::::%d",length);
     
-    length = ((NSString*)[delegate.mallData objectForKey:@"name"]).length;
+    length = (int)((NSString*)[delegate.mallData objectForKey:@"name"]).length;
     if (length>0 && length<61) {
         if ((int)message.length < (58-length+9)) {
             
@@ -221,9 +221,9 @@
     NSLog(@"from %@",[delegate.mallData objectForKey:@"name"]);
     [self presentViewController:controller animated:YES completion:Nil];
 }
--(NSString *)urlEncodeForEscapesForString:(NSString *)urlString{
+-(NSString *)urlEncodeForEscapesForString:(NSString *)urlString1{
     
-    NSString *trimmedString = [urlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *trimmedString = [urlString1 stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     return [trimmedString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
 }
@@ -348,7 +348,8 @@
     [ImageTap setCancelsTouchesInView:NO];
     
     
-    if ([img isKindOfClass:[UIImage class]]) {
+    if ([img isKindOfClass:[UIImage class]])
+    {
         UIImageView *imageDetail=[[UIImageView alloc]initWithImage:img];
         
         imageDetail.frame = imgViewMain.frame;
@@ -362,7 +363,8 @@
         [self.view bringSubviewToFront:imgViewZoom];
         imgViewZoom.hidden = FALSE;
     }
-    else {
+    else
+    {
         DetailAsyncImageVIew *imageDetail=[[DetailAsyncImageVIew alloc]init];
         [imageDetail setProductIndex:productIndex];
         [imageDetail setTag:tagImageView];
@@ -438,9 +440,16 @@
         
         [searchStore addTarget:self action:@selector(searchStore) forControlEvents:UIControlEventTouchUpInside];
         
-        [scrollProductDetail addSubview:searchStore];
+        if (self.isShoppingList)
+        {
+            
+        }else
+        {
+          [scrollProductDetail addSubview:searchStore];
+        }
         
-        if ([dbAgent productIsPresent:objectToBeUsed.productId]) {
+        if ([dbAgent productIsPresent:objectToBeUsed.productId])
+        {
             [shoppingList setBackgroundImage:removeImage forState:UIControlStateNormal];
             [shoppingList addTarget:self action:@selector(removeFromList:) forControlEvents:UIControlEventTouchUpInside];
         } else {
@@ -459,12 +468,18 @@
     [scrollProductDetail addSubview:shoppingList];
     
     
-    /////
+    ///// Add Share Btn
+    
+    if (self.isShoppingList)
+    {
+        lblShareVia.frame = CGRectMake(lblShareVia.frame.origin.x, btnFrame2.origin.y+ btnFrame2.size.height +15, lblShareVia.frame.size.width, lblShareVia.frame.size.height);
+
+    }else
+    {
+        lblShareVia.frame = CGRectMake(lblShareVia.frame.origin.x, btnFrame1.origin.y+ btnFrame1.size.height +15, lblShareVia.frame.size.width, lblShareVia.frame.size.height);
+    }
     
     
-    
-    
-    lblShareVia.frame = CGRectMake(lblShareVia.frame.origin.x, btnFrame1.origin.y+ btnFrame1.size.height +15, lblShareVia.frame.size.width, lblShareVia.frame.size.height);
     UIButton *twitterbutton = [UIButton buttonWithType:UIButtonTypeCustom];
     [twitterbutton setImage:[UIImage imageNamed:@"NewTwitterBtn.png"] forState:UIControlStateNormal];
     [twitterbutton addTarget:self
@@ -483,10 +498,10 @@
     [facebookbutton setTitle:@"facebook" forState:UIControlStateNormal];
     facebookbutton.frame = CGRectMake(68+33, lblShareVia.frame.origin.y + lblShareVia.frame.size.height + 20, 42, 43);
     [scrollProductDetail addSubview:facebookbutton];
-    float googleHeight =twitterbutton.frame.origin.y+twitterbutton.frame.size.height;
+//    float googleHeight = twitterbutton.frame.origin.y + twitterbutton.frame.size.height;
     
     UILabel *note=[[UILabel alloc]initWithFrame:CGRectMake(xAxis + 5, facebookbutton.frame.origin.y+facebookbutton.frame.size.height+15, 35, 20)];
-    note.textAlignment = UITextAlignmentCenter;
+    note.textAlignment = NSTextAlignmentCenter;
     [note setText:@"NOTE:"];
     [note setTextColor:[UIColor whiteColor]];
     note.numberOfLines = 0;
@@ -501,10 +516,10 @@
     
     // Note Description.
     UILabel *noteDesc=[[UILabel alloc]initWithFrame:CGRectMake(xAxis + 5, note.frame.origin.y+note.frame.size.height+15,240, 20)];
-    noteDesc.textAlignment = UITextAlignmentLeft;
+    noteDesc.textAlignment = NSTextAlignmentLeft;
     [noteDesc setText:@"Item shown may not be available at your local store. To check availability please call your local store."];
     [noteDesc setTextColor:[UIColor whiteColor]];
-    noteDesc.lineBreakMode = UILineBreakModeWordWrap;
+    noteDesc.lineBreakMode = NSLineBreakByWordWrapping;
     noteDesc.numberOfLines = 0;
     noteDesc.font = [UIFont systemFontOfSize:10];
     CGSize maximumLabelSize5 = CGSizeMake(240,100);
@@ -658,15 +673,15 @@
 -(IBAction)removeFromList:(UIButton*)sender {
     [dbAgent removeProductFromShoppingList:[[productsArray objectAtIndex:productIndex] productId]];
     [listCountLabel setText:[NSString stringWithFormat:@"%d",[dbAgent getCount]]];
-    if (isShoppingList) {
-        [imagesArray removeObjectAtIndex:productIndex];
-        [productsArray removeObjectAtIndex:productIndex];
-        [self refresh];
-    } else {
+//    if (isShoppingList) {
+//        [imagesArray removeObjectAtIndex:productIndex];
+//        [productsArray removeObjectAtIndex:productIndex];
+//        [self refresh];
+//    } else {
         [sender setBackgroundImage:[UIImage imageNamed:@"NewSavetoListBtn.png"] forState:UIControlStateNormal];
         [sender addTarget:self action:@selector(addToList:) forControlEvents:UIControlEventTouchUpInside];
         
-    }
+//    }
     [self CallForDBCount];
 }
 
@@ -678,7 +693,7 @@
     } else if(productIndex<productsArray.count-1) {
         [self createScrollView:[productsArray objectAtIndex:productIndex]];
     } else if (productIndex>=productsArray.count) {
-        [self prevClicked:nil];
+//        [self prevClicked:nil];
     }
     
 }
@@ -924,7 +939,7 @@
     loadingLabel.textColor = [UIColor whiteColor];
     loadingLabel.backgroundColor = [UIColor clearColor];
     loadingLabel.font=[UIFont boldSystemFontOfSize:18];
-    loadingLabel.textAlignment = UITextAlignmentCenter;
+    loadingLabel.textAlignment = NSTextAlignmentCenter;
     loadingLabel.text = @"Please wait loading stores...";
     loadingLabel.numberOfLines=0;
     [loadingView addSubview:loadingLabel];
@@ -993,7 +1008,7 @@
                     x=number;
                     if([[tempArray objectAtIndex:i] isEqualToString:@"Z"])
                     {
-                        y=[tmpArray count]-x;
+                        y=(int)[tmpArray count]-x;
                     }
                     else
                     {
@@ -1012,7 +1027,7 @@
                         }
                         if(num==-2)
                         {
-                            y=[tmpArray count]-x;
+                            y=(int)[tmpArray count] - x;
                         }
                         else
                             y=num-x;
@@ -1309,7 +1324,7 @@
         }
     }
     
-    int currentCount = itemsArray.count;
+    int currentCount = (int)itemsArray.count;
     
     
     NSMutableArray *mainArray = [[NSMutableArray alloc]initWithArray:itemsArray];

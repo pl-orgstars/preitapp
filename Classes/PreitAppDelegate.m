@@ -628,10 +628,10 @@ static NSString *const kAllowTracking = @"allowTracking";
 }
 
 -(void)tabBarController:(UITabBarController *)tabBarControllers didSelectViewController:(UIViewController *)viewController {
-    NSLog(@"didselect tab %d",[tabBarControllers selectedIndex]);
+    NSLog(@"didselect tab %d",(int)[tabBarControllers selectedIndex]);
     
     
-    int  i = [tabBarControllers selectedIndex];
+    int  i = (int)[tabBarControllers selectedIndex];
     
     [((UIButton *)[tabBarController.view viewWithTag:First_Button_Tag])setSelected:i==0?YES:NO];
     [((UIButton *)[tabBarController.view viewWithTag:Second_Button_Tag])setSelected:i==1?YES:NO];

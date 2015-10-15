@@ -145,14 +145,14 @@
     // Set up the cell...
 	
 	if(searching) 
-		cell.text = [copyListOfItems objectAtIndex:indexPath.row];
+		cell.textLabel.text = [copyListOfItems objectAtIndex:indexPath.row];
 	else {
 		
 		//First get the dictionary object
 		NSDictionary *dictionary = [listOfItems objectAtIndex:indexPath.section];
 		NSArray *array = [dictionary objectForKey:@"Countries"];
 		NSString *cellValue = [array objectAtIndex:indexPath.row];
-		cell.text = cellValue;
+		cell.textLabel.text = cellValue;
 	}
 	
     return cell;

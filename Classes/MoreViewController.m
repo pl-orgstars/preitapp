@@ -104,7 +104,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView modified_didSelectRowAtIndexPath:(NSIndexPath *)indexPath {	
-	int selectedRow=indexPath.row;
+	int selectedRow= (int)indexPath.row;
 	if(!delegate.isMovie && selectedRow>0)
 		selectedRow++;	
 	NSLog(@"************************==>%d",selectedRow);

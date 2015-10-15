@@ -114,9 +114,8 @@
     [imageView setContentMode:UIViewContentModeScaleAspectFit];
     [self addSubview:imageView];
     [self setBackgroundColor:[UIColor whiteColor]];
-    
-//    [imageView release];
 }
+
 - (void) setImageNew:(NSData*)imgData WithFrame:(float)xPoint
 {
     UIImage *img = [UIImage imageWithData:imgData];
