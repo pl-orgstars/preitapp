@@ -61,7 +61,8 @@
 
     [locationController.locationManager stopUpdatingLocation];
 
-    delegate.mallData = nil;
+    if (_presentMainView)
+        delegate.mallData = nil;
     
 	isFirstTime=YES;
     
