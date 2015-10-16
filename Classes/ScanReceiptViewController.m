@@ -48,7 +48,6 @@
     
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
-//    imagePicker.modalPresentationStyle = UIModalPresentationCurrentContext;
     imagePicker.sourceType = sourceType;
     
     [self presentViewController:imagePicker animated:YES completion:nil];
@@ -269,6 +268,7 @@
     UIAlertView* errorAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@" Something went wrong please try again!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    
     
     [manager POST:urlString parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         for (NSString* key in [originalImgArray allKeys]) {

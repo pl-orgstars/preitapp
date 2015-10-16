@@ -96,11 +96,6 @@
 		612FBB5D1BB14FBA00D9E30C /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB581BB14FBA00D9E30C /* MFSideMenuContainerViewController.m */; };
 		612FBB5E1BB14FBA00D9E30C /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5A1BB14FBA00D9E30C /* MFSideMenuShadow.m */; };
 		612FBB5F1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5C1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m */; };
-		613828951BCE6B140024F116 /* MessagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 613828931BCE6B140024F116 /* MessagesCell.m */; };
-		613828961BCE6B140024F116 /* MessagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 613828941BCE6B140024F116 /* MessagesCell.xib */; };
-		615604DC1BCE8B9C00FAD487 /* MessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 615604DB1BCE8B9C00FAD487 /* MessagesView.m */; };
-		615604DE1BCE8BAD00FAD487 /* MessagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 615604DD1BCE8BAD00FAD487 /* MessagesView.xib */; };
-		61C21BBA1BCFDE7E0081635A /* orientation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 61C21BB91BCFDE7E0081635A /* orientation@2x.png */; };
 		61C8FDDE1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C8FDDD1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m */; };
 		61C8FDE71BCBF5CC006428BB /* MNNotificationsManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C8FDE51BCBF5CC006428BB /* MNNotificationsManager.framework */; };
 		61C8FDE81BCBF5CC006428BB /* MNProximityManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */; };
@@ -270,6 +265,10 @@
 		AECE480F195A935600D1E5DB /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AECE47FF195A935600D1E5DB /* iTunesArtwork@2x.png */; };
 		AEDCC257198A018200E1DA17 /* btn-showdeals.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDCC255198A018200E1DA17 /* btn-showdeals.png */; };
 		AEDCC258198A018200E1DA17 /* btn-showdeals@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDCC256198A018200E1DA17 /* btn-showdeals@2x.png */; };
+		BD03C5451BCF70A0001BD95E /* MessagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 615604DD1BCE8BAD00FAD487 /* MessagesView.xib */; };
+		BD03C5461BCF70A6001BD95E /* MessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 615604DB1BCE8B9C00FAD487 /* MessagesView.m */; };
+		BD03C5471BCF72B0001BD95E /* MessagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 613828931BCE6B140024F116 /* MessagesCell.m */; };
+		BD03C5481BCF72B3001BD95E /* MessagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 613828941BCE6B140024F116 /* MessagesCell.xib */; };
 		BD24B63D1BB92C0C00066F15 /* collapseArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24B63C1BB92C0C00066F15 /* collapseArrow@2x.png */; };
 		BD24B63F1BB92EC900066F15 /* BackBlack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24B63E1BB92EC900066F15 /* BackBlack@2x.png */; };
 		BD24B6411BB93CB300066F15 /* BackWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24B6401BB93CB300066F15 /* BackWhite@2x.png */; };
@@ -2427,6 +2426,8 @@
 				E92DFA491B4412DA000B91B0 /* PREIT_Logo@3x.png in Resources */,
 				E6E3973C1BCFC3320048F00E /* New3.png in Resources */,
 				E2AFBBC6126C1C0400F84431 /* SelectMonthViewController.xib in Resources */,
+				AECE4802195A935600D1E5DB /* AppIcon40x40.png in Resources */,
+				BD03C5451BCF70A0001BD95E /* MessagesView.xib in Resources */,
 				BD3223111BB99AF8002D5146 /* BackBlackThick@2x.png in Resources */,
 				E2880B0A126C603C007B9D71 /* JobsViewController.xib in Resources */,
 				AE710DE519406905003277B2 /* camera_icon@2x.png in Resources */,
@@ -2470,7 +2471,6 @@
 				E2DA547413251D790010CB48 /* StoreSearchViewController.xib in Resources */,
 				E29818D0133C77E900EEC50C /* checkDict.plist in Resources */,
 				E2B8410C133D0105009816D6 /* shopping.jpg in Resources */,
-				615604DE1BCE8BAD00FAD487 /* MessagesView.xib in Resources */,
 				BD93E4871BB14CA100EB91F0 /* mainmenu-icon-movies@2x.png in Resources */,
 				E2B8412F133D025D009816D6 /* dinning.jpg in Resources */,
 				AE2B5F931A47F18200460114 /* call_new@2x.png in Resources */,
@@ -2653,7 +2653,6 @@
 				70D42EE1173A080200A9562E /* SalesViewController copy.xib in Resources */,
 				AE522160196E59C100487C3A /* main_screen_icon2.png in Resources */,
 				AE87D2F1193765C100F5493D /* Delete_icon.png in Resources */,
-				61C21BBA1BCFDE7E0081635A /* orientation@2x.png in Resources */,
 				AE710DE619406905003277B2 /* camera_icon.png in Resources */,
 				70D42EE3173A443A00A9562E /* sharingbutton_twitter.png in Resources */,
 				70D42EE9173A44B900A9562E /* sharingbutton_twitter_2x.png in Resources */,
@@ -2663,8 +2662,7 @@
 				70D42EEC173A44B900A9562E /* sharingbutton_pinterest.png in Resources */,
 				AE753F80193EFCF700D6F7B2 /* CustomWebViewController.xib in Resources */,
 				70D42EED173A44B900A9562E /* sharingbutton_pinterest_2x.png in Resources */,
-				613828961BCE6B140024F116 /* MessagesCell.xib in Resources */,
-				E6DC32A01BD0D9B000E09A9E /* NewRightArraow@2x.png in Resources */,
+				BD03C5481BCF72B3001BD95E /* MessagesCell.xib in Resources */,
 				AE2B5F921A47F18200460114 /* call_new.png in Resources */,
 				AE87D2921936F3C300F5493D /* 1234.png in Resources */,
 				BD4EF9711BBE7B180042EF6E /* ScanReceiptViewController.xib in Resources */,
@@ -2757,13 +2755,12 @@
 				E2AB25BF12660B1000F25111 /* ContactUsViewController.m in Sources */,
 				AE92AF6C193DEF970094FA4F /* UIViewController+NavigationMethods.m in Sources */,
 				E6FAE1651BC5515300AC1575 /* ImageLoader.m in Sources */,
-				615604DC1BCE8B9C00FAD487 /* MessagesView.m in Sources */,
 				E2AB25CD126611A900F25111 /* MovieListingViewController.m in Sources */,
 				E2BC23931266CF3E00E871E7 /* WebViewController.m in Sources */,
 				AE87D2A719370BC200F5493D /* SearchScreenViewController.m in Sources */,
 				E2BC245C1267083700E871E7 /* TrendsViewController.m in Sources */,
 				BDA3DEF81BC2950C00BA028A /* AFURLResponseSerialization.m in Sources */,
-				613828951BCE6B140024F116 /* MessagesCell.m in Sources */,
+				BD03C5471BCF72B0001BD95E /* MessagesCell.m in Sources */,
 				E2BC24E61267245300E871E7 /* ParkingMapViewController.m in Sources */,
 				E2BC273412676D3F00E871E7 /* EventsDetailsViewController.m in Sources */,
 				E2DF372A1268279800A38543 /* DiningViewController.m in Sources */,
@@ -2775,6 +2772,7 @@
 				E2B70AFC126F0E04006D2142 /* LocationViewController.m in Sources */,
 				AE407BB3193880D0009E0485 /* DDAnnotation.m in Sources */,
 				E2CF75AD12701D46004807A3 /* MovieDetailViewController.m in Sources */,
+				BD03C5461BCF70A6001BD95E /* MessagesView.m in Sources */,
 				E2C992C3127038A700F83CDD /* DirectionViewController.m in Sources */,
 				BDA3DEF91BC2950C00BA028A /* AFURLSessionManager.m in Sources */,
 				E2BDADCE12783E8300B52E14 /* MapViewController.m in Sources */,
