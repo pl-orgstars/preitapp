@@ -414,6 +414,7 @@
 
 
 -(void)imageUploadSuccessful{
+    PreitAppDelegate* delegate = (PreitAppDelegate*)[UIApplication sharedApplication].delegate;
     
     [originalImgArray removeAllObjects];
     
@@ -421,7 +422,7 @@
     [mainLabel setHidden:YES];
     
     [uploadedView setHidden:NO];
-    
+    processingLabel.text = [NSString stringWithFormat:processingLabel.text, delegate.mallData[@"name"]];
     
     [self setLowerView:(UIView*)divider1 upperView:(UIView*)uploadedView];
     

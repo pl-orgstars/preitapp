@@ -202,6 +202,7 @@
         else if ([page isEqualToString:@"/mall_hours"]){
             WebViewController *hoursWebView=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
             hoursWebView.screenIndex=8;
+            hoursWebView.isHours = YES;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 hoursWebView.titleLabel.text = @"HOURS";

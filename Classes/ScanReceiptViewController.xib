@@ -25,6 +25,7 @@
                 <outlet property="longerlabel2" destination="xZm-8T-XfW" id="nuR-bh-eGq"/>
                 <outlet property="mainLabel" destination="XQ1-2T-iuv" id="Dsj-CE-kJf"/>
                 <outlet property="mainScroll" destination="zFt-hu-f5V" id="qRu-xY-wkM"/>
+                <outlet property="processingLabel" destination="O9j-om-2Wa" id="6t3-9y-gLQ"/>
                 <outlet property="receiptImgView" destination="gWJ-9s-GGe" id="3ih-Au-RcJ"/>
                 <outlet property="receiptMainView" destination="yUD-st-Pyx" id="QAB-fP-8YE"/>
                 <outlet property="section2Btn" destination="swM-Lb-wks" id="hD2-FE-P5U"/>
@@ -209,9 +210,9 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O9j-om-2Wa">
                                     <rect key="frame" x="28" y="80" width="272" height="72"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <string key="text">We are precessing your receipt to
+                                    <string key="text">We are processing your receipt to
 extract summary information. You will
-receive 1 entry for every dolar you 
+receive 1 entry for every dollar you 
 spend at %@</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

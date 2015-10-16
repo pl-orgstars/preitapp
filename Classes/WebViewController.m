@@ -85,6 +85,9 @@
         [webView loadRequest:req];
         
 	}
+    else if (screenIndex == 8 && _isHours) {
+        self.titleLabel.text = @"HOURS";
+    }
 	else 
 	{
 		if(screenIndex==0) screenIndex=2;
