@@ -12,6 +12,13 @@
 @interface IntroductionView : UIViewController <UIScrollViewDelegate>
 {
   IBOutlet UIPageControl *pageControl;
+    
+    IBOutlet UIButton *btnRightMove;
+    IBOutlet UIButton *btnLeftMove;
+    
+    IBOutlet UIScrollView *scrollViewMain;
+    
+    int pagenumber;
 
 }
 @end

@@ -14,34 +14,61 @@
 #pragma mark - Class Methods
 
 - (void)awakeFromNib {
-    tableView_.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    dataArray = [NSMutableArray new];
     
-    PreitAppDelegate *del = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
+}
+
+- (void)showInView:(UIView *)parentView {
+    parentView_ = parentView;
+    tableView_.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    overallMessages = [NSMutableArray new];
+    propertyMessages = [NSMutableArray new];
+    
+    PreitAppDelegate *delegate = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
+    NSString *votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
+    
+    double destinationLat = [delegate.mallData[@"location_lat"] doubleValue];
+    double destinationLong = [delegate.mallData[@"location_lng"] doubleValue];
+    
+    CLLocation *destination = [[CLLocation alloc] initWithLatitude:destinationLat longitude:destinationLong];
+    CLLocation *current = [[CLLocation alloc] initWithLatitude:delegate.latitude longitude:delegate.longitude];
+    
+    CLLocationDistance distance = [current distanceFromLocation:destination];
+    if (distance >= 1609 && votigoUserID) //1609 meters = 1 mile
+    {
+        [self getPropertyMessages];
+    }
+    else {
+        NSLog(@"Should Not Add");
+    }
+}
+
+- (void)getOverallMessages {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[NSString stringWithFormat:@"http://preitmessage.r5i.com/api/messages?mall_id=%@", del.mallData[@"id"]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *arr = (NSArray *)responseObject;
-        NSArray *read = [[NSUserDefaults standardUserDefaults] objectForKey:@"ReadPropertyMessages"];
+    [manager GET:@"preitmessage.r5i.com/api/messages/overall_message" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [overallMessages addObjectsFromArray:(NSArray *)responseObject];
+        [self getPropertyMessages];
         
-        if (arr.count > 0) {
-            for (NSDictionary *dict in arr) {
-                NSString *key = [NSString stringWithFormat:@"%@-%@", dict[@"property_id"], dict[@"id"]];
-                if (![read containsObject:key]) {
-                    [dataArray addObject:dict];
-                }
-            }
-            
-            if (dataArray.count > 0) {
-                numberOfSections = 1;
-                [tableView_ reloadData];
-                self.frame = CGRectMake(10.0, 65.0, 300.0, 250.0);
-            }
-            else {
-                [self removeFromSuperview];
-            }
-        }
-        else {
-            [self removeFromSuperview];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"localizedDescription %@", error.localizedDescription);
+    }];
+}
+
+- (void)getPropertyMessages {
+    PreitAppDelegate *delegate = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
+    NSString *votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
+    
+    NSDictionary *params = @{@"mall_id" : delegate.mallData[@"id"],
+                             @"udid" : votigoUserID};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://preitmessage.r5i.com/api/messages" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [propertyMessages addObjectsFromArray:responseObject];
+        
+        if (overallMessages.count > 0 || propertyMessages.count > 0) {
+            [tableView_ reloadData];
+
+            self.frame = CGRectMake(10.0, 65.0, self.frame.size.width, self.frame.size.height);
+            [parentView_ addSubview:self];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -49,8 +76,31 @@
     }];
 }
 
-- (void)setDataArray:(NSArray *)array {
-    [dataArray addObjectsFromArray:array];
+- (void)markAsReadMessage:(NSIndexPath *)indexPath {
+    NSDictionary *dict;
+    if (overallMessages.count > 0 && propertyMessages.count > 0) {
+        if (indexPath.section == 0)
+            dict = overallMessages[indexPath.row];
+        else
+            dict = propertyMessages[indexPath.row];
+    }
+    else if (overallMessages.count == 0 && propertyMessages.count > 0) {
+        dict = propertyMessages[indexPath.row];
+    }
+    else if (overallMessages.count > 0 && propertyMessages.count == 0) {
+        dict = overallMessages[indexPath.row];
+    }
+    
+    NSString *votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
+    NSDictionary *params = @{@"property_message_id" : [dict objectForKey:@"id"],
+                             @"udid" : votigoUserID};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:@"http://preitmessage.r5i.com/api/user_infos" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response = %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error = %@", error.localizedDescription);
+    }];
 }
 
 #pragma mark - IBActions
@@ -61,12 +111,51 @@
 
 #pragma mark - TableView Methods
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (overallMessages.count > 0 && propertyMessages.count > 0)
+        return 2;
+    
+    return 1;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (overallMessages.count > 0 && propertyMessages.count > 0) {
+        if (section == 0)
+            return @"Overall Messages";
+        else
+            return @"Property Messages";
+    }
+    else if (overallMessages.count == 0 && propertyMessages.count > 0) {
+        return @"Property Messages";
+    }
+    else if (overallMessages.count > 0 && propertyMessages.count == 0) {
+        return @"Overall Messages";
+    }
+    else {
+        return @"";
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 65.0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return dataArray.count;
+    if (overallMessages.count > 0 && propertyMessages.count > 0) {
+        if (section == 0)
+            return overallMessages.count;
+        else
+            return propertyMessages.count;
+    }
+    else if (overallMessages.count == 0 && propertyMessages.count > 0) {
+        return propertyMessages.count;
+    }
+    else if (overallMessages.count > 0 && propertyMessages.count == 0) {
+        return overallMessages.count;
+    }
+    else {
+        return 0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -76,20 +165,26 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    NSDictionary *dict = dataArray[indexPath.row];
+    NSDictionary *dict;
+    if (overallMessages.count > 0 && propertyMessages.count > 0) {
+        if (indexPath.section == 0)
+            dict = overallMessages[indexPath.row];
+        else
+            dict = propertyMessages[indexPath.row];
+    }
+    else if (overallMessages.count == 0 && propertyMessages.count > 0) {
+        dict = propertyMessages[indexPath.row];
+    }
+    else if (overallMessages.count > 0 && propertyMessages.count == 0) {
+        dict = overallMessages[indexPath.row];
+    }
+    
     cell.cellLabel.text = dict[@"message_text"];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *dict = dataArray[indexPath.row];
-    NSArray *read = [[NSUserDefaults standardUserDefaults] objectForKey:@"ReadPropertyMessages"];
-    NSString *key = [NSString stringWithFormat:@"%@-%@", dict[@"property_id"], dict[@"id"]];
-    NSMutableArray *arr = [NSMutableArray arrayWithArray:read];
-    [arr addObject:key];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:arr forKey:@"ReadPropertyMessages"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self markAsReadMessage:indexPath];
 }
 
 @end

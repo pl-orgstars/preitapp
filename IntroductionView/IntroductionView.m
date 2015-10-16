@@ -19,6 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    btnLeftMove.hidden = TRUE;
+    pagenumber = 0;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,10 +43,31 @@
     self.navigationController.viewControllers = [NSArray arrayWithObject:loaction];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
     CGFloat pageWidth = scrollView.frame.size.width;
     float fractionalPage = scrollView.contentOffset.x / pageWidth;
-    NSInteger page = lround(fractionalPage);
-    pageControl.currentPage = page; // you need to have a **iVar** with getter for pageControl
+    pagenumber = (int)lround(fractionalPage);
+    pageControl.currentPage = pagenumber; // you need to have a **iVar** with getter for pageControl
+    btnLeftMove.hidden = FALSE;
+    btnRightMove.hidden = FALSE;
+    
+    if (pagenumber == 0)
+        btnLeftMove.hidden = TRUE;
+    else if(pagenumber == 3)
+        btnRightMove.hidden = TRUE;
 }
+
+-(IBAction)LeftMovE:(id)sender
+{
+    
+    [scrollViewMain setContentOffset:CGPointMake((pagenumber - 1) *320, 0) animated:YES];
+}
+
+-(IBAction)RightMovE:(id)sender
+{
+    [scrollViewMain setContentOffset:CGPointMake((pagenumber + 1) *320, 0) animated:YES];
+}
+
+
 @end

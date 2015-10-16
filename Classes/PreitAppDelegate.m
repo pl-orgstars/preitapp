@@ -16,7 +16,7 @@
 #import "SpecialsViewController.h"
 #import "SalesViewController.h"
 #import "MoreViewController.h"
-
+#import "Flurry.h"
 #import "ShoppingStoreViewController.h"
 #import "StoreDetailsViewController.h"
 
@@ -313,7 +313,8 @@ static NSString *const kAllowTracking = @"allowTracking";
     }
     // Override point for customization after application launch.
     
-    
+    [Flurry startSession:@"3R4FZDCQWKVKJTW6DTZ4"];
+    // flurry event here
     // Handle launching from a notification
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {
@@ -321,7 +322,7 @@ static NSString *const kAllowTracking = @"allowTracking";
         
     }
  
-
+//
     
     application.applicationIconBadgeNumber = 0;
     [application cancelAllLocalNotifications];
@@ -350,20 +351,20 @@ static NSString *const kAllowTracking = @"allowTracking";
     storeListContent=[[NSMutableArray alloc]init];
     
     
-//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"viewShow"])
-//    {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"viewShow"])
+    {
         LocationViewController *loaction = [[LocationViewController alloc]initWithNibName:@"LocationViewController" bundle:nil];
         loaction.presentMainView = YES;
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"mallData"] isKindOfClass:[NSData class]])
             loaction.shouldReload = NO;
         
         navController = [[UINavigationController alloc]initWithRootViewController:loaction];
-//    }else
-//    {
-//        IntroductionView *loaction = [[IntroductionView alloc]initWithNibName:@"IntroductionView" bundle:nil];
-//        
-//        navController = [[UINavigationController alloc]initWithRootViewController:loaction];
-//    }
+    }else
+    {
+        IntroductionView *loaction = [[IntroductionView alloc]initWithNibName:@"IntroductionView" bundle:nil];
+        
+        navController = [[UINavigationController alloc]initWithRootViewController:loaction];
+    }
     
    
     
@@ -373,7 +374,6 @@ static NSString *const kAllowTracking = @"allowTracking";
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     
-//    [window addSubview:navController.view];
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     
@@ -387,9 +387,7 @@ static NSString *const kAllowTracking = @"allowTracking";
     /////////////////////////////////////
     
     self.x=0;
-    
-//    self.tabBarController.tabBar.frame = CGRectMake(0, 0, 0, 0);
-    
+
     UILocalNotification *notification = launchOptions[UIApplicationLaunchOptionsLocalNotificationKey];
     BOOL isNotificationsManagerNotification = [MNNotificationsManager processLocalNotification:notification];
     if (isNotificationsManagerNotification) {
@@ -501,7 +499,9 @@ static NSString *const kAllowTracking = @"allowTracking";
 }
 
 
-- (void)applicationWillTerminate:(UIApplication *)application {
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+     [Flurry pauseBackgroundSession];
     /*
      Called when the application is about to terminate.
      See also applicationDidEnterBackground:.
@@ -798,7 +798,7 @@ static NSString *const kAllowTracking = @"allowTracking";
 }
 
 - (void)initilizeBeacon {
-    MNAppKey *appKey = [[MNAppKey alloc] initWithAppKey:@"0b47040c219cb0b632a538e1c907dbd5" andSecretKey:@"18e7d79d401c2dd84e74296cb42c510d"];
+    MNAppKey *appKey = [[MNAppKey alloc] initWithAppKey:@"530ba22a8281e4719d86f82f6dbfa2a9" andSecretKey:@"f515ffa5099ec2df46c8fb2733936a77"];
     self.notificationsDelegate = [[MNNotificationsManagerCustomDelegate alloc] init];
     
     // MNNotificationsManager instantiation
