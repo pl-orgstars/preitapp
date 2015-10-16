@@ -24,6 +24,8 @@
     
     IBOutlet UIButton *webViewBackButton;
     UIWebView *mobileWebView;
+    
+    MessagesView *messagesView;
 }
 
 -(IBAction)webViewBackButtonTapped:(id)sender;

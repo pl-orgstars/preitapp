@@ -75,9 +75,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateSideMenu" object:nil];
     findLabel.text = [NSString stringWithFormat:@"Find what you are looking for at %@ from participating retailers",[del.mallData objectForKey:@"name"]];
     
-    MessagesView *view = [[NSBundle mainBundle] loadNibNamed:@"MessagesView" owner:self options:nil][0];
-    view.frame = CGRectMake(10.0, 65.0, 0, 0);
-    [self.view addSubview:view];
+    [self showMessagesView];
 }
 
 - (void)viewDidLoad
@@ -89,10 +87,9 @@
 }
 
 - (void)showMessagesView {
-//    MessagesView *messagesView = [MessagesView new];
-//    [messagesView setDataArray:@[@"abc"]];
-//    [messagesView showInView:self.view];
-//    [self.view addSubview:messagesView];
+    if (!messagesView)
+        messagesView = [[NSBundle mainBundle] loadNibNamed:@"MessagesView" owner:self options:nil][0];
+    [messagesView showInView:self.view];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
