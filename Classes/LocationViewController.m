@@ -61,7 +61,9 @@
 
     [locationController.locationManager stopUpdatingLocation];
     PreitAppDelegate *delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
-    delegate.mallData = nil;
+    
+    if (_presentMainView)
+        delegate.mallData = nil;
     
 	isFirstTime=YES;
     
