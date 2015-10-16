@@ -434,6 +434,7 @@
 		E6DC32A01BD0D9B000E09A9E /* NewRightArraow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6DC329F1BD0D9B000E09A9E /* NewRightArraow@2x.png */; };
 		E6DC32A21BD0D9DE00E09A9E /* NewSkipIntro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6DC32A11BD0D9DE00E09A9E /* NewSkipIntro@2x.png */; };
 		E6DC32A41BD0D9EB00E09A9E /* NewLeftArraow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6DC32A31BD0D9EB00E09A9E /* NewLeftArraow@2x.png */; };
+		E6DC32B31BD0F84300E09A9E /* libFlurry_7.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6DC32B21BD0F84300E09A9E /* libFlurry_7.2.1.a */; };
 		E6E283791BAABDCD001736DF /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E283771BAABDCD001736DF /* MenuView.m */; };
 		E6E2837A1BAABDCD001736DF /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6E283781BAABDCD001736DF /* MenuView.xib */; };
 		E6E283931BAAEC67001736DF /* MenuNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6E283921BAAEC67001736DF /* MenuNew@2x.png */; };
@@ -1026,6 +1027,9 @@
 		E6DC329F1BD0D9B000E09A9E /* NewRightArraow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewRightArraow@2x.png"; sourceTree = "<group>"; };
 		E6DC32A11BD0D9DE00E09A9E /* NewSkipIntro@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewSkipIntro@2x.png"; sourceTree = "<group>"; };
 		E6DC32A31BD0D9EB00E09A9E /* NewLeftArraow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewLeftArraow@2x.png"; sourceTree = "<group>"; };
+		E6DC32B01BD0F84300E09A9E /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		E6DC32B11BD0F84300E09A9E /* FlurryWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryWatch.h; sourceTree = "<group>"; };
+		E6DC32B21BD0F84300E09A9E /* libFlurry_7.2.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.2.1.a; sourceTree = "<group>"; };
 		E6E283761BAABDCD001736DF /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuView.h; path = MenuView/MenuView.h; sourceTree = "<group>"; };
 		E6E283771BAABDCD001736DF /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuView.m; path = MenuView/MenuView.m; sourceTree = "<group>"; };
 		E6E283781BAABDCD001736DF /* MenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MenuView.xib; path = MenuView/MenuView.xib; sourceTree = "<group>"; };
@@ -1071,6 +1075,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE93BCBB1A651F400040AEB5 /* Security.framework in Frameworks */,
 				61C8FDE71BCBF5CC006428BB /* MNNotificationsManager.framework in Frameworks */,
 				61C8FDE91BCBF5D1006428BB /* MNProximityManager.bundle in Frameworks */,
 				AE93BCB71A651EC50040AEB5 /* CoreBluetooth.framework in Frameworks */,
@@ -1079,7 +1084,6 @@
 				70BF84BA17571B37003ACF3C /* MobileCoreServices.framework in Frameworks */,
 				70BF84BE17571C37003ACF3C /* libsqlite3.0.dylib in Frameworks */,
 				8CE9BF151AC95F3700C89A46 /* libGoogleAnalyticsServices.a in Frameworks */,
-				AE93BCBB1A651F400040AEB5 /* Security.framework in Frameworks */,
 				AE93BCCF1A65227C0040AEB5 /* NetworkServices.framework in Frameworks */,
 				AE93BCB91A651F2A0040AEB5 /* libz.dylib in Frameworks */,
 				7003D6DB170961B20031D69D /* CoreData.framework in Frameworks */,
@@ -1087,6 +1091,7 @@
 				AE93BCCB1A65227C0040AEB5 /* ContextLocation.framework in Frameworks */,
 				70BF84BC17571C03003ACF3C /* libz.1.2.5.dylib in Frameworks */,
 				AE93BCCD1A65227C0040AEB5 /* ContextProfiling.framework in Frameworks */,
+				E6DC32B31BD0F84300E09A9E /* libFlurry_7.2.1.a in Frameworks */,
 				70BF84B817571B23003ACF3C /* CFNetwork.framework in Frameworks */,
 				AE93BCCA1A65227B0040AEB5 /* ContextCore.framework in Frameworks */,
 				70FE3A8C17392ACB00E64874 /* Accounts.framework in Frameworks */,
@@ -1151,6 +1156,7 @@
 				AE0E511B1987B78D0065B9DA /* NSDictionary+Extension.h */,
 				AE0E511C1987B78D0065B9DA /* NSDictionary+Extension.m */,
 				AEB8481219666859004B6A81 /* ListFontSize.h */,
+				E6DC32AF1BD0F84300E09A9E /* Flurry */,
 				E6FCFC031BC69E3600B15121 /* New PRoduct Detail Images */,
 				E6FAE1601BC5515300AC1575 /* Image Loader */,
 				E60CFE1E1BA69E0600AA95AD /* Font */,
@@ -2210,6 +2216,16 @@
 			name = "Custom class For Collection";
 			sourceTree = "<group>";
 		};
+		E6DC32AF1BD0F84300E09A9E /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				E6DC32B01BD0F84300E09A9E /* Flurry.h */,
+				E6DC32B11BD0F84300E09A9E /* FlurryWatch.h */,
+				E6DC32B21BD0F84300E09A9E /* libFlurry_7.2.1.a */,
+			);
+			path = Flurry;
+			sourceTree = "<group>";
+		};
 		E6E283751BAABDBC001736DF /* Menu View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2852,6 +2868,7 @@
 					"\"$(SRCROOT)/../../../files/GoogleAnalyticsiOS_2.0beta4/Library\"",
 					"\"$(SRCROOT)/Library\"",
 					"\"$(SRCROOT)/GoogleAnalyticsServicesiOS_3.10\"",
+					"$(PROJECT_DIR)/Flurry",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -2896,6 +2913,7 @@
 					"\"$(SRCROOT)/../../../files/GoogleAnalyticsiOS_2.0beta4/Library\"",
 					"\"$(SRCROOT)/Library\"",
 					"\"$(SRCROOT)/GoogleAnalyticsServicesiOS_3.10\"",
+					"$(PROJECT_DIR)/Flurry",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.r5i.preitTJ;

@@ -11,7 +11,7 @@
 #import "PreitAppDelegate.h"
 #import "UIAlertView+Blocks.h"
 #import "LocationViewController.h"
-
+#import "Flurry.h"
 
 #import "DirectoryViewController.h"
 #import "DiningViewController.h"
@@ -261,6 +261,11 @@
     }
     
     else if ([[[request URL] absoluteString] rangeOfString:VOTIGO_SIGNUP].location != NSNotFound){
+        
+        // flurry event here
+        NSString *strEvent = [NSString stringWithFormat:@"%@ win.",[del.mallData objectForKey:@"name"]];
+
+        [Flurry logEvent:strEvent timed:YES];
         WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
         
         [self.navigationController pushViewController:winVC animated:NO];
