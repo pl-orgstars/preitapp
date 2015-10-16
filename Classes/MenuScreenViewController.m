@@ -11,6 +11,7 @@
 #import "StoreSearchViewController.h"
 #import "ProductListViewController.h"
 #import "WebViewController.h"
+#import "Flurry.h"
 
 #define HOME @"HOME"
 #define GIFT @"BEST GIFT EVER"
@@ -252,6 +253,10 @@
     }
     
     else if ([str isEqualToString:GIFT]){
+        
+        // flurry event here
+        NSString *strEvent = [NSString stringWithFormat:@"%@ Best Gift Ever.",[appdelegate.mallData objectForKey:@"name"]];
+        [Flurry logEvent:strEvent timed:YES];
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[WinViewController class]]) {
             WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
             

@@ -16,7 +16,7 @@
 #import "SpecialsViewController.h"
 #import "SalesViewController.h"
 #import "MoreViewController.h"
-
+#import "Flurry.h"
 #import "ShoppingStoreViewController.h"
 #import "StoreDetailsViewController.h"
 
@@ -313,7 +313,8 @@ static NSString *const kAllowTracking = @"allowTracking";
     }
     // Override point for customization after application launch.
     
-    
+    [Flurry startSession:@"3R4FZDCQWKVKJTW6DTZ4"];
+    // flurry event here
     // Handle launching from a notification
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {
@@ -321,7 +322,7 @@ static NSString *const kAllowTracking = @"allowTracking";
         
     }
  
-
+//
     
     application.applicationIconBadgeNumber = 0;
     [application cancelAllLocalNotifications];
@@ -386,9 +387,7 @@ static NSString *const kAllowTracking = @"allowTracking";
     /////////////////////////////////////
     
     self.x=0;
-    
-//    self.tabBarController.tabBar.frame = CGRectMake(0, 0, 0, 0);
-    
+
     UILocalNotification *notification = launchOptions[UIApplicationLaunchOptionsLocalNotificationKey];
     BOOL isNotificationsManagerNotification = [MNNotificationsManager processLocalNotification:notification];
     if (isNotificationsManagerNotification) {
@@ -500,7 +499,9 @@ static NSString *const kAllowTracking = @"allowTracking";
 }
 
 
-- (void)applicationWillTerminate:(UIApplication *)application {
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+     [Flurry pauseBackgroundSession];
     /*
      Called when the application is about to terminate.
      See also applicationDidEnterBackground:.
