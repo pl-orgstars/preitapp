@@ -236,9 +236,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "799"
-            endingLineNumber = "799"
-            landmarkName = "-initilizeBeacon"
-            landmarkType = "5">
+            endingLineNumber = "799">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -252,9 +250,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "793"
-            endingLineNumber = "793"
-            landmarkName = "-initilizeBeacon"
-            landmarkType = "5">
+            endingLineNumber = "793">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
