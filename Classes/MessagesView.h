@@ -12,11 +12,16 @@
 
 @interface MessagesView : UIView <UITableViewDataSource, UITableViewDelegate>
 {
+    UIView *parentView_;
     IBOutlet UITableView *tableView_;
-    NSMutableArray *dataArray;
+    
+    NSMutableArray *overallMessages;
+    NSMutableArray *propertyMessages;
     
     NSInteger numberOfSections;
 }
+
+- (void)showInView:(UIView *)parentView;
 
 //- (void)setDataArray:(NSArray *)array;
 
