@@ -36,24 +36,6 @@
     if (distance >= 1609 && votigoUserID) //1609 meters = 1 mile
     {
         [self getPropertyMessages];
-//        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//        NSDictionary *params = @{@"mall_id" : delegate.mallData[@"id"],
-//                                 @"udid" : votigoUserID};
-//        
-//        [manager GET:@"http://preitmessage.r5i.com/api/messages" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//            [dataArray addObjectsFromArray:responseObject];
-//            
-//            if (dataArray.count > 0) {
-//                [tableView_ reloadData];
-//                
-//                self.frame = CGRectMake(10.0, 65.0, self.frame.size.width, self.frame.size.height);
-//                [parentView addSubview:self];
-//                [parentView bringSubviewToFront:self];
-//            }
-//            
-//        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            NSLog(@"localizedDescription %@", error.localizedDescription);
-//        }];
     }
     else {
         NSLog(@"Should Not Add");
