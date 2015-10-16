@@ -52,11 +52,15 @@
     
     del = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
     
-    NSString *urlString = [del.mallData objectForKey:@"website_url"];
-   NSLog(@"urlsrtrrttrWaseem  %@",urlString);
+//    NSString *urlString = [del.mallData objectForKey:@"website_url"];
+//   NSLog(@"urlsrtrrttrWaseem  %@",urlString);
     
-
-    urlString = [NSString stringWithFormat:@"%@%@",urlString,HOME_WEB_VIEW];
+    NSString *mallName = [[del.mallData objectForKey:@"name"] lowercaseString];
+    mallName = [mallName stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@.red5demo.com/mobilepromo?mobile=yes", mallName];
+    
+//    urlString = [NSString stringWithFormat:@"%@%@",urlString,HOME_WEB_VIEW];
+    
     NSLog(@"urlsrtrrttrviewWillAppear %@",urlString);
     webViewURLString = urlString;
     mobileWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, isIPhone5?66:65, 320, isIPhone5?534:417)];
@@ -164,96 +168,93 @@
     
 //    PreitAppDelegate *del = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
     
-    NSString *urlString = [del.mallData objectForKey:@"website_url"];
+    NSString *urlString = @".red5demo.com";
     
     if ([[[request URL]absoluteString]rangeOfString:urlString].location != NSNotFound) {
         
-        if ([[del.mallData objectForKey:@"name"] isEqualToString:@"Cherry Hill Mall"]) {
-            NSString* url = [[request URL]absoluteString];
-            
-            NSRange range = [url rangeOfString:@".com"];
-            
-            NSString* page = [url substringWithRange:NSMakeRange(range.location + range.length , url.length - range.length - range.location)];
-            
-            if ([page isEqualToString:HOME_WEB_VIEW]) {
-                return YES;
-            }
-            else if ([page isEqualToString:@"/directory"]) {
-                DirectoryViewController* directoryVC = [[DirectoryViewController alloc] initWithNibName:@"DirectoryViewController" bundle:[NSBundle mainBundle]];
-                [self.navigationController pushViewController:directoryVC animated:NO];
-                return NO;
-            }
-            else if ([page isEqualToString:@"/directory/dining"]){
-                DiningViewController *viewCnt = [[DiningViewController alloc]initWithNibName:@"CustomTable" bundle:nil];
-                
-                
-                [self.navigationController pushViewController:viewCnt animated:NO];
-                return NO;
-            }
-            else if ([page isEqualToString:@"/about_us/directions"]){
-                DirectionViewController *directionVC=[[DirectionViewController alloc]initWithNibName:@"DirectionViewController" bundle:nil];
-                [self.navigationController pushViewController:directionVC animated:NO];
-                return NO;
-                
-            }
-            else if ([page isEqualToString:@"/mall_hours"]){
-                WebViewController *hoursWebView=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
-                hoursWebView.screenIndex=8;
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    hoursWebView.titleLabel.text = @"HOURS";
-                });
-                
-                [self.navigationController pushViewController:hoursWebView animated:NO];
-                return NO;
-                
-            }
-            
-            else if ([page isEqualToString:@"/events"]){
-                EventsViewController *viewCnt = [[EventsViewController alloc]initWithNibName:@"EventsViewController" bundle:nil];
-                
-                [self.navigationController pushViewController:viewCnt animated:NO];
-                
-                return NO;
-
-            }
-            
-            else if ([page isEqualToString:@"/sales"]){
-                DealScreenViewController* dealsVC = [[DealScreenViewController alloc] initWithNibName:@"DealScreenViewController" bundle:[NSBundle mainBundle]];
-                
-                [self.navigationController pushViewController:dealsVC animated:NO];
-                
-                return NO;
-            }
-            
-            else if ([page isEqualToString:@"/product_search"]){
-                ProductListViewController *productListViewController = [[ProductListViewController alloc]initWithNibName:@"ProductListViewController copy" bundle:nil];
-                
-                [self.navigationController pushViewController:productListViewController animated:NO];
-                return NO;
-                
-            }
-            
-            else if ([page rangeOfString:@"/product_search"].location != NSNotFound){
-                
-                
-                NSRange range = [page rangeOfString:@"search="];
-                NSString* searchString = [page substringWithRange:NSMakeRange(range.location + range.length, page.length - range.location - range.length)];
-                
-                ProductListViewController *productListViewController = [[ProductListViewController alloc]initWithNibName:@"ProductListViewController copy" bundle:nil];
-                
-                if (![searchString isEqualToString:@""]) {
-                    productListViewController.passedSearchString = searchString;
-
-                }
-                
-                [self.navigationController pushViewController:productListViewController animated:NO];
-                return NO;
-                
-            }
-            
+        NSString* url = [[request URL]absoluteString];
+        
+        NSRange range = [url rangeOfString:@".com"];
+        
+        NSString* page = [url substringWithRange:NSMakeRange(range.location + range.length , url.length - range.length - range.location)];
+        
+        if ([page isEqualToString:HOME_WEB_VIEW]) {
             return YES;
         }
+        else if ([page isEqualToString:@"/directory"]) {
+            DirectoryViewController* directoryVC = [[DirectoryViewController alloc] initWithNibName:@"DirectoryViewController" bundle:[NSBundle mainBundle]];
+            [self.navigationController pushViewController:directoryVC animated:NO];
+            return NO;
+        }
+        else if ([page isEqualToString:@"/directory/dining"]){
+            DiningViewController *viewCnt = [[DiningViewController alloc]initWithNibName:@"CustomTable" bundle:nil];
+            
+            
+            [self.navigationController pushViewController:viewCnt animated:NO];
+            return NO;
+        }
+        else if ([page isEqualToString:@"/about_us/directions"]){
+            DirectionViewController *directionVC=[[DirectionViewController alloc]initWithNibName:@"DirectionViewController" bundle:nil];
+            [self.navigationController pushViewController:directionVC animated:NO];
+            return NO;
+            
+        }
+        else if ([page isEqualToString:@"/mall_hours"]){
+            WebViewController *hoursWebView=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
+            hoursWebView.screenIndex=8;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                hoursWebView.titleLabel.text = @"HOURS";
+            });
+            
+            [self.navigationController pushViewController:hoursWebView animated:NO];
+            return NO;
+            
+        }
+        
+        else if ([page isEqualToString:@"/events"]){
+            EventsViewController *viewCnt = [[EventsViewController alloc]initWithNibName:@"EventsViewController" bundle:nil];
+            
+            [self.navigationController pushViewController:viewCnt animated:NO];
+            
+            return NO;
+            
+        }
+        
+        else if ([page isEqualToString:@"/sales"]){
+            DealScreenViewController* dealsVC = [[DealScreenViewController alloc] initWithNibName:@"DealScreenViewController" bundle:[NSBundle mainBundle]];
+            
+            [self.navigationController pushViewController:dealsVC animated:NO];
+            
+            return NO;
+        }
+        
+        else if ([page isEqualToString:@"/product_search"]){
+            ProductListViewController *productListViewController = [[ProductListViewController alloc]initWithNibName:@"ProductListViewController copy" bundle:nil];
+            
+            [self.navigationController pushViewController:productListViewController animated:NO];
+            return NO;
+            
+        }
+        
+        else if ([page rangeOfString:@"/product_search"].location != NSNotFound){
+            
+            
+            NSRange range = [page rangeOfString:@"search="];
+            NSString* searchString = [page substringWithRange:NSMakeRange(range.location + range.length, page.length - range.location - range.length)];
+            
+            ProductListViewController *productListViewController = [[ProductListViewController alloc]initWithNibName:@"ProductListViewController copy" bundle:nil];
+            
+            if (![searchString isEqualToString:@""]) {
+                productListViewController.passedSearchString = searchString;
+                
+            }
+            
+            [self.navigationController pushViewController:productListViewController animated:NO];
+            return NO;
+            
+        }
+        
         return YES;
     }
     
