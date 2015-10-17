@@ -322,8 +322,8 @@ static NSString *const kAllowTracking = @"allowTracking";
         
     }
     
-    NSArray *fontFamilies = [UIFont familyNames];
-    
+//    NSArray *fontFamilies = [UIFont familyNames];
+//    
 //    for (int i = 0; i < [fontFamilies count]; i++)
 //    {
 //        NSString *fontFamily = [fontFamilies objectAtIndex:i];

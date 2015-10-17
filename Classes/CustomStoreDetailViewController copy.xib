@@ -36,6 +36,7 @@
                 <outlet property="mainScroll" destination="MtL-q5-RMj" id="tsn-XM-tIt"/>
                 <outlet property="textDescription" destination="6" id="13"/>
                 <outlet property="titleLabel" destination="qIa-5C-EuA" id="jf3-9E-vX2"/>
+                <outlet property="txtViewDis" destination="jdq-lR-JFR" id="w1l-aa-aMm"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="webView_" destination="OQR-QE-fAt" id="iHL-Gs-Qpq"/>
             </connections>
@@ -191,7 +192,7 @@
                                         <outlet property="delegate" destination="-1" id="17"/>
                                     </connections>
                                 </textView>
-                                <webView contentMode="scaleToFill" id="OQR-QE-fAt">
+                                <webView hidden="YES" contentMode="scaleToFill" id="OQR-QE-fAt">
                                     <rect key="frame" x="8" y="31" width="304" height="179"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -199,6 +200,13 @@
                                         <outlet property="delegate" destination="-1" id="APa-rS-8GE"/>
                                     </connections>
                                 </webView>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" id="jdq-lR-JFR">
+                                    <rect key="frame" x="8" y="31" width="304" height="179"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
