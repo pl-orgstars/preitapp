@@ -25,10 +25,11 @@
 }
 
 #pragma mark - navigation title
--(void)setNavigationTitle:(NSString *)string withBackButton:(BOOL)backBttn{
+-(void)setNavigationTitle:(NSString *)string withBackButton:(BOOL)backBttn
+{
     UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 25.0)];
 	titleLabel.text= string;
-	titleLabel.font = [UIFont systemFontOfSize:19];
+	titleLabel.font = [UIFont fontWithName:@"ProximaNova-Bold" size:18.0];
 	titleLabel.textColor=[UIColor whiteColor];
 	titleLabel.backgroundColor=[UIColor clearColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;

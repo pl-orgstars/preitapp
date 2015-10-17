@@ -62,15 +62,12 @@
     mobileWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, isIPhone5?66:65, 320, isIPhone5?534:417)];
     [mobileWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
     mobileWebView.delegate = self;
-//    [self.view addSubview:mobileWebView];
     [self.view insertSubview:mobileWebView belowSubview:spinner];
     
     [webViewBackButton setEnabled:YES];
     
     titleLabel.text = (NSString*)[del.mallData objectForKey:@"name"];
     titleLabel2.text = (NSString*)[del.mallData objectForKey:@"name"];
-    NSLog(@"titleLabel1 ==%@",[del.mallData objectForKey:@"name"]);
-    NSLog(@"titleLabel2 ==%@",[del.mallData objectForKey:@"name"]);
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateSideMenu" object:nil];
     findLabel.text = [NSString stringWithFormat:@"Find what you are looking for at %@ from participating retailers",[del.mallData objectForKey:@"name"]];
