@@ -321,6 +321,16 @@ static NSString *const kAllowTracking = @"allowTracking";
         // Show Alert Here
         
     }
+    
+//    NSArray *fontFamilies = [UIFont familyNames];
+//    
+//    for (int i = 0; i < [fontFamilies count]; i++)
+//    {
+//        NSString *fontFamily = [fontFamilies objectAtIndex:i];
+//        NSArray *fontNames = [UIFont fontNamesForFamilyName:[fontFamilies objectAtIndex:i]];
+//        NSLog (@"%@: %@", fontFamily, fontNames);
+//    }
+    
  
 //
     

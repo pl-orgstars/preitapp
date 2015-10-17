@@ -21,6 +21,14 @@
     // Do any additional setup after loading the view from its nib.
     btnLeftMove.hidden = TRUE;
     pagenumber = 0;
+    
+    [UIView animateWithDuration:0.5
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         // ... do stuff here
+                     } completion:NULL];
+    
 }
 
 - (void)didReceiveMemoryWarning {

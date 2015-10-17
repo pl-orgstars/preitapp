@@ -87,15 +87,20 @@
 	labelName.text=[dictData objectForKey:@"name"];
     
     if ([dictData objectForKeyWithNullCheck:@"description"]) {
-        if (![dictData[@"description"] isEqualToString:@""]) {
-            NSString *description = [dictData[@"description"] stringByReplacingOccurrencesOfString:@"<p>" withString:@"<p style='color:white'>"];
+        if (![dictData[@"description"] isEqualToString:@""])
+        {
+            NSString *strDis = [self stringByStrippingHTML:dictData[@"description"]];
+            txtViewDis.text = strDis;
             
-            NSLog(@"%@",[NSURL URLWithString:delegate.mallData[@"website_url"]]);
-            [webView_ loadHTMLString:description baseURL:[NSURL URLWithString:delegate.mallData[@"website_url"]]];
-            [webView_ setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.0]];
-            [webView_ setOpaque:NO];
-        }
-        else {
+            CGSize newSize = [txtViewDis sizeThatFits:CGSizeMake(304, MAXFLOAT)];
+            CGRect newFrame = txtViewDis.frame;
+            newFrame.size = CGSizeMake(fmaxf(newSize.width, 304), newSize.height);
+            txtViewDis.frame = newFrame;
+            [mainScroll setContentSize:CGSizeMake(0, descriptionView.frame.origin.y + txtViewDis.frame.size.height +35)];
+            txtViewDis.textColor = [UIColor whiteColor];
+            txtViewDis.scrollEnabled = FALSE;
+        }else
+        {
             [descriptionView setHidden:YES];
 
         }
@@ -105,31 +110,15 @@
     else{
         [descriptionView setHidden:YES];
     }
-    
-    
-
-	
-
-    
-
-/*
-    //set title, font size and font color
-//    [button setAttributedTitle:[dictData objectForKey:@"telephone"] forState:UIControlStateNormal];
-    [callBtn setTitle:[dictData objectForKey:@"telephone"] forState:UIControlStateNormal];
-	callBtn.titleLabel.font =[UIFont boldSystemFontOfSize:17.0];
-    [callBtn setTitleColor:LABEL_TEXT_COLOR forState:UIControlStateNormal];
-    //set action of the button
-    [callBtn addTarget:self action:@selector(buttonAction:)forControlEvents:UIControlEventTouchUpInside];
-	callBtn.tag=100;
-	[self.view addSubview:callBtn];	*/
 }
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+
+
+-(NSString *) stringByStrippingHTML:(NSString *)str {
+    NSRange r;
+    while ((r = [str rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+        str = [str stringByReplacingCharactersInRange:r withString:@""];
+    return str;
 }
-*/
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -145,9 +134,7 @@
 }
 
 
-//- (void)dealloc {
-//    [super dealloc];
-//}
+
 
 #pragma mark - web view delegate
 
@@ -259,6 +246,9 @@
     //    [[GAI sharedInstance].defaultTracker sendView:@"Hours"];
     
     screenWebView.htmlString = [showDealDictionary objectForKeyWithNullCheck:@"content"];
+    
+    
+    
     
     dispatch_async(dispatch_get_main_queue(), ^{
         screenWebView.titleLabel.text = @"DEAL";

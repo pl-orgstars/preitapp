@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Proxima Nova Bold.ttf">
@@ -35,6 +36,7 @@
                 <outlet property="mainScroll" destination="MtL-q5-RMj" id="tsn-XM-tIt"/>
                 <outlet property="textDescription" destination="6" id="13"/>
                 <outlet property="titleLabel" destination="qIa-5C-EuA" id="jf3-9E-vX2"/>
+                <outlet property="txtViewDis" destination="jdq-lR-JFR" id="w1l-aa-aMm"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="webView_" destination="OQR-QE-fAt" id="iHL-Gs-Qpq"/>
             </connections>
@@ -190,7 +192,7 @@
                                         <outlet property="delegate" destination="-1" id="17"/>
                                     </connections>
                                 </textView>
-                                <webView contentMode="scaleToFill" id="OQR-QE-fAt">
+                                <webView hidden="YES" contentMode="scaleToFill" id="OQR-QE-fAt">
                                     <rect key="frame" x="8" y="31" width="304" height="179"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -198,6 +200,13 @@
                                         <outlet property="delegate" destination="-1" id="APa-rS-8GE"/>
                                     </connections>
                                 </webView>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" id="jdq-lR-JFR">
+                                    <rect key="frame" x="8" y="31" width="304" height="179"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -211,7 +220,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="qIa-5C-EuA">
                     <rect key="frame" x="8" y="31" width="304" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -255,9 +264,4 @@
         <image name="directory-icon-detail-phone.png" width="23" height="23"/>
         <image name="header-icon-menu.png" width="22" height="18"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>
