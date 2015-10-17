@@ -35,12 +35,14 @@
     CLLocationDistance distance = [current distanceFromLocation:destination];
     if (distance >= 1609 && votigoUserID) //1609 meters = 1 mile
     {
-        [self getPropertyMessages];
+        [self getOverallMessages];
     }
     else {
         NSLog(@"Should Not Add");
     }
 }
+
+#pragma mark - API Methods
 
 - (void)getOverallMessages {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -50,6 +52,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"localizedDescription %@", error.localizedDescription);
+        [self getPropertyMessages];
     }];
 }
 
@@ -183,8 +186,8 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self markAsReadMessage:indexPath];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+     [self markAsReadMessage:indexPath];
 }
 
 @end

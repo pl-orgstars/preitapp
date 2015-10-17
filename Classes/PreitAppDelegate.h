@@ -23,6 +23,8 @@
 #import <MNNotificationsManager/MNNMOptions+Internal.h>
 #import "IntroductionView.h"
 
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+
 @interface PreitAppDelegate : NSObject <UIApplicationDelegate,UITabBarControllerDelegate>
 {
     NSTimer *timer;

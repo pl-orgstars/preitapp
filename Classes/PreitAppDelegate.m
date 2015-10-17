@@ -396,6 +396,20 @@ static NSString *const kAllowTracking = @"allowTracking";
         NSLog(@"Notifications Manager has not processed the local notification %@", notification.userInfo);
     }
     
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
+    
+    if (launchOptions[UIApplicationLaunchOptionsURLKey] == nil) {
+        [FBSDKAppLinkUtility fetchDeferredAppLink:^(NSURL *url, NSError *error) {
+            if (error) {
+                NSLog(@"Received error while fetching deferred app link %@", error);
+            }
+            if (url) {
+                [[UIApplication sharedApplication] openURL:url];
+            }
+        }];
+    }
+    
     return YES;
 }
 
@@ -493,9 +507,7 @@ static NSString *const kAllowTracking = @"allowTracking";
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
+    [FBSDKAppEvents activateApp];
 }
 
 
@@ -508,6 +520,12 @@ static NSString *const kAllowTracking = @"allowTracking";
      */
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                   openURL:url
+                                         sourceApplication:sourceApplication
+                                                annotation:annotation];
+}
 
 #pragma mark -
 #pragma mark Memory management

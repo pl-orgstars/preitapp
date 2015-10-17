@@ -201,6 +201,10 @@
                                                                                                 rightMenuViewController:sideMenu];
     container.rightMenuWidth = 320.0;
     container.menuAnimationDefaultDuration = 0.5;
+    container.menuSlideAnimationEnabled = YES;
+    container.menuSlideAnimationFactor = 1.0;
+    [container setMenuSlideAnimationEnabled:YES];
+    [container setMenuSlideAnimationFactor:1.0];
     [self presentViewController:container animated:YES completion:nil];
 }
 

@@ -100,6 +100,7 @@
 		61C8FDE71BCBF5CC006428BB /* MNNotificationsManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C8FDE51BCBF5CC006428BB /* MNNotificationsManager.framework */; };
 		61C8FDE81BCBF5CC006428BB /* MNProximityManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */; };
 		61C8FDE91BCBF5D1006428BB /* MNProximityManager.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */; };
+		61CAFFF61BD253590011F79F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61CAFFF51BD253590011F79F /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
 		7003D6D9170961940031D69D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003D6D8170961920031D69D /* SystemConfiguration.framework */; };
 		7003D6DB170961B20031D69D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7003D6DA170961B10031D69D /* CoreData.framework */; };
 		704554321740B2840038838F /* MapViewController copy.xib in Resources */ = {isa = PBXBuildFile; fileRef = 704554311740B2840038838F /* MapViewController copy.xib */; };
@@ -430,7 +431,6 @@
 		E6D367731BCBADFE004F6E76 /* NewCircleBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D367721BCBADFE004F6E76 /* NewCircleBG@2x.png */; };
 		E6D367751BCBCFA1004F6E76 /* NewListDetail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D367741BCBCFA1004F6E76 /* NewListDetail@2x.png */; };
 		E6D367771BCBDE2C004F6E76 /* NewZoomBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D367761BCBDE2C004F6E76 /* NewZoomBtn@2x.png */; };
-		E6DC32A01BD0D9B000E09A9E /* NewRightArraow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6DC329F1BD0D9B000E09A9E /* NewRightArraow@2x.png */; };
 		E6DC32A21BD0D9DE00E09A9E /* NewSkipIntro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6DC32A11BD0D9DE00E09A9E /* NewSkipIntro@2x.png */; };
 		E6DC32A41BD0D9EB00E09A9E /* NewLeftArraow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6DC32A31BD0D9EB00E09A9E /* NewLeftArraow@2x.png */; };
 		E6DC32B31BD0F84300E09A9E /* libFlurry_7.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6DC32B21BD0F84300E09A9E /* libFlurry_7.2.1.a */; };
@@ -587,6 +587,7 @@
 		61C8FDDD1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNNotificationsManagerCustomDelegate.m; sourceTree = "<group>"; };
 		61C8FDE51BCBF5CC006428BB /* MNNotificationsManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MNNotificationsManager.framework; sourceTree = "<group>"; };
 		61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MNProximityManager.bundle; sourceTree = "<group>"; };
+		61CAFFF51BD253590011F79F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		7003D6D8170961920031D69D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7003D6DA170961B10031D69D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		704554311740B2840038838F /* MapViewController copy.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MapViewController copy.xib"; sourceTree = "<group>"; };
@@ -1074,6 +1075,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61CAFFF61BD253590011F79F /* FBSDKCoreKit.framework in Frameworks */,
 				AE93BCBB1A651F400040AEB5 /* Security.framework in Frameworks */,
 				61C8FDE71BCBF5CC006428BB /* MNNotificationsManager.framework in Frameworks */,
 				61C8FDE91BCBF5D1006428BB /* MNProximityManager.bundle in Frameworks */,
@@ -1232,6 +1234,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				61CAFFF51BD253590011F79F /* FBSDKCoreKit.framework */,
 				61C8FDE51BCBF5CC006428BB /* MNNotificationsManager.framework */,
 				61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */,
 				E6FC27971BC2AAF200DB444B /* CoreTelephony.framework */,
@@ -2426,7 +2429,6 @@
 				E92DFA491B4412DA000B91B0 /* PREIT_Logo@3x.png in Resources */,
 				E6E3973C1BCFC3320048F00E /* New3.png in Resources */,
 				E2AFBBC6126C1C0400F84431 /* SelectMonthViewController.xib in Resources */,
-				AECE4802195A935600D1E5DB /* AppIcon40x40.png in Resources */,
 				BD03C5451BCF70A0001BD95E /* MessagesView.xib in Resources */,
 				BD3223111BB99AF8002D5146 /* BackBlackThick@2x.png in Resources */,
 				E2880B0A126C603C007B9D71 /* JobsViewController.xib in Resources */,
@@ -2933,7 +2935,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "0690deb3-51ed-49cd-8fe7-01d211676ab4";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0690deb3-51ed-49cd-8fe7-01d211676ab4";
@@ -2950,7 +2952,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "0690deb3-51ed-49cd-8fe7-01d211676ab4";
