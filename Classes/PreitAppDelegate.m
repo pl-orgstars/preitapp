@@ -808,7 +808,7 @@ static NSString *const kAllowTracking = @"allowTracking";
 }
 
 - (void)initilizeBeacon {
-    MNAppKey *appKey = [[MNAppKey alloc] initWithAppKey:@"0b47040c219cb0b632a538e1c907dbd5" andSecretKey:@"18e7d79d401c2dd84e74296cb42c510d"];
+    MNAppKey *appKey = [[MNAppKey alloc] initWithAppKey:@"530ba22a8281e4719d86f82f6dbfa2a9" andSecretKey:@"f515ffa5099ec2df46c8fb2733936a77"];
     self.notificationsDelegate = [[MNNotificationsManagerCustomDelegate alloc] init];
     
     // MNNotificationsManager instantiation

@@ -43,6 +43,7 @@
     
     
     IBOutlet UIView*        uploadedView;
+    IBOutlet UILabel        *processingLabel;
     
     IBOutlet UIImageView*   divider;
     IBOutlet UIImageView* divider1;

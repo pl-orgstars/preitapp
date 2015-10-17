@@ -48,7 +48,6 @@
     
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
-//    imagePicker.modalPresentationStyle = UIModalPresentationCurrentContext;
     imagePicker.sourceType = sourceType;
     
     [self presentViewController:imagePicker animated:YES completion:nil];
@@ -270,6 +269,7 @@
     
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     
+    
     [manager POST:urlString parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         for (NSString* key in [originalImgArray allKeys]) {
             UIImage* image = [originalImgArray objectForKey:key];
@@ -414,6 +414,7 @@
 
 
 -(void)imageUploadSuccessful{
+    PreitAppDelegate* delegate = (PreitAppDelegate*)[UIApplication sharedApplication].delegate;
     
     [originalImgArray removeAllObjects];
     
@@ -421,7 +422,7 @@
     [mainLabel setHidden:YES];
     
     [uploadedView setHidden:NO];
-    
+    processingLabel.text = [NSString stringWithFormat:processingLabel.text, delegate.mallData[@"name"]];
     
     [self setLowerView:(UIView*)divider1 upperView:(UIView*)uploadedView];
     

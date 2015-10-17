@@ -36,6 +36,8 @@
 @property(nonatomic,retain) NSString *urlString;
 @property(nonatomic,retain) NSString *htmlString;
 @property(nonatomic,retain) NSString *titleString;
+@property(nonatomic) BOOL isHours;
+
 @property(nonatomic) int screenIndex;
 -(void)setHeader;
 - (void)callWebPage;

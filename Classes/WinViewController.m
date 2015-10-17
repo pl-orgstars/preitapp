@@ -116,8 +116,10 @@
 #pragma mark - Navigation
 
 - (IBAction)backBtnCall:(id)sender {
-    
-    [self.navigationController popViewControllerAnimated:NO];
+    if ([winWebView canGoBack])
+        [winWebView goBack];
+    else
+        [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (IBAction)menuBtnCall:(id)sender {
