@@ -84,12 +84,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/CustomStoreDetailViewController.m"
-            timestampString = "466772827.122294"
+            timestampString = "466932007.143291"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "282"
-            endingLineNumber = "282"
-            landmarkName = "-dealBttnTapped:"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
+            landmarkName = "-responseDataForArea:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

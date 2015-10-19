@@ -36,6 +36,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self.view bringSubviewToFront:btnRightMove];
+    btnRightMove.hidden = FALSE;
+}
 -(IBAction)Call:(id)sender
 {
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
@@ -59,10 +63,11 @@
     pageControl.currentPage = pagenumber; // you need to have a **iVar** with getter for pageControl
     btnLeftMove.hidden = FALSE;
     btnRightMove.hidden = FALSE;
+    NSLog(@"Pagenum%d",pagenumber);
     
-    if (pagenumber == 0)
+    if (pagenumber < 1)
         btnLeftMove.hidden = TRUE;
-    else if(pagenumber == 3)
+    else if(pagenumber > 2)
         btnRightMove.hidden = TRUE;
 }
 

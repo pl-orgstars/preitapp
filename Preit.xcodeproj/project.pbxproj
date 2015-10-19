@@ -429,6 +429,7 @@
 		E6210DD41BC5184C008D579C /* ProductSearchCC.m in Sources */ = {isa = PBXBuildFile; fileRef = E6210DD21BC5184C008D579C /* ProductSearchCC.m */; };
 		E6210DD51BC5184C008D579C /* ProductSearchCC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6210DD31BC5184C008D579C /* ProductSearchCC.xib */; };
 		E634685C1BA94BDB0088FADB /* backNavigation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E634685B1BA94BDB0088FADB /* backNavigation@2x.png */; };
+		E65AC71D1BD4D32E005AAD39 /* NewRightArraow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E65AC71C1BD4D32E005AAD39 /* NewRightArraow@2x.png */; settings = {ASSET_TAGS = (); }; };
 		E6D367731BCBADFE004F6E76 /* NewCircleBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D367721BCBADFE004F6E76 /* NewCircleBG@2x.png */; };
 		E6D367751BCBCFA1004F6E76 /* NewListDetail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D367741BCBCFA1004F6E76 /* NewListDetail@2x.png */; };
 		E6D367771BCBDE2C004F6E76 /* NewZoomBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D367761BCBDE2C004F6E76 /* NewZoomBtn@2x.png */; };
@@ -1024,10 +1025,11 @@
 		E6210DD21BC5184C008D579C /* ProductSearchCC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductSearchCC.m; path = "Product Search CC/ProductSearchCC.m"; sourceTree = "<group>"; };
 		E6210DD31BC5184C008D579C /* ProductSearchCC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProductSearchCC.xib; path = "Product Search CC/ProductSearchCC.xib"; sourceTree = "<group>"; };
 		E634685B1BA94BDB0088FADB /* backNavigation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backNavigation@2x.png"; sourceTree = "<group>"; };
+		E65AC71C1BD4D32E005AAD39 /* NewRightArraow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewRightArraow@2x.png"; sourceTree = "<group>"; };
 		E6D367721BCBADFE004F6E76 /* NewCircleBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewCircleBG@2x.png"; sourceTree = "<group>"; };
 		E6D367741BCBCFA1004F6E76 /* NewListDetail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewListDetail@2x.png"; sourceTree = "<group>"; };
 		E6D367761BCBDE2C004F6E76 /* NewZoomBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewZoomBtn@2x.png"; sourceTree = "<group>"; };
-		E6DC329F1BD0D9B000E09A9E /* NewRightArraow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewRightArraow@2x.png"; sourceTree = "<group>"; };
+		E6DC329F1BD0D9B000E09A9E /* NNewRightArraow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NNewRightArraow@2x.png"; sourceTree = "<group>"; };
 		E6DC32A11BD0D9DE00E09A9E /* NewSkipIntro@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewSkipIntro@2x.png"; sourceTree = "<group>"; };
 		E6DC32A31BD0D9EB00E09A9E /* NewLeftArraow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewLeftArraow@2x.png"; sourceTree = "<group>"; };
 		E6DC32B01BD0F84300E09A9E /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
@@ -2294,9 +2296,10 @@
 		E6FCFC031BC69E3600B15121 /* New PRoduct Detail Images */ = {
 			isa = PBXGroup;
 			children = (
+				E65AC71C1BD4D32E005AAD39 /* NewRightArraow@2x.png */,
 				E6DC32A31BD0D9EB00E09A9E /* NewLeftArraow@2x.png */,
 				E6DC32A11BD0D9DE00E09A9E /* NewSkipIntro@2x.png */,
-				E6DC329F1BD0D9B000E09A9E /* NewRightArraow@2x.png */,
+				E6DC329F1BD0D9B000E09A9E /* NNewRightArraow@2x.png */,
 				E6E397361BCFC3320048F00E /* New1.png */,
 				E6E397371BCFC3320048F00E /* New2.png */,
 				E6E397381BCFC3320048F00E /* New3.png */,
@@ -2465,6 +2468,7 @@
 				BD4EF9781BBEA09F0042EF6E /* productsearch-icon-list-email@2x.png in Resources */,
 				AE87D2AE19370BE400F5493D /* MenuScreenViewController.xib in Resources */,
 				E2B0AF83127ACDE100B32837 /* show.png in Resources */,
+				E65AC71D1BD4D32E005AAD39 /* NewRightArraow@2x.png in Resources */,
 				E2ABABBA1294FF7200240E75 /* dollar.png in Resources */,
 				BD3DAD841BBAB2BF00933F74 /* share-icon-facebook@2x.png in Resources */,
 				E2ABABBB1294FF7200240E75 /* shopingBag.png in Resources */,
