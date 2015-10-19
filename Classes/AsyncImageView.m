@@ -133,7 +133,7 @@
 
     }
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:rect];
-    imageView.backgroundColor = [UIColor yellowColor];
+    imageView.backgroundColor = [UIColor clearColor];
     [imageView setTag:100];
     [imageView setImage:img];
     

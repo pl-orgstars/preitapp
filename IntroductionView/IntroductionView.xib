@@ -8,7 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroductionView">
             <connections>
                 <outlet property="btnLeftMove" destination="vEn-eJ-TxP" id="Iwp-JN-KDz"/>
-                <outlet property="btnRightMove" destination="IbV-NQ-6ea" id="K8z-1B-Odm"/>
+                <outlet property="btnRightMove" destination="IbV-NQ-6ea" id="zYI-2y-2ab"/>
                 <outlet property="pageControl" destination="uRw-Y2-HQR" id="0sr-en-PuR"/>
                 <outlet property="scrollViewMain" destination="SSj-8D-Ee5" id="2jO-jK-g5p"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -278,6 +278,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IbV-NQ-6ea">
                     <rect key="frame" x="275" y="257" width="29" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <state key="normal" image="NewRightArraow.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>

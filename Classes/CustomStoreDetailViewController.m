@@ -100,18 +100,10 @@
             txtViewDis.textColor = [UIColor whiteColor];
             txtViewDis.scrollEnabled = FALSE;
         }else
-        {
             [descriptionView setHidden:YES];
-
-        }
-     
-    }
-    
-    else{
+    }else
         [descriptionView setHidden:YES];
-    }
 }
-
 
 -(NSString *) stringByStrippingHTML:(NSString *)str {
     NSRange r;
