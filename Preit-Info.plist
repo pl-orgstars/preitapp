@@ -22,8 +22,25 @@
 	<string>2.4</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1652935031590700</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.r5i.preit</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>preit</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>2.59</string>
+	<string>2.60</string>
 	<key>FacebookAppID</key>
 	<string>1652935031590700</string>
 	<key>FacebookDisplayName</key>
@@ -36,26 +53,26 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>facebook.com</key>
+			<key>akamaihd.net</key>
 			<dict>
-				<key>NSIncludesSubdomains</key>
-				<true/>
 				<key>NSExceptionRequiresForwardSecrecy</key>
 				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+			<key>facebook.com</key>
+			<dict>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
 			</dict>
 			<key>fbcdn.net</key>
 			<dict>
-				<key>NSIncludesSubdomains</key>
-				<true/>
 				<key>NSExceptionRequiresForwardSecrecy</key>
 				<false/>
-			</dict>
-			<key>akamaihd.net</key>
-			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>
-				<key>NSExceptionRequiresForwardSecrecy</key>
-				<false/>
 			</dict>
 		</dict>
 	</dict>
@@ -83,22 +100,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb1652935031590700</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>com.r5i.preit</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>preit</string>
-			</array>
-		</dict>
-	</array>
 </dict>
 </plist>
