@@ -144,6 +144,15 @@
     return tmpDict;
 }
 
+- (void)reloadAllLocationsData {
+    if (_isLocationEnabled) {
+        _isLocationEnabled = NO;
+        [self.tableData addObjectsFromArray:tempArray];
+    }
+    
+    self.radius=nil;
+    [self viewDidLoad];
+}
 
 #pragma mark - Action methods
 
@@ -512,8 +521,9 @@
 			isNoData=YES;	
 			if(self.radius)
 			{
-				UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Message" message:NSLocalizedString(@"ShowAll",@"") delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes",nil];
-				[alert show];
+                [self reloadAllLocationsData];
+//				UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Message" message:NSLocalizedString(@"ShowAll",@"") delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes",nil];
+//				[alert show];
 			}
 		}
  	}
@@ -610,8 +620,9 @@
         tempArray = [[NSArray alloc]initWithArray:self.tableData];
         [self.tableData removeAllObjects];
         
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Message" message:NSLocalizedString(@"ShowAll",@"") delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes",nil];
-        [alert show];
+        [self reloadAllLocationsData];
+//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Message" message:NSLocalizedString(@"ShowAll",@"") delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes",nil];
+//        [alert show];
     }else{
         [self.tableData removeAllObjects];
         [self.tableData addObjectsFromArray:tempTableData];
@@ -625,14 +636,8 @@
 {
 	if([[alertView buttonTitleAtIndex:buttonIndex] compare:@"Yes"] == NSOrderedSame)
 	{
-        if (_isLocationEnabled) {
-            _isLocationEnabled = NO;
-            [self.tableData addObjectsFromArray:tempArray];
-        }
-        
-		self.radius=nil;
-		[self viewDidLoad];
-	}	
+        [self reloadAllLocationsData];
+	}
 }
 
 -(void)requestForImages{
@@ -707,7 +712,7 @@
     ProductSearchHome *productSearchVC = [[ProductSearchHome alloc] initWithNibName:@"ProductSearchHome" bundle:nil];
     productSearchVC.view.frame = CGRectMake(0, 0, 320, isIPhone5?568:480);
     
-    UINavigationController *navCont = [[UINavigationController alloc] initWithRootViewController:productSearchVC];
+    PreitNavigationViewController *navCont = [[PreitNavigationViewController alloc] initWithRootViewController:productSearchVC];
     navCont.navigationBarHidden = YES;
     
     MenuScreenViewController *sideMenu = [[MenuScreenViewController alloc] initWithNibName:@"MenuScreenViewController" bundle:[NSBundle mainBundle]];

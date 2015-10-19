@@ -826,49 +826,38 @@ static NSString *const kAllowTracking = @"allowTracking";
 }
 
 - (void)initilizeBeacon {
-    MNAppKey *appKey = [[MNAppKey alloc] initWithAppKey:@"530ba22a8281e4719d86f82f6dbfa2a9" andSecretKey:@"f515ffa5099ec2df46c8fb2733936a77"];
-    self.notificationsDelegate = [[MNNotificationsManagerCustomDelegate alloc] init];
-    
-    // MNNotificationsManager instantiation
-    [MNNotificationsManager notificationsManagerWithAppKey:appKey
-                                                   options:nil
-                                                      user:nil
-                                                  delegate:self.notificationsDelegate
-                                         completionHandler:^(MNNotificationsManager *notificationsManager, NSError *error)
-    {
-        if (!error) {
-            NSLog(@"NMNotificationsManager instantiation success");
-            self.notificationsManager = notificationsManager;
-            [self.notificationsManager start];
-            
-            MNNMOptions *options = [[MNNMOptions alloc] init];
-            options.statsTrackingValues = @{@"specificapp" : @"Preit"};
-            
-        }
-        else {
-            NSLog(@"NMNotificationsManager instantiation error: %@", error.localizedDescription);
-        }
-    }];
-     
-    
-//    if (self.beaconRequestManager)
-//        [self.beaconRequestManager removeRequestManager];
-//    else{
-//        self.beaconRequestManager = [[BeaconRequestManager alloc]init];
-//        [self.beaconRequestManager addingNotification];
-//    }
-//    
-//    
-//    NSString *url=[NSString stringWithFormat:@"%@/ibeacons",[self.mallData objectForKey:@"resource_url"]];
-//    
-//
-//    [self.beaconRequestManager intWithUrl:url];
-    
+    if (!self.notificationsDelegate || !self.notificationsManager) {
+        MNAppKey *appKey = [[MNAppKey alloc] initWithAppKey:@"530ba22a8281e4719d86f82f6dbfa2a9" andSecretKey:@"f515ffa5099ec2df46c8fb2733936a77"];
+        self.notificationsDelegate = [[MNNotificationsManagerCustomDelegate alloc] init];
+        
+        // MNNotificationsManager instantiation
+        [MNNotificationsManager notificationsManagerWithAppKey:appKey
+                                                       options:nil
+                                                          user:nil
+                                                      delegate:self.notificationsDelegate
+                                             completionHandler:^(MNNotificationsManager *notificationsManager, NSError *error)
+        {
+            if (!error) {
+                NSLog(@"NMNotificationsManager instantiation success");
+                self.notificationsManager = notificationsManager;
+                [self.notificationsManager start];
+                
+                MNNMOptions *options = [[MNNMOptions alloc] init];
+                options.statsTrackingValues = @{@"specificapp" : @"Preit"};
+                
+            }
+            else {
+                NSLog(@"NMNotificationsManager instantiation error: %@", error.localizedDescription);
+            }
+        }];
+    }
+    else {
+        [self.notificationsManager start];
+    }
 }
+
 - (void)disableBeacon {
     [self.notificationsManager stop];
-    self.notificationsManager = nil;
-//    [self.beaconRequestManager removeRequestManager];
 }
 
 -(void)showLocalNotificationsWithMessage:(NSString *)message :(NSString*)beacon_id{

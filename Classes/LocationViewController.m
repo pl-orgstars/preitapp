@@ -190,7 +190,7 @@
     ProductSearchHome *productSearchVC = [[ProductSearchHome alloc] initWithNibName:@"ProductSearchHome" bundle:nil];
     productSearchVC.view.frame = CGRectMake(0, 0, 320, isIPhone5?568:480);
     
-    UINavigationController *navCont = [[UINavigationController alloc] initWithRootViewController:productSearchVC];
+    PreitNavigationViewController *navCont = [[PreitNavigationViewController alloc] initWithRootViewController:productSearchVC];
     navCont.navigationBarHidden = YES;
     
     MenuScreenViewController *sideMenu = [[MenuScreenViewController alloc] initWithNibName:@"MenuScreenViewController" bundle:[NSBundle mainBundle]];
@@ -201,10 +201,10 @@
                                                                                                 rightMenuViewController:sideMenu];
     container.rightMenuWidth = 320.0;
     container.menuAnimationDefaultDuration = 0.5;
+    
     container.menuSlideAnimationEnabled = YES;
     container.menuSlideAnimationFactor = 1.0;
-    [container setMenuSlideAnimationEnabled:YES];
-    [container setMenuSlideAnimationFactor:1.0];
+
     [self presentViewController:container animated:YES completion:nil];
 }
 

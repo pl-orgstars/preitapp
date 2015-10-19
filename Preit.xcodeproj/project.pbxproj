@@ -96,6 +96,7 @@
 		612FBB5D1BB14FBA00D9E30C /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB581BB14FBA00D9E30C /* MFSideMenuContainerViewController.m */; };
 		612FBB5E1BB14FBA00D9E30C /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5A1BB14FBA00D9E30C /* MFSideMenuShadow.m */; };
 		612FBB5F1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FBB5C1BB14FBA00D9E30C /* UIViewController+MFSideMenuAdditions.m */; };
+		619B10871BD4DBFB00AFE263 /* PreitNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 619B10861BD4DBFB00AFE263 /* PreitNavigationViewController.m */; settings = {ASSET_TAGS = (); }; };
 		61C8FDDE1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C8FDDD1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m */; };
 		61C8FDE71BCBF5CC006428BB /* MNNotificationsManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C8FDE51BCBF5CC006428BB /* MNNotificationsManager.framework */; };
 		61C8FDE81BCBF5CC006428BB /* MNProximityManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61C8FDE61BCBF5CC006428BB /* MNProximityManager.bundle */; };
@@ -582,6 +583,8 @@
 		615604DA1BCE8B9C00FAD487 /* MessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesView.h; sourceTree = "<group>"; };
 		615604DB1BCE8B9C00FAD487 /* MessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesView.m; sourceTree = "<group>"; };
 		615604DD1BCE8BAD00FAD487 /* MessagesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesView.xib; sourceTree = "<group>"; };
+		619B10851BD4DBFB00AFE263 /* PreitNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreitNavigationViewController.h; sourceTree = "<group>"; };
+		619B10861BD4DBFB00AFE263 /* PreitNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreitNavigationViewController.m; sourceTree = "<group>"; };
 		61C21BB91BCFDE7E0081635A /* orientation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orientation@2x.png"; sourceTree = "<group>"; };
 		61C8FDDC1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNNotificationsManagerCustomDelegate.h; sourceTree = "<group>"; };
 		61C8FDDD1BCBA1D0006428BB /* MNNotificationsManagerCustomDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNNotificationsManagerCustomDelegate.m; sourceTree = "<group>"; };
@@ -1439,6 +1442,15 @@
 			name = MessagesCell;
 			sourceTree = "<group>";
 		};
+		619B10841BD4DBDC00AFE263 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				619B10851BD4DBFB00AFE263 /* PreitNavigationViewController.h */,
+				619B10861BD4DBFB00AFE263 /* PreitNavigationViewController.m */,
+			);
+			name = Navigation;
+			sourceTree = "<group>";
+		};
 		61C8FDDF1BCBA1D9006428BB /* MNNotification Delegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -1623,6 +1635,7 @@
 		AE87D29C19370B1B00F5493D /* New Group */ = {
 			isa = PBXGroup;
 			children = (
+				619B10841BD4DBDC00AFE263 /* Navigation */,
 				6138288B1BCE69B10024F116 /* Messagee View */,
 				BD4EF96C1BBE7ABF0042EF6E /* ScanReceipt Screen */,
 				BD4EF9661BBE560B0042EF6E /* Jobs Detail Screen */,
@@ -2744,6 +2757,7 @@
 				E222B22F1259EE7800A699DB /* ShoppingStoreViewController.m in Sources */,
 				E222B2AD125A0D5700A699DB /* CustomTable.m in Sources */,
 				AE87D2AD19370BE400F5493D /* MenuScreenViewController.m in Sources */,
+				619B10871BD4DBFB00AFE263 /* PreitNavigationViewController.m in Sources */,
 				E222B357125A214500A699DB /* CustomStoreDetailViewController.m in Sources */,
 				E222B369125A2BE700A699DB /* MoreViewController.m in Sources */,
 				BD69FACF1BB01E0D00E78744 /* SideMenu.m in Sources */,
