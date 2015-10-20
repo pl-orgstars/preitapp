@@ -41,7 +41,7 @@
     
     if (vel.x > 0) {
         // swipe left
-//        controller.view.gestureRecognizers = nil;
+        controller.view.gestureRecognizers = nil;
         [self popViewControllerAnimated:YES];
     } else {
         // swipe right
