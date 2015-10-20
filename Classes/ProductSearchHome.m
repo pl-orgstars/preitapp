@@ -52,14 +52,16 @@
     
     del = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
     
-//    NSString *urlString = [del.mallData objectForKey:@"website_url"];
-//   NSLog(@"urlsrtrrttrWaseem  %@",urlString);
+    NSString *urlString = [del.mallData objectForKey:@"website_url"];
+   NSLog(@"urlsrtrrttrWaseem  %@",urlString);
     
-    NSString *mallName = [[del.mallData objectForKey:@"name"] lowercaseString];
-    mallName = [mallName stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *urlString = [NSString stringWithFormat:@"http://%@.red5demo.com/mobilepromo?mobile=yes", mallName];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@".com" withString:SUB_DOMAIN];
     
-//    urlString = [NSString stringWithFormat:@"%@%@",urlString,HOME_WEB_VIEW];
+//    NSString *mallName = [[del.mallData objectForKey:@"name"] lowercaseString];
+//    mallName = [mallName stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    NSString *urlString = [NSString stringWithFormat:@"http://%@.red5demo.com/mobilepromo?mobile=yes", mallName];
+    
+    urlString = [NSString stringWithFormat:@"%@%@",urlString,HOME_WEB_VIEW];
     
     NSLog(@"urlsrtrrttrviewWillAppear %@",urlString);
     webViewURLString = urlString;
@@ -165,7 +167,9 @@
     
 //    PreitAppDelegate *del = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
     
-    NSString *urlString = @".red5demo.com";
+    NSString *urlString = del.mallData[@"website_url"];//@".red5demo.com";
+    urlString = [urlString stringByReplacingOccurrencesOfString:@".com" withString:SUB_DOMAIN];
+
     
     if ([[[request URL]absoluteString]rangeOfString:urlString].location != NSNotFound) {
         
