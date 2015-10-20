@@ -38,6 +38,13 @@
     [self setNavigationTitle:self.titleString withBackButton:YES];
 //    [listCountLabel setText:[NSString stringWithFormat:@"%d",[[Database sharedDatabase] getCount]]];
     [self AddinList:[[Database sharedDatabase] getCount]];
+    if(self.titleString.length == 0){
+        lblHeaderStore.text = @"Store";
+    }else {
+        lblHeaderStore.text = self.titleString;
+    }
+        
+    
 }
 
 - (void)viewDidLoad

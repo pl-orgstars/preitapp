@@ -83,13 +83,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Classes/CustomStoreDetailViewController.m"
-            timestampString = "466932007.143291"
+            filePath = "Classes/ProductDetailViewController.m"
+            timestampString = "467016137.127964"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
-            landmarkName = "-responseDataForArea:"
+            startingLineNumber = "332"
+            endingLineNumber = "332"
+            landmarkName = "-createScrollView:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Classes/ProductDetailViewController.m"
+            timestampString = "467016251.499389"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1339"
+            endingLineNumber = "1339"
+            landmarkName = "-requestForSearchFinishedSuccess:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
