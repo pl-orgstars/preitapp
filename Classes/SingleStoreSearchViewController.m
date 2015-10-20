@@ -43,8 +43,6 @@
     }else {
         lblHeaderStore.text = self.titleString;
     }
-        
-    
 }
 
 - (void)viewDidLoad

@@ -523,7 +523,7 @@
     CGRect frame=CGRectMake(keyFrame.origin.x, keyFrame.origin.y, keyFrame.size.width, keyFrame.size.height);
     
     main_view = [[UIView alloc] initWithFrame:frame];
-    main_view.backgroundColor = [UIColor lightGrayColor];
+    main_view.backgroundColor = [UIColor clearColor];
     main_view.alpha =1.0;
     
     UIActivityIndicatorView *wait = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -531,7 +531,7 @@
     
     frame=CGRectMake(56.0,180.0, 211.0, 121.0);
     UIView *loadingView=[[UIView alloc]initWithFrame:frame];
-    loadingView.backgroundColor=[UIColor darkGrayColor];
+    loadingView.backgroundColor=[UIColor clearColor];
     
     frame=CGRectMake(32.0,20.0, 159.0,60.0);
     UILabel *loadingLabel = [[UILabel alloc] initWithFrame:frame];
@@ -539,7 +539,7 @@
     loadingLabel.backgroundColor = [UIColor clearColor];
     loadingLabel.font=[UIFont boldSystemFontOfSize:18];
     loadingLabel.textAlignment = NSTextAlignmentCenter;
-    loadingLabel.text = @"Please wait loading stores...";
+    loadingLabel.text = @"Loading...";
     loadingLabel.numberOfLines=0;
     [loadingView addSubview:loadingLabel];
     [loadingView addSubview:wait];
@@ -547,10 +547,10 @@
     frame=CGRectMake(86.0, 77.0, 37.0,37.0);
     wait.frame=frame;
     
-    CALayer *l=[loadingView layer];
-    [l setCornerRadius:10.0];
-    [l setBorderWidth:3.0];
-    [l setBorderColor:[[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]CGColor]];
+//    CALayer *l=[loadingView layer];
+//    [l setCornerRadius:10.0];
+//    [l setBorderWidth:3.0];
+//    [l setBorderColor:[[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]CGColor]];
     
     [main_view addSubview:loadingView];
     [wait startAnimating];

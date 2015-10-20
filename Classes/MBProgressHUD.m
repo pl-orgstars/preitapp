@@ -429,7 +429,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	label.textAlignment = UITextAlignmentCenter;
 	label.opaque = NO;
 	label.backgroundColor = [UIColor clearColor];
-	label.textColor = [UIColor blackColor];
+	label.textColor = [UIColor whiteColor];
 	label.font = self.labelFont;
 	label.text = self.labelText;
 	[self addSubview:label];
@@ -456,7 +456,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		// Update to indeterminate indicator
 		[indicator removeFromSuperview];
 		self.indicator = MB_AUTORELEASE([[UIActivityIndicatorView alloc]
-										 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]);
+										 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite]);
 		[(UIActivityIndicatorView *)indicator startAnimating];
 		[self addSubview:indicator];
 	}
