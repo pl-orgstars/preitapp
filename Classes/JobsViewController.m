@@ -12,6 +12,8 @@
 #import "AsyncImageView.h"
 #import "JobsDetailViewController.h"
 #import "JSON.h"
+#import "LoadingAgent.h"
+
 @implementation JobsViewController
 
 /*
@@ -236,11 +238,13 @@
 	NSString *url=[NSString stringWithFormat:@"%@%@",[delegate.mallData objectForKey:@"resource_url"],NSLocalizedString(@"API11","")];
 	RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
 	[req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
-	[indicator_ startAnimating];
+//	[indicator_ startAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:YES];
 }
 
 -(void)responseData:(NSData *)receivedData{
-	[indicator_ stopAnimating];
+//	[indicator_ stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 	if(receivedData!=nil){
 		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];// autorelease];
 		NSArray *tmpArray=[jsonString JSONValue];

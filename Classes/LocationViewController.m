@@ -590,7 +590,7 @@
     
     NSString *url = [tmpDict objectForKey:@"website_resource_url"];
     
-    [self showHudWithMessage:@"Loading..." color:[UIColor clearColor]];
+    [self showHudWithMessage:@"LOADING" color:[UIColor clearColor]];
     RequestAgent *req= [[RequestAgent alloc] init];// autorelease];
     [req requestToServer:self callBackSelector:@selector(requestSucceed:) errorSelector:@selector(requestFailed:) Url:url];
 }

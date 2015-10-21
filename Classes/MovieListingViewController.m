@@ -11,7 +11,7 @@
 #import "MovieDetailViewController.h"
 #import "AsyncImageView.h"
 #import "JSON.h"
-
+#import "LoadingAgent.h"
 
 @implementation MovieListingViewController
 
@@ -224,12 +224,14 @@
 	NSString *url=[NSString stringWithFormat:@"%@%@",[delegate.mallData objectForKey:@"resource_url"],NSLocalizedString(apiString,"")];
 	RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
 	[req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
-	[indicator_ startAnimating];
+//	[indicator_ startAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:YES];
 }
 
 -(void)responseData:(NSData *)receivedData
 {
-	[indicator_ stopAnimating];
+//	[indicator_ stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 	if(receivedData!=nil){
 		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];// autorelease];
 		NSArray *tmpArray=[jsonString JSONValue];
@@ -252,7 +254,8 @@
 }
 
 -(void)errorCallback:(NSError *)error{
-	[indicator_ stopAnimating];
+//	[indicator_ stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 	[delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Message" buttontitle:@"Ok"];
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "PinterestWebViewController.h"
+#import "LoadingAgent.h"
 
 @interface PinterestWebViewController ()
 
@@ -30,11 +31,11 @@
 {
 
     [super viewDidLoad];
-    spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [spinner setHidesWhenStopped:YES];
-    [spinner setCenter:self.view.center];
-    [self.view addSubview:spinner];
-    [spinner stopAnimating];
+//    spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//    [spinner setHidesWhenStopped:YES];
+//    [spinner setCenter:self.view.center];
+//    [self.view addSubview:spinner];
+//    [spinner stopAnimating];
     
     [self postToPinterest];
     
@@ -50,7 +51,7 @@
 //                          description:description];
 //}
 - (void)viewWillDisappear:(BOOL)animated{
-    spinner = nil;
+//    spinner = nil;
     [webViewToShareWithPinterest stopLoading];
     imageUrl = nil;
 }
@@ -111,7 +112,8 @@
    
     if ( [webView isLoading]) {
         // If we want to show Spinner, we show it everyTime
-        [spinner startAnimating];
+//        [spinner startAnimating];
+        [[LoadingAgent defaultAgent]makeBusy:YES];
 //        [self.navigationController.navigationBar setUserInteractionEnabled:NO];
 
     }
@@ -139,7 +141,8 @@
 //    [spinner stopAnimating];
     if (![webView isLoading]) {
 //
-        [spinner stopAnimating];
+//        [spinner stopAnimating];
+        [[LoadingAgent defaultAgent]makeBusy:NO];
 //        [self.navigationController.navigationBar setUserInteractionEnabled:YES];
     }
 
@@ -151,14 +154,16 @@
 //    [imageUrl release];
 //}
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 //    [self.navigationController.navigationBar setUserInteractionEnabled:YES];
 }
 - (BOOL)navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item{
     NSLog(@"working");
-    if (spinner.isAnimating) {
-        return NO;
-    }
+//    if (spinner.isAnimating)
+//    {
+//        return NO;
+//    }
     return YES;
 }
 @end

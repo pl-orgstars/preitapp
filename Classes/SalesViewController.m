@@ -11,7 +11,7 @@
 #import "RequestAgent.h"
 #import "AsyncImageView.h"
 #import "JSON.h"
-
+#import "LoadingAgent.h"
 
 
 #define TAG_HEAD_LABEL 101
@@ -500,11 +500,13 @@
 	//self.navigationItem.rightBarButtonItem.enabled=NO;
 	RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
 	[req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
-	[indicator_ startAnimating];
+//	[indicator_ startAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:YES];
 }
 
 -(void)responseData:(NSData *)receivedData{
-	[indicator_ stopAnimating];
+//	[indicator_ stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 	//self.navigationItem.rightBarButtonItem.enabled=YES;
 	if(receivedData!=nil){
 		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];// autorelease];
@@ -531,7 +533,8 @@
 
 -(void)errorCallback:(NSError *)error{
 	//self.navigationItem.rightBarButtonItem.enabled=YES;
-	[indicator_ stopAnimating];
+//	[indicator_ stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 	[delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Message" buttontitle:@"Ok"];
 }
 

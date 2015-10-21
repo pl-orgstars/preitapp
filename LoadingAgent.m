@@ -42,7 +42,7 @@ static LoadingAgent *agent;
         loadingLabel.backgroundColor = [UIColor clearColor];
         loadingLabel.font=[UIFont boldSystemFontOfSize:18];
         loadingLabel.textAlignment = NSTextAlignmentCenter;
-        loadingLabel.text = @"Loading...";
+        loadingLabel.text = @"LOADING";
         loadingLabel.numberOfLines=0;
         [loadingView addSubview:loadingLabel];
         [loadingView addSubview:wait];
@@ -65,7 +65,8 @@ static LoadingAgent *agent;
 }
 
 - (void) makeBusy:(BOOL)yesOrno{
-	if(yesOrno){
+	if(yesOrno)
+    {
 		[delegate showNetworkIndicator:YES];
 		loadingCount++;
 	}else {
@@ -76,7 +77,7 @@ static LoadingAgent *agent;
 		}
 	}
 	
-	//NSLog(@"::::::::::::::::::::::::::Busy count:::::::::::::::::%d",loadingCount);
+	NSLog(@"::::::::::::::::::::::::::Busy count:::::::::::::::::%d",loadingCount);
 	if(loadingCount == 1){
 		[[[UIApplication sharedApplication] keyWindow] addSubview:main_view];
 		[[[UIApplication sharedApplication] keyWindow] bringSubviewToFront:main_view];
