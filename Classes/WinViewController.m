@@ -51,6 +51,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [winWebView stopLoading];
+}
+
 
 #pragma mark - web view delgates
 
