@@ -15,6 +15,7 @@
     UIView *parentView_;
     IBOutlet UITableView *tableView_;
     
+    NSString *UDID;
     NSMutableArray *overallMessages;
     NSMutableArray *propertyMessages;
     
