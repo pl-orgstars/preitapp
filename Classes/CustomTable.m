@@ -10,7 +10,7 @@
 #import "RequestAgent.h"
 #import "ShoppingStoreViewController.h"
 #import "JSON.h"
-
+#import "LoadingAgent.h"
 #import "ShoppingViewController.h"
 #import "DirectoryTableViewCell.h"
 
@@ -240,7 +240,8 @@
     NSLog(@"url:::::::::::%@",url);
 	RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
 	[req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
-	[indicator_ startAnimating];
+//	[indicator_ startAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:YES];
 	
 	if(screenIndex==1)
 		self.navigationItem.rightBarButtonItem.enabled=NO;
@@ -255,7 +256,8 @@
 		NSLog(@"button enabled:::::::::::::::::::: ");
 	}
 	
-	[indicator_ stopAnimating];
+//	[indicator_ stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 	if(receivedData!=nil){
 		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];// autorelease];
 		NSArray *tmpArray=[jsonString JSONValue];
@@ -287,7 +289,8 @@
 
 -(void)errorCallback:(NSError *)error
 {
-	[indicator_ stopAnimating];
+//	[indicator_ stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 	if(screenIndex==1)
 	{
 		self.navigationItem.rightBarButtonItem.enabled=YES;

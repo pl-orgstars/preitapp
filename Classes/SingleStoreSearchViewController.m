@@ -7,6 +7,8 @@
 //
 
 #import "SingleStoreSearchViewController.h"
+#import "LoadingAgent.h"
+
 #define MAXROWS 30
 #define REMOVEROWS 30
 @implementation SingleStoreSearchViewController
@@ -51,11 +53,11 @@
     [self addMaxMinTextField];
     delegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
     
-    spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [spinner setHidesWhenStopped:YES];
-    [spinner setCenter:self.view.center];
-    [self.view addSubview:spinner];
-    [spinner stopAnimating];
+//    spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//    [spinner setHidesWhenStopped:YES];
+//    [spinner setCenter:self.view.center];
+//    [self.view addSubview:spinner];
+//    [spinner stopAnimating];
     
     CGRect frame = self.view.frame;
    
@@ -159,10 +161,11 @@
 -(void)loadMore
 {
     
-    if (![spinner isAnimating])
+//    if (![spinner isAnimating])
     {
-        [spinner setHidden:NO];
-        [spinner startAnimating];
+//        [spinner setHidden:NO];
+//        [spinner startAnimating];
+        [[LoadingAgent defaultAgent]makeBusy:YES];
         //kuldeep
         
         RequestAgent *req = [[RequestAgent alloc]init];
@@ -184,7 +187,8 @@
 
 -(void)moreRequestFinished:(NSData*)responseData
 {
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
     NSString *jsonString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
     NSDictionary *dict = [jsonString JSONValue];
     NSArray *array = [dict objectForKey:@"results"];
@@ -239,7 +243,8 @@
 
 -(void)moreRequestFailed:(NSError*)error {
     [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Network error!" buttontitle:@"Dismiss"];
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 }
 
 
@@ -247,9 +252,11 @@
     
     NSLog(@"load previous");
     
-    if (![spinner isAnimating]) {
-        [spinner setHidden:NO];
-        [spinner startAnimating];
+//    if (![spinner isAnimating])
+    {
+//        [spinner setHidden:NO];
+//        [spinner startAnimating];
+        [[LoadingAgent defaultAgent]makeBusy:YES];
         RequestAgent *req = [[RequestAgent alloc]init];
 
         page--;
@@ -269,7 +276,8 @@
 -(void)prevRequestFailed:(NSError *)error {
     
     [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Network error!" buttontitle:@"Dismiss"];
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
     
 }
 
@@ -291,7 +299,8 @@
 //        }
 //    }
     
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    
     NSString *jsonString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
     NSDictionary *dict = [jsonString JSONValue];
     NSArray *array = [dict objectForKey:@"results"];

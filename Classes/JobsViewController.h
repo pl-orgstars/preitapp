@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "PreitAppDelegate.h"
 
-@interface JobsViewController : BaseViewController {
+@interface JobsViewController : BaseViewController
+{
 	IBOutlet UITableView *tableJobs;
 	IBOutlet UIImageView *imageView;
 	PreitAppDelegate *delegate;

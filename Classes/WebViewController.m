@@ -10,7 +10,7 @@
 #import "RequestAgent.h"
 #import "AsyncImageView.h"
 #import "JSON.h"
-
+#import "LoadingAgent.h"
 #import "UIAlertView+Blocks.h"
 @implementation WebViewController
 {
@@ -101,7 +101,8 @@
 		NSString *url=[NSString stringWithFormat:@"%@%@",[delegate.mallData objectForKey:@"resource_url"],NSLocalizedString(apiString,"")];
 		RequestAgent *req=[[RequestAgent alloc] init];//autorelease];
 		[req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
-		[indicator startAnimating];
+//		[indicator startAnimating];
+        [[LoadingAgent defaultAgent]makeBusy:YES];
 	}
     
 
@@ -293,7 +294,8 @@
 #pragma mark Response methods
 
 -(void)responseData:(NSData *)receivedData{
-	[indicator stopAnimating];
+//	[indicator stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 	if(receivedData!=nil){
 		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding] ;//autorelease];
 		NSDictionary *tmpDict=[jsonString JSONValue];
@@ -305,8 +307,8 @@
 }
 
 -(void)responseDataTrends:(NSData *)receivedData{
-	[indicator stopAnimating];
-
+//	[indicator stopAnimating];
+[[LoadingAgent defaultAgent]makeBusy:NO];
 	if(receivedData!=nil){
 		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];
 		NSArray *tmpArray=[jsonString JSONValue];
@@ -335,8 +337,9 @@
 }
 
 -(void)errorCallback:(NSError *)error{
-	[indicator stopAnimating];
-	[delegate showAlert:@"Sorry there was some error.Please check your internet connection and try agian later." title:@"Message" buttontitle:@"Ok"];
+//	[indicator stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
+    [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try agian later." title:@"Message" buttontitle:@"Ok"];
 }
 
 - (void)callWebPage
@@ -351,8 +354,8 @@
 #pragma mark UIWebView methods
 -(void)showALertWithRequest:(NSURLRequest *)urlRequest{
     webView.userInteractionEnabled=TRUE;
-	[indicator stopAnimating];
-    
+//	[indicator stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
     [UIAlertView showWithTitle:NSLocalizedString(@"WebView_title",@"") message:NSLocalizedString(@"WebView_message",@"") cancelButtonTitle:@"Cancel" otherButtonTitles:@[@"Open"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
             [[UIApplication sharedApplication]openURL:[urlRequest URL]];
@@ -365,7 +368,8 @@
     
     
     webView.userInteractionEnabled=FALSE;
-	[indicator startAnimating];
+//	[indicator startAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:YES];
     NSString *urlStrings = [delegate.mallData objectForKey:@"website_url"];
     if (self.screenIndex == 9) {
         
@@ -385,13 +389,15 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
 	webView.userInteractionEnabled=TRUE;
-	[indicator stopAnimating];
+//	[indicator stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
 	webView.userInteractionEnabled=TRUE;
 	[delegate showNetworkIndicator:NO];
-	[indicator stopAnimating];
+//	[indicator stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 }
 
 -(void)loadHtml:(NSDictionary *)dict{

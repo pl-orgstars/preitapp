@@ -13,9 +13,6 @@
 @implementation AsyncImageView
 @synthesize delegate,callback;
 
-
-
-
 - (void)loadImageFromURL:(NSURL*)url delegate:(id)requestDelegate requestSelector:(SEL)requestSelector{
 	delegate=requestDelegate;
 	self.callback=requestSelector;

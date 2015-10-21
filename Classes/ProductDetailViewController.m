@@ -10,6 +10,7 @@
 #import <Twitter/Twitter.h>
 #import "PinterestWebViewController.h"
 #import "JSBridgeViewController.h"
+#import "LoadingAgent.h"
 
 @implementation ProductDetailViewController
 
@@ -57,12 +58,12 @@
     [super viewDidLoad];
     imgviewCircle.hidden = TRUE;
     lblCount.hidden = TRUE;
-    spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [spinner setHidesWhenStopped:YES];
-    [spinner setCenter:self.view.center];
-    [self.view addSubview:spinner];
-    [spinner stopAnimating];
-    
+//    spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//    [spinner setHidesWhenStopped:YES];
+//    [spinner setCenter:self.view.center];
+//    [self.view addSubview:spinner];
+//    [spinner stopAnimating];
+[[LoadingAgent defaultAgent]makeBusy:NO];
     delegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
     
     dbAgent = [Database sharedDatabase];
@@ -940,7 +941,7 @@
     loadingLabel.backgroundColor = [UIColor clearColor];
     loadingLabel.font=[UIFont boldSystemFontOfSize:18];
     loadingLabel.textAlignment = NSTextAlignmentCenter;
-    loadingLabel.text = @"Loading...";
+    loadingLabel.text = @"LOADING";
     loadingLabel.numberOfLines=0;
     [loadingView addSubview:loadingLabel];
     [loadingView addSubview:wait];
@@ -1329,9 +1330,9 @@
 #pragma mark - request
 -(void)makeRequestForStringAndStoreId{
     
-    [spinner setHidden:NO];
-    [spinner startAnimating];
-    
+//    [spinner setHidden:NO];
+//    [spinner startAnimating];
+[[LoadingAgent defaultAgent]makeBusy:YES];
     int page =1;
     Product *obj=[productsArray objectAtIndex:productIndex];
     RequestAgent *req = [[RequestAgent alloc]init];
@@ -1366,8 +1367,8 @@
     
     
     NSMutableArray *mainArray = [[NSMutableArray alloc]initWithArray:itemsArray];
-    [spinner stopAnimating];
-    
+//    [spinner stopAnimating];
+[[LoadingAgent defaultAgent]makeBusy:NO];
     if (itemsArray.count==0) {
         [delegate showAlert:@"No product matching your criteria found" title:@"No result found" buttontitle:@"Dismiss"];
     }
@@ -1388,7 +1389,8 @@
 
 -(void)requestError:(NSError*)error {
     [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Network error" buttontitle:@"Dismiss"];
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 }
 
 #pragma mark - nav

@@ -483,15 +483,15 @@
 		url=[NSString stringWithFormat:@"%@?lat=%f&lng=%f&radius=%@",url,self.coordinates.latitude,self.coordinates.longitude,radius];
 	
 	self.navigationItem.rightBarButtonItem.enabled=NO;
-	[indicator_ startAnimating];
-
+//	[indicator_ startAnimating];
+[[LoadingAgent defaultAgent]makeBusy:YES];
 	RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
 	[req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
 }
 
 -(void)responseData:(NSData *)receivedData{
-	[indicator_ stopAnimating];
-    
+//	[indicator_ stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 	self.navigationItem.hidesBackButton=NO;
 	self.navigationItem.rightBarButtonItem.enabled=YES;
 
@@ -534,7 +534,8 @@
 }
 
 -(void)errorCallback:(NSError *)error{
-	[indicator_ stopAnimating];
+//	[indicator_ stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 	self.navigationItem.rightBarButtonItem.enabled=YES;
 
 	[delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Message" buttontitle:@"Ok"];
@@ -682,14 +683,18 @@
     
     if (_presentMainView)
         [self showMainViewController];
-    else
+    else{
+        
+        ProductSearchHome *vcHomeSearch = (ProductSearchHome *)self.navigationController.viewControllers[0];
+        vcHomeSearch.isGiftViewPush = TRUE;
         [self.navigationController popToRootViewControllerAnimated:YES];
+    }
     
 }
 
 -(void)requestFailed:(NSError *)error{
-    [[LoadingAgent defaultAgent]makeBusy:YES];
-	[indicator_ stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
+//	[indicator_ stopAnimating];
 	self.navigationItem.hidesBackButton=NO;
 	self.navigationItem.rightBarButtonItem.enabled=YES;
     

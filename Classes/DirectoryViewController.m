@@ -9,7 +9,7 @@
 #import "DirectoryViewController.h"
 #import "JSBridgeViewController.h"
 #import "JSON.h"
-
+#import "LoadingAgent.h"
 
 #define ALLSTORES @"All Stores"
 
@@ -30,7 +30,7 @@
     self.navigationController.navigationBar.hidden = YES;
     
     
-    [self makeLoadingView];
+//    [self makeLoadingView];
     // Do any additional setup after loading the view from its nib.
     
     delegate=(PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -68,11 +68,11 @@
     frame.size.height = 0.0;
     [filterTableView setFrame:frame];
     
-    indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//    indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     
-    [filterTableView addSubview:indicator];
+//    [filterTableView addSubview:indicator];
     
-    indicator.center = filterTableView.center;
+//    indicator.center = filterTableView.center;
     
     filterCategories = [[NSMutableArray alloc] init];
     selectedFilter = [[NSMutableArray alloc] init];
@@ -511,7 +511,8 @@
     [self loadingView:NO];
     [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Message" buttontitle:@"Ok"];
     
-    [indicator stopAnimating];
+//    [indicator stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 }
 
 #pragma mark - loading
@@ -539,7 +540,7 @@
     loadingLabel.backgroundColor = [UIColor clearColor];
     loadingLabel.font=[UIFont boldSystemFontOfSize:18];
     loadingLabel.textAlignment = NSTextAlignmentCenter;
-    loadingLabel.text = @"Loading...";
+    loadingLabel.text = @"LOADING";
     loadingLabel.numberOfLines=0;
     [loadingView addSubview:loadingLabel];
     [loadingView addSubview:wait];
@@ -618,7 +619,9 @@
     
     RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
     [req requestToServer:self callBackSelector:@selector(responseDataFilter:) errorSelector:@selector(errorCallback:) Url:url];
-    [indicator startAnimating];
+//    [indicator startAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:YES];
+//    [self makeLoadingView];
   
 }
 
@@ -626,7 +629,8 @@
 -(void)responseDataFilter:(NSData*)receivedData
 {
     
-    [indicator stopAnimating];
+//    [indicator stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
     
     if (receivedData != nil) {
         NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];

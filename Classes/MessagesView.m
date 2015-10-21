@@ -24,7 +24,7 @@
     propertyMessages = [NSMutableArray new];
     
     PreitAppDelegate *delegate = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
-    NSString *votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
+    UDID = [[NSString alloc] initWithString:[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
     
     double destinationLat = [delegate.mallData[@"location_lat"] doubleValue];
     double destinationLong = [delegate.mallData[@"location_lng"] doubleValue];
@@ -33,7 +33,7 @@
     CLLocation *current = [[CLLocation alloc] initWithLatitude:delegate.latitude longitude:delegate.longitude];
     
     CLLocationDistance distance = [current distanceFromLocation:destination];
-    if (distance >= 1609 && votigoUserID) //1609 meters = 1 mile
+    if (distance >= 1609) //1609 meters = 1 mile
     {
         [self getOverallMessages];
     }
@@ -58,10 +58,8 @@
 
 - (void)getPropertyMessages {
     PreitAppDelegate *delegate = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
-    NSString *votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
-    
     NSDictionary *params = @{@"mall_id" : delegate.mallData[@"id"],
-                             @"udid" : votigoUserID};
+                             @"udid" : UDID};
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://preitmessage.r5i.com/api/messages" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -94,9 +92,8 @@
         dict = overallMessages[indexPath.row];
     }
     
-    NSString *votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
     NSDictionary *params = @{@"property_message_id" : [dict objectForKey:@"id"],
-                             @"udid" : votigoUserID};
+                             @"udid" : UDID};
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:@"http://preitmessage.r5i.com/api/user_infos" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {

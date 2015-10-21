@@ -70,7 +70,7 @@
     loadingLabel.backgroundColor = [UIColor clearColor];
     loadingLabel.font=[UIFont boldSystemFontOfSize:18];
     loadingLabel.textAlignment = NSTextAlignmentCenter;
-    loadingLabel.text = @"Loading...";
+    loadingLabel.text = @"LOADING";
     loadingLabel.numberOfLines=0;
     [loadingView addSubview:loadingLabel];
     [loadingView addSubview:wait];
