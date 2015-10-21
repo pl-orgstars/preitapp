@@ -72,9 +72,13 @@
 	}
 	else if(screenIndex==9)
 	{
-	    [self setHeader];		
+	    [self setHeader];
         
+//        NSString *name = delegate.mallData[@"name"];
+//        name = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
+//        name = [name lowercaseString];
         NSString *urlStrings = [delegate.mallData objectForKey:@"website_url"];
+        urlStrings = [urlStrings stringByReplacingOccurrencesOfString:@".com" withString:SUB_DOMAIN];
         NSLog(@"urlsrtrrttr %@",urlStrings);
         urlStrings = [NSString stringWithFormat:@"%@%@",urlStrings,TRENDS_WEB_VIEW];
         NSLog(@"urlsrtrrttr %@",urlStrings);
@@ -368,6 +372,8 @@
     [[LoadingAgent defaultAgent]makeBusy:YES];
     NSString *urlStrings = [delegate.mallData objectForKey:@"website_url"];
     if (self.screenIndex == 9) {
+        
+        urlStrings = [urlStrings stringByReplacingOccurrencesOfString:@".com" withString:SUB_DOMAIN];
         if ([[[request URL]absoluteString]rangeOfString:urlStrings].location != NSNotFound) {
             return YES;
         }
