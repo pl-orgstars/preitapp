@@ -30,6 +30,8 @@
     PreitAppDelegate *del;
 }
 
+@synthesize isGiftViewPush;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -78,7 +80,16 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateSideMenu" object:nil];
     findLabel.text = [NSString stringWithFormat:@"Find what you are looking for at %@ from participating retailers",[del.mallData objectForKey:@"name"]];
     
-    [self showMessagesView];
+    
+    
+    if (self.isGiftViewPush)
+    {
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowGiftView" object:nil];
+    }else
+    {
+        [self showMessagesView];
+    }
+    isGiftViewPush = FALSE;
 }
 
 - (void)viewDidLoad
@@ -93,6 +104,9 @@
     if (!messagesView)
         messagesView = [[NSBundle mainBundle] loadNibNamed:@"MessagesView" owner:self options:nil][0];
     [messagesView showInView:self.view];
+    
+    
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

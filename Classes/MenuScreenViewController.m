@@ -26,7 +26,7 @@
 #define HOURS @"HOURS"
 #define MOVIE @"MOVIE LISTINGS"
 #define JOB @"JOB OPENINGS"
-
+#define GOHome @"SELECT ANOTHER PROPERTY"
 
 #define SHOW_NEW_MALL @"Select a Different PREIT Property"
 
@@ -71,7 +71,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ShowGiftView:) name:@"ShowGiftView" object:nil];
     [self.navigationController.navigationBar setTranslucent:YES];
 
 
@@ -103,6 +103,18 @@
 
 }
 
+- (void)ShowGiftView:(NSNotification *)notification
+{
+    NSString *strEvent = [NSString stringWithFormat:@"%@ Best Gift Ever.",[appdelegate.mallData objectForKey:@"name"]];
+    [Flurry logEvent:strEvent timed:YES];
+        WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
+        
+        [_navController popToRootViewControllerAnimated:NO];
+        [_navController pushViewController:winVC animated:NO];
+
+
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -130,7 +142,9 @@
 }
 
 - (void)setSideMenuItems {
-    if (appdelegate.isDinning && appdelegate.isMovie) {
+    
+    if (appdelegate.isDinning && appdelegate.isMovie)
+    {
         tableData = [[NSMutableArray alloc]initWithObjects:
                      HOME,
                      GIFT,
@@ -146,8 +160,10 @@
                      MOVIE,
                      JOB,
                      CONTACT_US,
+                     GOHome,
                      nil];
-    }else if (!appdelegate.isDinning){
+    }else if (!appdelegate.isDinning)
+    {
         tableData = [[NSMutableArray alloc]initWithObjects:
                      
                      HOME,
@@ -163,8 +179,10 @@
                      MOVIE,
                      JOB,
                      CONTACT_US,
+                     GOHome,
                      nil];
-    }else if (!appdelegate.isMovie){
+    }else if (!appdelegate.isMovie)
+    {
         tableData = [[NSMutableArray alloc]initWithObjects:
                      HOME,
                      GIFT,
@@ -179,6 +197,7 @@
                      HOURS,
                      JOB,
                      CONTACT_US,
+                     GOHome,
                      nil];
     }else{
         tableData = [[NSMutableArray alloc]initWithObjects:
@@ -193,6 +212,7 @@
                      PARKING,
                      HOURS,
                      JOB,
+                     GOHome,
                      nil];
     }
     
@@ -427,7 +447,10 @@
             [_navController popToRootViewControllerAnimated:NO];
             [_navController pushViewController:parkScreen animated:NO];
         }
+    } else if ([str isEqualToString:GOHome]){
+        [self selectAnotherCall:nil];
     }
+
     
  /*   else if ([str isEqualToString:SCAN]){
         if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[ScanReceiptViewController class]]) {
@@ -446,7 +469,7 @@
 -(UIImage*)getImageForCell:(NSString*)cellName
 {
     UIImage* cellImage;
-    if ([cellName isEqualToString:HOME]) {
+    if ([cellName isEqualToString:HOME] || [cellName isEqualToString:GOHome]) {
         cellImage = [UIImage imageNamed:@"mainmenu-icon-home"];
     }
     else if ([cellName isEqualToString:GIFT]){
