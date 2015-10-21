@@ -9,7 +9,7 @@
 #import "DirectionViewController.h"
 #import "RequestAgent.h"
 #import "JSON.h"
-
+#import "LoadingAgent.h"
 
 @implementation AddressAnnotation
 
@@ -70,7 +70,8 @@
         RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
 	[req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
     
-	[indicator_ startAnimating];
+//	[indicator_ startAnimating];
+        [[LoadingAgent defaultAgent]makeBusy:YES];
 }
 }
 
@@ -103,7 +104,8 @@
 
 
 -(void)responseData:(NSData *)receivedData{
-	[indicator_ stopAnimating];
+//	[indicator_ stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 	if(receivedData!=nil){
 		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];// autorelease];
 		NSDictionary *tmpLocation=[jsonString JSONValue];

@@ -7,6 +7,7 @@
 //
 
 #import "ProductListViewController.h"
+#import "LoadingAgent.h"
 
 #define MAXROWS 30
 #define REMOVEROWS 30
@@ -98,11 +99,12 @@
     
     [self.view insertSubview:productListView belowSubview:pickerSort];
     [productListView setHidden:YES];
-    spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [spinner setHidesWhenStopped:YES];
-    [spinner setCenter:self.view.center];
-    [self.view addSubview:spinner];
-    [spinner stopAnimating];
+//    spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//    [spinner setHidesWhenStopped:YES];
+//    [spinner setCenter:self.view.center];
+//    [self.view addSubview:spinner];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
     sortString = @"Sort: Relevance";
     [pickerSort selectRow:0 inComponent:0 animated:NO];
     [productSearchBar becomeFirstResponder];
@@ -245,9 +247,9 @@
 
 -(void)makeRequestForString:(NSString *)productStr {
     
-    [spinner setHidden:NO];
-    [spinner startAnimating];
-    
+//    [spinner setHidden:NO];
+//    [spinner startAnimating];
+[[LoadingAgent defaultAgent]makeBusy:YES];
     searchString = productStr;
     [self makeRequestForStringAndStoreId];
     
@@ -310,8 +312,8 @@
     [productListView setHidden:NO];
     
     //    [overView setHidden:YES];
-    [spinner stopAnimating];
-    
+//    [spinner stopAnimating];
+[[LoadingAgent defaultAgent]makeBusy:NO];
     if (itemsArray.count==0) {
         [delegate showAlert:@"No product matching your criteria found" title:@"No result found" buttontitle:@"Dismiss"];
     }
@@ -323,16 +325,19 @@
 
 -(void)requestError:(NSError*)error {
     [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Network error" buttontitle:@"Dismiss"];
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 }
 
 #pragma mark - load more
 
 -(void)loadMore {
     
-    if (![spinner isAnimating]) {
-        [spinner setHidden:NO];
-        [spinner startAnimating];
+//    if (![spinner isAnimating])
+    {
+//        [spinner setHidden:NO];
+//        [spinner startAnimating];
+        [[LoadingAgent defaultAgent]makeBusy:YES];
         RequestAgent *req = [[RequestAgent alloc]init];//autorelease];
         page++;
         if (page > 1) {
@@ -348,7 +353,8 @@
 
 
 -(void)moreRequestFinished:(NSData*)responseData {
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
     NSString *jsonString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
     NSDictionary *dict = [jsonString JSONValue];
     NSArray *array = [dict objectForKey:@"results"];
@@ -382,16 +388,19 @@
 
 -(void)moreRequestFailed:(NSError*)error {
     [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Network error!" buttontitle:@"Dismiss"];
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 }
 
 
 -(void)loadPrevious {
     
     
-    if (![spinner isAnimating]) {
-        [spinner setHidden:NO];
-        [spinner startAnimating];
+//    if (![spinner isAnimating])
+    {
+//        [spinner setHidden:NO];
+//        [spinner startAnimating];
+        [[LoadingAgent defaultAgent]makeBusy:YES];
         RequestAgent *req = [[RequestAgent alloc]init];
         page--;
         if (page == 1) {
@@ -410,13 +419,15 @@
 -(void)prevRequestFailed:(NSError *)error {
     
     [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Network error!" buttontitle:@"Dismiss"];
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
     
 }
 
 -(void)prevRequestFinished:(NSData *)responseData
 {
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
     NSString *jsonString = [[NSString alloc] initWithBytes:[responseData bytes] length:[responseData length] encoding:NSUTF8StringEncoding];
     NSDictionary *dict = [jsonString JSONValue];
     NSArray *array = [dict objectForKey:@"results"];
@@ -456,7 +467,7 @@
 #pragma mark - show detail
 
 -(void)showProductDetail:(NSNumber *)productIndex {
-    if (!spinner.isAnimating)
+//    if (!spinner.isAnimating)
     {
         NSLog(@"show product detail");
         ProductDetailViewController *detailView = [[ProductDetailViewController alloc]initWithNibName:@"ProductDetailViewController" bundle:nil];

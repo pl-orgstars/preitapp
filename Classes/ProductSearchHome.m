@@ -21,7 +21,7 @@
 #import "DealScreenViewController.h"
 #import "ProductListViewController.h"
 #import "WinViewController.h"
-
+#import "LoadingAgent.h"
 
 #define VOTIGO_SIGNUP @"http://sqa02demopartner.votigo.com/fbsweeps/sweeps/testsweepsforred5-1"
 
@@ -51,7 +51,6 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
     del = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
     
     NSString *mallName = [[del.mallData objectForKey:@"name"] lowercaseString];
@@ -62,12 +61,12 @@
     mobileWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, isIPhone5?66:65, 320, isIPhone5?534:417)];
     [mobileWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
     mobileWebView.delegate = self;
-    [self.view insertSubview:mobileWebView belowSubview:spinner];
+//    [self.view insertSubview:mobileWebView belowSubview:spinner];
     
     [webViewBackButton setEnabled:YES];
     
-    titleLabel.text = (NSString*)[del.mallData objectForKey:@"name"];
-    titleLabel2.text = (NSString*)[del.mallData objectForKey:@"name"];
+    titleLabel.text = @"";
+    titleLabel2.text = @"";
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateSideMenu" object:nil];
     findLabel.text = [NSString stringWithFormat:@"Find what you are looking for at %@ from participating retailers",[del.mallData objectForKey:@"name"]];
@@ -82,6 +81,12 @@
         [self showMessagesView];
     }
     isGiftViewPush = FALSE;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    
+    titleLabel.text = (NSString*)[del.mallData objectForKey:@"name"];
+    titleLabel2.text = (NSString*)[del.mallData objectForKey:@"name"];
 }
 
 - (void)viewDidLoad
@@ -142,12 +147,14 @@
 -(IBAction)hideMoreInfo:(id)sender {
     backFlag = YES;
     [moreInfoView setHidden:YES];
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
     [webview stopLoading];
 }
 -(void)showALertWithRequest:(NSURLRequest *)urlRequest{
     
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
     [UIAlertView showWithTitle:NSLocalizedString(@"WebView_title",@"") message:NSLocalizedString(@"WebView_message",@"") cancelButtonTitle:@"Cancel" otherButtonTitles:@[@"Open"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
          [[UIApplication sharedApplication]openURL:[urlRequest URL]];
@@ -285,20 +292,23 @@
     
 }
 -(void)webViewDidStartLoad:(UIWebView *)webView {
-    if (!spinner.isAnimating) {
-        [spinner startAnimating];
-    }
-    
+//    if (!spinner.isAnimating)
+//    {
+//        [spinner startAnimating];
+//    }
+[[LoadingAgent defaultAgent]makeBusy:YES];
 
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 
 }
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 }
 -(IBAction)webViewBackButtonTapped:(id)sender{
     NSLog(@"yes");

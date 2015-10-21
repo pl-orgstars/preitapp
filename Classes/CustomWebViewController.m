@@ -9,6 +9,8 @@
 #import "CustomWebViewController.h"
 #import "UIAlertView+Blocks.h"
 #import "PreitAppDelegate.h"
+#import "LoadingAgent.h"
+
 @interface CustomWebViewController ()
 
 @end
@@ -37,7 +39,8 @@
     // Do any additional setup after loading the view from its nib.
 }
 -(void)viewWillAppear:(BOOL)animated{
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,7 +51,8 @@
 
 -(void)showALertWithRequest:(NSURLRequest *)urlRequest{
     
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
     [UIAlertView showWithTitle:NSLocalizedString(@"WebView_title",@"") message:NSLocalizedString(@"WebView_message",@"") cancelButtonTitle:@"Cancel" otherButtonTitles:@[@"Open"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
             [[UIApplication sharedApplication]openURL:[urlRequest URL]];
@@ -82,20 +86,24 @@
     return NO;
 }
 -(void)webViewDidStartLoad:(UIWebView *)webview {
-    if (!spinner.isAnimating) {
-        [spinner startAnimating];
-    }
+//    if (!spinner.isAnimating)
+//    {
+//        [spinner startAnimating];
+//    }
+    [[LoadingAgent defaultAgent]makeBusy:YES];
     [self setNAvigationRightBttnEnable:webView.canGoBack];
 
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webview {
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
     [self setNAvigationRightBttnEnable:webView.canGoBack];
 }
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [spinner stopAnimating];
+//    [spinner stopAnimating];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
 }
 
 -(void)setNAvigationRightBttnEnable:(BOOL)enable{
