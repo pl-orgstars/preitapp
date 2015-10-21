@@ -725,7 +725,7 @@
     container.menuAnimationDefaultDuration = 0.5;
     container.menuSlideAnimationEnabled = YES;
     container.menuSlideAnimationFactor = 1.0;
-    
+    container.panMode = 0;
     [self presentViewController:container animated:YES completion:nil];
 }
 
