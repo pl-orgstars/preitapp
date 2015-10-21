@@ -30,5 +30,6 @@
 
 -(IBAction)webViewBackButtonTapped:(id)sender;
 -(IBAction)hideMoreInfo:(id)sender;
+@property BOOL isGiftViewPush;
 
 @end

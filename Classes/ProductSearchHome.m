@@ -30,6 +30,8 @@
     PreitAppDelegate *del;
 }
 
+@synthesize isGiftViewPush;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -52,16 +54,10 @@
     
     del = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
     
-//    NSString *urlString = [del.mallData objectForKey:@"website_url"];
-//   NSLog(@"urlsrtrrttrWaseem  %@",urlString);
-    
     NSString *mallName = [[del.mallData objectForKey:@"name"] lowercaseString];
     mallName = [mallName stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *urlString = [NSString stringWithFormat:@"http://%@.red5demo.com/mobilepromo?mobile=yes", mallName];
-    
-//    urlString = [NSString stringWithFormat:@"%@%@",urlString,HOME_WEB_VIEW];
-    
-    NSLog(@"urlsrtrrttrviewWillAppear %@",urlString);
+
     webViewURLString = urlString;
     mobileWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, isIPhone5?66:65, 320, isIPhone5?534:417)];
     [mobileWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
@@ -76,7 +72,16 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateSideMenu" object:nil];
     findLabel.text = [NSString stringWithFormat:@"Find what you are looking for at %@ from participating retailers",[del.mallData objectForKey:@"name"]];
     
-    [self showMessagesView];
+    
+    
+    if (self.isGiftViewPush)
+    {
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowGiftView" object:nil];
+    }else
+    {
+        [self showMessagesView];
+    }
+    isGiftViewPush = FALSE;
 }
 
 - (void)viewDidLoad
@@ -91,6 +96,9 @@
     if (!messagesView)
         messagesView = [[NSBundle mainBundle] loadNibNamed:@"MessagesView" owner:self options:nil][0];
     [messagesView showInView:self.view];
+    
+    
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

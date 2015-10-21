@@ -71,7 +71,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ShowGiftView:) name:@"ShowGiftView" object:nil];
     [self.navigationController.navigationBar setTranslucent:YES];
 
 
@@ -100,6 +100,18 @@
 - (IBAction)closeBtnCall:(id)sender {
     
     self.menuContainerViewController.menuState = MFSideMenuStateClosed;
+
+}
+
+- (void)ShowGiftView:(NSNotification *)notification
+{
+    NSString *strEvent = [NSString stringWithFormat:@"%@ Best Gift Ever.",[appdelegate.mallData objectForKey:@"name"]];
+    [Flurry logEvent:strEvent timed:YES];
+        WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
+        
+        [_navController popToRootViewControllerAnimated:NO];
+        [_navController pushViewController:winVC animated:NO];
+
 
 }
 
