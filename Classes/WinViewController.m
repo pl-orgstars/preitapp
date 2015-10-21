@@ -13,12 +13,12 @@
 #define VOTIGO_MAIN @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/mainmenu"
 #define VOTIGO_SCAN_RECEIPT @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/scanreceipt"
 
-#define NOT_CHECKED_IN      @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
-#define ALREADY_CHECKED_IN  @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/already_checked_in?mobile=yes"
-#define CHECKED_IN          @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/successful?mobile=yes"
-#define NOT_PERMITTED       @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/no_permissions?mobile=yes"
-#define NOT_IN_MALL         @"http://staging.cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
-#define MAIN_MENU           @"http://staging.cherryhillmall.red5demo.com/main_menu"
+#define NOT_CHECKED_IN      @"http://cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
+#define ALREADY_CHECKED_IN  @"http://cherryhillmall.red5demo.com/promos/enter_to_win/already_checked_in?mobile=yes"
+#define CHECKED_IN          @"http://cherryhillmall.red5demo.com/promos/enter_to_win/successful?mobile=yes"
+#define NOT_PERMITTED       @"http://cherryhillmall.red5demo.com/promos/enter_to_win/no_permissions?mobile=yes"
+#define NOT_IN_MALL         @"http://cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
+#define MAIN_MENU           @"http://cherryhillmall.red5demo.com/main_menu"
 
 @interface WinViewController ()
 
@@ -161,7 +161,7 @@
                         NSURL *url = [NSURL URLWithString:NOT_PERMITTED];
                         [winWebView loadRequest:[NSURLRequest requestWithURL:url]];
                     }
-                    else if ([responseObject[@"message"] isEqualToString:@"Checkin limit reached for today"]) {
+                    else if ([responseObject[@"message"] isEqualToString:@"Checkin limit reached for today."]) {
                         NSURL *url = [NSURL URLWithString:ALREADY_CHECKED_IN];
                         [winWebView loadRequest:[NSURLRequest requestWithURL:url]];
                     }

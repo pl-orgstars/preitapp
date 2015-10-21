@@ -47,7 +47,7 @@
     IBOutlet UILabel *lblShareVia;
     ///////
     
-    UIView *main_view;
+    UIView *main_view1;
     NSMutableArray *listContent;
     NSDictionary *checkDict;
     NSMutableArray *indexArray,*tempArray;

@@ -24,4 +24,6 @@
 #define TRENDS_WEB_VIEW @"/trends?mobile=yes"
 #define DEAL_WEB_VIEW @"/sales?mobile=yes"
 
+#define SUB_DOMAIN @".red5demo.com"
+
 #endif

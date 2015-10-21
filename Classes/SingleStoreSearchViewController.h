@@ -27,6 +27,7 @@
     IBOutlet UILabel *lblResultCount;
     IBOutlet UIImageView *imgViewCircleBG;
     IBOutlet UILabel *lblTotalNumber;
+    IBOutlet UILabel *lblHeaderStore;
     
     IBOutlet UITextField *maximunPriceLabel;
     IBOutlet  UITextField *minmumPriceLabel;

@@ -18,7 +18,7 @@
     [super viewDidLoad];
     self.delegate = self;
     
-    gesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureHandler:)];
+//    gesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureHandler:)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,24 +29,24 @@
 /************************************************************************************************************************************************/
 #pragma mark - Navigation Controller Delegates
 
-- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    if (![viewController isKindOfClass:NSClassFromString(@"ProductSearchHome")] && ![viewController.view.gestureRecognizers containsObject:gesture]) {
-            [viewController.view addGestureRecognizer:gesture];
-    }
-}
+//- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+//    if (![viewController isKindOfClass:NSClassFromString(@"ProductSearchHome")] && ![viewController.view.gestureRecognizers containsObject:gesture]) {
+//            [viewController.view addGestureRecognizer:gesture];
+//    }
+//}
 
-- (void)panGestureHandler:(UIPanGestureRecognizer *)recognizer {
-    CGPoint vel = [recognizer velocityInView:self.view];
-    UIViewController *controller = (UIViewController *)recognizer.view.nextResponder;
-    
-    if (vel.x > 0) {
-        // swipe left
+//- (void)panGestureHandler:(UIPanGestureRecognizer *)recognizer {
+//    CGPoint vel = [recognizer velocityInView:self.view];
+//    UIViewController *controller = (UIViewController *)recognizer.view.nextResponder;
+//    
+//    if (vel.x > 0) {
+//        // swipe left
 //        controller.view.gestureRecognizers = nil;
-        [self popViewControllerAnimated:YES];
-    } else {
-        // swipe right
-        controller.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
-    }
-}
+//        [self popViewControllerAnimated:YES];
+//    } else {
+//        // swipe right
+//        controller.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
+//    }
+//}
 
 @end

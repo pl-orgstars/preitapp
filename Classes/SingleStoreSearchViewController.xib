@@ -11,6 +11,7 @@
                 <outlet property="btnNext" destination="Wq1-92-NsM" id="Mfa-YF-RFL"/>
                 <outlet property="btnPrevious" destination="06w-6K-jhy" id="6vc-ug-xDG"/>
                 <outlet property="imgViewCircleBG" destination="ZpT-SL-urP" id="mxf-2x-8nU"/>
+                <outlet property="lblHeaderStore" destination="hHW-D9-zie" id="Hfc-ma-riy"/>
                 <outlet property="lblResultCount" destination="1Gu-wK-6hm" id="pVT-3h-bQ7"/>
                 <outlet property="lblTotalNumber" destination="guz-iz-BuN" id="u98-d8-EVh"/>
                 <outlet property="maximunPriceLabel" destination="Cn9-BR-4Wi" id="VqF-yE-CWM"/>

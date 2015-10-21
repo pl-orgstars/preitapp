@@ -173,7 +173,7 @@ static NSString *const kAllowTracking = @"allowTracking";
     mHomeViewController = [[ProductSearchHome alloc] initWithNibName:@"ProductSearchHome" bundle:nil];
     
     mHomeViewController.view.frame = CGRectMake(0, 0, 320, isIPhone5?519:433);
-    
+    mHomeViewController.isGiftViewPush = TRUE;
     
     [tabBarController.view addSubview:mHomeViewController.view];
     
@@ -322,18 +322,6 @@ static NSString *const kAllowTracking = @"allowTracking";
         
     }
     
-//    NSArray *fontFamilies = [UIFont familyNames];
-//    
-//    for (int i = 0; i < [fontFamilies count]; i++)
-//    {
-//        NSString *fontFamily = [fontFamilies objectAtIndex:i];
-//        NSArray *fontNames = [UIFont fontNamesForFamilyName:[fontFamilies objectAtIndex:i]];
-//        NSLog (@"%@: %@", fontFamily, fontNames);
-//    }
-    
- 
-//
-    
     application.applicationIconBadgeNumber = 0;
     [application cancelAllLocalNotifications];
     
@@ -345,8 +333,6 @@ static NSString *const kAllowTracking = @"allowTracking";
     _localiBeaconmsg=[[NSMutableArray alloc] init];
     
     
-    // Override point for customization after application launch.
-//    [window makeKeyAndVisible];
     
     tabBarController.delegate = self;
     tabBarController.hidesBottomBarWhenPushed = YES;
@@ -360,8 +346,8 @@ static NSString *const kAllowTracking = @"allowTracking";
     
     storeListContent=[[NSMutableArray alloc]init];
     
-    
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"viewShow"])
+    //// Uncomment this for Introduction View/////
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"viewShow"])
     {
         LocationViewController *loaction = [[LocationViewController alloc]initWithNibName:@"LocationViewController" bundle:nil];
         loaction.presentMainView = YES;
@@ -369,11 +355,11 @@ static NSString *const kAllowTracking = @"allowTracking";
             loaction.shouldReload = NO;
         
         navController = [[UINavigationController alloc]initWithRootViewController:loaction];
-    }else
-    {
-        IntroductionView *loaction = [[IntroductionView alloc]initWithNibName:@"IntroductionView" bundle:nil];
-        
-        navController = [[UINavigationController alloc]initWithRootViewController:loaction];
+//    }else
+//    {
+//        IntroductionView *loaction = [[IntroductionView alloc]initWithNibName:@"IntroductionView" bundle:nil];
+//        
+//        navController = [[UINavigationController alloc]initWithRootViewController:loaction];
     }
     
    

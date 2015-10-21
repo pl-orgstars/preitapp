@@ -711,7 +711,7 @@
 - (void)showMainViewController {
     ProductSearchHome *productSearchVC = [[ProductSearchHome alloc] initWithNibName:@"ProductSearchHome" bundle:nil];
     productSearchVC.view.frame = CGRectMake(0, 0, 320, isIPhone5?568:480);
-    
+    productSearchVC.isGiftViewPush = TRUE;
     PreitNavigationViewController *navCont = [[PreitNavigationViewController alloc] initWithRootViewController:productSearchVC];
     navCont.navigationBarHidden = YES;
     
@@ -725,7 +725,7 @@
     container.menuAnimationDefaultDuration = 0.5;
     container.menuSlideAnimationEnabled = YES;
     container.menuSlideAnimationFactor = 1.0;
-    
+    container.panMode = 0;
     [self presentViewController:container animated:YES completion:nil];
 }
 

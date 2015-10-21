@@ -35,7 +35,12 @@
 
     [super viewDidLoad];
     
-    NSString *urlString = [delegate.mallData objectForKey:@"website_url"];
+    
+    NSString* name = delegate.mallData[@"name"];
+    name = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
+    name = [name lowercaseString];
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://%@.red5demo.com",name];//[delegate.mallData objectForKey:@"website_url"];
     NSLog(@"urlsrtrrttr %@",urlString);
     
     //    urlString = [[urlString componentsSeparatedByString:@"."] objectAtIndex:0];
@@ -60,6 +65,24 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - Web View Delegate
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    
+    NSString *urlString = @".red5demo.com";
+    
+     if ([[[request URL]absoluteString]rangeOfString:urlString].location != NSNotFound) {
+         return YES;
+    }
+    
+    return NO;
+}
+
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    
 }
 
 @end

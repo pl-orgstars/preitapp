@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomWebViewController.h"
-@interface DealScreenViewController : CustomWebViewController
+@interface DealScreenViewController : CustomWebViewController 
 
 @end

@@ -12,6 +12,8 @@
 @interface BaseViewController : UIViewController{
    
     MBProgressHUD *hud;
+    UIView* main_view;
+    
 }
 -(void)hideHud;
 -(void)showHudWithMessage:(NSString *)message;
