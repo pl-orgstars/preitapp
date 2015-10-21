@@ -11,7 +11,7 @@
 #import "HomeScreen.h"
 #import "MapViewController.h"
 #import "JSBridgeViewController.h"
-
+#import "WinViewController.h"
 
 #import "RequestAgent.h"
 
@@ -189,8 +189,12 @@
 - (void)showMainViewController {
     ProductSearchHome *productSearchVC = [[ProductSearchHome alloc] initWithNibName:@"ProductSearchHome" bundle:nil];
     productSearchVC.view.frame = CGRectMake(0, 0, 320, isIPhone5?568:480);
-    productSearchVC.isGiftViewPush = TRUE;
+//    productSearchVC.isGiftViewPush = TRUE;
     PreitNavigationViewController *navCont = [[PreitNavigationViewController alloc] initWithRootViewController:productSearchVC];
+    // Chaipy Start
+    WinViewController *winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
+    [navCont pushViewController:winVC animated:NO];
+    // Chaipy End
     navCont.navigationBarHidden = YES;
     
     MenuScreenViewController *sideMenu = [[MenuScreenViewController alloc] initWithNibName:@"MenuScreenViewController" bundle:[NSBundle mainBundle]];

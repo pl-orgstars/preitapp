@@ -105,7 +105,6 @@
 
 - (void)ShowGiftView:(NSNotification *)notification
 {
-    NSLog(@"ShowGiftViewShowGiftViewShowGiftViewShowGiftView");
     NSString *strEvent = [NSString stringWithFormat:@"%@ Best Gift Ever.",[appdelegate.mallData objectForKey:@"name"]];
     [Flurry logEvent:strEvent timed:YES];
         WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
@@ -119,7 +118,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ShowGiftView:) name:@"ShowGiftView" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ShowGiftView:) name:@"ShowGiftView" object:nil];
 
     beaconmsgUpdate =[NSTimer scheduledTimerWithTimeInterval:100.0
                                                       target:self

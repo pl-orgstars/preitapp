@@ -13,6 +13,7 @@
 #import "JSON.h"
 #import "UIAlertView+Blocks.h"
 #import "MenuScreenViewController.h"
+#import "WinViewController.h"
 
 #define LABEL_TAG 100
 
@@ -685,9 +686,19 @@
         [self showMainViewController];
     else{
         
-        ProductSearchHome *vcHomeSearch = (ProductSearchHome *)self.navigationController.viewControllers[0];
-        vcHomeSearch.isGiftViewPush = TRUE;
-        [self.navigationController popToRootViewControllerAnimated:YES];
+//        ProductSearchHome *vcHomeSearch = (ProductSearchHome *)self.navigationController.viewControllers[0];
+//        vcHomeSearch.isGiftViewPush = TRUE;
+        
+        // Chaipy Start
+        WinViewController *winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
+        
+        NSMutableArray *controllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+        [controllers insertObject:winVC atIndex:1];
+        self.navigationController.viewControllers = controllers;
+        [self.navigationController popToViewController:winVC animated:YES];
+        
+        // Chaipy End
+        
     }
     
 }
@@ -716,8 +727,12 @@
 - (void)showMainViewController {
     ProductSearchHome *productSearchVC = [[ProductSearchHome alloc] initWithNibName:@"ProductSearchHome" bundle:nil];
     productSearchVC.view.frame = CGRectMake(0, 0, 320, isIPhone5?568:480);
-    productSearchVC.isGiftViewPush = TRUE;
+//    productSearchVC.isGiftViewPush = TRUE;
     PreitNavigationViewController *navCont = [[PreitNavigationViewController alloc] initWithRootViewController:productSearchVC];
+    // Chaipy Start
+    WinViewController *winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
+    [navCont pushViewController:winVC animated:NO];
+    // Chaipy End
     navCont.navigationBarHidden = YES;
     
     MenuScreenViewController *sideMenu = [[MenuScreenViewController alloc] initWithNibName:@"MenuScreenViewController" bundle:[NSBundle mainBundle]];
