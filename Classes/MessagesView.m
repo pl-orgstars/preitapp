@@ -79,25 +79,35 @@
 
 - (void)markAsReadMessage:(NSIndexPath *)indexPath {
     NSDictionary *dict;
-    if (overallMessages.count > 0 && propertyMessages.count > 0) {
-        if (indexPath.section == 0)
-            dict = overallMessages[indexPath.row];
-        else
-            dict = propertyMessages[indexPath.row];
-    }
-    else if (overallMessages.count == 0 && propertyMessages.count > 0) {
+//    if (overallMessages.count > 0 && propertyMessages.count > 0) {
+//        if (indexPath.section == 0)
+//            dict = overallMessages[indexPath.row];
+//        else
+//            dict = propertyMessages[indexPath.row];
+//    }
+//    else if (overallMessages.count == 0 && propertyMessages.count > 0) {
+//        dict = propertyMessages[indexPath.row];
+//    }
+//    else if (overallMessages.count > 0 && propertyMessages.count == 0) {
+//        dict = overallMessages[indexPath.row];
+//    }
+    if (propertyMessages.count > 0) {
+        if (overallMessages.count > 0 && indexPath.section == 0)
+            return;
+        
         dict = propertyMessages[indexPath.row];
-    }
-    else if (overallMessages.count > 0 && propertyMessages.count == 0) {
-        dict = overallMessages[indexPath.row];
     }
     
     NSDictionary *params = @{@"property_message_id" : [dict objectForKey:@"id"],
-                             @"udid" : UDID};
+                             @"user_info" : @{@"udid" : UDID}
+                             };
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:@"http://preitmessage.r5i.com/api/user_infos" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"response = %@", responseObject);
+        [propertyMessages removeObjectAtIndex:indexPath.row];
+        [tableView_ reloadData];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error = %@", error.localizedDescription);
     }];

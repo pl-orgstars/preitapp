@@ -44,6 +44,7 @@ typedef enum {
     NSDictionary *nearestMall;
     
     DisplayOrder displayOrder;
+    BOOL locationButtonPressed;
 }
 
 @property(nonatomic,retain)NSMutableArray *tableData;
