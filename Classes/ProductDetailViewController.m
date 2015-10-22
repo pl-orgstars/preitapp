@@ -370,6 +370,7 @@
         [imageDetail setProductIndex:productIndex];
         [imageDetail setTag:tagImageView];
         imageDetail.backgroundColor=[UIColor clearColor];
+        NSLog(@"objectToBeUsed.imageUrl %@",objectToBeUsed.imageUrl);
         [imageDetail loadImageFromURL:[NSURL URLWithString:objectToBeUsed.imageUrl] delegate:self requestSelector:@selector(imageDownloaded:)];
         imageDetail.frame = imgViewMain.frame;
         y2=imageDetail.frame.size.height;
@@ -559,7 +560,9 @@
     
     NSLog(@"crash here 1");
     if (imgDict!=nil) {
-        if ([imgDict objectForKey:@"imgData"]) {
+        if ([imgDict objectForKey:@"imgData"] && [UIImage imageWithData:[imgDict objectForKey:@"imgData"]])
+        {
+            NSLog(@"[imgDict objectForKey: %@",[UIImage imageWithData:[imgDict objectForKey:@"imgData"]]);
             DetailAsyncImageVIew *asyn = (DetailAsyncImageVIew*)[imgDict objectForKey:@"imgView"] ;//retain];
             [imagesArray replaceObjectAtIndex:asyn.productIndex withObject:[UIImage imageWithData:[imgDict objectForKey:@"imgData"]]];
             
