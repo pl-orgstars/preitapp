@@ -192,7 +192,7 @@
                 </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="467" y="263"/>
+            <point key="canvasLocation" x="617" y="218"/>
         </view>
     </objects>
     <resources>
