@@ -4,6 +4,11 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Proxima Nova Bold.ttf">
+            <string>ProximaNova-Bold</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SingleStoreSearchViewController">
             <connections>
@@ -198,9 +203,9 @@
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hHW-D9-zie">
-                    <rect key="frame" x="7" y="31" width="304" height="22"/>
+                    <rect key="frame" x="0.0" y="30" width="320" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -244,6 +249,6 @@
         <image name="header-icon-menu.png" width="22" height="18"/>
         <image name="next_arrow.png" width="19" height="28"/>
         <image name="previous_arrow.png" width="19" height="28"/>
-        <image name="productsearch-icon-list.png" width="20" height="20"/>
+        <image name="productsearch-icon-list.png" width="23" height="18"/>
     </resources>
 </document>
