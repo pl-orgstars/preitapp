@@ -132,13 +132,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 	CGFloat height=60.0;
-	if(!isNoData){
-		NSDictionary *tmpDict=[[tableData objectAtIndex:indexPath.row]objectForKey:@"job"];
-		CGSize constraint = CGSizeMake(200.0000, 20000.0f);
-		CGSize titlesize = [[tmpDict objectForKey:@"title"] sizeWithFont:[UIFont boldSystemFontOfSize:25] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-//		height= (titlesize.height<60?is_iOS7?80:65:(titlesize.height+20));
-	}
-	return height;	
+//	if(!isNoData){
+//		NSDictionary *tmpDict=[[tableData objectAtIndex:indexPath.row]objectForKey:@"job"];
+//		CGSize constraint = CGSizeMake(200.0000, 20000.0f);
+//		CGSize titlesize = [[tmpDict objectForKey:@"title"] sizeWithFont:[UIFont boldSystemFontOfSize:25] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+////		height= (titlesize.height<60?is_iOS7?80:65:(titlesize.height+20));
+//	}
+	return height;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -159,7 +159,8 @@
 	}
 //	if(cellIdentifier==@"Cell")
     if([cellIdentifier isEqualToString:@"Cell"]){
-		cell.textLabel.numberOfLines=0;
+		cell.textLabel.numberOfLines=1;
+        cell.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
 		NSDictionary *tmpDict=[[tableData objectAtIndex:indexPath.row]objectForKey:@"job"];
 		
 		NSString *text=[tmpDict objectForKey:@"title"];

@@ -389,22 +389,34 @@
     
     UILabel *desc=[[UILabel alloc]initWithFrame:CGRectMake(xAxis , imgViewMain.frame.origin.y + imgViewMain.frame.size.height + 20,253,20)];
     desc.textAlignment = NSTextAlignmentLeft;
-    [desc setText:objectToBeUsed.desc];
+    
     [desc setTextColor:[UIColor whiteColor]];
     desc.lineBreakMode = NSLineBreakByWordWrapping;
     desc.numberOfLines = 0;
     desc.font = [UIFont systemFontOfSize:13];
+//    NSDictionary *fontAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:13]};
+//  
+//    CGSize expectedLabelSize = [objectToBeUsed.desc sizeWithAttributes:fontAttributes];
+
     
+    /// For rEmove extra Space///
+    NSError *error = nil;
     
-    NSDictionary *fontAttributes = @{NSFontAttributeName : desc.font};
-    CGSize expectedLabelSize = [objectToBeUsed.desc sizeWithAttributes:fontAttributes];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"  +" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSString *trimmedString = [regex stringByReplacingMatchesInString:objectToBeUsed.desc options:0 range:NSMakeRange(0, [objectToBeUsed.desc length]) withTemplate:@" "];
     
+    NSLog(@"objectToBeUsed.desc %@",objectToBeUsed.desc);
+    //////////////////////
+    CGSize maximumLabelSize = CGSizeMake(296, FLT_MAX);
     
+    CGSize expectedLabelSize = [trimmedString sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:maximumLabelSize lineBreakMode:desc.lineBreakMode];
+
     
     [desc sizeToFit];
-    CGRect make=desc.frame;
-    make.size.height=expectedLabelSize.height;
-    desc.frame=make;
+    [desc setText:[trimmedString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+    
+
+    desc.frame=CGRectMake(xAxis, imgViewMain.frame.origin.y + imgViewMain.frame.size.height + 20, 253, expectedLabelSize.height);
     desc.backgroundColor=[UIColor clearColor];
     [scrollProductDetail addSubview:desc];
 
