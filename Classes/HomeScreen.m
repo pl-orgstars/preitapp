@@ -169,24 +169,43 @@
 
 
 - (IBAction)locateNearestMallAction:(id)sender {
-    CLLocation *locA = [[CLLocation alloc] initWithLatitude:self.coordinates.latitude longitude:self.coordinates.longitude];
-    CLLocationDistance distance = 0;
-    
-    for (NSDictionary *dict in tableData) {
-        CLLocation *locB = [[CLLocation alloc] initWithLatitude:[[dict objectForKey:@"location_lat"] doubleValue]
-                                                      longitude:[[dict objectForKey:@"location_lng"] doubleValue]];
-        CLLocationDistance tempDistance = [locA distanceFromLocation:locB];
-        if (tempDistance < distance || distance == 0) {
-            distance = tempDistance;
-            nearestMall = dict;
+    if (!locationButtonPressed) {
+        locationButtonPressed = YES;
+        
+        locateButton.imageView.hidden = YES;
+        [locateButton setTitle:@"SHOW ALL MALLS" forState:UIControlStateNormal];
+        [locateButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [locateButton setBackgroundColor:[UIColor whiteColor]];
+        
+        CLLocation *locA = [[CLLocation alloc] initWithLatitude:self.coordinates.latitude longitude:self.coordinates.longitude];
+        CLLocationDistance distance = 0;
+        
+        for (NSDictionary *dict in tableData) {
+            CLLocation *locB = [[CLLocation alloc] initWithLatitude:[[dict objectForKey:@"location_lat"] doubleValue]
+                                                          longitude:[[dict objectForKey:@"location_lng"] doubleValue]];
+            CLLocationDistance tempDistance = [locA distanceFromLocation:locB];
+            if (tempDistance < distance || distance == 0) {
+                distance = tempDistance;
+                nearestMall = dict;
+            }
         }
+        
+        byStateUnderline.hidden = YES;
+        byAlphabetUnderline.hidden = YES;
+        
+        displayOrder = DisplayOrderNearestMall;
+        [self reloadTableView];
     }
-    
-    byStateUnderline.hidden = YES;
-    byAlphabetUnderline.hidden = YES;
-    
-    displayOrder = DisplayOrderNearestMall;
-    [self reloadTableView];
+    else {
+        locationButtonPressed = NO;
+        
+        locateButton.imageView.hidden = NO;
+        [locateButton setTitle:@"LOCATE NEAREST MALL" forState:UIControlStateNormal];
+        [locateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [locateButton setBackgroundColor:[UIColor clearColor]];
+        
+        [self byStateAction:nil];
+    }
 }
 
 - (IBAction)byStateAction:(id)sender {
