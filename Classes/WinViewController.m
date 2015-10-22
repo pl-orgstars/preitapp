@@ -7,6 +7,7 @@
 //
 
 #import "WinViewController.h"
+#import "LoadingAgent.h"
 
 #define VOTIGO_SIGNUP @"http://sqa02demopartner.votigo.com/fbsweeps/sweeps/testsweepsforred5-1"
 #define VOTIGO_CONFIRM @"http://sqa02demopartner.votigo.com/fbsweeps/confirmation/testsweepsforred5-1"
@@ -31,9 +32,9 @@
     // Do any additional setup after loading the view from its nib.
     
     delegate = (PreitAppDelegate*)[UIApplication sharedApplication].delegate;
-    
     NSString* votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
     NSString* url;
+//    [[LoadingAgent defaultAgent] makeBusy:YES];
     
     if (votigoUserID) {
         url = [NSString stringWithFormat:@"%@?mall_id=%@&sweepuserentry_id=%@", VOTIGO_MAIN, [delegate.mallData objectForKey:@"id"], votigoUserID];
@@ -51,9 +52,29 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [winWebView stopLoading];
+}
+
+
 
 #pragma mark - web view delgates
 
+
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    [[LoadingAgent defaultAgent] makeBusy:NO];
+
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    [[LoadingAgent defaultAgent] makeBusy:NO];
+
+}
+
+-(void)webViewDidStartLoad:(UIWebView *)webView{
+    [[LoadingAgent defaultAgent] makeBusy:YES];
+
+}
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     
     

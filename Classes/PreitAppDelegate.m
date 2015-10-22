@@ -173,7 +173,7 @@ static NSString *const kAllowTracking = @"allowTracking";
     mHomeViewController = [[ProductSearchHome alloc] initWithNibName:@"ProductSearchHome" bundle:nil];
     
     mHomeViewController.view.frame = CGRectMake(0, 0, 320, isIPhone5?519:433);
-    mHomeViewController.isGiftViewPush = TRUE;
+//    mHomeViewController.isGiftViewPush = TRUE;
     
     [tabBarController.view addSubview:mHomeViewController.view];
     

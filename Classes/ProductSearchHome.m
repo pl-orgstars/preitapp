@@ -30,7 +30,7 @@
     PreitAppDelegate *del;
 }
 
-@synthesize isGiftViewPush;
+//@synthesize isGiftViewPush;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -69,7 +69,8 @@
     mobileWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, isIPhone5?66:65, 320, isIPhone5?534:417)];
     [mobileWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
     mobileWebView.delegate = self;
-//    [self.view insertSubview:mobileWebView belowSubview:spinner];
+    
+    [self.view insertSubview:mobileWebView belowSubview:spinner];
     
     [webViewBackButton setEnabled:YES];
     
@@ -79,16 +80,16 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateSideMenu" object:nil];
     findLabel.text = [NSString stringWithFormat:@"Find what you are looking for at %@ from participating retailers",[del.mallData objectForKey:@"name"]];
     
+    [self showMessagesView];
     
-    
-    if (self.isGiftViewPush)
-    {
-         [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowGiftView" object:nil];
-    }else
-    {
-        [self showMessagesView];
-    }
-    isGiftViewPush = FALSE;
+//    if (self.isGiftViewPush)
+//    {
+//         [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowGiftView" object:nil];
+//    }else
+//    {
+//        [self showMessagesView];
+//    }
+//    isGiftViewPush = FALSE;
 }
 
 -(void)viewDidAppear:(BOOL)animated{

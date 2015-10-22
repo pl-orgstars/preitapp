@@ -166,8 +166,9 @@
     
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Choose Source" message:@"Please select the source" delegate:self cancelButtonTitle:@"Camera" otherButtonTitles:@"Photos", nil];
-        [alertView show];
+//        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Choose Source" message:@"Please select the source" delegate:self cancelButtonTitle:@"Camera" otherButtonTitles:@"Photos", nil];
+//        [alertView show];
+        [self showImagePickerWithSource:UIImagePickerControllerSourceTypeCamera];
     }
     else{
         [self showImagePickerWithSource:UIImagePickerControllerSourceTypePhotoLibrary];
@@ -181,8 +182,9 @@
     gettingSection1 = YES;
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Choose Source" message:@"Please select the source" delegate:self cancelButtonTitle:@"Camera" otherButtonTitles:@"Photos", nil];
-        [alertView show];
+        [self showImagePickerWithSource:UIImagePickerControllerSourceTypeCamera];
+//        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Choose Source" message:@"Please select the source" delegate:self cancelButtonTitle:@"Camera" otherButtonTitles:@"Photos", nil];
+//        [alertView show];
     }
     else{
         [self showImagePickerWithSource:UIImagePickerControllerSourceTypePhotoLibrary];
@@ -194,8 +196,9 @@
     gettingSection1 = NO;
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Choose Source" message:@"Please select the source" delegate:self cancelButtonTitle:@"Camera" otherButtonTitles:@"Photos", nil];
-        [alertView show];
+//        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Choose Source" message:@"Please select the source" delegate:self cancelButtonTitle:@"Camera" otherButtonTitles:@"Photos", nil];
+//        [alertView show];
+        [self showImagePickerWithSource:UIImagePickerControllerSourceTypeCamera];
     }
     else{
         [self showImagePickerWithSource:UIImagePickerControllerSourceTypePhotoLibrary];

@@ -100,12 +100,12 @@
                             <rect key="frame" x="277" y="146" width="23" height="23"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" tag="-10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NewCircleBG.png" id="Wue-BZ-R28">
-                            <rect key="frame" x="239" y="9" width="20" height="20"/>
+                        <imageView userInteractionEnabled="NO" tag="-10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="productsearch-icon-list.png" id="Wue-BZ-R28">
+                            <rect key="frame" x="225" y="16" width="23" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" tag="-10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3l7-QZ-Yy0">
-                            <rect key="frame" x="236" y="12" width="20" height="11"/>
+                            <rect key="frame" x="228" y="19" width="20" height="11"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -156,7 +156,7 @@
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PRODUCTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8CE-j5-vPd">
-                    <rect key="frame" x="8" y="31" width="304" height="22"/>
+                    <rect key="frame" x="0.0" y="30" width="320" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -195,11 +195,11 @@
     </objects>
     <resources>
         <image name="BackWhite.png" width="25" height="25"/>
-        <image name="NewCircleBG.png" width="15" height="15"/>
         <image name="NewListDetail.png" width="90" height="29"/>
         <image name="NewStoreNAme.png" width="17" height="22"/>
         <image name="NewZoomBtn.png" width="23" height="23"/>
         <image name="close.png" width="19" height="19"/>
         <image name="header-icon-menu.png" width="22" height="18"/>
+        <image name="productsearch-icon-list.png" width="23" height="18"/>
     </resources>
 </document>

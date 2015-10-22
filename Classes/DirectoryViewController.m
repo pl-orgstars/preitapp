@@ -287,7 +287,7 @@
         
         [displayContent removeAllObjects];
         [displayContent addObjectsFromArray:listContent];
-        [self toggleFilterTableView:nil];
+        [self toggleFilterTableView:toggleFilterBtn];
         filterON = NO;
         
         filterByLabel.text = ALLSTORES;
