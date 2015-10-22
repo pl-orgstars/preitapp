@@ -287,17 +287,19 @@
         NSDictionary *tmpDict=[jsonString JSONValue];
 		if(tmpDict && [tmpDict objectForKey:@"tenant"])
 		{
-			NSDictionary *tmpInnerDict=[tmpDict objectForKey:@"tenant"];
-			NSString *imageLink=[tmpInnerDict objectForKey:@"image"];
-			if([imageLink length]!=0)
-			{
-
-				AsyncImageView* thumbnailImage = [[AsyncImageView alloc] initWithFrame:image_thumbNail.frame] ;//autorelease];
-				NSURL *url=[NSURL URLWithString:imageLink];
-				[thumbnailImage loadImageFromURL:url delegate:self requestSelector:@selector(responseThumb_Image:)];				
-			}
-			else [self hideLogoImageView];
+//			NSDictionary *tmpInnerDict=[tmpDict objectForKey:@"tenant"];
+//			NSString *imageLink=[tmpInnerDict objectForKey:@"image"];
+//			if([imageLink length]!=0)
+//			{
+//
+//				AsyncImageView* thumbnailImage = [[AsyncImageView alloc] initWithFrame:image_thumbNail.frame] ;//autorelease];
+//				NSURL *url=[NSURL URLWithString:imageLink];
+//				[thumbnailImage loadImageFromURL:url delegate:self requestSelector:@selector(responseThumb_Image:)];				
+//			}
+//			else [self hideLogoImageView];
 		}
+        
+        [self hideLogoImageView];
 	}
     
     
