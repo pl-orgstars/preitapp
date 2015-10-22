@@ -66,7 +66,7 @@
 		self.mallAddress=[NSString stringWithFormat:@"%@,+%@+%@+%@",[delegate.mallData objectForKey:@"address_street"],[delegate.mallData objectForKey:@"address_city"],[delegate.mallData objectForKey:@"address_state"],[delegate.mallData objectForKey:@"address_zipcode"]];
     self.mallAddress=[self.mallAddress stringByReplacingOccurrencesOfString:@" " withString:@"+"];
 	NSString *url = [NSString stringWithFormat:@"%@json?address=%@&sensor=false",NSLocalizedString(@"API_GeoCoding",@""),self.mallAddress]; 
-   // NSLog(@"url==>%@",url);
+    NSLog(@"url==>%@",url);
         RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
 	[req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
     

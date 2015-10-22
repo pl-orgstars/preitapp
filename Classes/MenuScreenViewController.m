@@ -354,13 +354,17 @@
         
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
+        NSString *location = [NSString stringWithFormat:@"%@ %@", [appdelegate.mallData objectForKey:@"name"], [appdelegate.mallData objectForKey:@"address_street"]];
+        location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+        NSLog(@"location %@",location);
+        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:location]]];
         
-        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[DirectionViewController class]]) {
-            DirectionViewController *screenDirection=[[DirectionViewController alloc]initWithNibName:@"DirectionViewController" bundle:nil];
-            
-            [_navController popToRootViewControllerAnimated:NO];
-            [_navController pushViewController:screenDirection animated:NO];
-        }
+//        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[DirectionViewController class]]) {
+//            DirectionViewController *screenDirection=[[DirectionViewController alloc]initWithNibName:@"DirectionViewController" bundle:nil];
+//            
+//            [_navController popToRootViewControllerAnimated:NO];
+//            [_navController pushViewController:screenDirection animated:NO];
+//        }
         
         
     }
