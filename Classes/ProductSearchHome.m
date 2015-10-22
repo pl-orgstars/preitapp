@@ -69,6 +69,7 @@
     mobileWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, isIPhone5?66:65, 320, isIPhone5?534:417)];
     [mobileWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
     mobileWebView.delegate = self;
+    
     [self.view insertSubview:mobileWebView belowSubview:spinner];
     
     [webViewBackButton setEnabled:YES];
