@@ -33,12 +33,9 @@
     CLLocation *current = [[CLLocation alloc] initWithLatitude:delegate.latitude longitude:delegate.longitude];
     
     CLLocationDistance distance = [current distanceFromLocation:destination];
-    if (distance >= 1609) //1609 meters = 1 mile
-    {
+    if (distance <= 1609) {
+        //1609 meters = 1 mile
         [self getOverallMessages];
-    }
-    else {
-        NSLog(@"Should Not Add");
     }
 }
 

@@ -38,6 +38,9 @@ typedef enum {
     IBOutlet UIImageView *byStateUnderline;
     IBOutlet UIImageView *byAlphabetUnderline;
     
+    IBOutlet UIImageView *locateImage;
+    IBOutlet UILabel *locateLabel;
+    
     NSMutableDictionary *sections;
     NSArray *sectionKeys;
     NSMutableArray *searchArray;

@@ -171,11 +171,7 @@
 - (IBAction)locateNearestMallAction:(id)sender {
     if (!locationButtonPressed) {
         locationButtonPressed = YES;
-        
-        locateButton.imageView.hidden = YES;
-        [locateButton setTitle:@"SHOW ALL MALLS" forState:UIControlStateNormal];
-        [locateButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [locateButton setBackgroundColor:[UIColor whiteColor]];
+        [self updateLocateButton];
         
         CLLocation *locA = [[CLLocation alloc] initWithLatitude:self.coordinates.latitude longitude:self.coordinates.longitude];
         CLLocationDistance distance = 0;
@@ -198,12 +194,7 @@
     }
     else {
         locationButtonPressed = NO;
-        
-        locateButton.imageView.hidden = NO;
-        [locateButton setTitle:@"LOCATE NEAREST MALL" forState:UIControlStateNormal];
-        [locateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [locateButton setBackgroundColor:[UIColor clearColor]];
-        
+        [self updateLocateButton];
         [self byStateAction:nil];
     }
 }
@@ -222,6 +213,23 @@
     
     displayOrder = DisplayOrderByAlphabet;
     [self reloadTableView];
+}
+
+- (void)updateLocateButton {
+    if (locationButtonPressed) {
+        locateImage.hidden = YES;
+        locateLabel.frame = locateButton.frame;
+        locateLabel.backgroundColor = [UIColor whiteColor];
+        locateLabel.textColor = [UIColor blackColor];
+        locateLabel.text = @"SHOW ALL MALLS";
+    }
+    else {
+        locateImage.hidden = NO;
+        locateLabel.frame = CGRectMake(81.0, 144, 192, 20);
+        locateLabel.backgroundColor = [UIColor clearColor];
+        locateLabel.textColor = [UIColor whiteColor];
+        locateLabel.text = @"LOCATE NEAREST MALL";
+    }
 }
 
 #pragma mark - SearchBar Methods
