@@ -271,6 +271,7 @@
 		BD03C5461BCF70A6001BD95E /* MessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 615604DB1BCE8B9C00FAD487 /* MessagesView.m */; };
 		BD03C5471BCF72B0001BD95E /* MessagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 613828931BCE6B140024F116 /* MessagesCell.m */; };
 		BD03C5481BCF72B3001BD95E /* MessagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 613828941BCE6B140024F116 /* MessagesCell.xib */; };
+		BD0CF2071BD8D4CF007F50C2 /* orientation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 61C21BB91BCFDE7E0081635A /* orientation@2x.png */; settings = {ASSET_TAGS = (); }; };
 		BD24B63D1BB92C0C00066F15 /* collapseArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24B63C1BB92C0C00066F15 /* collapseArrow@2x.png */; };
 		BD24B63F1BB92EC900066F15 /* BackBlack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24B63E1BB92EC900066F15 /* BackBlack@2x.png */; };
 		BD24B6411BB93CB300066F15 /* BackWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24B6401BB93CB300066F15 /* BackWhite@2x.png */; };
@@ -2628,6 +2629,7 @@
 				42AEED1515AE8FC300BE5B35 /* tic.png in Resources */,
 				AE2B5F941A47F18200460114 /* email_new.png in Resources */,
 				AE87D2DB193710F600F5493D /* search_selected@2x.png in Resources */,
+				BD0CF2071BD8D4CF007F50C2 /* orientation@2x.png in Resources */,
 				E6E283991BAAF80A001736DF /* MenuUpperview.xib in Resources */,
 				42AEED1615AE8FC300BE5B35 /* view-shopping-list.png in Resources */,
 				AE87D2E11937407D00F5493D /* main_screen_icon.png in Resources */,
