@@ -16,6 +16,8 @@
                 <outlet property="byStateUnderline" destination="aoE-Ag-yjf" id="J1M-yz-5h5"/>
                 <outlet property="indicator_" destination="8" id="9"/>
                 <outlet property="locateButton" destination="KQO-qQ-Or6" id="nE9-x4-Bz1"/>
+                <outlet property="locateImage" destination="Rbk-0W-1yn" id="Qau-w5-Vzk"/>
+                <outlet property="locateLabel" destination="Ssd-3X-ooh" id="I9Q-OM-IgJ"/>
                 <outlet property="menuButton" destination="4TS-W9-1OK" id="NNO-C7-L6j"/>
                 <outlet property="searchBar_" destination="zou-gW-eBQ" id="v4l-V5-T6k"/>
                 <outlet property="tableHome" destination="4" id="5"/>
@@ -122,11 +124,22 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orientation.png" id="Rbk-0W-1yn">
+                    <rect key="frame" x="48" y="141" width="25" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATE NEAREST MALL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ssd-3X-ooh">
+                    <rect key="frame" x="81" y="144" width="192" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KQO-qQ-Or6">
-                    <rect key="frame" x="20" y="135" width="280" height="38"/>
+                    <rect key="frame" x="35" y="135" width="250" height="38"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="18" maxY="0.0"/>
-                    <state key="normal" title="LOCATE NEAREST MALL" image="orientation.png">
+                    <state key="normal">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
