@@ -19,6 +19,7 @@
 #import "ProductListView.h"
 #import "AsyncImageView.h"
 #import "ProductSearchCC.h"
+#import "LoadingAgent.h"
 
 @implementation ProductListView
 
@@ -446,6 +447,8 @@
 
 -(void)RemoveFromDB:(int)index
 {
+    [[LoadingAgent defaultAgent] makeBusy:YES];
+    [self performSelector:@selector(RemoveLoading) withObject:nil afterDelay:0.3];
     Product *product;
     
     product = [productsArray objectAtIndex:index];
@@ -458,6 +461,9 @@
     [showProductDetailDelegate performSelector:removeFromShListSelector withObject:nil];
 }
 
+-(void)RemoveLoading{
+    [[LoadingAgent defaultAgent] makeBusy:NO];
+}
 -(IBAction)AddMe:(UIButton *)btnSender
 {
     
@@ -483,12 +489,17 @@
 
 -(void) imgLoader:(ImageLoader *)imgLoader processImage:(UIImage *)img indexPath:(NSIndexPath *)imgIndexPath
 {
-    if (img && productsArray.count >= imgIndexPath.row)
+    if (img && productsArray.count >= imgIndexPath.row )
     {
         ProductSearchCC *cell = (ProductSearchCC*)[collectionView cellForItemAtIndexPath:imgIndexPath];
         UIImageView *mainInage;
         Product *product;
-        product = [productsArray objectAtIndex:imgIndexPath.row];
+        if (imgIndexPath.row <= productsArray.count ) {
+            NSLog(@"count %d",productsArray.count);
+            NSLog(@"imgIndexPath %d",imgIndexPath.row);
+            product = [productsArray objectAtIndex:imgIndexPath.row];
+        }
+
         
         product.imgMain = img;
         cell.imageViewMain.clipsToBounds = YES;
