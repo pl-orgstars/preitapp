@@ -76,28 +76,30 @@
 
 - (void)markAsReadMessage:(NSIndexPath *)indexPath {
     NSDictionary *dict;
-//    if (overallMessages.count > 0 && propertyMessages.count > 0) {
-//        if (indexPath.section == 0)
-//            dict = overallMessages[indexPath.row];
-//        else
-//            dict = propertyMessages[indexPath.row];
-//    }
-//    else if (overallMessages.count == 0 && propertyMessages.count > 0) {
-//        dict = propertyMessages[indexPath.row];
-//    }
-//    else if (overallMessages.count > 0 && propertyMessages.count == 0) {
-//        dict = overallMessages[indexPath.row];
-//    }
-    if (propertyMessages.count > 0) {
-        if (overallMessages.count > 0 && indexPath.section == 0)
-            return;
-        
+    BOOL addPropertyMessageID = NO;
+    
+    if (overallMessages.count > 0 && propertyMessages.count > 0) {
+        if (indexPath.section == 0)
+            dict = overallMessages[indexPath.row];
+        else {
+            dict = propertyMessages[indexPath.row];
+            addPropertyMessageID = YES;
+        }
+    }
+    else if (overallMessages.count == 0 && propertyMessages.count > 0) {
         dict = propertyMessages[indexPath.row];
+        addPropertyMessageID = YES;
+    }
+    else if (overallMessages.count > 0 && propertyMessages.count == 0) {
+        dict = overallMessages[indexPath.row];
     }
     
-    NSDictionary *params = @{@"property_message_id" : [dict objectForKey:@"id"],
-                             @"user_info" : @{@"udid" : UDID}
-                             };
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"user_info"] = @{@"udid" : UDID};
+    
+    if (addPropertyMessageID == YES)
+        params[@"property_message_id"] = [dict objectForKey:@"id"];
+    
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:@"http://preitmessage.r5i.com/api/user_infos" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
