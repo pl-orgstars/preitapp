@@ -37,6 +37,9 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ShoppingListRefresh:) name:@"ShoppingListRefresh" object:nil];
+
+    
     [self setNavigationTitle:self.titleString withBackButton:YES];
 //    [listCountLabel setText:[NSString stringWithFormat:@"%d",[[Database sharedDatabase] getCount]]];
     [self AddinList:[[Database sharedDatabase] getCount]];
@@ -45,6 +48,12 @@
     }else {
         lblHeaderStore.text = self.titleString;
     }
+}
+
+- (void)ShoppingListRefresh:(NSNotification *)notification
+{
+    NSDictionary *dictionary = [notification userInfo];
+    [self AddinList:[dictionary[@"total"] intValue]];
 }
 
 - (void)viewDidLoad
@@ -148,6 +157,7 @@
 }
 
 -(IBAction)showShoppingList:(id)sender {
+    
     NSLog(@"show shopping list %d",[[Database sharedDatabase]getCount]);
 
     if ([[Database sharedDatabase]getCount]) {
