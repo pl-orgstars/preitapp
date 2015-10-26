@@ -36,11 +36,13 @@
     [super viewDidLoad];
     
     
-    NSString* name = delegate.mallData[@"name"];
-    name = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
-    name = [name lowercaseString];
+//    NSString* name = delegate.mallData[@"name"];
+//    name = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    name = [name lowercaseString];
     
     NSString *urlString = /*[NSString stringWithFormat:@"http://%@.red5demo.com",name];*/[delegate.mallData objectForKey:@"website_url"];
+    
+    urlString = [urlString stringByReplacingOccurrencesOfString:@".com" withString:SUB_DOMAIN];
     NSLog(@"urlsrtrrttr %@",urlString);
     
     //    urlString = [[urlString componentsSeparatedByString:@"."] objectAtIndex:0];
