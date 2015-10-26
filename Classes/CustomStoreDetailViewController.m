@@ -20,17 +20,6 @@
 @implementation CustomStoreDetailViewController
 @synthesize dictData;
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
 {
@@ -59,9 +48,6 @@
 
 	if(suiteID>0)
 	{
-		
-		
-        
         NSString *url=[NSString stringWithFormat:@"%@/tenant_categories/tenant_image?suite_id=%d",[delegate.mallData objectForKey:@"resource_url"],suiteID];
         [self showHudWithMessage:@""];
         RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
@@ -81,9 +67,9 @@
 	
 }
 
+
+
 -(void)setData{
-//    [self setDefaultThumbnail];
-    
 	labelName.text=[dictData objectForKey:@"name"];
     
     if ([dictData objectForKeyWithNullCheck:@"description"]) {
@@ -191,23 +177,19 @@
 
 				NSURL *url = [[ NSURL alloc ] initWithString: phoneNumber];
 				[[UIApplication sharedApplication] openURL:url];
-//				[url release];
 			}
 		}
 			break;
 		case 101:
 		{
 			//Map
-			NSLog(@"Map==%@",dictData);
 			NSDictionary *suite=[dictData objectForKey:@"suite"];
 			int suiteID=[[suite objectForKey:@"id"] intValue];
             if(suiteID>0)
 			{
 				JSBridgeViewController *screenMap=[[JSBridgeViewController alloc]initWithNibName:@"JSBridgeViewController" bundle:nil];
-				//screenMap.mapUrl=[NSString stringWithFormat:@"%@/areas/%d/show_map?suit_id=%d",[delegate.mallData objectForKey:@"resource_url"],[[dictData objectForKey:@"suite_id"] intValue],[[dictData objectForKey:@"suite_id"] intValue]];
 				screenMap.mapUrl=[NSString stringWithFormat:@"%@/areas/getarea?suit_id=%d",[delegate.mallData objectForKey:@"resource_url"],suiteID];
 				[self.navigationController pushViewController:screenMap animated:YES];
-//				[screenMap release];
 			}
 		}
 			break;
@@ -235,7 +217,6 @@
 -(IBAction)dealBttnTapped:(id)sender{
     WebViewController *screenWebView=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
     screenWebView.screenIndex=50;
-    //    [[GAI sharedInstance].defaultTracker sendView:@"Hours"];
     
     screenWebView.htmlString = [showDealDictionary objectForKeyWithNullCheck:@"content"];
     

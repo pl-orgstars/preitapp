@@ -470,7 +470,7 @@
     
     
     //// Add discription /////////
-    UILabel *descHeader=[[UILabel alloc]initWithFrame:CGRectMake(xAxis , facebookbutton.frame.origin.y + facebookbutton.frame.size.height + 10,253,20)];
+    UILabel *descHeader=[[UILabel alloc]initWithFrame:CGRectMake(xAxis , facebookbutton.frame.origin.y + facebookbutton.frame.size.height + 5,253,20)];
     [descHeader setTextColor:[UIColor whiteColor]];
     descHeader.text = @"DESCRIPTION";
     descHeader.textAlignment = NSTextAlignmentLeft;
