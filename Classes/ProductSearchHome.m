@@ -58,9 +58,6 @@
     
     urlString = [urlString stringByReplacingOccurrencesOfString:@".com" withString:SUB_DOMAIN];
     
-//    NSString *mallName = [[del.mallData objectForKey:@"name"] lowercaseString];
-//    mallName = [mallName stringByReplacingOccurrencesOfString:@" " withString:@""];
-//    NSString *urlString = [NSString stringWithFormat:@"http://%@.red5demo.com/mobilepromo?mobile=yes", mallName];
     
     urlString = [NSString stringWithFormat:@"%@%@",urlString,HOME_WEB_VIEW];
     
@@ -81,21 +78,14 @@
     findLabel.text = [NSString stringWithFormat:@"Find what you are looking for at %@ from participating retailers",[del.mallData objectForKey:@"name"]];
     
     [self showMessagesView];
-    
-//    if (self.isGiftViewPush)
-//    {
-//         [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowGiftView" object:nil];
-//    }else
-//    {
-//        [self showMessagesView];
-//    }
-//    isGiftViewPush = FALSE;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     
     titleLabel.text = (NSString*)[del.mallData objectForKey:@"name"];
+    titleLabel.text = [titleLabel.text uppercaseString];
     titleLabel2.text = (NSString*)[del.mallData objectForKey:@"name"];
+    titleLabel2.text = [titleLabel2.text uppercaseString];
 }
 
 - (void)viewDidLoad
@@ -156,13 +146,11 @@
 -(IBAction)hideMoreInfo:(id)sender {
     backFlag = YES;
     [moreInfoView setHidden:YES];
-//    [spinner stopAnimating];
     [[LoadingAgent defaultAgent]makeBusy:NO];
     [webview stopLoading];
 }
 -(void)showALertWithRequest:(NSURLRequest *)urlRequest{
     
-//    [spinner stopAnimating];
     [[LoadingAgent defaultAgent]makeBusy:NO];
     [UIAlertView showWithTitle:NSLocalizedString(@"WebView_title",@"") message:NSLocalizedString(@"WebView_message",@"") cancelButtonTitle:@"Cancel" otherButtonTitles:@[@"Open"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
@@ -184,11 +172,6 @@
 
 #pragma mark webview delegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-    NSLog(@"request::::::::::: Waseem %@ %@",[request URL],[[request URL]absoluteString]);
-    
-    
-//    PreitAppDelegate *del = (PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
-    
     NSString *urlString = del.mallData[@"website_url"];//@".red5demo.com";
     urlString = [urlString stringByReplacingOccurrencesOfString:@".com" withString:SUB_DOMAIN];
 

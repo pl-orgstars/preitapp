@@ -64,8 +64,7 @@
 	[headerView sizeToFit];
 
 	titleLabel=[[UILabel alloc] initWithFrame:CGRectMake(0, 2, 200, 20)];
-	titleLabel.text=[delegate.mallData objectForKey:@"name"];
-    NSLog(@"titleLabel ==%@",[delegate.mallData objectForKey:@"name"]);
+	titleLabel.text=[[delegate.mallData objectForKey:@"name"] uppercaseString];
     titleLabel.textColor = [UIColor whiteColor];
 	titleLabel.font=[UIFont boldSystemFontOfSize:18];
 	titleLabel.shadowColor=[UIColor blackColor];

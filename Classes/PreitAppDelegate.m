@@ -67,8 +67,6 @@ static NSString *const kAllowTracking = @"allowTracking";
 @synthesize shoppingStores;
 @synthesize storeListContent;
 @synthesize website_url;
-@synthesize vc_MenuView;
-@synthesize sideMenuV;
 
 @synthesize tracker;
 @synthesize isOnForeGround;
@@ -355,11 +353,6 @@ static NSString *const kAllowTracking = @"allowTracking";
             loaction.shouldReload = NO;
         
         navController = [[UINavigationController alloc]initWithRootViewController:loaction];
-//    }else
-//    {
-//        IntroductionView *loaction = [[IntroductionView alloc]initWithNibName:@"IntroductionView" bundle:nil];
-//        
-//        navController = [[UINavigationController alloc]initWithRootViewController:loaction];
     }
     
    
@@ -373,10 +366,6 @@ static NSString *const kAllowTracking = @"allowTracking";
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     
-    vc_MenuView = [[MenuView alloc]initWithNibName:@"MenuView" bundle:[NSBundle mainBundle]];
-
-    
-    sideMenuV = [[SideMenu alloc] customInit];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
@@ -409,48 +398,6 @@ static NSString *const kAllowTracking = @"allowTracking";
     return YES;
 }
 
--(void)ShowMenuViewOnTop
-{
-//    [window addSubview:self.vc_MenuUpperview];
-    
-    [window addSubview:self.sideMenuV];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.sideMenuV.nameLabel.text = [mallData objectForKey:@"name"];
-
-    });
-    self.sideMenuV.frame = CGRectMake(self.window.frame.size.width, self.sideMenuV.frame.origin.y, self.sideMenuV.frame.size.width, self.sideMenuV.frame.size.height);
-    NSLog(@"self %@",self.sideMenuV);
-    [UIView animateWithDuration:0.5
-                          delay:0.0
-                        options: 2
-                     animations:^{
-                         [window bringSubviewToFront:self.sideMenuV];
-
-                         self.sideMenuV.center = CGPointMake(self.window.frame.size.width/2, self.window.frame.size.height/2);
-                     }
-                     completion:^(BOOL finished){
-                         [tabBarController.view removeFromSuperview];
-                     }];
-}
-
-
--(void)HideMenuViewOnTop
-{
-    [self.window addSubview:tabBarController.view];
-    [self.window bringSubviewToFront:self.sideMenuV];
-    [UIView animateWithDuration:0.25
-                          delay:0.0
-                        options: 2
-                     animations:^{
-                         self.sideMenuV.frame = CGRectMake(self.window.frame.size.width, self.sideMenuV.frame.origin.y, self.sideMenuV.frame.size.width, self.sideMenuV.frame.size.height);
-
-                     }
-                     completion:^(BOOL finished){
-                         [self.sideMenuV removeFromSuperview];
-                     }];
-}
-
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
@@ -459,12 +406,8 @@ static NSString *const kAllowTracking = @"allowTracking";
     
     // Start the long-running task and return immediately.
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
         // Do the work associated with the task.
-        
         if (navController.viewControllers.count) {
-
-            
         }else{
             [application endBackgroundTask:bgTask];
             bgTask = UIBackgroundTaskInvalid;

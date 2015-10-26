@@ -484,14 +484,11 @@
 
 -(IBAction)showShoppingList:(id)sender {
     NSLog(@"show shopping list");
-    
-    if ([[Database sharedDatabase]getCount]) {
-        
-        
+//    if ([[Database sharedDatabase]getCount]) {
         ShoppingListViewController *shoppingList = [[ShoppingListViewController alloc]initWithNibName:@"ShoppingListViewController" bundle:nil];
         [self.navigationController pushViewController:shoppingList animated:YES];
         [self.navigationItem setTitle:@"Back"];
-    }
+//    }
 }
 
 
@@ -824,16 +821,16 @@
 
 -(void)AddinList:(int)totalIndex
 {
- 
     if (totalIndex > 0)
     {
         lblTotalNumber.hidden = FALSE;
         imgViewCircleBG.hidden = FALSE;
         lblTotalNumber.text = [NSString stringWithFormat:@"%d",totalIndex];
+         imgViewCircleBG.image = [UIImage imageNamed:@"productsearch-icon-list.png"];
     }else
     {
         lblTotalNumber.hidden = TRUE;
-        imgViewCircleBG.hidden = TRUE;
+        imgViewCircleBG.image = [UIImage imageNamed:@"Old-productsearch-icon-list.png"];
     }
 }
 @end
