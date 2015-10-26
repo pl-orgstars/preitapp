@@ -499,7 +499,8 @@
     [twitterbutton addTarget:self
                       action:@selector(twiterBttnTapped:)
             forControlEvents:UIControlEventTouchDown];
-    [twitterbutton setTitle:@"twitter" forState:UIControlStateNormal];
+//    [twitterbutton setTitle:@"twitter" forState:UIControlStateNormal];
+    twitterbutton.backgroundColor = [UIColor clearColor];
     twitterbutton.frame = CGRectMake(68+99, lblShareVia.frame.origin.y + lblShareVia.frame.size.height + 20 , 42, 43);
     [scrollProductDetail addSubview:twitterbutton];
     
@@ -509,7 +510,8 @@
     [facebookbutton addTarget:self
                        action:@selector(facebookBttnTapped:)
              forControlEvents:UIControlEventTouchDown];
-    [facebookbutton setTitle:@"facebook" forState:UIControlStateNormal];
+//    [facebookbutton setTitle:@"facebook" forState:UIControlStateNormal];
+    facebookbutton.backgroundColor = [UIColor clearColor];
     facebookbutton.frame = CGRectMake(68+33, lblShareVia.frame.origin.y + lblShareVia.frame.size.height + 20, 42, 43);
     [scrollProductDetail addSubview:facebookbutton];
 //    float googleHeight = twitterbutton.frame.origin.y + twitterbutton.frame.size.height;
