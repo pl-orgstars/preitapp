@@ -40,7 +40,7 @@
     name = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
     name = [name lowercaseString];
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@.red5demo.com",name];//[delegate.mallData objectForKey:@"website_url"];
+    NSString *urlString = /*[NSString stringWithFormat:@"http://%@.red5demo.com",name];*/[delegate.mallData objectForKey:@"website_url"];
     NSLog(@"urlsrtrrttr %@",urlString);
     
     //    urlString = [[urlString componentsSeparatedByString:@"."] objectAtIndex:0];
