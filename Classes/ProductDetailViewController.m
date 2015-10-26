@@ -1333,8 +1333,6 @@
 #pragma mark - request
 -(void)makeRequestForStringAndStoreId{
     
-//    [spinner setHidden:NO];
-//    [spinner startAnimating];
 [[LoadingAgent defaultAgent]makeBusy:YES];
     int page =1;
     Product *obj=[productsArray objectAtIndex:productIndex];
@@ -1370,8 +1368,7 @@
     
     
     NSMutableArray *mainArray = [[NSMutableArray alloc]initWithArray:itemsArray];
-//    [spinner stopAnimating];
-[[LoadingAgent defaultAgent]makeBusy:NO];
+    [[LoadingAgent defaultAgent]makeBusy:NO];
     if (itemsArray.count==0) {
         [delegate showAlert:@"No product matching your criteria found" title:@"No result found" buttontitle:@"Dismiss"];
     }

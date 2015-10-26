@@ -90,7 +90,7 @@
         
 	}
     else if (screenIndex == 8 && _isHours) {
-        self.titleLabel.text = @"HOURS";
+        self.titleLabel.text = [@"HOURS" uppercaseString];
     }
 	else 
 	{
@@ -262,8 +262,7 @@
 	[headerView sizeToFit];
 	
 	titleLabel=[[UILabel alloc] initWithFrame:CGRectMake(0, 2, 200, 20)];
-	titleLabel.text=[delegate.mallData objectForKey:@"name"];
-     NSLog(@"gate.mallDa %@",[delegate.mallData objectForKey:@"name"]);
+	titleLabel.text=[[delegate.mallData objectForKey:@"name"] uppercaseString];
 	titleLabel.textColor=[UIColor whiteColor];
 	titleLabel.font=[UIFont boldSystemFontOfSize:18];
 	titleLabel.shadowColor=[UIColor blackColor];
