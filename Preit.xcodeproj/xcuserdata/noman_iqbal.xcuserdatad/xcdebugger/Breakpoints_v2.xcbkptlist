@@ -10,28 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classes/ProductSearchHome.m"
-            timestampString = "467130384.515215"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
-            landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Classes/ProductSearchHome.m"
             timestampString = "467130701.15501"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
             endingLineNumber = "156"
-            landmarkName = "-hideMoreInfo:"
+            landmarkName = "-showALertWithRequest:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Classes/ProductSearchHome.m"
-            timestampString = "467130892.722688"
+            filePath = "Classes/HomeScreen.m"
+            timestampString = "467546833.731406"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
-            landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
+            startingLineNumber = "760"
+            endingLineNumber = "760"
+            landmarkName = "-showMainViewController"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

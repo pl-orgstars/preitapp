@@ -191,7 +191,7 @@
     productSearchVC.view.frame = CGRectMake(0, 0, 320, isIPhone5?568:480);
 //    productSearchVC.isGiftViewPush = TRUE;
     PreitNavigationViewController *navCont = [[PreitNavigationViewController alloc] initWithRootViewController:productSearchVC];
-    // Chaipy Start
+    // Chaipy Start 2
     WinViewController *winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
     [navCont pushViewController:winVC animated:NO];
     // Chaipy End

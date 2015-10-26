@@ -45,6 +45,9 @@
     
     NSURLRequest* winRequest = [[NSURLRequest alloc] initWithURL:[[NSURL alloc] initWithString:url]];
     [winWebView loadRequest:winRequest];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateSideMenu" object:nil];
+
 }
 
 - (void)didReceiveMemoryWarning {
