@@ -76,11 +76,28 @@
     
     NSString *urlString = @".red5demo.com";
     
-     if ([[[request URL]absoluteString]rangeOfString:urlString].location != NSNotFound) {
-         return YES;
+    if ([[[request URL]absoluteString]rangeOfString:urlString].location != NSNotFound) {
+        
+        spotCount = 0;
+        return YES;
     }
     
-    return NO;
+    // maha chaipi start
+    
+    if ([[[request URL]absoluteString]rangeOfString:@"spotzot"].location != NSNotFound) {
+        spotCount++;
+        
+        if (spotCount>1) {
+            return NO;
+        }
+        
+        return YES;
+    }
+    
+    // maha chaipi ends
+   
+    
+    return YES;
 }
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
