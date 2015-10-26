@@ -78,7 +78,7 @@
     [self.navigationController.navigationBar setTranslucent:NO];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"backNavigation.png"] forBarMetrics:UIBarMetricsDefault];
     
-    [mallNameLabel setText:[appdelegate.mallData objectForKey:@"name"]];
+    [mallNameLabel setText:[[appdelegate.mallData objectForKey:@"name"] uppercaseString]];
 
     [self setSideMenuItems];
 }
