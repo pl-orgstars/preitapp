@@ -26,7 +26,7 @@
 #define HOURS @"HOURS"
 #define MOVIE @"MOVIE LISTINGS"
 #define JOB @"JOB OPENINGS"
-#define GOHome @"SELECT ANOTHER PROPERTY"
+#define GOHome @"SELECT ANOTHER MALL"
 
 #define SHOW_NEW_MALL @"Select a Different PREIT Property"
 
@@ -359,14 +359,6 @@
         NSLog(@"location %@",location);
         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:location]]];
         
-//        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[DirectionViewController class]]) {
-//            DirectionViewController *screenDirection=[[DirectionViewController alloc]initWithNibName:@"DirectionViewController" bundle:nil];
-//            
-//            [_navController popToRootViewControllerAnimated:NO];
-//            [_navController pushViewController:screenDirection animated:NO];
-//        }
-        
-        
     }
     else if([str isEqualToString:MOVIE]){
         // Change google
@@ -455,17 +447,6 @@
     } else if ([str isEqualToString:GOHome]){
         [self selectAnotherCall:nil];
     }
-
-    
- /*   else if ([str isEqualToString:SCAN]){
-        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[ScanReceiptViewController class]]) {
-            ScanReceiptViewController *scanVC = [[ScanReceiptViewController alloc] initWithNibName:@"ScanReceiptViewController" bundle:[NSBundle mainBundle]];
-            
-            [_navController popToRootViewControllerAnimated:NO];
-            [_navController pushViewController:scanVC animated:NO];
-        }
-        
-    }*/
     
     self.menuContainerViewController.menuState = MFSideMenuStateClosed;
     
@@ -474,7 +455,7 @@
 -(UIImage*)getImageForCell:(NSString*)cellName
 {
     UIImage* cellImage;
-    if ([cellName isEqualToString:HOME] || [cellName isEqualToString:GOHome]) {
+    if ([cellName isEqualToString:HOME]) {
         cellImage = [UIImage imageNamed:@"mainmenu-icon-home"];
     }
     else if ([cellName isEqualToString:GIFT]){
@@ -516,7 +497,9 @@
     else if ([cellName isEqualToString:CONTACT_US]){
         cellImage = [UIImage imageNamed:@"mainmenu-icon-contactus"];
     }
-    else{
+    else if([cellName isEqualToString:GOHome]){
+      cellImage = [UIImage imageNamed:@"mainmenu-icon-mallselect"];
+    }else {
         return nil;
     }
     
