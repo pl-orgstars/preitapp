@@ -430,6 +430,7 @@
 		E6210DD41BC5184C008D579C /* ProductSearchCC.m in Sources */ = {isa = PBXBuildFile; fileRef = E6210DD21BC5184C008D579C /* ProductSearchCC.m */; };
 		E6210DD51BC5184C008D579C /* ProductSearchCC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6210DD31BC5184C008D579C /* ProductSearchCC.xib */; };
 		E6213ED71BDE064200298014 /* mainmenu-icon-mallselect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6213ED61BDE064200298014 /* mainmenu-icon-mallselect@2x.png */; settings = {ASSET_TAGS = (); }; };
+		E6213ED91BDE1EF300298014 /* Old-productsearch-icon-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6213ED81BDE1EF300298014 /* Old-productsearch-icon-list@2x.png */; settings = {ASSET_TAGS = (); }; };
 		E634685C1BA94BDB0088FADB /* backNavigation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E634685B1BA94BDB0088FADB /* backNavigation@2x.png */; };
 		E65AC71D1BD4D32E005AAD39 /* NewRightArraow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E65AC71C1BD4D32E005AAD39 /* NewRightArraow@2x.png */; settings = {ASSET_TAGS = (); }; };
 		E6D367731BCBADFE004F6E76 /* NewCircleBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D367721BCBADFE004F6E76 /* NewCircleBG@2x.png */; };
@@ -1027,6 +1028,7 @@
 		E6210DD21BC5184C008D579C /* ProductSearchCC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductSearchCC.m; path = "Product Search CC/ProductSearchCC.m"; sourceTree = "<group>"; };
 		E6210DD31BC5184C008D579C /* ProductSearchCC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProductSearchCC.xib; path = "Product Search CC/ProductSearchCC.xib"; sourceTree = "<group>"; };
 		E6213ED61BDE064200298014 /* mainmenu-icon-mallselect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mainmenu-icon-mallselect@2x.png"; sourceTree = "<group>"; };
+		E6213ED81BDE1EF300298014 /* Old-productsearch-icon-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Old-productsearch-icon-list@2x.png"; sourceTree = "<group>"; };
 		E634685B1BA94BDB0088FADB /* backNavigation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backNavigation@2x.png"; sourceTree = "<group>"; };
 		E65AC71C1BD4D32E005AAD39 /* NewRightArraow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewRightArraow@2x.png"; sourceTree = "<group>"; };
 		E6D367721BCBADFE004F6E76 /* NewCircleBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewCircleBG@2x.png"; sourceTree = "<group>"; };
@@ -1198,6 +1200,7 @@
 			children = (
 				E92DFA4A1B4415E7000B91B0 /* Images.xcassets */,
 				AE29A5C81935C27100738C79 /* back.png */,
+				E6213ED81BDE1EF300298014 /* Old-productsearch-icon-list@2x.png */,
 				AE29A5C91935C27100738C79 /* back@2x.png */,
 				70D5D33E179E693600E911D4 /* bg_home.jpg */,
 				70D5D33C179E653D00E911D4 /* bg_home@2x.jpg */,
@@ -2670,6 +2673,7 @@
 				70FE3AA11739370200E64874 /* LocationViewController copy.xib in Resources */,
 				BD4EF96B1BBE56380042EF6E /* JobsDetailViewController.xib in Resources */,
 				70FE3AA3173941C700E64874 /* CustomTable copy.xib in Resources */,
+				E6213ED91BDE1EF300298014 /* Old-productsearch-icon-list@2x.png in Resources */,
 				E6213ED71BDE064200298014 /* mainmenu-icon-mallselect@2x.png in Resources */,
 				BD46BB881BB2ABD100FC5A43 /* directory-icon-detail-menu@2x.png in Resources */,
 				AE87D2CD193710F600F5493D /* Deal_normal@2x.png in Resources */,

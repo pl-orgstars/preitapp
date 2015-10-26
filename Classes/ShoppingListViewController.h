@@ -19,14 +19,14 @@
 {
     IBOutlet UILabel *lblResultCount;
     IBOutlet UIToolbar *toolBar;
+    IBOutlet UIView *viewEmptyShoppingList;
+    
     ProductListView *productListView;
     PreitAppDelegate *delegate;    
     UIBarButtonItem *done;
     UIBarButtonItem *cancel;
     
+    
 }
-
-//-(IBAction)editClicked:(id)sender;
 -(void)showProductDetail:(NSNumber *)productIndex;
-
 @end

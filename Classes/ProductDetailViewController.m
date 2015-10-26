@@ -58,12 +58,8 @@
     [super viewDidLoad];
     imgviewCircle.hidden = TRUE;
     lblCount.hidden = TRUE;
-//    spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//    [spinner setHidesWhenStopped:YES];
-//    [spinner setCenter:self.view.center];
-//    [self.view addSubview:spinner];
-//    [spinner stopAnimating];
-[[LoadingAgent defaultAgent]makeBusy:NO];
+
+    [[LoadingAgent defaultAgent]makeBusy:NO];
     delegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
     
     dbAgent = [Database sharedDatabase];
@@ -276,8 +272,6 @@
     [self presentViewController:controller animated:YES completion:Nil];
 }
 -(NSString *)tinyUrl:(NSString *)origUrl{
-    NSLog(@"origna %@",origUrl);
-    
     origUrl = [origUrl stringByReplacingOccurrencesOfString:@"-" withString:@"%20"];
     origUrl = [origUrl stringByReplacingOccurrencesOfString:@"|" withString:@"%20"];
     origUrl = [origUrl stringByReplacingOccurrencesOfString:@"\"" withString:@"%20"];
@@ -293,7 +287,6 @@
                                                returningResponse:&response
                                                            error:&error];
     NSString *myTinyUrl = [[NSString alloc] initWithData:myUrlData encoding:NSUTF8StringEncoding];
-    NSLog(@"tiitititiitit %@",myTinyUrl);
     return myTinyUrl;
     
     
@@ -386,40 +379,7 @@
     
     
     
-    //// Add discription /////////
-    
-    UILabel *desc=[[UILabel alloc]initWithFrame:CGRectMake(xAxis , imgViewMain.frame.origin.y + imgViewMain.frame.size.height + 20,253,20)];
-    desc.textAlignment = NSTextAlignmentLeft;
-    
-    [desc setTextColor:[UIColor whiteColor]];
-    desc.lineBreakMode = NSLineBreakByWordWrapping;
-    desc.numberOfLines = 0;
-    desc.font = [UIFont systemFontOfSize:13];
 
-    /// For rEmove extra Space///
-    NSError *error = nil;
-    
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"  +" options:NSRegularExpressionCaseInsensitive error:&error];
-    NSString *trimmedString = [regex stringByReplacingMatchesInString:objectToBeUsed.desc options:0 range:NSMakeRange(0, [objectToBeUsed.desc length]) withTemplate:@" "];
-    
-    NSLog(@"objectToBeUsed.desc %@",objectToBeUsed.desc);
-    //////////////////////
-    CGSize maximumLabelSize = CGSizeMake(296, FLT_MAX);
-    
-    CGSize expectedLabelSize = [trimmedString sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:maximumLabelSize lineBreakMode:desc.lineBreakMode];
-
-    
-    [desc sizeToFit];
-    [desc setText:[trimmedString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
-    
-
-    desc.frame=CGRectMake(xAxis, imgViewMain.frame.origin.y + imgViewMain.frame.size.height + 20, 253, expectedLabelSize.height);
-    desc.backgroundColor=[UIColor clearColor];
-    [scrollProductDetail addSubview:desc];
-
-    
-    
-    
     
     ////// Add Buttons ///////
     
@@ -434,7 +394,7 @@
     
     if (isShoppingList)
     {
-        btnFrame2.origin.y=desc.frame.origin.y + desc.frame.size.height+ 15;
+        btnFrame2.origin.y=imgViewMain.frame.origin.y + imgViewMain.frame.size.height+ 15;
         [shoppingList setBackgroundImage:removeImage forState:UIControlStateNormal];
         [shoppingList addTarget:self action:@selector(removeFromList:) forControlEvents:UIControlEventTouchUpInside];
     } else
@@ -443,7 +403,7 @@
         UIButton *searchStore = [UIButton buttonWithType:UIButtonTypeCustom];
         btnFrame1= searchStore.frame;
         btnFrame1.origin.x= 10 ;
-        btnFrame1.origin.y=desc.frame.origin.y + desc.frame.size.height+ 65;
+        btnFrame1.origin.y=imgViewMain.frame.origin.y + imgViewMain.frame.size.height+ 65;
         btnFrame1.size = searchImage.size;
         searchStore.frame=btnFrame1;
         [searchStore setBackgroundImage:searchImage forState:UIControlStateNormal];
@@ -454,9 +414,8 @@
         {
             
         }else
-        {
           [scrollProductDetail addSubview:searchStore];
-        }
+        
         
         if ([dbAgent productIsPresent:objectToBeUsed.productId])
         {
@@ -466,7 +425,7 @@
             [shoppingList setBackgroundImage:addImage forState:UIControlStateNormal];
             [shoppingList addTarget:self action:@selector(addToList:) forControlEvents:UIControlEventTouchUpInside];
         }
-        btnFrame2.origin.y= desc.frame.origin.y + desc.frame.size.height+ 15;
+        btnFrame2.origin.y= imgViewMain.frame.origin.y + imgViewMain.frame.size.height+ 15;
     }
     
     // Button for shopping list.
@@ -509,7 +468,47 @@
     facebookbutton.frame = CGRectMake(68+33, lblShareVia.frame.origin.y + lblShareVia.frame.size.height + 20, 42, 43);
     [scrollProductDetail addSubview:facebookbutton];
     
-    UILabel *note=[[UILabel alloc]initWithFrame:CGRectMake(xAxis + 5, facebookbutton.frame.origin.y+facebookbutton.frame.size.height+15, 35, 20)];
+    
+    //// Add discription /////////
+    UILabel *descHeader=[[UILabel alloc]initWithFrame:CGRectMake(xAxis , facebookbutton.frame.origin.y + facebookbutton.frame.size.height + 10,253,20)];
+    [descHeader setTextColor:[UIColor whiteColor]];
+    descHeader.text = @"DESCRIPTION";
+    descHeader.textAlignment = NSTextAlignmentLeft;
+    descHeader.font = [UIFont boldSystemFontOfSize:10];
+    [scrollProductDetail addSubview:descHeader];
+    UILabel *desc=[[UILabel alloc]initWithFrame:CGRectMake(xAxis , facebookbutton.frame.origin.y + facebookbutton.frame.size.height + 20,253,20)];
+    desc.textAlignment = NSTextAlignmentLeft;
+    
+    [desc setTextColor:[UIColor whiteColor]];
+    desc.lineBreakMode = NSLineBreakByWordWrapping;
+    desc.numberOfLines = 0;
+    desc.font = [UIFont systemFontOfSize:10];
+    
+    /// For rEmove extra Space///
+    NSError *error = nil;
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"  +" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSString *trimmedString = [regex stringByReplacingMatchesInString:objectToBeUsed.desc options:0 range:NSMakeRange(0, [objectToBeUsed.desc length]) withTemplate:@" "];
+    
+    //////////////////////
+    CGSize maximumLabelSize = CGSizeMake(296, FLT_MAX);
+    
+    CGSize expectedLabelSize = [trimmedString sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:maximumLabelSize lineBreakMode:desc.lineBreakMode];
+    
+    
+    [desc sizeToFit];
+    [desc setText:[trimmedString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+    
+    
+    desc.frame=CGRectMake(xAxis, facebookbutton.frame.origin.y + facebookbutton.frame.size.height + 20, 253, expectedLabelSize.height);
+    desc.backgroundColor=[UIColor clearColor];
+    [scrollProductDetail addSubview:desc];
+
+    
+    
+    //// Add note//
+    
+    UILabel *note=[[UILabel alloc]initWithFrame:CGRectMake(xAxis + 5, desc.frame.origin.y+desc.frame.size.height+15, 35, 20)];
     note.textAlignment = NSTextAlignmentCenter;
     [note setText:@"NOTE:"];
     [note setTextColor:[UIColor whiteColor]];
@@ -669,9 +668,10 @@
     [self CallForDBCount];
 }
 
--(void)CallForDBCount{
+-(void)CallForDBCount
+{
     int count  = [dbAgent getCount];
-    if (count > 0) {
+    if (count > 0){
         lblCount.text = [NSString stringWithFormat:@"%d",count];
         lblCount.hidden = FALSE;
         imgviewCircle.hidden = FALSE;
@@ -684,15 +684,8 @@
 -(IBAction)removeFromList:(UIButton*)sender {
     [dbAgent removeProductFromShoppingList:[[productsArray objectAtIndex:productIndex] productId]];
     [listCountLabel setText:[NSString stringWithFormat:@"%d",[dbAgent getCount]]];
-//    if (isShoppingList) {
-//        [imagesArray removeObjectAtIndex:productIndex];
-//        [productsArray removeObjectAtIndex:productIndex];
-//        [self refresh];
-//    } else {
-        [sender setBackgroundImage:[UIImage imageNamed:@"NewSavetoListBtn.png"] forState:UIControlStateNormal];
-        [sender addTarget:self action:@selector(addToList:) forControlEvents:UIControlEventTouchUpInside];
-        
-//    }
+    [sender setBackgroundImage:[UIImage imageNamed:@"NewSavetoListBtn.png"] forState:UIControlStateNormal];
+    [sender addTarget:self action:@selector(addToList:) forControlEvents:UIControlEventTouchUpInside];
     [self CallForDBCount];
 }
 
