@@ -19,6 +19,7 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
 	delegate=(PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
 
@@ -35,7 +36,7 @@
 
 	}
 
-
+    
 	[self getData];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload:) name:@"Reload" object:nil];
     
@@ -240,6 +241,7 @@
 	RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
 	[req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
 //	[indicator_ startAnimating];
+    tableCustom.hidden = TRUE;
     [[LoadingAgent defaultAgent]makeBusy:YES];
 	
 	if(screenIndex==1)
@@ -255,8 +257,8 @@
 		NSLog(@"button enabled:::::::::::::::::::: ");
 	}
 	
-//	[indicator_ stopAnimating];
     [[LoadingAgent defaultAgent]makeBusy:NO];
+    tableCustom.hidden = FALSE;
 	if(receivedData!=nil){
 		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];// autorelease];
 		NSArray *tmpArray=[jsonString JSONValue];
@@ -290,6 +292,7 @@
 {
 //	[indicator_ stopAnimating];
     [[LoadingAgent defaultAgent]makeBusy:NO];
+    tableCustom.hidden = FALSE;
 	if(screenIndex==1)
 	{
 		self.navigationItem.rightBarButtonItem.enabled=YES;
@@ -373,11 +376,4 @@
     [tableCustom reloadData];
 }
 
-
-
-
-/*
-- (void)dealloc {
-    [super dealloc];
-}*/
 @end

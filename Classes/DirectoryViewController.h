@@ -23,7 +23,6 @@
     PreitAppDelegate* delegate;
     
     NSMutableArray *listContent;
-//    NSMutableArray *searchedListContent;
     
     NSMutableArray* displayContent;
     
@@ -39,7 +38,6 @@
     BOOL			searchWasActive;
     NSMutableArray  *webViewArray;
     BOOL isNoData;
-    UIView *main_view;
     NSMutableDictionary *checkDict;
     
     IBOutlet UIButton* toggleFilterBtn;
@@ -50,7 +48,6 @@
 }
 
 @property (nonatomic, retain) NSArray *listContent;
-//@property (nonatomic, retain) NSMutableArray *searchedListContent;
 
 
 @property (nonatomic, copy) NSString *savedSearchTerm;
