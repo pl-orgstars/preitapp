@@ -447,6 +447,10 @@ static NSString *const kAllowTracking = @"allowTracking";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [FBSDKAppEvents activateApp];
+    
+//    MyCLController* locationController = [[MyCLController alloc] init];
+//    
+//    [locationController.locationManager startUpdatingLocation];
 }
 
 

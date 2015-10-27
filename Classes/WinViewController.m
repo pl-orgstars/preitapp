@@ -19,6 +19,7 @@
 #define CHECKED_IN          @"http://cherryhillmall.red5demo.com/promos/enter_to_win/successful?mobile=yes"
 #define NOT_PERMITTED       @"http://cherryhillmall.red5demo.com/promos/enter_to_win/no_permissions?mobile=yes"
 #define NOT_IN_MALL         @"http://cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
+#define SET_LOCATION_ACCESS @"http://cherryhillmall.red5demo.com/promos/enter_to_win/set_location_access?mobile=yes"
 #define MAIN_MENU           @"http://cherryhillmall.red5demo.com/main_menu"
 #define NewSwipe            @"http://sqa02demopartner.votigo.com/fbsweeps/sweeps/testsweepsforred5-1"
 #define Rules               @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/rules"
@@ -113,7 +114,7 @@
     }
     
     else if ([url rangeOfString:@"/checkin"].location != NSNotFound) {
-        [self chekinMallAction];
+        [self checkLocation];
     }
     
     else if ([url rangeOfString:VOTIGO_MAIN].location != NSNotFound){
@@ -141,6 +142,14 @@
     {
         return YES;
     }
+    else if ([url rangeOfString:NOT_PERMITTED].location != NSNotFound){
+        return YES;
+    }
+    else if ([url rangeOfString:SET_LOCATION_ACCESS].location != NSNotFound){
+        [self requestLocationAccess];
+        return NO;
+
+    }
     
     return NO;
 }
@@ -159,7 +168,27 @@
     self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
 }
 
+-(void)checkLocation{
+    if (![CLLocationManager locationServicesEnabled]) {
+        NSURL *url = [NSURL URLWithString:NOT_PERMITTED];
+        [winWebView loadRequest:[NSURLRequest requestWithURL:url]];
+    }
+    else{
+        
+        if (!locationController) {
+            locationController = [[MyCLController alloc] init];
+            locationController.delegate = self;
+
+        }
+        [locationController.locationManager startUpdatingLocation];
+    }
+}
+
 - (void)chekinMallAction {
+  
+    
+
+    
     double destinationLat = [delegate.mallData[@"location_lat"] doubleValue];
     double destinationLong = [delegate.mallData[@"location_lng"] doubleValue];
     
@@ -167,7 +196,8 @@
     CLLocation *current = [[CLLocation alloc] initWithLatitude:delegate.latitude longitude:delegate.longitude];
     
     CLLocationDistance distance = [current distanceFromLocation:destination];
-    if (distance <= 1609) { //1609 meters = 1 mile
+    
+    if (distance >= 1609) { //1609 meters = 1 mile
         NSURL *url = [NSURL URLWithString:NOT_CHECKED_IN];
         [winWebView loadRequest:[NSURLRequest requestWithURL:url]];
     }
@@ -211,6 +241,26 @@
             NSLog(@"Error = %@", error);
         }];
     }
+    
+    
 }
 
+
+
+-(void)requestLocationAccess{
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Service Disabled" message:@"Please turn on location services from privacy settings to check in the mall" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alert show];
+}
+
+
+-(void)locationUpdate:(CLLocation *)location{
+    [locationController.locationManager stopUpdatingLocation];
+    
+    delegate.latitude   = location.coordinate.latitude;
+    delegate.longitude  = location.coordinate.longitude;
+    
+    [self chekinMallAction];
+
+}
 @end
