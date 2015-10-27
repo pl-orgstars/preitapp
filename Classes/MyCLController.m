@@ -31,11 +31,11 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
    
+    [locationManager stopUpdatingLocation];
     [self.delegate locationUpdate: [locations lastObject]];
 }
 
-- (void)locationManager:(CLLocationManager *)manager
-	   didFailWithError:(NSError *)error
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
 	[self.delegate locationError:error];
 }
