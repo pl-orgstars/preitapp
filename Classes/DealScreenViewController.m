@@ -29,35 +29,20 @@
     NSString *titleLabel = (NSString*)[delegate.mallData objectForKey:@"name"];
     [self setNavigationTitle:titleLabel withBackButton:YES];
     
-    NSLog(@"setNavigationTitle ==%@",[delegate.mallData objectForKey:@"name"]);
     [self.navigationController.navigationBar setTranslucent:NO];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"backNavigation.png"] forBarMetrics:UIBarMetricsDefault];
 
     [super viewDidLoad];
-    
-    
-//    NSString* name = delegate.mallData[@"name"];
-//    name = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
-//    name = [name lowercaseString];
     
     NSString *urlString = /*[NSString stringWithFormat:@"http://%@.red5demo.com",name];*/[delegate.mallData objectForKey:@"website_url"];
     
     urlString = [urlString stringByReplacingOccurrencesOfString:@".com" withString:SUB_DOMAIN];
     NSLog(@"urlsrtrrttr %@",urlString);
     
-    //    urlString = [[urlString componentsSeparatedByString:@"."] objectAtIndex:0];
     
     webViewURLString = [NSString stringWithFormat:@"%@%@",urlString,DEAL_WEB_VIEW];
-//    webViewURLString = urlString;
-    NSLog(@"urlsrtrrttr %@",webViewURLString);
-    
-    
-    //    NSString *mapUrl = [NSString stringWithFormat:@"%@/sales",[delegate.mallData objectForKey:@"website_url"]];
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:webViewURLString]]];
     
-    //    webView.delegate = self;
-    
-    // Do any additional setup after loading the view from its nib.
 }
 -(void)viewWillAppear:(BOOL)animated{
     

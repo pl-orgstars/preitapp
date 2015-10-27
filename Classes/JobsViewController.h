@@ -16,7 +16,6 @@
 	PreitAppDelegate *delegate;
 	NSMutableArray *tableData;
 	BOOL isNoData;
-	IBOutlet UIActivityIndicatorView *indicator_;
 }
 
 -(void)setHeader;

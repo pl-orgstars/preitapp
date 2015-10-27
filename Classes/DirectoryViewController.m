@@ -68,29 +68,15 @@
     frame.size.height = 0.0;
     [filterTableView setFrame:frame];
     
-//    indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    
-//    [filterTableView addSubview:indicator];
-    
-//    indicator.center = filterTableView.center;
-    
     filterCategories = [[NSMutableArray alloc] init];
     selectedFilter = [[NSMutableArray alloc] init];
     
     [self getShoppingData];
-    
-
 
     NSLog(@"Directory View, listContent:   %@",listContent);
     if([listContent count]==0)
         [self getData];
     
-    
-   
-    
-    
-
-
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -467,16 +453,15 @@
 
 -(void)getData{
     isNoData=NO;
-//    NSString *url=[NSString stringWithFormat:@"%@%@",[delegate.mallData objectForKey:@"resource_url"],NSLocalizedString(@"API1.2","")];
-    
+   
     NSString* url = [NSString stringWithFormat:@"%@/tenant_categories/all_tenants_detail",[delegate.mallData objectForKey:@"resource_url"]];
     RequestAgent *req= [[RequestAgent alloc] init];// autorelease];
     [req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
-    [self loadingView:YES];
+     [[LoadingAgent defaultAgent]makeBusy:YES];
 }
 
 -(void)responseData:(NSData *)receivedData{
-    [self loadingView:NO];
+     [[LoadingAgent defaultAgent]makeBusy:NO];
     
     if(receivedData!=nil){
         NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];// autorelease];
@@ -504,72 +489,23 @@
     else
         isNoData=YES;
     
-    [tableView_ reloadData];
+    if([[LoadingAgent defaultAgent] isBusy]){
+        
+    }else {
+        [tableView_ reloadData];
+        
+    }
+
+
 }
 
 -(void)errorCallback:(NSError *)error{
-    [self loadingView:NO];
+     [[LoadingAgent defaultAgent]makeBusy:NO];
     [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Message" buttontitle:@"Ok"];
     
-//    [indicator stopAnimating];
     [[LoadingAgent defaultAgent]makeBusy:NO];
 }
 
-#pragma mark - loading
-
--(void)makeLoadingView
-{
-    UIWindow* keywindow = [[UIApplication sharedApplication] keyWindow];
-    CGRect keyFrame=[keywindow frame];
-    CGRect frame=CGRectMake(keyFrame.origin.x, keyFrame.origin.y, keyFrame.size.width, keyFrame.size.height);
-    
-    main_view = [[UIView alloc] initWithFrame:frame];
-    main_view.backgroundColor = [UIColor clearColor];
-    main_view.alpha =1.0;
-    
-    UIActivityIndicatorView *wait = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    wait.hidesWhenStopped = NO;
-    
-    frame=CGRectMake(56.0,180.0, 211.0, 121.0);
-    UIView *loadingView=[[UIView alloc]initWithFrame:frame];
-    loadingView.backgroundColor=[UIColor clearColor];
-    
-    frame=CGRectMake(32.0,20.0, 159.0,60.0);
-    UILabel *loadingLabel = [[UILabel alloc] initWithFrame:frame];
-    loadingLabel.textColor = [UIColor whiteColor];
-    loadingLabel.backgroundColor = [UIColor clearColor];
-    loadingLabel.font=[UIFont boldSystemFontOfSize:18];
-    loadingLabel.textAlignment = NSTextAlignmentCenter;
-    loadingLabel.text = @"LOADING";
-    loadingLabel.numberOfLines=0;
-    [loadingView addSubview:loadingLabel];
-    [loadingView addSubview:wait];
-    
-    frame=CGRectMake(86.0, 77.0, 37.0,37.0);
-    wait.frame=frame;
-    
-//    CALayer *l=[loadingView layer];
-//    [l setCornerRadius:10.0];
-//    [l setBorderWidth:3.0];
-//    [l setBorderColor:[[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]CGColor]];
-    
-    [main_view addSubview:loadingView];
-    [wait startAnimating];
-}
-
-
-
--(void)loadingView:(BOOL)flag
-{
-    if(flag){
-        
-        [self.view addSubview:main_view];
-        [self.view bringSubviewToFront:main_view];
-//        [[[UIApplication sharedApplication] keyWindow] addSubview:main_view];
-//        [[[UIApplication sharedApplication] keyWindow] bringSubviewToFront:main_view];
-    }else
-        [main_view removeFromSuperview];
-}
 
 #pragma mark - Cell Button Actions
 
@@ -601,7 +537,6 @@
        
         screenMap.mapUrl=[NSString stringWithFormat:@"%@/areas/getarea?suit_id=%d",[delegate.mallData objectForKey:@"resource_url"],suiteID];
         [self.navigationController pushViewController:screenMap animated:YES];
-        //				[screenMap release];
     }
     
 }
@@ -619,9 +554,7 @@
     
     RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
     [req requestToServer:self callBackSelector:@selector(responseDataFilter:) errorSelector:@selector(errorCallback:) Url:url];
-//    [indicator startAnimating];
     [[LoadingAgent defaultAgent]makeBusy:YES];
-//    [self makeLoadingView];
   
 }
 
@@ -629,7 +562,6 @@
 -(void)responseDataFilter:(NSData*)receivedData
 {
     
-//    [indicator stopAnimating];
     [[LoadingAgent defaultAgent]makeBusy:NO];
     
     if (receivedData != nil) {
@@ -637,31 +569,23 @@
         
         NSArray* tmpArray = [jsonString JSONValue];
         
-        NSLog(@"%@",tmpArray);
+        NSLog(@"tmpArray %@",tmpArray);
         
         [filterCategories removeAllObjects];
         [filterCategories addObjectsFromArray:tmpArray];
         [filterCategories insertObject:@"All Stores" atIndex:0];
         
+        if([[LoadingAgent defaultAgent] isBusy]){
+            
+        }else {
+            [filterTableView reloadData];
+            [tableView_ reloadData];
+
+        }
+            
         
-        [filterTableView reloadData];
     }
     
 }
-
-
-
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

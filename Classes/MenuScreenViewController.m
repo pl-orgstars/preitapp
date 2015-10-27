@@ -354,9 +354,8 @@
         
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
-        NSString *location = [NSString stringWithFormat:@"%@ %@", [appdelegate.mallData objectForKey:@"name"], [appdelegate.mallData objectForKey:@"address_street"]];
+        NSString *location = [NSString stringWithFormat:@"%@ %@,%@ %@", [appdelegate.mallData objectForKey:@"address_street"],[appdelegate.mallData objectForKey:@"address_city"],[appdelegate.mallData objectForKey:@"address_state"], [appdelegate.mallData objectForKey:@"address_zipcode"]];
         location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-        NSLog(@"location %@",location);
         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:location]]];
         
     }
