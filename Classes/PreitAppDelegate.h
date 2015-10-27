@@ -12,11 +12,7 @@
 #import "GAIFields.h"
 #import "GAIDictionaryBuilder.h"
 
-#import "MenuView.h"
-#import "MenuUpperview.h"
-
 #import "IIViewDeckController.h"
-#import "SideMenu.h"
 
 #import <MNNotificationsManager/MNNotificationsManager.h>
 #import "MNNotificationsManagerCustomDelegate.h"
@@ -52,17 +48,10 @@
     
     ProductSearchHome *mHomeViewController;
     
-    MenuView *vc_MenuView;
-    MenuUpperview *vc_MenuUpperview;
-    SideMenu *sideMenuV;
-    
     UIBackgroundTaskIdentifier bgTask;
 
 }
 
-@property (strong,nonatomic) MenuView *vc_MenuView;
-@property (strong,nonatomic) MenuUpperview *vc_MenuUpperview;
-@property (strong,nonatomic) SideMenu* sideMenuV;
 @property (nonatomic) BOOL isOnForeGround;
 @property (nonatomic) int x;
 @property (nonatomic, retain) IBOutlet UIWindow *window;

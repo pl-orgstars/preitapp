@@ -86,8 +86,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5V0-IV-h2f">
-                    <rect key="frame" x="287" y="116" width="25" height="25"/>
+                    <rect key="frame" x="8" y="116" width="304" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                    <inset key="imageEdgeInsets" minX="265" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" image="exoandArrowDown50.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>

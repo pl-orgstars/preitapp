@@ -494,9 +494,7 @@
         ProductSearchCC *cell = (ProductSearchCC*)[collectionView cellForItemAtIndexPath:imgIndexPath];
         UIImageView *mainInage;
         Product *product;
-        if (imgIndexPath.row <= productsArray.count ) {
-            NSLog(@"count %d",productsArray.count);
-            NSLog(@"imgIndexPath %d",imgIndexPath.row);
+        if (imgIndexPath.row <= productsArray.count && productsArray.count > 0) {
             product = [productsArray objectAtIndex:imgIndexPath.row];
         }
 

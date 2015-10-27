@@ -36,7 +36,7 @@
     // Do any additional setup after loading the view from its nib.
 
     NSString *titleLabel = (NSString*)[appdelegate.mallData objectForKey:@"name"];
-    [navigationLabel setText:titleLabel];
+    [navigationLabel setText:[titleLabel uppercaseString]];
     NSLog(@"onLabel setTex ==%@",[appdelegate.mallData objectForKey:@"name"]);
     [self.navigationController.navigationBar setTranslucent:NO];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"backNavigation.png"] forBarMetrics:UIBarMetricsDefault];

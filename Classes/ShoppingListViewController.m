@@ -23,33 +23,33 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
     // Release any cached data, images, etc that aren't in use.
 }
-
 
 
 #pragma mark - View lifecycle
 
 
--(void)viewWillAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:YES];
     [delegate showTabBar:NO];
-    
-    
     [self setNavigationTitle:@"Shopping List" withBackButton:YES];
-    
-    [productListView.productListTable reloadData];
-    
-    [lblResultCount setText:[NSString stringWithFormat:@"%d item%@",[[Database sharedDatabase] getCount],[[Database sharedDatabase] getCount]==1?@"":@"s"]];
-    productListView.productsArray = [[NSMutableArray alloc]initWithArray:[[Database sharedDatabase]getShoppingList]];
-    [productListView refreshNow];
+
+    if ([[Database sharedDatabase] getCount] > 0) {
+        viewEmptyShoppingList.hidden = TRUE;
+        [productListView.productListTable reloadData];
+        [lblResultCount setText:[NSString stringWithFormat:@"%d item%@",[[Database sharedDatabase] getCount],[[Database sharedDatabase] getCount]==1?@"":@"s"]];
+        productListView.productsArray = [[NSMutableArray alloc]initWithArray:[[Database sharedDatabase]getShoppingList]];
+        [productListView refreshNow];
+    }else
+        viewEmptyShoppingList.hidden = FALSE;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    viewEmptyShoppingList.hidden = TRUE;
     delegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
     
     CGRect frame = self.view.frame;
@@ -69,10 +69,7 @@
     [self.view insertSubview:toolBar aboveSubview:productListView];
 
     [self.view insertSubview:lblResultCount aboveSubview:toolBar];
-    
 }
-
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -105,30 +102,24 @@
 -(IBAction)EmailBtn:(id)sender
 {
     [self emailList];
-
 }
 
 -(void)deleteFromTable:(NSNumber*)row {
-//    [lblResultCount setText:[NSString stringWithFormat:@"%lu item%@",(unsigned long)productListView.productsArray.count,productListView.productsArray.count==1?@"":@"s"]];
-    [lblResultCount setText:[NSString stringWithFormat:@"%d item%@",[[Database sharedDatabase] getCount],[[Database sharedDatabase] getCount]==1?@"":@"s"]];
-
-
-}
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
+    if ([[Database sharedDatabase] getCount] > 0) {
+        viewEmptyShoppingList.hidden = TRUE;
+        [lblResultCount setText:[NSString stringWithFormat:@"%d item%@",[[Database sharedDatabase] getCount],[[Database sharedDatabase] getCount]==1?@"":@"s"]];
+    }else {
+        viewEmptyShoppingList.hidden = FALSE;
+    }
 }
 
 #pragma mark - navigation
 
 - (IBAction)menuBtnCall:(id)sender {
-    
     self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
-    
 }
 
 - (IBAction)backBtnCall:(id)sender {
-    
     [self.navigationController popViewControllerAnimated:NO];
 }
 

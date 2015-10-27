@@ -13,24 +13,6 @@
 
 @implementation DiningViewController
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
-
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	self.imageView.image=[UIImage imageNamed:@"dinning.jpg"];
 	self.screenIndex=2;
@@ -48,7 +30,6 @@
 			CGRect frame;
 			frame.size.width=320;
 			if(isIPhone5){frame.size.height=586;}else{frame.size.height=480;}
-//            frame.size.height=480;
 			frame.origin.x=0; frame.origin.y=0;
 			AsyncImageView* asyncImage = [[AsyncImageView alloc] initWithFrame:frame];// autorelease];
 			NSURL *url=[NSURL URLWithString:delegate.imageLink2];
@@ -83,13 +64,7 @@
 		[self viewDidLoad];
 	}
 }
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
+
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -101,13 +76,8 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
-
-//- (void)dealloc {
-//    [super dealloc];
-//}
 
 - (CGFloat)tableView_:(UITableView *)tableView modified_heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 44;
@@ -153,22 +123,16 @@
 	DiningDetailViewController *screenStoreDetail=[[DiningDetailViewController alloc]initWithNibName:@"CustomStoreDetailViewController" bundle:nil];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        screenStoreDetail.titleLabel.text = @"Dining";
+        screenStoreDetail.titleLabel.text = @"DINING";
 
     });
 	NSDictionary *tmpDict=[self.tableData objectAtIndex:indexPath.row];
-    ///kkkkkk
-    NSLog(@"dinning data are:::::%@",tmpDict);
-    // Change google
     [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:@"name"];
     
     // Send a screenview.
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
-   // [[GAI sharedInstance].defaultTracker sendView:[tmpDict objectForKey:@"name"]];
 	screenStoreDetail.dictData=tmpDict;
-	///kkkkk
 	[self.navigationController pushViewController:screenStoreDetail animated:YES];
-//	[screenStoreDetail release];
 }
 
 
@@ -199,16 +163,13 @@
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:url]]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
     }
-    else {
-        NSLog(@"Error Calling");
-    }
+   
 }
 
 - (IBAction)cellMapAction:(UIButton *)sender {
     
     
     NSDictionary *dictData = [tableData objectAtIndex:sender.tag];
-    NSLog(@"Map==%@",dictData);
     NSDictionary *suite=[dictData objectForKey:@"suite"];
     int suiteID=[[suite objectForKey:@"id"] intValue];
     if(suiteID>0)
@@ -217,7 +178,6 @@
         
         screenMap.mapUrl=[NSString stringWithFormat:@"%@/areas/getarea?suit_id=%d",[delegate.mallData objectForKey:@"resource_url"],suiteID];
         [self.navigationController pushViewController:screenMap animated:YES];
-        //				[screenMap release];
     }
     
 }

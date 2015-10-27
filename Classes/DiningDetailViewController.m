@@ -11,21 +11,7 @@
 
 @implementation DiningDetailViewController
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -33,20 +19,12 @@
     [super viewDidLoad];
     
     
-//	self.navigationItem.title=NSLocalizedString(@"Screen2.1",@"");
 	[self setNavigationTitle:NSLocalizedString(@"Screen2.1",@"") withBackButton:YES];
     
-//	buttonLabel.text=@"Description of Restaurant";
 	
 	if(delegate.image2==nil)
 	{
 		
-	/*	if(delegate.image3)
-			image_Background.image=delegate.image3;
-		else
-			image_Background.image=[UIImage imageNamed:@"dinning.jpg"];
-     */
-
 		if(delegate.imageLink2 && [delegate.imageLink2 length]!=0)
 		{
 			CGRect frame;
@@ -60,21 +38,9 @@
 		
 		}
 	}
-	else
-	{
-//		image_Background.image=delegate.image2;
-	}
-
+	
 }
 
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -90,13 +56,10 @@
 }
 
 
-//- (void)dealloc {
-//    [super dealloc];
-//}
+
 
 -(void)responseData_Image:(NSData *)receivedData{
 	delegate.image2=[UIImage imageWithData:receivedData];
-//	image_Background.image=delegate.image2;
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"updateDining_IMG" object:nil];
 
 }

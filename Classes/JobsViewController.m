@@ -15,32 +15,16 @@
 #import "LoadingAgent.h"
 
 @implementation JobsViewController
-
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {	
     [super viewDidLoad];	
 	delegate=(PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
 	tableData=[[NSMutableArray alloc]init];
-//	tableJobs.separatorColor=[UIColor whiteColor];	
-//	tableJobs.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.4];
-
+    tableJobs.hidden =TRUE;
 	[self setHeader];
 	[self getData];
     
     self.navigationController.navigationBarHidden = YES;
-//    [self.navigationController.navigationBar setTranslucent:NO];
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"backNavigation.png"] forBarMetrics:UIBarMetricsDefault];
 
 	if(delegate.image3==nil)
 	{
@@ -51,19 +35,14 @@
 			frame.size.width=320;
 			frame.size.height=480;
 			frame.origin.x=0; frame.origin.y=0;
-			AsyncImageView* asyncImage = [[AsyncImageView alloc] initWithFrame:frame];// autorelease];
+			AsyncImageView* asyncImage = [[AsyncImageView alloc] initWithFrame:frame];
 			NSURL *url=[NSURL URLWithString:delegate.imageLink3];
 			[asyncImage loadImageFromURL:url delegate:self requestSelector:@selector(responseData_Image:)];				
 		}
 	}
 	else
-	{
 		imageView.image=delegate.image3;
-	}	
-	
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -75,10 +54,7 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
-
-
 
 
 -(void)setHeader{
@@ -88,7 +64,6 @@
     headerView.backgroundColor = [UIColor clearColor];
 	titleLabel=[[UILabel alloc] initWithFrame:CGRectMake(0, 2, 200, 20)];
 	titleLabel.text=[delegate.mallData objectForKey:@"name"];
-    NSLog(@"345 ==%@",[delegate.mallData objectForKey:@"name"]);
 
 	titleLabel.textColor=[UIColor whiteColor];
 	titleLabel.font=[UIFont boldSystemFontOfSize:18];
@@ -131,14 +106,7 @@
 #pragma mark UITableViewDelegate methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-	CGFloat height=60.0;
-//	if(!isNoData){
-//		NSDictionary *tmpDict=[[tableData objectAtIndex:indexPath.row]objectForKey:@"job"];
-//		CGSize constraint = CGSizeMake(200.0000, 20000.0f);
-//		CGSize titlesize = [[tmpDict objectForKey:@"title"] sizeWithFont:[UIFont boldSystemFontOfSize:25] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-////		height= (titlesize.height<60?is_iOS7?80:65:(titlesize.height+20));
-//	}
-	return height;
+	return 60.0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -151,13 +119,11 @@
 	
 	cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil){
-//		if(cellIdentifier==@"Cell")
         if([cellIdentifier isEqualToString:@"Cell"])
 			cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];// autorelease];
         else
 			cell= [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];// autorelease];
 	}
-//	if(cellIdentifier==@"Cell")
     if([cellIdentifier isEqualToString:@"Cell"]){
 		cell.textLabel.numberOfLines=1;
         cell.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -200,18 +166,12 @@
 	if(!isNoData)
 	{
 		NSDictionary *tmpDict=[[tableData objectAtIndex:indexPath.row]objectForKey:@"job"];
-		/*WebViewController *screenWebView=[[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
-		screenWebView.htmlString=[tmpDict objectForKey:@"description"];
-		screenWebView.titleString=NSLocalizedString(@"Screen11.1",@"");
-        screenWebView.titleLabel.text= @"JOB OPENINGS";
-		screenWebView.tmpdict=tmpDict;*/
         
         JobsDetailViewController* jobsDetailVC = [[JobsDetailViewController alloc] initWithNibName:@"JobsDetailViewController" bundle:[NSBundle mainBundle]];
         
         jobsDetailVC.jobDetailDict = tmpDict;
         
         [self.navigationController pushViewController:jobsDetailVC animated:NO];
-        
         
         ////kk
         NSString *str = [NSString stringWithFormat:@"Job opening-%@",[tmpDict valueForKey:@"title"]];
@@ -220,12 +180,6 @@
         
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
-       // [[GAI sharedInstance].defaultTracker sendView:str];
-        
-        
-//        NSLog(@"<<<<<<<<< %@,,,,,%@",screenWebView.htmlString,tmpDict);
-//		[self.navigationController pushViewController:screenWebView animated:YES];
-//		[screenWebView release];
 	}
 }
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
@@ -239,12 +193,11 @@
 	NSString *url=[NSString stringWithFormat:@"%@%@",[delegate.mallData objectForKey:@"resource_url"],NSLocalizedString(@"API11","")];
 	RequestAgent *req=[[RequestAgent alloc] init];// autorelease];
 	[req requestToServer:self callBackSelector:@selector(responseData:) errorSelector:@selector(errorCallback:) Url:url];
-//	[indicator_ startAnimating];
     [[LoadingAgent defaultAgent]makeBusy:YES];
 }
 
 -(void)responseData:(NSData *)receivedData{
-//	[indicator_ stopAnimating];
+    tableJobs.hidden =FALSE;
     [[LoadingAgent defaultAgent]makeBusy:NO];
 	if(receivedData!=nil){
 		NSString *jsonString = [[NSString alloc] initWithBytes:[receivedData bytes] length:[receivedData length] encoding:NSUTF8StringEncoding];// autorelease];
@@ -266,7 +219,8 @@
 }
 
 -(void)errorCallback:(NSError *)error{
-	[indicator_ stopAnimating];
+    tableJobs.hidden =FALSE;
+	[[LoadingAgent defaultAgent]makeBusy:NO];
 	[delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Message" buttontitle:@"Ok"];
 }
 

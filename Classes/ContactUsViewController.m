@@ -191,7 +191,6 @@
 - (IBAction)directionsAction:(id)sender {
     NSString *location = [NSString stringWithFormat:@"%@ %@", streelLabel.text, state_zipLabel.text];
     location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    NSLog(@"location %@",location);
     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:location]]];
 }
 

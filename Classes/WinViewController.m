@@ -19,7 +19,11 @@
 #define CHECKED_IN          @"http://cherryhillmall.red5demo.com/promos/enter_to_win/successful?mobile=yes"
 #define NOT_PERMITTED       @"http://cherryhillmall.red5demo.com/promos/enter_to_win/no_permissions?mobile=yes"
 #define NOT_IN_MALL         @"http://cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
+#define SET_LOCATION_ACCESS @"http://cherryhillmall.red5demo.com/promos/enter_to_win/set_location_access?mobile=yes"
 #define MAIN_MENU           @"http://cherryhillmall.red5demo.com/main_menu"
+#define PRIZE               @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/prizes"
+#define Rules               @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/rules"
+
 
 @interface WinViewController ()
 
@@ -45,6 +49,9 @@
     
     NSURLRequest* winRequest = [[NSURLRequest alloc] initWithURL:[[NSURL alloc] initWithString:url]];
     [winWebView loadRequest:winRequest];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UpdateSideMenu" object:nil];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,11 +89,11 @@
     
     NSString* url = [[request URL]absoluteString];
     
-    if ([url rangeOfString:VOTIGO_SIGNUP].location != NSNotFound ) {
-        return YES;
-    }
+//    if ([url rangeOfString:VOTIGO_SIGNUP].location != NSNotFound ) {
+//        return YES;
+//    }
     
-    else if ([url rangeOfString:VOTIGO_CONFIRM].location != NSNotFound)
+    /*else*/ if ([url rangeOfString:VOTIGO_CONFIRM].location != NSNotFound)
     {
         NSRange range = [url rangeOfString:VOTIGO_CONFIRM];
         NSString* page = [url substringWithRange:NSMakeRange(range.location + range.length, url.length - range.length - range.location)];
@@ -107,30 +114,46 @@
     }
     
     else if ([url rangeOfString:@"/checkin"].location != NSNotFound) {
-        [self chekinMallAction];
+        [self checkLocation];
     }
     
-    else if ([url rangeOfString:VOTIGO_MAIN].location != NSNotFound){
-        return YES;
-    }
-    
-    else if ([url rangeOfString:NOT_CHECKED_IN].location != NSNotFound) {
-        return YES;
-    }
-    else if ([url rangeOfString:ALREADY_CHECKED_IN].location != NSNotFound) {
-        return YES;
-    }
-    else if ([url rangeOfString:CHECKED_IN].location != NSNotFound) {
-        return YES;
-    }
+//    else if ([url rangeOfString:VOTIGO_MAIN].location != NSNotFound){
+//        return YES;
+//    }
+//    
+//    else if ([url rangeOfString:NOT_CHECKED_IN].location != NSNotFound) {
+//        return YES;
+//    }
+//    else if ([url rangeOfString:ALREADY_CHECKED_IN].location != NSNotFound) {
+//        return YES;
+//    }
+//    else if ([url rangeOfString:CHECKED_IN].location != NSNotFound) {
+//        return YES;
+//    }
     else if ([url rangeOfString:MAIN_MENU].location != NSNotFound) {
         NSString* votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
         NSString* url = [NSString stringWithFormat:@"%@?mall_id=%@&sweepuserentry_id=%@", VOTIGO_MAIN, [delegate.mallData objectForKey:@"id"], votigoUserID];
         
         [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+    
+    }
+//    else if([url rangeOfString:Rules].location != NSNotFound)
+//    {
+//        return YES;
+//    }else if([url rangeOfString:PRIZE].location != NSNotFound)
+//    {
+//        return YES;
+//    }
+//    else if ([url rangeOfString:NOT_PERMITTED].location != NSNotFound){
+//        return YES;
+//    }
+    else if ([url rangeOfString:SET_LOCATION_ACCESS].location != NSNotFound){
+        [self requestLocationAccess];
+        return NO;
+
     }
     
-    return NO;
+    return YES;
 }
 
 
@@ -147,7 +170,29 @@
     self.menuContainerViewController.menuState = MFSideMenuStateRightMenuOpen;
 }
 
+-(void)checkLocation{
+    if (![CLLocationManager locationServicesEnabled]) {
+        NSURL *url = [NSURL URLWithString:NOT_PERMITTED];
+        [winWebView loadRequest:[NSURLRequest requestWithURL:url]];
+    }
+    else{
+        
+        if (!locationController) {
+            locationController = [[MyCLController alloc] init];
+            locationController.delegate = self;
+        }
+        
+        [locationController.locationManager requestLocation];
+
+       
+    }
+}
+
 - (void)chekinMallAction {
+  
+    
+
+    
     double destinationLat = [delegate.mallData[@"location_lat"] doubleValue];
     double destinationLong = [delegate.mallData[@"location_lng"] doubleValue];
     
@@ -155,7 +200,8 @@
     CLLocation *current = [[CLLocation alloc] initWithLatitude:delegate.latitude longitude:delegate.longitude];
     
     CLLocationDistance distance = [current distanceFromLocation:destination];
-    if (distance <= 1609) { //1609 meters = 1 mile
+    
+    if (distance >= 1609) { //1609 meters = 1 mile
         NSURL *url = [NSURL URLWithString:NOT_CHECKED_IN];
         [winWebView loadRequest:[NSURLRequest requestWithURL:url]];
     }
@@ -199,6 +245,35 @@
             NSLog(@"Error = %@", error);
         }];
     }
+    
+    
 }
 
+
+
+-(void)requestLocationAccess{
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Service Disabled" message:@"Please turn on location services from privacy settings to check in the mall" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alert show];
+}
+
+
+-(void)locationUpdate:(CLLocation *)location{
+    
+    delegate.latitude   = location.coordinate.latitude;
+    delegate.longitude  = location.coordinate.longitude;
+    
+    [self chekinMallAction];
+
+}
+
+-(void)locationError:(NSError *)error{
+    NSLog(@"location error : %@",error.localizedDescription);
+    
+    delegate.latitude   = 0.0;
+    delegate.longitude  = 0.0;
+    
+    [self chekinMallAction];
+    
+}
 @end
