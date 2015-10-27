@@ -196,10 +196,7 @@
             NSString *location = [NSString stringWithFormat:@"%@ %@,%@ %@", [del.mallData objectForKey:@"address_street"],[del.mallData objectForKey:@"address_city"],[del.mallData objectForKey:@"address_state"], [del.mallData objectForKey:@"address_zipcode"]];
             location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
             [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:location]]];
-
-//            DirectionViewController *directionVC=[[DirectionViewController alloc]initWithNibName:@"DirectionViewController" bundle:nil];
-//            [self.navigationController pushViewController:directionVC animated:NO];
-            return NO;
+           return NO;
             
         }
         else if ([page isEqualToString:@"/mall_hours"]){
