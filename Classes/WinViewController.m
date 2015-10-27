@@ -20,6 +20,9 @@
 #define NOT_PERMITTED       @"http://cherryhillmall.red5demo.com/promos/enter_to_win/no_permissions?mobile=yes"
 #define NOT_IN_MALL         @"http://cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
 #define MAIN_MENU           @"http://cherryhillmall.red5demo.com/main_menu"
+#define NewSwipe            @"http://sqa02demopartner.votigo.com/fbsweeps/sweeps/testsweepsforred5-1"
+#define Rules               @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/rules"
+
 
 @interface WinViewController ()
 
@@ -131,6 +134,12 @@
         NSString* url = [NSString stringWithFormat:@"%@?mall_id=%@&sweepuserentry_id=%@", VOTIGO_MAIN, [delegate.mallData objectForKey:@"id"], votigoUserID];
         
         [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+    }else if([url rangeOfString:Rules].location != NSNotFound)
+    {
+        return YES;
+    }else if([url rangeOfString:NewSwipe].location != NSNotFound)
+    {
+        return YES;
     }
     
     return NO;
