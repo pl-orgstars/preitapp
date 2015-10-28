@@ -100,7 +100,7 @@
                             <rect key="frame" x="277" y="146" width="23" height="23"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" tag="-10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="productsearch-icon-list.png" id="Wue-BZ-R28">
+                        <imageView userInteractionEnabled="NO" tag="-10" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="productsearch-icon-list.png" id="Wue-BZ-R28">
                             <rect key="frame" x="225" y="16" width="23" height="18"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -108,7 +108,7 @@
                             <rect key="frame" x="228" y="19" width="20" height="11"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
