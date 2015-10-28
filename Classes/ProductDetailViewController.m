@@ -671,13 +671,16 @@
 -(void)CallForDBCount
 {
     int count  = [dbAgent getCount];
+    imgviewCircle.hidden = FALSE;
+    
     if (count > 0){
+        imgviewCircle.image = [UIImage imageNamed:@"productsearch-icon-list.png"];
         lblCount.text = [NSString stringWithFormat:@"%d",count];
         lblCount.hidden = FALSE;
         imgviewCircle.hidden = FALSE;
     }else {
         lblCount.hidden = TRUE;
-        imgviewCircle.hidden = TRUE;
+        imgviewCircle.image = [UIImage imageNamed:@"Old-productsearch-icon-list.png"];;
     }
     
 }
@@ -709,7 +712,8 @@
 
 -(void)showShoppingList {
     
-    if ([[Database sharedDatabase]getCount]) {
+//    if ([[Database sharedDatabase]getCount])
+    {
         
         ShoppingListViewController *shoppingList = [[ShoppingListViewController alloc]initWithNibName:@"ShoppingListViewController" bundle:nil];
         [self.navigationController pushViewController:shoppingList animated:YES];
@@ -1389,7 +1393,6 @@
 
 -(void)requestError:(NSError*)error {
     [delegate showAlert:@"Sorry there was some error.Please check your internet connection and try again later." title:@"Network error" buttontitle:@"Dismiss"];
-//    [spinner stopAnimating];
     [[LoadingAgent defaultAgent]makeBusy:NO];
 }
 
