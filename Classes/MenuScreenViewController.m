@@ -356,6 +356,11 @@
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
         NSString *location = [NSString stringWithFormat:@"%@ %@,%@ %@", [appdelegate.mallData objectForKey:@"address_street"],[appdelegate.mallData objectForKey:@"address_city"],[appdelegate.mallData objectForKey:@"address_state"], [appdelegate.mallData objectForKey:@"address_zipcode"]];
         location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+            NSRange r;
+            while ((r = [location rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+                location = [location stringByReplacingCharactersInRange:r withString:@""];
+
+        
         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:location]]];
         
     }
