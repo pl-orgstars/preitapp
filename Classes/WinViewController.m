@@ -115,6 +115,7 @@
     
     else if ([url rangeOfString:@"/checkin"].location != NSNotFound) {
         [self checkLocation];
+        return NO;
     }
     
 //    else if ([url rangeOfString:VOTIGO_MAIN].location != NSNotFound){
@@ -182,6 +183,7 @@
             locationController.delegate = self;
         }
         
+        [[LoadingAgent defaultAgent] makeBusy:YES];
         [locationController.locationManager requestLocation];
 
        
@@ -207,7 +209,11 @@
     }
     else {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        [[LoadingAgent defaultAgent] makeBusy:YES];
         [manager GET:@"http://smbaqa02code.votigo.com/api/signature.json?apiKey=fb86e75edb447a2b66e5db3471a26ddb" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+          
             NSLog(@"Response = %@", responseObject);
             
             NSDictionary *params = @{@"sweepuserentry_id" : [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"],
@@ -218,6 +224,8 @@
                                      };
             [manager GET:@"http://smbaqa02code.votigo.com/sweeps/awardSweepentryCredits.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"Response = %@", responseObject);
+                
+                [[LoadingAgent defaultAgent] makeBusy:NO];
                 
                 if ([responseObject[@"status"] integerValue] == 1) {
                     NSURL *url = [NSURL URLWithString:CHECKED_IN];
@@ -238,10 +246,12 @@
                     }
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                [[LoadingAgent defaultAgent] makeBusy:NO];
                 NSLog(@"Error = %@", error);
             }];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [[LoadingAgent defaultAgent] makeBusy:NO];
             NSLog(@"Error = %@", error);
         }];
     }
@@ -260,14 +270,18 @@
 
 -(void)locationUpdate:(CLLocation *)location{
     
+    
     delegate.latitude   = location.coordinate.latitude;
     delegate.longitude  = location.coordinate.longitude;
     
     [self chekinMallAction];
+    [[LoadingAgent defaultAgent] makeBusy:NO];
 
 }
 
 -(void)locationError:(NSError *)error{
+    
+    [[LoadingAgent defaultAgent] makeBusy:NO];
     NSLog(@"location error : %@",error.localizedDescription);
     
     delegate.latitude   = 0.0;

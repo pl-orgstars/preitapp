@@ -210,7 +210,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" id="O9j-om-2Wa">
                                     <rect key="frame" x="28" y="80" width="272" height="72"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <string key="text">Thanks for scanning - we are verifying your receipt. This may take up to 24 hours to process. You will receive 1 entry for evry dollar you spend at %@.</string>
+                                    <string key="text">Thanks for scanning - we are verifying your receipt. This may take up to 24 hours to process. You will receive 1 entry for every dollar you spend at %@.</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
