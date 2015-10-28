@@ -43,7 +43,8 @@
 
 - (void)getOverallMessages {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"preitmessage.r5i.com/api/messages/overall_message" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSDictionary *param = @{@"udid" : UDID};
+    [manager GET:@"preitmessage.r5i.com/api/messages/overall_message" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [overallMessages addObjectsFromArray:(NSArray *)responseObject];
         [self getPropertyMessages];
         
@@ -76,33 +77,37 @@
 
 - (void)markAsReadMessage:(NSIndexPath *)indexPath {
     NSDictionary *dict;
-    BOOL addPropertyMessageID = NO;
+    BOOL isPropertyMessage = NO;
     
     if (overallMessages.count > 0 && propertyMessages.count > 0) {
         if (indexPath.section == 0)
             dict = overallMessages[indexPath.row];
         else {
             dict = propertyMessages[indexPath.row];
-            addPropertyMessageID = YES;
+            isPropertyMessage = YES;
         }
     }
     else if (overallMessages.count == 0 && propertyMessages.count > 0) {
         dict = propertyMessages[indexPath.row];
-        addPropertyMessageID = YES;
+        isPropertyMessage = YES;
     }
     else if (overallMessages.count > 0 && propertyMessages.count == 0) {
         dict = overallMessages[indexPath.row];
     }
     
+    NSString *URL;
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"user_info"] = @{@"udid" : UDID};
     
-    if (addPropertyMessageID == YES)
+    if (isPropertyMessage == YES) {
+        URL = @"http://preitmessage.r5i.com";
         params[@"property_message_id"] = [dict objectForKey:@"id"];
-    
+    } else {
+        URL = @"http://preitmessage.r5i.com/api/user_infos";
+    }
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://preitmessage.r5i.com/api/user_infos" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:URL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"response = %@", responseObject);
         [propertyMessages removeObjectAtIndex:indexPath.row];
         [tableView_ reloadData];

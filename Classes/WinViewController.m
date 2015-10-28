@@ -23,6 +23,7 @@
 #define MAIN_MENU           @"http://cherryhillmall.red5demo.com/main_menu"
 #define PRIZE               @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/prizes"
 #define Rules               @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/rules"
+#define REFER_FRIEND        @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/referafriend"
 
 
 @interface WinViewController ()
@@ -36,7 +37,7 @@
     // Do any additional setup after loading the view from its nib.
     
     delegate = (PreitAppDelegate*)[UIApplication sharedApplication].delegate;
-    NSString* votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
+    votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
     NSString* url;
 //    [[LoadingAgent defaultAgent] makeBusy:YES];
     
@@ -151,6 +152,15 @@
         [self requestLocationAccess];
         return NO;
 
+    }
+    
+    else if ([url rangeOfString:REFER_FRIEND].location != NSNotFound) {
+        if ([url rangeOfString:@"id=0"].location != NSNotFound) {
+            NSString *newURL = [NSString stringWithFormat:@"%@?mall_id=%@?sweepuserentry_id=%@", REFER_FRIEND, delegate.mallData[@"id"], votigoUserID];
+            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:newURL]]];
+            
+            return NO;
+        }
     }
     
     return YES;

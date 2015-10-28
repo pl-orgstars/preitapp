@@ -17,6 +17,7 @@
     
     PreitAppDelegate* delegate;
     MyCLController *locationController;
+    NSString* votigoUserID;
 }
 
 @end
