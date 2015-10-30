@@ -12,6 +12,16 @@
 #import "JSON.h"
 #import "LoadingAgent.h"
 
+static inline NSString *hxURLEscape(NSString *v) {
+    static CFStringRef _hxURLEscapeChars = CFSTR("￼=,!$&'()*+;@?\r\n\"<>#\t :/");
+    return ((__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(
+                                                                                  NULL,
+                                                                                  (__bridge CFStringRef)[v mutableCopy],
+                                                                                  NULL,
+                                                                                  _hxURLEscapeChars,
+                                                                                  kCFStringEncodingUTF8));
+}
+
 
 @implementation ContactUsViewController
 
@@ -191,6 +201,16 @@
 - (IBAction)directionsAction:(id)sender {
     NSString *location = [NSString stringWithFormat:@"%@ %@", streelLabel.text, state_zipLabel.text];
     location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    /// Remove HTml Tag
+    location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    NSRange r;
+    while ((r = [location rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+        location = [location stringByReplacingCharactersInRange:r withString:@""];
+    /// Remove HTml Tag
+    
+    location = hxURLEscape(location);
+
+    
     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:location]]];
 }
 

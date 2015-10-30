@@ -133,7 +133,7 @@
 //        return YES;
 //    }
     else if ([url rangeOfString:MAIN_MENU].location != NSNotFound) {
-        NSString* votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
+        votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
         NSString* url = [NSString stringWithFormat:@"%@?mall_id=%@&sweepuserentry_id=%@", VOTIGO_MAIN, [delegate.mallData objectForKey:@"id"], votigoUserID];
         
         [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
@@ -156,8 +156,11 @@
     }
     
     else if ([url rangeOfString:REFER_FRIEND].location != NSNotFound) {
-        if ([url rangeOfString:@"id=0"].location != NSNotFound) {
-            NSString *newURL = [NSString stringWithFormat:@"%@?mall_id=%@?sweepuserentry_id=%@", REFER_FRIEND, delegate.mallData[@"id"], votigoUserID];
+        votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
+        NSString    *mallString = [NSString stringWithFormat:@"mall_id=%@",delegate.mallData[@"id"]];
+        NSString    *sweepUser  = [NSString stringWithFormat:@"sweepuserentry_id=%@",votigoUserID];
+        if ([url rangeOfString:mallString].location == NSNotFound  || [url rangeOfString:sweepUser].location == NSNotFound) {
+            NSString *newURL = [NSString stringWithFormat:@"%@?mall_id=%@&sweepuserentry_id=%@", REFER_FRIEND, delegate.mallData[@"id"], votigoUserID];
             [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:newURL]]];
             
             return NO;
