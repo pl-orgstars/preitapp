@@ -93,6 +93,40 @@
     return cordinate;
     
 }
+
++ (void)get:(NSString *)URL parameters:(NSDictionary *)params completion:(void(^)(NSDictionary *response, NSError *error))completion {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager GET:URL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completion(responseObject, nil);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(nil, error);
+    }];
+}
+
++ (void)post:(NSString *)URL parameters:(NSDictionary *)params completion:(void(^)(NSDictionary *response, NSError *error))completion {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager POST:URL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completion(responseObject, nil);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(nil, error);
+    }];
+}
+
++ (void)put:(NSString *)URL parameters:(NSDictionary *)params completion:(void(^)(NSDictionary *response, NSError *error))completion {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager PUT:URL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completion(responseObject, nil);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        completion(nil, error);
+    }];
+}
+
 @end
 
 #define PARKING_NOTE @"parkingNote"
