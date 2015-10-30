@@ -374,9 +374,8 @@ static inline NSString *hxURLEscape(NSString *v) {
                 location = [location stringByReplacingCharactersInRange:r withString:@""];
         /// Remove HTml Tag
         
-        NSLog(@"location %@",location);
         location = hxURLEscape(location);
-        NSLog(@"location %@",location);
+
         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:location]]];
         
     }
