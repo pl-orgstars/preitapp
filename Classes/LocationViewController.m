@@ -739,8 +739,12 @@
 			for(int i=0;i<[tmpArray count];i++)
 			{
 				NSDictionary *tmpDict=[tmpArray objectAtIndex:i];
-				if(tmpDict && [tmpDict objectForKey:@"property"])
-					[array addObject:[tmpDict objectForKey:@"property"]];
+                if(tmpDict && [tmpDict objectForKey:@"property"]) {
+                    NSString *name = [[tmpDict objectForKey:@"property"] objectForKey:@"name"];
+                    
+                    if (![name isEqualToString:@"Voorhees Town Center"] && ![name isEqualToString:@"The Gallery"])
+                        [array addObject:[tmpDict objectForKey:@"property"]];
+                }
 			}
             if (isLocationEnabled) {
                 if ([self getDistance:array]) {

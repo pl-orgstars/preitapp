@@ -503,7 +503,7 @@ static NSString *const kAllowTracking = @"allowTracking";
         [application presentLocalNotificationNow:notification];
         completionHandler(UIBackgroundFetchResultNewData);
     }
-    else if ([application applicationState] == UIApplicationStateActive) {
+    else if (application.applicationState == UIApplicationStateActive  || application.applicationState == UIApplicationStateInactive) {
         NSString *alertMessage = [userInfo[@"aps"][@"alert"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert!" message:alertMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
