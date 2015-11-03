@@ -746,12 +746,12 @@
                         [array addObject:[tmpDict objectForKey:@"property"]];
                 }
 			}
-            if (isLocationEnabled) {
-                if ([self getDistance:array]) {
-                    return;
-                }
-
-            }
+//            if (isLocationEnabled) {
+//                if ([self getDistance:array]) {
+//                    return;
+//                }
+//
+//            }
 		}
 		else
 		{
@@ -770,6 +770,7 @@
         HomeScreen *screenHome=[[HomeScreen alloc]initWithNibName:@"HomeScreen" bundle:nil];
         self.navigationItem.title=@"Back";
         screenHome.isLocationEnabled = isLocationEnabled;
+        screenHome.coordinates=coordinates;
         screenHome.tableData = [[NSMutableArray alloc]initWithArray:array];
         screenHome.presentMainView = _presentMainView;
         [self.navigationController pushViewController:screenHome animated:YES];

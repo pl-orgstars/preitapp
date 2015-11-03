@@ -37,9 +37,9 @@
         self.tableData=[[NSMutableArray alloc]init];
         [self getData];
     }else{
-        if (_isLocationEnabled) {
-            [self getDistance];
-        }
+//        if (_isLocationEnabled) {
+//            [self getDistance];
+//        }
         
         if (_presentMainView)
             menuButton.hidden = YES;
@@ -544,9 +544,9 @@
 			}
 			
 
-            if (_isLocationEnabled) {
-                [self getDistance];
-            }
+//            if (_isLocationEnabled) {
+//                [self getDistance];
+//            }
 		}
 		else
 		{
