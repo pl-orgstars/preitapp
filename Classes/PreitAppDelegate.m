@@ -417,6 +417,8 @@ static NSString *const kAllowTracking = @"allowTracking";
         }
 
     });
+    
+    application.applicationIconBadgeNumber = 0;
 }
 
 
@@ -505,7 +507,7 @@ static NSString *const kAllowTracking = @"allowTracking";
     }
     else if (application.applicationState == UIApplicationStateActive  || application.applicationState == UIApplicationStateInactive) {
         NSString *alertMessage = [userInfo[@"aps"][@"alert"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert!" message:alertMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Message!" message:alertMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
     }
 }
