@@ -15,11 +15,12 @@
 //#define VOTIGO_SCAN_RECEIPT     @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/scanreceipt"
 
 #define VOTIGO_SIGNUP           @"http://bestgiftever.votigo.com/fbsweeps/sweeps/Best-Gift-Ever?mall_id="
+#define VOTIGO_SIGNUP_2         @"http://bestgiftever.votigo.com/fbsweeps/sweeps/Best-Gift-Ever-Sweeps-2"
 #define VOTIGO_RULES            @"http://bestgiftever.votigo.com/fbsweeps/pages/Best-Gift-Ever/rules"
 #define VOTIGO_CONFIRM          @"http://bestgiftever.votigo.com/fbsweeps/confirmation/Best-Gift-Ever"
 #define REFER_FRIEND            @"http://bestgiftever.votigo.com/fbsweeps/pages/Best-Gift-Ever/referafriend"
 #define VOTIGO_MAIN             @"http://bestgiftever.votigo.com/fbsweeps/pages/Best-Gift-Ever/mainmenu"
-#define VOTIGO_SCAN_RECEIPT     @""
+#define VOTIGO_SCAN_RECEIPT     @"http://bestgiftever.votigo.com/fbsweeps/pages/Best-Gift-Ever/scanreceipt"
 
 #define NOT_CHECKED_IN      @"http://cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
 #define ALREADY_CHECKED_IN  @"http://cherryhillmall.red5demo.com/promos/enter_to_win/already_checked_in?mobile=yes"
@@ -126,23 +127,33 @@
         [self checkLocation];
         return NO;
     }
+    else if ([url rangeOfString:VOTIGO_SIGNUP_2].location != NSNotFound){
+        
+//        votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
+//        
+//        NSString *newUrl;
+//        if (votigoUserID) {
+//            newUrl = [NSString stringWithFormat:@"%@?u=%@", VOTIGO_MAIN, votigoUserID];
+//        }
+//        else{
+//            newUrl = [NSString stringWithFormat:@"%@%@", VOTIGO_SIGNUP, [delegate.mallData objectForKey:@"id"]];
+//        }
+//        
+//        [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:newUrl]]];
+        
+        if ([webView canGoBack]) {
+            [webView goBack];
+        }
+        
+        return NO;
+        
+    }
     
-//    else if ([url rangeOfString:VOTIGO_MAIN].location != NSNotFound){
-//        return YES;
-//    }
-//    
-//    else if ([url rangeOfString:NOT_CHECKED_IN].location != NSNotFound) {
-//        return YES;
-//    }
-//    else if ([url rangeOfString:ALREADY_CHECKED_IN].location != NSNotFound) {
-//        return YES;
-//    }
-//    else if ([url rangeOfString:CHECKED_IN].location != NSNotFound) {
-//        return YES;
-//    }
+
     else if ([url rangeOfString:MAIN_MENU].location != NSNotFound) {
         votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
         NSString* url = [NSString stringWithFormat:@"%@?mall_id=%@&sweepuserentry_id=%@", VOTIGO_MAIN, [delegate.mallData objectForKey:@"id"], votigoUserID];
+        
         
         [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     
