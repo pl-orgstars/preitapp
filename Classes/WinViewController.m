@@ -12,13 +12,14 @@
 //#define VOTIGO_SIGNUP @"http://sqa02demopartner.votigo.com/fbsweeps/sweeps/testsweepsforred5-1"
 //#define VOTIGO_CONFIRM @"http://sqa02demopartner.votigo.com/fbsweeps/confirmation/testsweepsforred5-1"
 //#define VOTIGO_MAIN             @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/mainmenu"
-#define VOTIGO_SCAN_RECEIPT     @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/scanreceipt"
+//#define VOTIGO_SCAN_RECEIPT     @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/scanreceipt"
 
 #define VOTIGO_SIGNUP           @"http://bestgiftever.votigo.com/fbsweeps/sweeps/Best-Gift-Ever?mall_id="
 #define VOTIGO_RULES            @"http://bestgiftever.votigo.com/fbsweeps/pages/Best-Gift-Ever/rules"
 #define VOTIGO_CONFIRM          @"http://bestgiftever.votigo.com/fbsweeps/confirmation/Best-Gift-Ever"
 #define REFER_FRIEND            @"http://bestgiftever.votigo.com/fbsweeps/pages/Best-Gift-Ever/referafriend"
 #define VOTIGO_MAIN             @"http://bestgiftever.votigo.com/fbsweeps/pages/Best-Gift-Ever/mainmenu"
+#define VOTIGO_SCAN_RECEIPT     @""
 
 #define NOT_CHECKED_IN      @"http://cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
 #define ALREADY_CHECKED_IN  @"http://cherryhillmall.red5demo.com/promos/enter_to_win/already_checked_in?mobile=yes"
@@ -27,7 +28,7 @@
 #define NOT_IN_MALL         @"http://cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
 #define SET_LOCATION_ACCESS @"http://cherryhillmall.red5demo.com/promos/enter_to_win/set_location_access?mobile=yes"
 #define MAIN_MENU           @"http://cherryhillmall.red5demo.com/main_menu"
-#define PRIZE               @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/prizes"
+//#define PRIZE               @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/prizes"
 //#define Rules               @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/rules"
 //#define REFER_FRIEND        @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/referafriend"
 
@@ -160,8 +161,8 @@
 
     }
     
-//    else if ([url rangeOfString:REFER_FRIEND].location != NSNotFound) {
-//        votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
+    else if ([url rangeOfString:REFER_FRIEND].location != NSNotFound ) {
+        votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
 //        NSString    *mallString = [NSString stringWithFormat:@"mall_id=%@",delegate.mallData[@"id"]];
 //        NSString    *sweepUser  = [NSString stringWithFormat:@"sweepuserentry_id=%@",votigoUserID];
 //        if ([url rangeOfString:mallString].location == NSNotFound  || [url rangeOfString:sweepUser].location == NSNotFound) {
@@ -170,7 +171,13 @@
 //            
 //            return NO;
 //        }
-//    }
+        if ([url rangeOfString:[NSString stringWithFormat:@"%@?sweepuserentry_id=%@",REFER_FRIEND,votigoUserID]].location == NSNotFound) {
+            NSString *newURL = [NSString stringWithFormat:@"%@?sweepuserentry_id=%@",REFER_FRIEND,votigoUserID];
+            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:newURL]]];
+            return NO;
+        }
+   
+    }
     
     return YES;
 }
@@ -229,18 +236,19 @@
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
         [[LoadingAgent defaultAgent] makeBusy:YES];
-        [manager GET:@"http://smbaqa02code.votigo.com/api/signature.json?apiKey=fb86e75edb447a2b66e5db3471a26ddb" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager GET:@"http://code.votigo.com/api/signature.json?apiKey=1551561c19fadbd4c5afb83cd14f3193" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
           
             NSLog(@"Response = %@", responseObject);
             
-            NSDictionary *params = @{@"sweepuserentry_id" : [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"],
-                                     @"sweep_id" : @"7239",
-                                     @"mall_id" : delegate.mallData[@"id"],
-                                     @"signature" : responseObject[@"signature"],
-                                     @"action_type" : @"checkin"
-                                     };
-            [manager GET:@"http://smbaqa02code.votigo.com/sweeps/awardSweepentryCredits.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//            NSDictionary *params = @{@"sweepuserentry_id" : [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"],
+//                                     @"sweep_id" : @"36369",
+//                                     @"mall_id" : delegate.mallData[@"id"],
+//                                     @"signature" : responseObject[@"signature"],
+//                                     @"action_type" : @"checkin"
+//                                     };
+            NSString *urlString = [NSString stringWithFormat:@"http://code.votigo.com/sweeps/awardSweepentryCredits.json?sweep_id=36369&sweepuserentry_id=%@&mall_id=%@&action_type=checkin&signature=%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"],delegate.mallData[@"id"],responseObject[@"signature"]];
+            [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"Response = %@", responseObject);
                 
                 [[LoadingAgent defaultAgent] makeBusy:NO];
