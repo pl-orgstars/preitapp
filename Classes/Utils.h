@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "AFNetworking.h"
+
 #define MILE_FROM_MERTER(dist) (dist*0.00062137119)
 @interface Utils : NSObject
 #define is_iPhone5 [Utils isDeviceiPhone5]
@@ -30,6 +32,10 @@
 
 +(void)setLocationServiceForApp:(BOOL)value;
 +(BOOL)isLocationServiceOn;
+
++ (void)get:(NSString *)URL parameters:(NSDictionary *)params completion:(void(^)(NSDictionary *response, NSError *error))completion;
++ (void)post:(NSString *)URL parameters:(NSDictionary *)params completion:(void(^)(NSDictionary *response, NSError *error))completion;
++ (void)put:(NSString *)URL parameters:(NSDictionary *)params completion:(void(^)(NSDictionary *response, NSError *error))completion;
 
 @end
 

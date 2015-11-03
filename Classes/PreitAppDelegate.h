@@ -90,6 +90,8 @@
 @property (nonatomic,retain) ProductSearchHome *mHomeViewController; 
 @property (nonatomic,retain) UINavigationController *searchHomeNavController;
 
+@property (retain, nonatomic) NSString *deviceToken;
+
 
 -(void) showNetworkIndicator:(BOOL )show;
 - (void)setupPortraitUserInterface;

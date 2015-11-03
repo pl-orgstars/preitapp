@@ -48,6 +48,18 @@
 #import "DirectoryViewController.h"
 #import "WinViewController.h"
 #import "ScanReceiptViewController.h"
+
+static inline NSString *hxURLEscape(NSString *v) {
+    static CFStringRef _hxURLEscapeChars = CFSTR("￼=,!$&'()*+;@?\r\n\"<>#\t :/");
+    return ((__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(
+                                                                                  NULL,
+                                                                                  (__bridge CFStringRef)[v mutableCopy],
+                                                                                  NULL, 
+                                                                                  _hxURLEscapeChars, 
+                                                                                  kCFStringEncodingUTF8));
+}
+
+
 @interface MenuScreenViewController ()
 {
     NSMutableArray *tableData;
@@ -355,12 +367,15 @@
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
         NSString *location = [NSString stringWithFormat:@"%@ %@,%@ %@", [appdelegate.mallData objectForKey:@"address_street"],[appdelegate.mallData objectForKey:@"address_city"],[appdelegate.mallData objectForKey:@"address_state"], [appdelegate.mallData objectForKey:@"address_zipcode"]];
+        /// Remove HTml Tag
         location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
             NSRange r;
             while ((r = [location rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
                 location = [location stringByReplacingCharactersInRange:r withString:@""];
-
+        /// Remove HTml Tag
         
+        location = hxURLEscape(location);
+
         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:location]]];
         
     }
