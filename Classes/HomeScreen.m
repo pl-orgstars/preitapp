@@ -535,13 +535,12 @@
 			for(int i=0;i<[tmpArray count];i++)
 			{
 				NSDictionary *tmpDict=[tmpArray objectAtIndex:i];
-				if(tmpDict && [tmpDict objectForKey:@"property"])
-                    if ([[tmpDict objectForKey:@"name"] isEqualToString:@"Voorhees Town"]) {
-                        NSString *name = [[tmpDict objectForKey:@"property"] objectForKey:@"name"];
-                        
-                        if (![name isEqualToString:@"Voorhees Town Center"] && ![name isEqualToString:@"The Gallery"])
-                            [self.tableData addObject:[tmpDict objectForKey:@"property"]];
-                    }
+                if(tmpDict && [tmpDict objectForKey:@"property"]) {
+//                    NSString *name = [[tmpDict objectForKey:@"property"] objectForKey:@"name"];
+//                    
+//                    if (![name isEqualToString:@"Voorhees Town Center"] && ![name isEqualToString:@"The Gallery"])
+                        [self.tableData addObject:[tmpDict objectForKey:@"property"]];
+                }
 			}
 			
 
@@ -721,7 +720,8 @@
             [alert show];
         }
         else {
-            NSString *url = [NSString stringWithFormat:@"http://preitmessage.r5i.com/api/notifications/%@", response[@"id"]];
+            NSString *message_id = ([response isKindOfClass:[NSArray class]]) ? message_id = @"1" : response[@"id"];
+            NSString *url = [NSString stringWithFormat:@"http://preitmessage.r5i.com/api/notifications/%@", message_id];
             NSDictionary *params = @{@"notification[property_id]" : delegate.mallData[@"id"]};
             
             [Utils put:url parameters:params completion:^(NSDictionary *response, NSError *error) {
