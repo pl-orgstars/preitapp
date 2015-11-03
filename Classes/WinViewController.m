@@ -10,11 +10,15 @@
 #import "LoadingAgent.h"
 //
 //#define VOTIGO_SIGNUP @"http://sqa02demopartner.votigo.com/fbsweeps/sweeps/testsweepsforred5-1"
-#define VOTIGO_CONFIRM @"http://sqa02demopartner.votigo.com/fbsweeps/confirmation/testsweepsforred5-1"
-#define VOTIGO_MAIN @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/mainmenu"
-#define VOTIGO_SCAN_RECEIPT @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/scanreceipt"
+//#define VOTIGO_CONFIRM @"http://sqa02demopartner.votigo.com/fbsweeps/confirmation/testsweepsforred5-1"
+//#define VOTIGO_MAIN             @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/mainmenu"
+#define VOTIGO_SCAN_RECEIPT     @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/scanreceipt"
 
-#define VOTIGO_SIGNUP @""
+#define VOTIGO_SIGNUP           @"http://bestgiftever.votigo.com/fbsweeps/sweeps/Best-Gift-Ever?mall_id="
+#define VOTIGO_RULES            @"http://bestgiftever.votigo.com/fbsweeps/pages/Best-Gift-Ever/rules"
+#define VOTIGO_CONFIRM          @"http://bestgiftever.votigo.com/fbsweeps/confirmation/Best-Gift-Ever"
+#define REFER_FRIEND            @"http://bestgiftever.votigo.com/fbsweeps/pages/Best-Gift-Ever/referafriend"
+#define VOTIGO_MAIN             @"http://bestgiftever.votigo.com/fbsweeps/pages/Best-Gift-Ever/mainmenu"
 
 #define NOT_CHECKED_IN      @"http://cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
 #define ALREADY_CHECKED_IN  @"http://cherryhillmall.red5demo.com/promos/enter_to_win/already_checked_in?mobile=yes"
@@ -24,8 +28,8 @@
 #define SET_LOCATION_ACCESS @"http://cherryhillmall.red5demo.com/promos/enter_to_win/set_location_access?mobile=yes"
 #define MAIN_MENU           @"http://cherryhillmall.red5demo.com/main_menu"
 #define PRIZE               @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/prizes"
-#define Rules               @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/rules"
-#define REFER_FRIEND        @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/referafriend"
+//#define Rules               @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/rules"
+//#define REFER_FRIEND        @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/referafriend"
 
 
 @interface WinViewController ()
@@ -44,10 +48,10 @@
 //    [[LoadingAgent defaultAgent] makeBusy:YES];
     
     if (votigoUserID) {
-        url = [NSString stringWithFormat:@"%@?mall_id=%@&sweepuserentry_id=%@", VOTIGO_MAIN, [delegate.mallData objectForKey:@"id"], votigoUserID];
+        url = [NSString stringWithFormat:@"%@?u=%@", VOTIGO_MAIN, votigoUserID];
     }
     else{
-        url = [NSString stringWithFormat:@"%@?mall_id=%@", VOTIGO_SIGNUP, [delegate.mallData objectForKey:@"id"]];
+        url = [NSString stringWithFormat:@"%@%@", VOTIGO_SIGNUP, [delegate.mallData objectForKey:@"id"]];
     }
     
     NSURLRequest* winRequest = [[NSURLRequest alloc] initWithURL:[[NSURL alloc] initWithString:url]];
@@ -96,9 +100,10 @@
 //        return YES;
 //    }
     
-    /*else*/ if ([url rangeOfString:VOTIGO_CONFIRM].location != NSNotFound)
+    /*else*/ if ([url rangeOfString:VOTIGO_CONFIRM].location != NSNotFound /*&& [url rangeOfString:@"#container"].location != NSNotFound*/)
     {
         NSRange range = [url rangeOfString:VOTIGO_CONFIRM];
+//        NSRange containerRange = [url rangeOfString:@"#container"];
         NSString* page = [url substringWithRange:NSMakeRange(range.location + range.length, url.length - range.length - range.location)];
         
         NSString* returnedUserID = [[page componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
@@ -141,10 +146,8 @@
         [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     
     }
-//    else if([url rangeOfString:Rules].location != NSNotFound)
-//    {
-//        return YES;
-//    }else if([url rangeOfString:PRIZE].location != NSNotFound)
+
+//    else if([url rangeOfString:PRIZE].location != NSNotFound)
 //    {
 //        return YES;
 //    }
@@ -157,17 +160,17 @@
 
     }
     
-    else if ([url rangeOfString:REFER_FRIEND].location != NSNotFound) {
-        votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
-        NSString    *mallString = [NSString stringWithFormat:@"mall_id=%@",delegate.mallData[@"id"]];
-        NSString    *sweepUser  = [NSString stringWithFormat:@"sweepuserentry_id=%@",votigoUserID];
-        if ([url rangeOfString:mallString].location == NSNotFound  || [url rangeOfString:sweepUser].location == NSNotFound) {
-            NSString *newURL = [NSString stringWithFormat:@"%@?mall_id=%@&sweepuserentry_id=%@", REFER_FRIEND, delegate.mallData[@"id"], votigoUserID];
-            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:newURL]]];
-            
-            return NO;
-        }
-    }
+//    else if ([url rangeOfString:REFER_FRIEND].location != NSNotFound) {
+//        votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
+//        NSString    *mallString = [NSString stringWithFormat:@"mall_id=%@",delegate.mallData[@"id"]];
+//        NSString    *sweepUser  = [NSString stringWithFormat:@"sweepuserentry_id=%@",votigoUserID];
+//        if ([url rangeOfString:mallString].location == NSNotFound  || [url rangeOfString:sweepUser].location == NSNotFound) {
+//            NSString *newURL = [NSString stringWithFormat:@"%@?mall_id=%@&sweepuserentry_id=%@", REFER_FRIEND, delegate.mallData[@"id"], votigoUserID];
+//            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:newURL]]];
+//            
+//            return NO;
+//        }
+//    }
     
     return YES;
 }
