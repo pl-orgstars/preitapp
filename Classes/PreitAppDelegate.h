@@ -115,6 +115,7 @@
 // MNNotification By Jawad Ahmed
 @property (retain, nonatomic) MNNotificationsManager *notificationsManager;
 @property (retain, nonatomic) MNNotificationsManagerCustomDelegate *notificationsDelegate;
+@property (retain, nonatomic) NSMutableArray *notificationsArray;
 
 
 -(void)showLocalNotificationsWithMessage:(NSString *)message :(NSString*)beacon_id;

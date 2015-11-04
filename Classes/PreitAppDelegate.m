@@ -398,6 +398,8 @@ static NSString *const kAllowTracking = @"allowTracking";
         }];
     }
     
+    if (!_notificationsArray) _notificationsArray = [NSMutableArray new];
+    
     return YES;
 }
 
@@ -453,6 +455,11 @@ static NSString *const kAllowTracking = @"allowTracking";
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [FBSDKAppEvents activateApp];
     
+    for (NSString *string in _notificationsArray) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Message!" message:string delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    }
+    [_notificationsArray removeAllObjects];
 //    MyCLController* locationController = [[MyCLController alloc] init];
 //    
 //    [locationController.locationManager startUpdatingLocation];
@@ -501,14 +508,21 @@ static NSString *const kAllowTracking = @"allowTracking";
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     if ([application applicationState] == UIApplicationStateBackground) {
+        NSString *alertMessage = [userInfo[@"aps"][@"alert"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [_notificationsArray addObject:alertMessage];
+        
         UILocalNotification *notification = [[UILocalNotification alloc] init];
         [application presentLocalNotificationNow:notification];
         completionHandler(UIBackgroundFetchResultNewData);
     }
-    else if (application.applicationState == UIApplicationStateActive  || application.applicationState == UIApplicationStateInactive) {
+    else if (application.applicationState == UIApplicationStateActive || application.applicationState == UIApplicationStateInactive) {
         NSString *alertMessage = [userInfo[@"aps"][@"alert"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Message!" message:alertMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
+        
+        if (application.applicationState == UIApplicationStateInactive) {
+            [_notificationsArray removeObject:alertMessage];
+        }
     }
 }
 
