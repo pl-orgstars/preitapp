@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>96CE34C1-16EB-4281-8D7E-5EC6B3FB817A</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Preit</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>5C49DD2E5B9E3C2592933B57D5C1B9324E3E8C8F</key>
 		<string>https://github.com/pl-orgstars/preitapp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Preit.xcodeproj</string>
+	<string>Preit.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>5C49DD2E5B9E3C2592933B57D5C1B9324E3E8C8F</key>
