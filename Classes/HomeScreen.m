@@ -536,9 +536,9 @@
 			{
 				NSDictionary *tmpDict=[tmpArray objectAtIndex:i];
                 if(tmpDict && [tmpDict objectForKey:@"property"]) {
-                    NSString *name = [[tmpDict objectForKey:@"property"] objectForKey:@"name"];
-                    
-                    if (![name isEqualToString:@"Voorhees Town Center"] && ![name isEqualToString:@"The Gallery"])
+//                    NSString *name = [[tmpDict objectForKey:@"property"] objectForKey:@"name"];
+//                    
+//                    if (![name isEqualToString:@"Voorhees Town Center"] && ![name isEqualToString:@"The Gallery"])
                         [self.tableData addObject:[tmpDict objectForKey:@"property"]];
                 }
 			}
