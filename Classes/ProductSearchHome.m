@@ -175,7 +175,7 @@ static inline NSString *hxURLEscape(NSString *v) {
 
 #pragma mark webview delegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-    NSString *urlString = del.mallData[@"website_url"];//@".red5demo.com";
+    NSString *urlString = del.mallData[@"website_url"];
     urlString = [urlString stringByReplacingOccurrencesOfString:@".com" withString:SUB_DOMAIN];
 
     

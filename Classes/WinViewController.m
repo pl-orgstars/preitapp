@@ -21,6 +21,7 @@
 #define REFER_FRIEND            @"http://bestgiftever.votigo.com/fbsweeps/pages/Best-Gift-Ever/referafriend"
 #define VOTIGO_MAIN             @"http://bestgiftever.votigo.com/fbsweeps/pages/Best-Gift-Ever/mainmenu"
 #define VOTIGO_SCAN_RECEIPT     @"http://bestgiftever.votigo.com/fbsweeps/pages/Best-Gift-Ever/scanreceipt"
+#define VOTIGO_CHECK_IN         @"http://bestgiftever.votigo.com/fbsweeps/pages/Best-Gift-Ever/checkin"
 
 #define NOT_CHECKED_IN      @"http://cherryhillmall.red5demo.com/promos/enter_to_win/not_in_mall?mobile=yes"
 #define ALREADY_CHECKED_IN  @"http://cherryhillmall.red5demo.com/promos/enter_to_win/already_checked_in?mobile=yes"
@@ -50,7 +51,7 @@
 //    [[LoadingAgent defaultAgent] makeBusy:YES];
     
     if (votigoUserID) {
-        url = [NSString stringWithFormat:@"%@?u=%@", VOTIGO_MAIN, votigoUserID];
+        url = [NSString stringWithFormat:@"%@?u=%@&mall_id=%@", VOTIGO_MAIN, votigoUserID,[delegate.mallData objectForKey:@"id"]];
     }
     else{
         url = [NSString stringWithFormat:@"%@%@", VOTIGO_SIGNUP, [delegate.mallData objectForKey:@"id"]];
@@ -102,7 +103,12 @@
 //        return YES;
 //    }
     
-    /*else*/ if ([url rangeOfString:VOTIGO_CONFIRM].location != NSNotFound /*&& [url rangeOfString:@"#container"].location != NSNotFound*/)
+    if ([url rangeOfString:VOTIGO_CHECK_IN].location != NSNotFound) {
+        [self checkLocation];
+        return NO;
+    }
+    
+    else if ([url rangeOfString:VOTIGO_CONFIRM].location != NSNotFound /*&& [url rangeOfString:@"#container"].location != NSNotFound*/)
     {
         NSRange range = [url rangeOfString:VOTIGO_CONFIRM];
 //        NSRange containerRange = [url rangeOfString:@"#container"];
@@ -123,31 +129,8 @@
         return NO;
     }
     
-    else if ([url rangeOfString:@"/checkin"].location != NSNotFound) {
-        [self checkLocation];
-        return NO;
-    }
-    else if ([url rangeOfString:VOTIGO_SIGNUP_2].location != NSNotFound){
-        
-//        votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
-//        
-//        NSString *newUrl;
-//        if (votigoUserID) {
-//            newUrl = [NSString stringWithFormat:@"%@?u=%@", VOTIGO_MAIN, votigoUserID];
-//        }
-//        else{
-//            newUrl = [NSString stringWithFormat:@"%@%@", VOTIGO_SIGNUP, [delegate.mallData objectForKey:@"id"]];
-//        }
-//        
-//        [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:newUrl]]];
-        
-        if ([webView canGoBack]) {
-            [webView goBack];
-        }
-        
-        return NO;
-        
-    }
+ 
+
     
 
     else if ([url rangeOfString:MAIN_MENU].location != NSNotFound) {
@@ -240,14 +223,14 @@
     CLLocationDistance distance = [current distanceFromLocation:destination];
     
     if (distance >= 1609) { //1609 meters = 1 mile
-        NSURL *url = [NSURL URLWithString:NOT_CHECKED_IN];
+        NSURL *url = [NSURL URLWithString:NOT_IN_MALL];
         [winWebView loadRequest:[NSURLRequest requestWithURL:url]];
     }
     else {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
         [[LoadingAgent defaultAgent] makeBusy:YES];
-        [manager GET:@"http://code.votigo.com/api/signature.json?apiKey=1551561c19fadbd4c5afb83cd14f3193" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager GET:@"http://developerplatform.votigo.com/api/signature.json?apiKey=1551561c19fadbd4c5afb83cd14f3193" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
           
             NSLog(@"Response = %@", responseObject);
@@ -258,7 +241,7 @@
 //                                     @"signature" : responseObject[@"signature"],
 //                                     @"action_type" : @"checkin"
 //                                     };
-            NSString *urlString = [NSString stringWithFormat:@"http://code.votigo.com/sweeps/awardSweepentryCredits.json?sweep_id=36369&sweepuserentry_id=%@&mall_id=%@&action_type=checkin&signature=%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"],delegate.mallData[@"id"],responseObject[@"signature"]];
+            NSString *urlString = [NSString stringWithFormat:@"http://developerplatform.votigo.com/sweeps/awardSweepentryCredits.json?sweep_id=36369&sweepuserentry_id=%@&mall_id=%@&action_type=checkin&signature=%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"],delegate.mallData[@"id"],responseObject[@"signature"]];
             [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"Response = %@", responseObject);
                 

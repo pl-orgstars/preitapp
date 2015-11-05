@@ -407,9 +407,7 @@
 	if(!isNoData){
 		NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithDictionary:[self getTempDictionary:indexPath]];
         
-//        if ([[tmpDict objectForKey:@"name"] isEqualToString:@"Cherry Hill Mall"]) {
-//            [tmpDict setObject:@"http://staging.cherryhillmall.red5demo.com" forKey:@"website_url"];
-//        }
+
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:tmpDict];

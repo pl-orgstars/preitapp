@@ -40,7 +40,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>3.6</string>
+	<string>3.10</string>
 	<key>FacebookAppID</key>
 	<string>1652935031590700</string>
 	<key>FacebookDisplayName</key>
@@ -76,8 +76,8 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string></string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Preit will use you Location to Check you In a Mall</string>
 	<key>PRODUCTION_API_KEY</key>
 	<string>277d825b-7e1f-4418-895f-0d1cf248ff80</string>
 	<key>U</key>
