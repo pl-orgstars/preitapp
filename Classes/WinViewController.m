@@ -130,27 +130,7 @@
     }
     
  
-    else if ([url rangeOfString:VOTIGO_SIGNUP_2].location != NSNotFound){
-        
-//        votigoUserID = [[NSUserDefaults standardUserDefaults] objectForKey:@"votigoUserID"];
-//        
-//        NSString *newUrl;
-//        if (votigoUserID) {
-//            newUrl = [NSString stringWithFormat:@"%@?u=%@", VOTIGO_MAIN, votigoUserID];
-//        }
-//        else{
-//            newUrl = [NSString stringWithFormat:@"%@%@", VOTIGO_SIGNUP, [delegate.mallData objectForKey:@"id"]];
-//        }
-//        
-//        [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:newUrl]]];
-        
-        if ([webView canGoBack]) {
-            [webView goBack];
-        }
-        
-        return NO;
-        
-    }
+
     
 
     else if ([url rangeOfString:MAIN_MENU].location != NSNotFound) {
