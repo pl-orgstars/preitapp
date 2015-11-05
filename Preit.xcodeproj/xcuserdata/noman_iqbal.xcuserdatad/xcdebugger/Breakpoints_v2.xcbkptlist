@@ -122,12 +122,12 @@
                   moduleName = "Preit"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/noman_iqbal/Desktop/Projects/Priet/preitapp/Classes/WinViewController.m"
-                  timestampString = "468399950.53582"
+                  timestampString = "468406599.43684"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "245"
                   endingLineNumber = "245"
-                  offsetFromSymbolStart = "392">
+                  offsetFromSymbolStart = "470">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -137,12 +137,12 @@
                   moduleName = "Preit"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/noman_iqbal/Desktop/Projects/Priet/preitapp/Classes/WinViewController.m"
-                  timestampString = "468399950.536067"
+                  timestampString = "468406599.437222"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "246"
                   endingLineNumber = "246"
-                  offsetFromSymbolStart = "28">
+                  offsetFromSymbolStart = "24">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -320,6 +320,38 @@
             startingLineNumber = "19"
             endingLineNumber = "19"
             landmarkName = "-init"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Classes/DirectoryViewController.m"
+            timestampString = "468406519.212031"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "552"
+            endingLineNumber = "552"
+            landmarkName = "-getShoppingData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Classes/DirectoryViewController.m"
+            timestampString = "468406673.580464"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "457"
+            endingLineNumber = "457"
+            landmarkName = "-getData"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
