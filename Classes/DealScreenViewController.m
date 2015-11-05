@@ -34,7 +34,7 @@
 
     [super viewDidLoad];
     
-    NSString *urlString = /*[NSString stringWithFormat:@"http://%@.red5demo.com",name];*/[delegate.mallData objectForKey:@"website_url"];
+    NSString *urlString = [delegate.mallData objectForKey:@"website_url"];
     
     urlString = [urlString stringByReplacingOccurrencesOfString:@".com" withString:SUB_DOMAIN];
     NSLog(@"urlsrtrrttr %@",urlString);
@@ -59,7 +59,10 @@
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     
-    NSString *urlString = @".red5demo.com";
+    PreitAppDelegate *delegate = (PreitAppDelegate*)[[UIApplication sharedApplication]delegate];
+
+    NSString *urlString = [delegate.mallData objectForKey:@"website_url"];
+    urlString = [urlString stringByAppendingString:@"/sales"];
     
     if ([[[request URL]absoluteString]rangeOfString:urlString].location != NSNotFound) {
         
