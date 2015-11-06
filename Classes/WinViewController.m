@@ -116,6 +116,11 @@
         [self checkLocation];
         return NO;
     }
+    else if ([url rangeOfString:NOT_IN_MALL].location != NSNotFound) {
+        [self showLocationViewController];
+        return NO;
+    }
+    
     
     else if ([url rangeOfString:VOTIGO_CONFIRM].location != NSNotFound /*&& [url rangeOfString:@"#container"].location != NSNotFound*/)
     {
@@ -319,4 +324,15 @@
     [self chekinMallAction];
     
 }
+
+- (void) showLocationViewController {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowLocationView" object:nil];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    [delegate disableBeacon];
+//    LocationViewController *loaction = [[LocationViewController alloc]initWithNibName:@"LocationViewController" bundle:nil];
+//    loaction.shouldReload = YES;
+//
+//    [self.navigationController pushViewController:loaction animated:NO];
+}
+
 @end
