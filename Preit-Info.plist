@@ -76,6 +76,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Preit will use your Location to send you latest updates</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Preit will use you Location to Check you In a Mall</string>
 	<key>PRODUCTION_API_KEY</key>
