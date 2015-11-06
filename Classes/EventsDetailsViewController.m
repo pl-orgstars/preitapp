@@ -131,7 +131,7 @@
 	delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
 	[webView loadHTMLString:htmlString baseURL:nil];
     
-    
+//    txtViewDis.dataDetectorTypes = UIDataDetectorTypeNone;
 	image_Background.image=delegate.image1;
 	
 	if(delegate.image3==nil)
