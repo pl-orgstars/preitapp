@@ -129,6 +129,11 @@
 	}
 	
 	delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    htmlString = [self flattenHTML:htmlString];
+    
+    htmlString = [NSString stringWithFormat:@"<p style=\"color:white\">%@</font></p>",htmlString];
+    
 	[webView loadHTMLString:htmlString baseURL:nil];
     
 //    txtViewDis.dataDetectorTypes = UIDataDetectorTypeNone;
@@ -304,4 +309,6 @@
         scrolviewMain.contentSize= CGSizeMake(0, webView.frame.origin.y + webView.frame.size.height);
     }
 }
+
+
 @end
