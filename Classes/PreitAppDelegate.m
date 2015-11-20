@@ -836,10 +836,6 @@ static NSString *const kAllowTracking = @"allowTracking";
                 self.notificationsManager = notificationsManager;
                 [self.notificationsManager start];
                 
-          
-             
-                
-                
             }
             else {
                 NSLog(@"NMNotificationsManager instantiation error: %@", error.localizedDescription);
