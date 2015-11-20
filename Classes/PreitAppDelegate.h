@@ -90,6 +90,8 @@
 @property (nonatomic,retain) ProductSearchHome *mHomeViewController; 
 @property (nonatomic,retain) UINavigationController *searchHomeNavController;
 
+@property (retain, nonatomic) NSString *deviceToken;
+
 
 -(void) showNetworkIndicator:(BOOL )show;
 - (void)setupPortraitUserInterface;
@@ -113,6 +115,7 @@
 // MNNotification By Jawad Ahmed
 @property (retain, nonatomic) MNNotificationsManager *notificationsManager;
 @property (retain, nonatomic) MNNotificationsManagerCustomDelegate *notificationsDelegate;
+@property (retain, nonatomic) NSMutableArray *notificationsArray;
 
 
 -(void)showLocalNotificationsWithMessage:(NSString *)message :(NSString*)beacon_id;

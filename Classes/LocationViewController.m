@@ -739,15 +739,19 @@
 			for(int i=0;i<[tmpArray count];i++)
 			{
 				NSDictionary *tmpDict=[tmpArray objectAtIndex:i];
-				if(tmpDict && [tmpDict objectForKey:@"property"])
-					[array addObject:[tmpDict objectForKey:@"property"]];
-			}
-            if (isLocationEnabled) {
-                if ([self getDistance:array]) {
-                    return;
+                if(tmpDict && [tmpDict objectForKey:@"property"]) {
+                    NSString *name = [[tmpDict objectForKey:@"property"] objectForKey:@"name"];
+                    
+                    if (![name isEqualToString:@"Voorhees Town Center"] && ![name isEqualToString:@"The Gallery"])
+                        [array addObject:[tmpDict objectForKey:@"property"]];
                 }
-
-            }
+			}
+//            if (isLocationEnabled) {
+//                if ([self getDistance:array]) {
+//                    return;
+//                }
+//
+//            }
 		}
 		else
 		{
@@ -766,6 +770,7 @@
         HomeScreen *screenHome=[[HomeScreen alloc]initWithNibName:@"HomeScreen" bundle:nil];
         self.navigationItem.title=@"Back";
         screenHome.isLocationEnabled = isLocationEnabled;
+        screenHome.coordinates=coordinates;
         screenHome.tableData = [[NSMutableArray alloc]initWithArray:array];
         screenHome.presentMainView = _presentMainView;
         [self.navigationController pushViewController:screenHome animated:YES];

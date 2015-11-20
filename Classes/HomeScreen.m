@@ -37,9 +37,9 @@
         self.tableData=[[NSMutableArray alloc]init];
         [self getData];
     }else{
-        if (_isLocationEnabled) {
-            [self getDistance];
-        }
+//        if (_isLocationEnabled) {
+//            [self getDistance];
+//        }
         
         if (_presentMainView)
             menuButton.hidden = YES;
@@ -407,9 +407,7 @@
 	if(!isNoData){
 		NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithDictionary:[self getTempDictionary:indexPath]];
         
-//        if ([[tmpDict objectForKey:@"name"] isEqualToString:@"Cherry Hill Mall"]) {
-//            [tmpDict setObject:@"http://staging.cherryhillmall.red5demo.com" forKey:@"website_url"];
-//        }
+
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:tmpDict];
@@ -535,14 +533,18 @@
 			for(int i=0;i<[tmpArray count];i++)
 			{
 				NSDictionary *tmpDict=[tmpArray objectAtIndex:i];
-				if(tmpDict && [tmpDict objectForKey:@"property"])
-					[self.tableData addObject:[tmpDict objectForKey:@"property"]];
+                if(tmpDict && [tmpDict objectForKey:@"property"]) {
+                    NSString *name = [[tmpDict objectForKey:@"property"] objectForKey:@"name"];
+                    
+                    if (![name isEqualToString:@"Voorhees Town Center"] && ![name isEqualToString:@"The Gallery"])
+                        [self.tableData addObject:[tmpDict objectForKey:@"property"]];
+                }
 			}
 			
 
-            if (_isLocationEnabled) {
-                [self getDistance];
-            }
+//            if (_isLocationEnabled) {
+//                [self getDistance];
+//            }
 		}
 		else
 		{
@@ -709,25 +711,42 @@
     [delegate setupPortraitUserInterface];
     [delegate initilizeBeacon];
     
-    if (_presentMainView)
-        [self showMainViewController];
-    else{
-        
-//        ProductSearchHome *vcHomeSearch = (ProductSearchHome *)self.navigationController.viewControllers[0];
-//        vcHomeSearch.isGiftViewPush = TRUE;
-        
-        // Chaipy Start 1
-        WinViewController *winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
-        
-        NSMutableArray *controllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
-        [controllers insertObject:winVC atIndex:1];
-        self.navigationController.viewControllers = controllers;
-        [self.navigationController popToViewController:winVC animated:YES];
-        
-        // Chaipy End
-        
-    }
-    
+    NSDictionary *params = @{@"device_id" : delegate.deviceToken};
+    [Utils get:@"http://preitmessage.r5i.com/api/notifications" parameters:params completion:^(NSDictionary *response, NSError *error) {
+        if (error) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alert show];
+        }
+        else {
+            NSString *message_id = ([response isKindOfClass:[NSArray class]]) ? message_id = @"1" : response[@"id"];
+            NSString *url = [NSString stringWithFormat:@"http://preitmessage.r5i.com/api/notifications/%@", message_id];
+            NSDictionary *params = @{@"notification[property_id]" : delegate.mallData[@"id"]};
+            
+            [Utils put:url parameters:params completion:^(NSDictionary *response, NSError *error) {
+                if (error) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                    [alert show];
+                }
+                else {
+                    if (_presentMainView)
+                        [self showMainViewController];
+                    else
+                    {
+                        // Chaipy Start 1
+                        WinViewController *winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
+                        
+                        NSMutableArray *controllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+                        [controllers insertObject:winVC atIndex:1];
+                        self.navigationController.viewControllers = controllers;
+                        [self.navigationController popToViewController:winVC animated:YES];
+                        
+                        // Chaipy End
+                        
+                    }
+                }
+            }];
+        }
+    }];
 }
 
 -(void)requestFailed:(NSError *)error{

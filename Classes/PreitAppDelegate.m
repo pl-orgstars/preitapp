@@ -309,6 +309,9 @@ static NSString *const kAllowTracking = @"allowTracking";
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge|UIUserNotificationTypeAlert|UIUserNotificationTypeSound) categories:nil];
         [application registerUserNotificationSettings:settings];
     }
+    
+    self.deviceToken = @"dummy token";
+    
     // Override point for customization after application launch.
     
     [Flurry startSession:@"3R4FZDCQWKVKJTW6DTZ4"];
@@ -395,6 +398,8 @@ static NSString *const kAllowTracking = @"allowTracking";
         }];
     }
     
+    if (!_notificationsArray) _notificationsArray = [NSMutableArray new];
+    
     return YES;
 }
 
@@ -414,6 +419,8 @@ static NSString *const kAllowTracking = @"allowTracking";
         }
 
     });
+    
+    application.applicationIconBadgeNumber = 0;
 }
 
 
@@ -448,6 +455,11 @@ static NSString *const kAllowTracking = @"allowTracking";
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [FBSDKAppEvents activateApp];
     
+    for (NSString *string in _notificationsArray) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Message!" message:string delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    }
+    [_notificationsArray removeAllObjects];
 //    MyCLController* locationController = [[MyCLController alloc] init];
 //    
 //    [locationController.locationManager startUpdatingLocation];
@@ -468,6 +480,50 @@ static NSString *const kAllowTracking = @"allowTracking";
                                                    openURL:url
                                          sourceApplication:sourceApplication
                                                 annotation:annotation];
+}
+
+#pragma mark -
+#pragma mark Push Notification
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSString *dt = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    dt = [dt stringByReplacingOccurrencesOfString:@" " withString:@""];
+    self.deviceToken = dt;
+    
+    NSDictionary *params = @{@"notification[device_id]" : _deviceToken};
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [manager POST:@"http://preitmessage.r5i.com/api/notifications" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject %@", responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error.localizedDescription %@", error.localizedDescription);
+    }];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    self.deviceToken = @"dummy token";
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    if ([application applicationState] == UIApplicationStateBackground) {
+        NSString *alertMessage = [userInfo[@"aps"][@"alert"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [_notificationsArray addObject:alertMessage];
+        
+        UILocalNotification *notification = [[UILocalNotification alloc] init];
+        [application presentLocalNotificationNow:notification];
+        completionHandler(UIBackgroundFetchResultNewData);
+    }
+    else if (application.applicationState == UIApplicationStateActive || application.applicationState == UIApplicationStateInactive) {
+        NSString *alertMessage = [userInfo[@"aps"][@"alert"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Message!" message:alertMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        
+        if (application.applicationState == UIApplicationStateInactive) {
+            [_notificationsArray removeObject:alertMessage];
+        }
+    }
 }
 
 #pragma mark -

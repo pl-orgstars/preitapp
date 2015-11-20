@@ -15,7 +15,9 @@
         if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
             [self.locationManager requestWhenInUseAuthorization];
         }
-        [locationManager requestAlwaysAuthorization];
+        else{
+            [locationManager requestAlwaysAuthorization];
+        }
     }
     
     
