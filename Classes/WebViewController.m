@@ -158,7 +158,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *data2 = [defaults objectForKey:@"mallData"];
     NSDictionary *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data2];
-
+    NSLog(@"Mall DAta %@",arr);
     NSDictionary *strAllDays = arr[@"daily_hours_data"][@"daily_hours"];
     NSLog(@"arr %@",strAllDays);
     
