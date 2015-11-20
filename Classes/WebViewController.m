@@ -158,7 +158,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *data2 = [defaults objectForKey:@"mallData"];
     NSDictionary *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data2];
-
+    NSLog(@"Mall DAta %@",arr);
     NSDictionary *strAllDays = arr[@"daily_hours_data"][@"daily_hours"];
     NSLog(@"arr %@",strAllDays);
     
@@ -197,17 +197,17 @@
 
         
         switch ([dayString intValue]) {
-            case 1:
+            case 1: case 21: case 31:
                 [dummydict setValue:[NSString stringWithFormat:@"%@ - %@st:",arrayAllDays[findIndex],[dateFormatterNEw stringFromDate:newDate1]] forKey:@"day"];
 
                 break;
                 
-                case 2:
+                case 2: case 22:
                 [dummydict setValue:[NSString stringWithFormat:@"%@ - %@nd:",arrayAllDays[findIndex],[dateFormatterNEw stringFromDate:newDate1]] forKey:@"day"];
 
                 break;
                 
-                case 3:
+                case 3: case 23:
                 [dummydict setValue:[NSString stringWithFormat:@"%@ - %@rd:",arrayAllDays[findIndex],[dateFormatterNEw stringFromDate:newDate1]] forKey:@"day"];
 
                 break;
