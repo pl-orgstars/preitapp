@@ -203,19 +203,24 @@ static inline NSString *hxURLEscape(NSString *v) {
             return NO;
         }
         else if ([page isEqualToString:@"/about_us/directions"]){
-            NSString *location = [NSString stringWithFormat:@"%@ %@,%@ %@", [del.mallData objectForKey:@"address_street"],[del.mallData objectForKey:@"address_city"],[del.mallData objectForKey:@"address_state"], [del.mallData objectForKey:@"address_zipcode"]];
-            location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+//            NSString *location = [NSString stringWithFormat:@"%@ %@,%@ %@", [del.mallData objectForKey:@"address_street"],[del.mallData objectForKey:@"address_city"],[del.mallData objectForKey:@"address_state"], [del.mallData objectForKey:@"address_zipcode"]];
+//            location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+//            
+//            /// Remove HTml Tag
+//            location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+//            NSRange r;
+//            while ((r = [location rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+//                location = [location stringByReplacingCharactersInRange:r withString:@""];
+//            /// Remove HTml Tag
+//            
+//            location = hxURLEscape(location);
+//            
+//            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:location]]];
+            NSString *strlatlong = [NSString stringWithFormat:@"%@,%@",del.mallData[@"location_lat"],del.mallData[@"location_lat"]];
             
-            /// Remove HTml Tag
-            location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-            NSRange r;
-            while ((r = [location rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
-                location = [location stringByReplacingCharactersInRange:r withString:@""];
-            /// Remove HTml Tag
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:strlatlong]]];
+
             
-            location = hxURLEscape(location);
-            
-            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:location]]];
            return NO;
             
         }
