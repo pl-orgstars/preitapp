@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -95,22 +95,21 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XQ1-2T-iuv">
-                            <rect key="frame" x="20" y="49" width="280" height="30"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XQ1-2T-iuv">
+                            <rect key="frame" x="20" y="49" width="280" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <string key="text">You will receive 1 entry for every dollar you spend at
-%@.</string>
+                            <string key="text">You will receive 1 entry for every dollar you spend at %@. Your receipt photo must be clear and contain a valid store name, phone number and a transaction date between Nov 1, 2015 and December 31, 2015 to be accepted. If you can not capture your entire receipt within one photo, please use the “Next Section” option below to scan the remainder of your receipt. </string>
                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="nsg-qF-OMR" userLabel="divderLine1">
-                            <rect key="frame" x="0.0" y="87" width="320" height="2"/>
+                            <rect key="frame" x="0.0" y="161" width="320" height="2"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </imageView>
                         <view contentMode="scaleToFill" id="yUD-st-Pyx">
-                            <rect key="frame" x="0.0" y="97" width="320" height="171"/>
+                            <rect key="frame" x="0.0" y="169" width="320" height="145"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Yzg-JG-F0M">
@@ -126,23 +125,23 @@
                                     </connections>
                                 </button>
                                 <imageView hidden="YES" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="gWJ-9s-GGe" userLabel="receiptImgView">
-                                    <rect key="frame" x="20" y="0.0" width="280" height="171"/>
+                                    <rect key="frame" x="20" y="0.0" width="280" height="129"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="u2U-IP-1NR" userLabel="dividerLine2">
-                            <rect key="frame" x="0.0" y="276" width="320" height="2"/>
+                            <rect key="frame" x="0.0" y="322" width="320" height="2"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </imageView>
                         <view contentMode="scaleToFill" id="Hiy-MI-Twc">
-                            <rect key="frame" x="0.0" y="286" width="320" height="161"/>
+                            <rect key="frame" x="0.0" y="332" width="320" height="161"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView hidden="YES" tag="201" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="pDJ-fc-zQD" userLabel="nextSection1">
-                                    <rect key="frame" x="20" y="0.0" width="280" height="161"/>
+                                    <rect key="frame" x="20" y="0.0" width="280" height="115"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="AVX-c7-72C">
