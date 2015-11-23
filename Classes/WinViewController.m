@@ -39,6 +39,7 @@
 #define NOT_IN_MALL         @"http://cherryhillmall.com/promos/enter_to_win/not_in_mall?mobile=yes"
 #define SET_LOCATION_ACCESS @"http://cherryhillmall.com/promos/enter_to_win/set_location_access?mobile=yes"
 #define MAIN_MENU           @"http://cherryhillmall.com/main_menu"
+#define SELECT_MALL         @"http://cherryhillmall.com/promos/enter_to_win/select_the_mall"
 //#define PRIZE               @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/prizes"
 //#define Rules               @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/rules"
 //#define REFER_FRIEND        @"http://sqa02demopartner.votigo.com/fbsweeps/pages/testsweepsforred5-1/referafriend"
@@ -116,7 +117,7 @@
         [self checkLocation];
         return NO;
     }
-    else if ([url rangeOfString:NOT_IN_MALL].location != NSNotFound) {
+    else if ([url rangeOfString:SELECT_MALL].location != NSNotFound) {
         [self showLocationViewController];
         return NO;
     }
