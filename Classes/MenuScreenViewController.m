@@ -378,7 +378,7 @@ static inline NSString *hxURLEscape(NSString *v) {
         
         
         
-        NSString *strlatlong = [NSString stringWithFormat:@"%@,%@",appdelegate.mallData[@"location_lat"],appdelegate.mallData[@"location_lat"]];
+        NSString *strlatlong = [NSString stringWithFormat:@"%@,%@",appdelegate.mallData[@"location_lat"],appdelegate.mallData[@"location_lng"]];
         
         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:strlatlong]]];
         
