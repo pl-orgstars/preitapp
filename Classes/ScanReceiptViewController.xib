@@ -98,7 +98,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XQ1-2T-iuv">
                             <rect key="frame" x="20" y="49" width="280" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <string key="text">You will receive 1 entry for every dollar you spend at %@. Your receipt photo must be clear and contain a valid store name, phone number and a transaction date between Nov 1, 2015 and December 31, 2015 to be accepted. If you can not capture your entire receipt within one photo, please use the “Next Section” option below to scan the remainder of your receipt. </string>
+                            <string key="text">You will receive one entry for every dollar you spend at %@. Your receipt photo must be clear and contain a qualifying store name, phone number, total spent, and a transaction date between November 1, 2015 and December 31, 2015 to be accepted. If you can not capture your entire receipt within one photo, please use the “Next Section” option below to scan the remainder of your receipt.</string>
                             <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -157,7 +157,7 @@
                                         <action selector="getSectionBtnCall:" destination="-1" eventType="touchUpInside" id="mcb-Kl-ElZ"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for long reciepts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EoT-E9-ldW">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for long receipts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EoT-E9-ldW">
                                     <rect key="frame" x="118" y="42" width="100" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -188,7 +188,7 @@
                                         <action selector="getSection2BtnCall:" destination="-1" eventType="touchUpInside" id="bMo-jd-WCG"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for long reciepts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xZm-8T-XfW">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for long receipts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xZm-8T-XfW">
                                     <rect key="frame" x="118" y="42" width="100" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
