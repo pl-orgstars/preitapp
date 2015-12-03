@@ -2814,7 +2814,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kevin Dufficy (5GU6JDPWBT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kevin Dufficy (5GU6JDPWBT)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
@@ -2861,7 +2861,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Red 5 Interactive, Inc. (2JTRSA43WS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Red 5 Interactive, Inc. (2JTRSA43WS)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
@@ -2890,10 +2890,10 @@
 					"$(PROJECT_DIR)/Flurry",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.r5i.preitTJ;
+				PRODUCT_BUNDLE_IDENTIFIER = com.r5i.preit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9a14a316-d22f-4a46-99ad-3d4c2e683daa";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9a14a316-d22f-4a46-99ad-3d4c2e683daa";
+				PROVISIONING_PROFILE = "fc5c62ef-b6b7-47bf-a0b7-e365ac71a408";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "fc5c62ef-b6b7-47bf-a0b7-e365ac71a408";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};

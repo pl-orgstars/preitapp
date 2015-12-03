@@ -296,6 +296,8 @@ static NSString *const kAllowTracking = @"allowTracking";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
+    
+    
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings
                                                                              settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)
@@ -322,6 +324,8 @@ static NSString *const kAllowTracking = @"allowTracking";
         // Show Alert Here
         
     }
+    
+    [self initilizeBeacon];
     
     application.applicationIconBadgeNumber = 0;
     [application cancelAllLocalNotifications];
@@ -848,7 +852,7 @@ static NSString *const kAllowTracking = @"allowTracking";
 }
 
 - (void)disableBeacon {
-    [self.notificationsManager stop];
+//    [self.notificationsManager stop];
 }
 
 -(void)showLocalNotificationsWithMessage:(NSString *)message :(NSString*)beacon_id{
