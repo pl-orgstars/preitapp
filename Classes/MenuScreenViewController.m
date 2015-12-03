@@ -14,7 +14,7 @@
 #import "Flurry.h"
 
 #define HOME @"HOME"
-#define GIFT @"BEST GIFT EVER"
+//#define GIFT @"BEST GIFT EVER"
 #define STORE @"STORES"
 #define DINING @"DINING"
 #define PRODUCTS @"PRODUCT SEARCH"
@@ -115,17 +115,17 @@ static inline NSString *hxURLEscape(NSString *v) {
 
 }
 
-- (void)ShowGiftView:(NSNotification *)notification
-{
-    NSString *strEvent = [NSString stringWithFormat:@"%@ Best Gift Ever.",[appdelegate.mallData objectForKey:@"name"]];
-    [Flurry logEvent:strEvent timed:YES];
-        WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
-        
-        [_navController popToRootViewControllerAnimated:NO];
-        [_navController pushViewController:winVC animated:NO];
-
-
-}
+//- (void)ShowGiftView:(NSNotification *)notification
+//{
+//    NSString *strEvent = [NSString stringWithFormat:@"%@ Best Gift Ever.",[appdelegate.mallData objectForKey:@"name"]];
+//    [Flurry logEvent:strEvent timed:YES];
+//        WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
+//        
+//        [_navController popToRootViewControllerAnimated:NO];
+//        [_navController pushViewController:winVC animated:NO];
+//
+//
+//}
 
 
 - (void)viewDidLoad {
@@ -160,7 +160,7 @@ static inline NSString *hxURLEscape(NSString *v) {
     {
         tableData = [[NSMutableArray alloc]initWithObjects:
                      HOME,
-                     GIFT,
+//                     GIFT,
                      STORE,
                      DINING,
                      PRODUCTS,
@@ -180,7 +180,7 @@ static inline NSString *hxURLEscape(NSString *v) {
         tableData = [[NSMutableArray alloc]initWithObjects:
                      
                      HOME,
-                     GIFT,
+//                     GIFT,
                      STORE,
                      PRODUCTS,
                      DEALS,
@@ -198,7 +198,7 @@ static inline NSString *hxURLEscape(NSString *v) {
     {
         tableData = [[NSMutableArray alloc]initWithObjects:
                      HOME,
-                     GIFT,
+//                     GIFT,
                      STORE,
                      DINING,
                      PRODUCTS,
@@ -215,7 +215,7 @@ static inline NSString *hxURLEscape(NSString *v) {
     }else{
         tableData = [[NSMutableArray alloc]initWithObjects:
                      HOME,
-                     GIFT,
+//                     GIFT,
                      STORE,
                      PRODUCTS,
                      DEALS,
@@ -285,18 +285,18 @@ static inline NSString *hxURLEscape(NSString *v) {
         }
     }
     
-    else if ([str isEqualToString:GIFT]){
-        
-        // flurry event here
-        NSString *strEvent = [NSString stringWithFormat:@"%@ Best Gift Ever.",[appdelegate.mallData objectForKey:@"name"]];
-        [Flurry logEvent:strEvent timed:YES];
-        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[WinViewController class]]) {
-            WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
-            
-            [_navController popToRootViewControllerAnimated:NO];
-            [_navController pushViewController:winVC animated:NO];
-        }
-    }
+//    else if ([str isEqualToString:GIFT]){
+//        
+//        // flurry event here
+//        NSString *strEvent = [NSString stringWithFormat:@"%@ Best Gift Ever.",[appdelegate.mallData objectForKey:@"name"]];
+//        [Flurry logEvent:strEvent timed:YES];
+//        if (![[_navController.viewControllers objectAtIndex:count] isKindOfClass:[WinViewController class]]) {
+//            WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
+//            
+//            [_navController popToRootViewControllerAnimated:NO];
+//            [_navController pushViewController:winVC animated:NO];
+//        }
+//    }
     else if ([str isEqualToString:STORE]){
         
 //CHM Start ibnetariq update store view and solve this issue
@@ -481,9 +481,9 @@ static inline NSString *hxURLEscape(NSString *v) {
     if ([cellName isEqualToString:HOME]) {
         cellImage = [UIImage imageNamed:@"mainmenu-icon-home"];
     }
-    else if ([cellName isEqualToString:GIFT]){
-        cellImage = [UIImage imageNamed:@"mainmenu-icon-gift"];
-    }
+//    else if ([cellName isEqualToString:GIFT]){
+//        cellImage = [UIImage imageNamed:@"mainmenu-icon-gift"];
+//    }
     else if ([cellName isEqualToString:STORE]){
         cellImage = [UIImage imageNamed:@"mainmenu-icon-stores"];
     }
