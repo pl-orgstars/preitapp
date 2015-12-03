@@ -78,8 +78,6 @@
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Preit will use your Location to send you latest updates</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Preit will use you Location to Check you In a Mall</string>
 	<key>PRODUCTION_API_KEY</key>
 	<string>277d825b-7e1f-4418-895f-0d1cf248ff80</string>
 	<key>U</key>
