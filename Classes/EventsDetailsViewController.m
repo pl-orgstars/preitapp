@@ -129,9 +129,14 @@
 	}
 	
 	delegate=(PreitAppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    htmlString = [self flattenHTML:htmlString];
+    
+    htmlString = [NSString stringWithFormat:@"<p style=\"color:white\">%@</font></p>",htmlString];
+    
 	[webView loadHTMLString:htmlString baseURL:nil];
     
-    
+//    txtViewDis.dataDetectorTypes = UIDataDetectorTypeNone;
 	image_Background.image=delegate.image1;
 	
 	if(delegate.image3==nil)
@@ -304,4 +309,6 @@
         scrolviewMain.contentSize= CGSizeMake(0, webView.frame.origin.y + webView.frame.size.height);
     }
 }
+
+
 @end

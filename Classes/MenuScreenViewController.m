@@ -366,17 +366,21 @@ static inline NSString *hxURLEscape(NSString *v) {
         
         // Send a screenview.
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView]  build]];
-        NSString *location = [NSString stringWithFormat:@"%@ %@,%@ %@", [appdelegate.mallData objectForKey:@"address_street"],[appdelegate.mallData objectForKey:@"address_city"],[appdelegate.mallData objectForKey:@"address_state"], [appdelegate.mallData objectForKey:@"address_zipcode"]];
+//        NSString *location = [NSString stringWithFormat:@"%@ %@,%@ %@", [appdelegate.mallData objectForKey:@"address_street"],[appdelegate.mallData objectForKey:@"address_city"],[appdelegate.mallData objectForKey:@"address_state"], [appdelegate.mallData objectForKey:@"address_zipcode"]];
         /// Remove HTml Tag
-        location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-            NSRange r;
-            while ((r = [location rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
-                location = [location stringByReplacingCharactersInRange:r withString:@""];
-        /// Remove HTml Tag
+//        location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+//            NSRange r;
+//            while ((r = [location rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+//                location = [location stringByReplacingCharactersInRange:r withString:@""];
+//        /// Remove HTml Tag
+//        
+//        location = hxURLEscape(location);
         
-        location = hxURLEscape(location);
-
-        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:location]]];
+        
+        
+        NSString *strlatlong = [NSString stringWithFormat:@"%@,%@",appdelegate.mallData[@"location_lat"],appdelegate.mallData[@"location_lng"]];
+        
+        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:strlatlong]]];
         
     }
     else if([str isEqualToString:MOVIE]){

@@ -820,8 +820,13 @@ static NSString *const kAllowTracking = @"allowTracking";
         self.notificationsDelegate = [[MNNotificationsManagerCustomDelegate alloc] init];
         
         // MNNotificationsManager instantiation
+        
+
+        
+        MNNMOptions *options = [[MNNMOptions alloc] init];
+        options.statsTrackingValues = @{@"specificapp" : @"Preit"};
         [MNNotificationsManager notificationsManagerWithAppKey:appKey
-                                                       options:nil
+                                                       options:options
                                                           user:nil
                                                       delegate:self.notificationsDelegate
                                              completionHandler:^(MNNotificationsManager *notificationsManager, NSError *error)
@@ -830,9 +835,6 @@ static NSString *const kAllowTracking = @"allowTracking";
                 NSLog(@"NMNotificationsManager instantiation success");
                 self.notificationsManager = notificationsManager;
                 [self.notificationsManager start];
-                
-                MNNMOptions *options = [[MNNMOptions alloc] init];
-                options.statsTrackingValues = @{@"specificapp" : @"Preit"};
                 
             }
             else {

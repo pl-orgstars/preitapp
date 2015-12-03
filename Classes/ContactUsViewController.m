@@ -199,19 +199,19 @@ static inline NSString *hxURLEscape(NSString *v) {
 }
 
 - (IBAction)directionsAction:(id)sender {
-    NSString *location = [NSString stringWithFormat:@"%@ %@", streelLabel.text, state_zipLabel.text];
-    location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    /// Remove HTml Tag
-    location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    NSRange r;
-    while ((r = [location rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
-        location = [location stringByReplacingCharactersInRange:r withString:@""];
-    /// Remove HTml Tag
+//    NSString *location = [NSString stringWithFormat:@"%@ %@", streelLabel.text, state_zipLabel.text];
+//    location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+//
+//    /// Remove HTml Tag
+//    location = [location stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+//    NSRange r;
+//    while ((r = [location rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+//        location = [location stringByReplacingCharactersInRange:r withString:@""];
+//    /// Remove HTml Tag
+//    location = hxURLEscape(location);
     
-    location = hxURLEscape(location);
-
-    
-    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:location]]];
+    NSString *strlatlong = [NSString stringWithFormat:@"%@,%@",delegate.mallData[@"location_lat"],delegate.mallData[@"location_lng"]];
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[@"http://maps.apple.com/?q=" stringByAppendingString:strlatlong]]];
 }
 
 - (IBAction)callAction:(id)sender {

@@ -16,6 +16,7 @@
 	IBOutlet UIImageView *image_thumbNail;
 	IBOutlet UILabel *labelName;
 	IBOutlet UIWebView *webView;
+    IBOutlet UITextView *descriptionTextView;
 	PreitAppDelegate *delegate;
 	NSDictionary *dictData;
 	BOOL flagScreen;

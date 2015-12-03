@@ -150,7 +150,6 @@
     [dateFormatter setDateFormat:@"EEEE"];
     
     NSString *strTodayDate = [dateFormatter stringFromDate:todayDate];
-    NSLog(@"strTodayDay %@",strTodayDate);
     
     NSString *title=[NSString stringWithFormat:@"Screen%d",screenIndex];
     title=NSLocalizedString(title,@"");
@@ -158,12 +157,10 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *data2 = [defaults objectForKey:@"mallData"];
     NSDictionary *arr = [NSKeyedUnarchiver unarchiveObjectWithData:data2];
-
+    NSLog(@"Mall DAta %@",arr);
     NSDictionary *strAllDays = arr[@"daily_hours_data"][@"daily_hours"];
-    NSLog(@"arr %@",strAllDays);
     
     NSArray *arrayAllDays = [dateFormatter weekdaySymbols];
-    NSLog(@"%@", arrayAllDays);
     
     int findIndex = -1;
     for (int index = 0; index < [arrayAllDays count]; index ++)
@@ -197,17 +194,17 @@
 
         
         switch ([dayString intValue]) {
-            case 1:
+            case 1: case 21: case 31:
                 [dummydict setValue:[NSString stringWithFormat:@"%@ - %@st:",arrayAllDays[findIndex],[dateFormatterNEw stringFromDate:newDate1]] forKey:@"day"];
 
                 break;
                 
-                case 2:
+                case 2: case 22:
                 [dummydict setValue:[NSString stringWithFormat:@"%@ - %@nd:",arrayAllDays[findIndex],[dateFormatterNEw stringFromDate:newDate1]] forKey:@"day"];
 
                 break;
                 
-                case 3:
+                case 3: case 23:
                 [dummydict setValue:[NSString stringWithFormat:@"%@ - %@rd:",arrayAllDays[findIndex],[dateFormatterNEw stringFromDate:newDate1]] forKey:@"day"];
 
                 break;
@@ -228,18 +225,44 @@
         
     }
     
-    NSLog(@"arraySortDummy %@",arraySortDummy);
-    [arrayTable addObjectsFromArray:arraySortDummy];
     
+    
+    /// Check Special Hours
+    
+    NSDictionary *specialHours = arr[@"daily_hours_data"][@"special_hours"];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+
+    
+    for (int index = 0; index < 7 ; index++) {
+        NSString *strDate =[formatter stringFromDate: [self addDays:index toDate:[NSDate date]]];
+        if (specialHours[strDate]) {
+            arraySortDummy[index][@"time"] = specialHours[strDate];
+        }
+    }
+    
+    
+    
+    [arrayTable addObjectsFromArray:arraySortDummy];
+
+    //// End Check Special Hours
     
     
     tbleViewHours.hidden = TRUE;
-    NSLog(@"title %@",title);
     if ([title isEqualToString:@"Hours"])
         tbleViewHours.hidden = FALSE;
     
     [tbleViewHours reloadData];
 }
+
+- (NSDate *)addDays:(NSInteger)days toDate:(NSDate *)originalDate {
+    NSDateComponents *components= [[NSDateComponents alloc] init];
+    [components setDay:days];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    return [calendar dateByAddingComponents:components toDate:originalDate options:0];
+}
+
+
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
