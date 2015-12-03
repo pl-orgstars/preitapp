@@ -85,6 +85,7 @@
             [mainScroll setContentSize:CGSizeMake(0, descriptionView.frame.origin.y + txtViewDis.frame.size.height +35)];
             txtViewDis.textColor = [UIColor whiteColor];
             txtViewDis.scrollEnabled = FALSE;
+            txtViewDis.dataDetectorTypes = UIDataDetectorTypeNone;
         }else
             [descriptionView setHidden:YES];
     }else
