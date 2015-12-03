@@ -20,7 +20,7 @@
 #import "EventsViewController.h"
 #import "DealScreenViewController.h"
 #import "ProductListViewController.h"
-#import "WinViewController.h"
+//#import "WinViewController.h"
 #import "LoadingAgent.h"
 
 static inline NSString *hxURLEscape(NSString *v) {
@@ -65,7 +65,7 @@ static inline NSString *hxURLEscape(NSString *v) {
     
     NSString *urlString = [del.mallData objectForKey:@"website_url"];
     
-    urlString = [urlString stringByReplacingOccurrencesOfString:@".com" withString:SUB_DOMAIN];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@".com" withString:@".red5demo.com"];
     
     
     urlString = [NSString stringWithFormat:@"%@%@",urlString,HOME_WEB_VIEW];
@@ -176,7 +176,20 @@ static inline NSString *hxURLEscape(NSString *v) {
 #pragma mark webview delegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     NSString *urlString = del.mallData[@"website_url"];
-    urlString = [urlString stringByReplacingOccurrencesOfString:@".com" withString:SUB_DOMAIN];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@".com" withString:@".red5demo.com"];
+    
+    if ([[[request URL]absoluteString]rangeOfString:@"tel:"].location != NSNotFound) {
+//        NSString *tel = [[request URL] absoluteString];
+        if ([[UIApplication sharedApplication] canOpenURL:[request URL]]) {
+            [[UIApplication sharedApplication] openURL:[request URL]];
+        }
+        else {
+            NSLog(@"Error Calling");
+        }
+        
+        return NO;
+        
+    }
 
     
     if ([[[request URL]absoluteString]rangeOfString:urlString].location != NSNotFound) {
@@ -280,22 +293,25 @@ static inline NSString *hxURLEscape(NSString *v) {
             return NO;
             
         }
+        else if ([page rangeOfString:@"/promos/mobile_apps"].location != NSNotFound){
+            return NO;
+        }
         
         return YES;
     }
     
-    else if ([[[request URL] absoluteString] rangeOfString:VOTIGO_SIGNUP].location != NSNotFound){
-        
-        // flurry event here
-        NSString *strEvent = [NSString stringWithFormat:@"%@ win.",[del.mallData objectForKey:@"name"]];
-
-        [Flurry logEvent:strEvent timed:YES];
-        WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
-        
-        [self.navigationController pushViewController:winVC animated:NO];
-        
-        return NO;
-    }
+//    else if ([[[request URL] absoluteString] rangeOfString:VOTIGO_SIGNUP].location != NSNotFound){
+//        
+//        // flurry event here
+//        NSString *strEvent = [NSString stringWithFormat:@"%@ win.",[del.mallData objectForKey:@"name"]];
+//
+//        [Flurry logEvent:strEvent timed:YES];
+//        WinViewController* winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
+//        
+//        [self.navigationController pushViewController:winVC animated:NO];
+//        
+//        return NO;
+//    }
     
     if ([Utils checkForEmptyString:[[request URL]absoluteString]]) {
         return NO;

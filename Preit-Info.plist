@@ -6,6 +6,10 @@
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
 	<string>PREIT</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>itms</string>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons~ipad</key>

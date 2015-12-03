@@ -404,6 +404,9 @@ static NSString *const kAllowTracking = @"allowTracking";
     
     if (!_notificationsArray) _notificationsArray = [NSMutableArray new];
     
+    
+   
+    
     return YES;
 }
 
