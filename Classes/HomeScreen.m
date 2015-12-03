@@ -732,16 +732,7 @@
                         [self showMainViewController];
                     else
                     {
-                        // Chaipy Start 1
-                        WinViewController *winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
-                        
-                        NSMutableArray *controllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
-                        [controllers insertObject:winVC atIndex:1];
-                        self.navigationController.viewControllers = controllers;
-                        [self.navigationController popToViewController:winVC animated:YES];
-                        
-                        // Chaipy End
-                        
+                        [self.navigationController popToRootViewControllerAnimated:YES];
                     }
                 }
             }];
@@ -775,10 +766,6 @@
     productSearchVC.view.frame = CGRectMake(0, 0, 320, isIPhone5?568:480);
 //    productSearchVC.isGiftViewPush = TRUE;
     PreitNavigationViewController *navCont = [[PreitNavigationViewController alloc] initWithRootViewController:productSearchVC];
-    // Chaipy Start
-    WinViewController *winVC = [[WinViewController alloc] initWithNibName:@"WinViewController" bundle:[NSBundle mainBundle]];
-    [navCont pushViewController:winVC animated:NO];
-    // Chaipy End
     navCont.navigationBarHidden = YES;
     
     MenuScreenViewController *sideMenu = [[MenuScreenViewController alloc] initWithNibName:@"MenuScreenViewController" bundle:[NSBundle mainBundle]];
