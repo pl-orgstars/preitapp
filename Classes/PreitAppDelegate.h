@@ -21,7 +21,7 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-@interface PreitAppDelegate : NSObject <UIApplicationDelegate,UITabBarControllerDelegate>
+@interface PreitAppDelegate : NSObject <UIApplicationDelegate,UITabBarControllerDelegate,UIAlertViewDelegate>
 {
     NSTimer *timer;
 	UINavigationController *navController;

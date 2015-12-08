@@ -405,7 +405,7 @@ static NSString *const kAllowTracking = @"allowTracking";
     if (!_notificationsArray) _notificationsArray = [NSMutableArray new];
     
     
-   
+    [self checkRateItConditions];
     
     return YES;
 }
@@ -453,10 +453,15 @@ static NSString *const kAllowTracking = @"allowTracking";
     }
     [_localiBeaconmsg removeAllObjects];
     application.applicationIconBadgeNumber = 0;
+    
+    [self checkRateItConditions];
+    
     /*
      Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
      */
 }
+
+
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -533,7 +538,52 @@ static NSString *const kAllowTracking = @"allowTracking";
     }
 }
 
-#pragma mark -
+#pragma mark - rate it
+
+-(void)checkRateItConditions{
+        if (![[NSUserDefaults standardUserDefaults] objectForKey:@"rateAppCounter"]) {
+    
+            [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"rateAppCounter"];
+            [self showRateIt];
+        }
+        else if ([[NSUserDefaults standardUserDefaults] integerForKey:@"rateAppCounter"] < 5 && [[NSUserDefaults standardUserDefaults] integerForKey:@"rateAppCounter"] > 0)
+        {
+            NSInteger count = [[NSUserDefaults standardUserDefaults] integerForKey:@"rateAppCounter"] + 1;
+            [[NSUserDefaults standardUserDefaults] setInteger:count forKey:@"rateAppCounter"];
+        }
+        else if ([[NSUserDefaults standardUserDefaults] integerForKey:@"rateAppCounter"] >= 5){
+            [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"rateAppCounter"];
+            [self showRateIt];
+        }
+}
+
+
+-(void)showRateIt{
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Rate PREIT Malls App" message:@"Hey! Do you enjoy using our PREIT Malls App?\nLet us know your feedback by taking a moment to review our app.\n\nThanks for shopping with us!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Rate PREIT Malls App",@"Remind Me Later",@"No, Thanks", nil];
+    
+    [alertView show];
+
+}
+
+
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    NSURL *rateIt = [NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id437846433"];
+    if (buttonIndex == 0) { // rate app now
+        [[NSUserDefaults standardUserDefaults] setInteger:-1 forKey:@"rateAppCounter"];
+        if ([[UIApplication sharedApplication] canOpenURL:rateIt]){
+            [[UIApplication sharedApplication] openURL:rateIt];
+        }
+    }
+    else if (buttonIndex == 1){ // reminde me later
+        NSInteger count = [[NSUserDefaults standardUserDefaults] integerForKey:@"rateAppCounter"] + 1;
+        [[NSUserDefaults standardUserDefaults] setInteger:count forKey:@"rateAppCounter"];
+    }
+    else if (buttonIndex == 2){ // no thanks
+        [[NSUserDefaults standardUserDefaults] setInteger:-1 forKey:@"rateAppCounter"];
+    }
+}
 #pragma mark Memory management
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {

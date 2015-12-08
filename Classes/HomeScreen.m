@@ -52,43 +52,13 @@
         [tableHome reloadData];
     }
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"rateIT"] == nil) {
-            [self showRateIt];
-    }else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"rateIT"]){
-        [self showRateIt];
-    }
+
  
     
     
 }
 
--(void)showRateIt{
-    NSURL *rateIt = [NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id437846433"];
 
-    
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Preit MALL" message:@"Do you like the PREIT Malls app?" preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if ([[UIApplication sharedApplication] canOpenURL:rateIt]){
-            [[UIApplication sharedApplication] openURL:rateIt];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"rateIT"];
-            [alertVC dismissViewControllerAnimated:YES completion:nil];
-        }
-    }];
-    
-    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"rateIT"];
-        [alertVC dismissViewControllerAnimated:YES completion:nil];
-    }];
-    
-    [alertVC addAction:yesAction];
-    [alertVC addAction:noAction];
-    
-    [self presentViewController:alertVC animated:YES completion:nil];
-    
- 
-    
-}
 
 -(void)loadInitialView{
     [self loadDefaultValues];
