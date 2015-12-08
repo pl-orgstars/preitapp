@@ -65,7 +65,8 @@ static inline NSString *hxURLEscape(NSString *v) {
     
     NSString *urlString = [del.mallData objectForKey:@"website_url"];
     
-    urlString = [urlString stringByReplacingOccurrencesOfString:@".com" withString:@".red5demo.com"];
+//    urlString = [urlString stringByReplacingOccurrencesOfString:@".com" withString:@".red5demo.com"];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@".com" withString:SUB_DOMAIN];
     
     
     urlString = [NSString stringWithFormat:@"%@%@",urlString,HOME_WEB_VIEW];
